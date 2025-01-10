@@ -437,3 +437,4 @@ We look forward to hearing your feedback. Feel free to open a PR or an issue wit
 
 ### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=vanta-auditor-api-sdk&utm_campaign=typescript)
 # vanta-auditor-api-sdk-typescript
+# vanta-auditor-api-sdk-typescript
