@@ -1,0 +1,36 @@
+speakeasyVersion: 1.467.1
+sources:
+    Conduct an audit:
+        sourceNamespace: conduct-an-audit
+        sourceRevisionDigest: sha256:c524d9ce1fffa88089f94c22cd937ab1b866cd103705ac07cb1536ac41bdd0ea
+        sourceBlobDigest: sha256:c5cd2640418deb9fbb6be419800b0e1e89fe7a03b454bdfc72b320db2ecd971b
+        tags:
+            - latest
+            - 1.0.0
+targets:
+    vanta:
+        source: Conduct an audit
+        sourceNamespace: conduct-an-audit
+        sourceRevisionDigest: sha256:c524d9ce1fffa88089f94c22cd937ab1b866cd103705ac07cb1536ac41bdd0ea
+        sourceBlobDigest: sha256:c5cd2640418deb9fbb6be419800b0e1e89fe7a03b454bdfc72b320db2ecd971b
+        codeSamplesNamespace: conduct-an-audit-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:a8b51b11c4cb76d29c1229ee5ab9151e17b167eda2d4786594bebc7165557413
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Conduct an audit:
+            inputs:
+                - location: ../obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/vanta/vanta/conduct-an-audit
+    targets:
+        vanta:
+            target: typescript
+            source: Conduct an audit
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/vanta/vanta/conduct-an-audit-typescript-code-samples
+                blocking: false

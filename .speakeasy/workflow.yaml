@@ -1,0 +1,18 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Conduct an audit:
+        inputs:
+            - location: ../obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/vanta/vanta/conduct-an-audit
+targets:
+    vanta:
+        target: typescript
+        source: Conduct an audit
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/vanta/vanta/conduct-an-audit-typescript-code-samples
+            blocking: false
