@@ -12,6 +12,9 @@ targets:
     vanta:
         target: typescript
         source: Conduct an audit
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/vanta/vanta/conduct-an-audit-typescript-code-samples
