@@ -21,7 +21,7 @@ workflow:
     sources:
         Conduct an audit:
             inputs:
-                - location: ../obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
+                - location: api_spec.yaml
             overlays:
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
             registry:
