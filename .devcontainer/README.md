@@ -20,11 +20,11 @@ The speakeasy CLI allows you to generate more usage snippets. Here's how:
 - To generate a sample for a specific operation by providing an operation ID, use:
 
 ```
-speakeasy generate usage -s /Users/christopherdang/Desktop/obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml -l typescript -i {INPUT_OPERATION_ID} -o ./samples
+speakeasy generate usage -s api-spec.yaml -l typescript -i {INPUT_OPERATION_ID} -o ./samples
 ```
 
 - To generate samples for an entire namespace (like a tag or group name), use:
 
 ```
-speakeasy generate usage -s /Users/christopherdang/Desktop/obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml -l typescript -n {INPUT_TAG_NAME} -o ./samples
+speakeasy generate usage -s api-spec.yaml -l typescript -n {INPUT_TAG_NAME} -o ./samples
 ```
