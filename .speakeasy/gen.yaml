@@ -2,7 +2,7 @@ configVersion: 2.0.0
 generation:
   devContainers:
     enabled: true
-    schemaPath: /Users/christopherdang/Desktop/obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
+    schemaPath: api-spec.yaml
   sdkClassName: Vanta
   maintainOpenAPIOrder: true
   usageSnippets:
