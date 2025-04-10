@@ -21,7 +21,7 @@ workflow:
     sources:
         Conduct an audit:
             inputs:
-                - location: api_spec.yaml
+                - location: api-spec.yaml
             overlays:
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
             registry:
