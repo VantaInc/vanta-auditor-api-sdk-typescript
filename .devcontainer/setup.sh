@@ -27,4 +27,4 @@ EOL
 echo "$TS_CONFIG_CONTENT" > samples/tsconfig.json
 
 # Generate starter usage sample with speakeasy
-speakeasy generate usage -s api-spec.yaml -l typescript -o samples/root.ts
+speakeasy generate usage -s api_spec.yaml -l typescript -o samples/root.ts
