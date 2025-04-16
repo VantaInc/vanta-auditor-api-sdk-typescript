@@ -5,6 +5,7 @@
 import { VantaCore } from "../core.js";
 import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -20,6 +21,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -28,11 +30,11 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Returns a paginated list of evidence for an audit.
  */
-export async function auditsListEvidence(
+export function auditsListEvidence(
   client: VantaCore,
   request: operations.ListAuditEvidenceRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     components.PaginatedResponseEvidence,
     | APIError
@@ -44,13 +46,39 @@ export async function auditsListEvidence(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: VantaCore,
+  request: operations.ListAuditEvidenceRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      components.PaginatedResponseEvidence,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.ListAuditEvidenceRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -70,15 +98,16 @@ export async function auditsListEvidence(
     "pageSize": payload.pageSize,
   });
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.bearerAuth);
   const securityInput = secConfig == null ? {} : { bearerAuth: secConfig };
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "ListAuditEvidence",
     oAuth2Scopes: [],
 
@@ -102,7 +131,7 @@ export async function auditsListEvidence(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -113,7 +142,7 @@ export async function auditsListEvidence(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -128,11 +157,12 @@ export async function auditsListEvidence(
     | ConnectionError
   >(
     M.json(200, components.PaginatedResponseEvidence$inboundSchema),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

@@ -10,6 +10,7 @@ export const AuditorEnabledStateTransition = {
   MarkApplicable: "MARK_APPLICABLE",
   Flag: "FLAG",
   MarkNa: "MARK_NA",
+  ReadyForAudit: "READY_FOR_AUDIT",
 } as const;
 export type AuditorEnabledStateTransition = ClosedEnum<
   typeof AuditorEnabledStateTransition

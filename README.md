@@ -38,43 +38,126 @@ Conduct an audit: The Auditor API lets audit firms conduct audits from a tool ou
 * [Development](#development)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
+* [vanta-auditor-api-sdk-typescript](#vanta-auditor-api-sdk-typescript)
+* [vanta-auditor-api-sdk-typescript](#vanta-auditor-api-sdk-typescript-1)
 
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add vanta-auditor-api-sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add vanta-auditor-api-sdk
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add vanta-auditor-api-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add vanta-auditor-api-sdk zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
+```
+
+
+
+### Model Context Protocol (MCP) Server
+
+This SDK is also an installable MCP server where the various SDK methods are
+exposed as tools that can be invoked by AI applications.
+
+> Node.js v20 or greater is required to run the MCP server from npm.
+
+<details>
+<summary>Claude installation steps</summary>
+
+Add the following server definition to your `claude_desktop_config.json` file:
+
+```json
+{
+  "mcpServers": {
+    "Vanta": {
+      "command": "npx",
+      "args": [
+        "-y", "--package", "vanta-auditor-api-sdk",
+        "--",
+        "mcp", "start",
+        "--bearer-auth", "..."
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>Cursor installation steps</summary>
+
+Create a `.cursor/mcp.json` file in your project root with the following content:
+
+```json
+{
+  "mcpServers": {
+    "Vanta": {
+      "command": "npx",
+      "args": [
+        "-y", "--package", "vanta-auditor-api-sdk",
+        "--",
+        "mcp", "start",
+        "--bearer-auth", "..."
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+You can also run MCP servers as a standalone binary with no additional dependencies. You must pull these binaries from available Github releases:
+
+```bash
+curl -L -o mcp-server \
+    https://github.com/{org}/{repo}/releases/download/{tag}/mcp-server-bun-darwin-arm64 && \
+chmod +x mcp-server
+```
+
+If the repo is a private repo you must add your Github PAT to download a release `-H "Authorization: Bearer {GITHUB_PAT}"`.
+
+
+```json
+{
+  "mcpServers": {
+    "Todos": {
+      "command": "./DOWNLOAD/PATH/mcp-server",
+      "args": [
+        "start"
+      ]
+    }
+  }
+}
+```
+
+For a full list of server arguments, run:
+
+```sh
+npx -y --package vanta-auditor-api-sdk -- mcp start --help
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -328,6 +411,37 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 <!-- Start Server Selection [server] -->
 ## Server Selection
+
+### Select Server by Index
+
+You can override the default server globally by passing a server index to the `serverIdx: number` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+
+| #   | Server                         | Description    |
+| --- | ------------------------------ | -------------- |
+| 0   | `https://api.vanta.com/v1`     | US Region API  |
+| 1   | `https://api.eu.vanta.com/v1`  | EU Region API  |
+| 2   | `https://api.aus.vanta.com/v1` | AUS Region API |
+
+#### Example
+
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  serverIdx: 2,
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.list({});
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
 
 ### Override Server URL Per-Client
 

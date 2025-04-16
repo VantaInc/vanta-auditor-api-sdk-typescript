@@ -9,8 +9,8 @@ import { Owner } from "vanta-auditor-api-sdk/models/components";
 
 let value: Owner = {
   id: "<id>",
-  displayName: "Marion.Champlin95",
-  emailAddress: "Karine.Tillman@hotmail.com",
+  displayName: "Jennie.Wunsch60",
+  emailAddress: "Orrin23@yahoo.com",
 };
 ```
 

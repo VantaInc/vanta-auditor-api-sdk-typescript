@@ -89,7 +89,8 @@ run();
 
 ## getEvidenceUrls
 
-Returns a paginated list of evidence urls for an audit.
+Returns a paginated list of evidence urls for an audit. This endpoint should be called whenever an
+evidence is created or has a statusUpdatedAt field that is more recent than the most recent polling event.
 
 ### Example Usage
 
@@ -412,8 +413,8 @@ async function run() {
     auditEvidenceId: "<id>",
     addCommentInput: {
       text: "<value>",
-      email: "Earnestine28@yahoo.com",
-      creationDate: new Date("2024-11-28T04:59:12.710Z"),
+      email: "Alexis74@hotmail.com",
+      creationDate: new Date("2024-08-13T11:18:40.035Z"),
     },
   });
 
@@ -444,8 +445,8 @@ async function run() {
     auditEvidenceId: "<id>",
     addCommentInput: {
       text: "<value>",
-      email: "Earnestine28@yahoo.com",
-      creationDate: new Date("2024-11-28T04:59:12.710Z"),
+      email: "Alexis74@hotmail.com",
+      creationDate: new Date("2024-08-13T11:18:40.035Z"),
     },
   });
 
@@ -586,6 +587,7 @@ async function run() {
       cadence: "P3M",
       reminderWindow: "P0D",
       isRestricted: true,
+      auditorEmail: "<value>",
     },
   });
 
@@ -622,6 +624,7 @@ async function run() {
       cadence: "P3M",
       reminderWindow: "P0D",
       isRestricted: true,
+      auditorEmail: "<value>",
     },
   });
 

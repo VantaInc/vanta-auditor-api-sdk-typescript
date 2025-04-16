@@ -10,13 +10,15 @@ generation:
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: true
+    nameResolutionFeb2025: false
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
+    securityFeb2025: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 typescript:
-  version: 0.1.1
+  version: 0.2.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -25,6 +27,8 @@ typescript:
   author: Speakeasy
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
+  enableCustomCodeRegions: false
+  enableMCPServer: true
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: VANTA
@@ -39,6 +43,7 @@ typescript:
       shared: models/components
       webhooks: models/webhooks
   inputModelSuffix: input
+  jsonpath: legacy
   maxMethodParams: 0
   methodArguments: require-security-and-request
   moduleFormat: commonjs

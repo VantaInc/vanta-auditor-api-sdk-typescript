@@ -31,6 +31,10 @@ export type CreateCustomEvidenceRequestInput = {
    * Whether this document contains sensitive data and needs more restrictive read access
    */
   isRestricted: boolean;
+  /**
+   * Email of the auditor who created the custom evidence request.
+   */
+  auditorEmail: string;
 };
 
 /** @internal */
@@ -45,6 +49,7 @@ export const CreateCustomEvidenceRequestInput$inboundSchema: z.ZodType<
   cadence: RecurrenceDuration$inboundSchema,
   reminderWindow: RecurrenceDuration$inboundSchema,
   isRestricted: z.boolean(),
+  auditorEmail: z.string(),
 });
 
 /** @internal */
@@ -55,6 +60,7 @@ export type CreateCustomEvidenceRequestInput$Outbound = {
   cadence: string;
   reminderWindow: string;
   isRestricted: boolean;
+  auditorEmail: string;
 };
 
 /** @internal */
@@ -69,6 +75,7 @@ export const CreateCustomEvidenceRequestInput$outboundSchema: z.ZodType<
   cadence: RecurrenceDuration$outboundSchema,
   reminderWindow: RecurrenceDuration$outboundSchema,
   isRestricted: z.boolean(),
+  auditorEmail: z.string(),
 });
 
 /**

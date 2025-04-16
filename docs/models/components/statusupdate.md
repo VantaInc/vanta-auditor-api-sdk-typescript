@@ -7,7 +7,7 @@ import { StatusUpdate } from "vanta-auditor-api-sdk/models/components";
 
 let value: StatusUpdate = {
   auditorEmail: "<value>",
-  stateTransition: "FLAG",
+  stateTransition: "ACCEPT",
 };
 ```
 

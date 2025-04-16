@@ -10,13 +10,13 @@ let value: PaginatedResponseEvidenceResults = {
     {
       id: "<id>",
       externalId: "<id>",
-      status: "NA",
+      status: "Flagged",
       name: "<value>",
-      deletionDate: new Date("2023-01-21T14:14:48.878Z"),
-      creationDate: new Date("2024-11-07T22:17:02.814Z"),
-      statusUpdatedDate: new Date("2024-11-01T20:33:57.206Z"),
+      deletionDate: new Date("2024-10-11T23:13:42.656Z"),
+      creationDate: new Date("2025-11-05T07:41:06.984Z"),
+      statusUpdatedDate: new Date("2024-05-18T09:01:14.230Z"),
       testStatus: "<value>",
-      evidenceType: "Policy",
+      evidenceType: "Test",
       evidenceId: "<id>",
       relatedControls: [
         {
@@ -26,8 +26,7 @@ let value: PaginatedResponseEvidenceResults = {
           ],
         },
       ],
-      description:
-        "gadzooks yet athwart skateboard newsstand farm bourgeoisie ah how elliptical",
+      description: "unfortunately failing fabricate",
     },
   ],
   pageInfo: {

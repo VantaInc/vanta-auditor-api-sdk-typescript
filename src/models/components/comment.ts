@@ -29,6 +29,10 @@ export type Comment = {
    */
   modificationDate: Date | null;
   /**
+   * When the comment was deleted
+   */
+  deletionDate: Date | null;
+  /**
    * The email of the comment author. This acts as a unique identifier to map users between Vanta and external systems.
    */
   email: string | null;
@@ -46,6 +50,9 @@ export const Comment$inboundSchema: z.ZodType<Comment, z.ZodTypeDef, unknown> =
     modificationDate: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
+    deletionDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
     email: z.nullable(z.string()),
   });
 
@@ -56,6 +63,7 @@ export type Comment$Outbound = {
   text: string;
   creationDate: string;
   modificationDate: string | null;
+  deletionDate: string | null;
   email: string | null;
 };
 
@@ -70,6 +78,7 @@ export const Comment$outboundSchema: z.ZodType<
   text: z.string(),
   creationDate: z.date().transform(v => v.toISOString()),
   modificationDate: z.nullable(z.date().transform(v => v.toISOString())),
+  deletionDate: z.nullable(z.date().transform(v => v.toISOString())),
   email: z.nullable(z.string()),
 });
 

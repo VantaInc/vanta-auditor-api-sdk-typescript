@@ -10,18 +10,18 @@ let value: Audit = {
   customerOrganizationName: "<value>",
   customerDisplayName: "<value>",
   customerOrganizationId: "<id>",
-  auditStartDate: new Date("2023-03-19T20:31:56.909Z"),
-  auditEndDate: new Date("2023-04-06T11:50:56.757Z"),
-  earlyAccessStartsDate: new Date("2023-01-23T03:49:29.014Z"),
+  auditStartDate: new Date("2023-05-28T05:26:06.780Z"),
+  auditEndDate: new Date("2023-04-01T16:46:31.728Z"),
+  earlyAccessStartsDate: new Date("2025-04-28T15:58:02.627Z"),
   framework: "<value>",
   allowAuditorEmails: [
     "<value>",
   ],
   allowAllAuditors: false,
-  deletionDate: new Date("2025-07-01T13:13:56.703Z"),
-  creationDate: new Date("2025-05-02T20:38:06.637Z"),
-  modificationDate: new Date("2025-08-11T12:47:58.371Z"),
-  completionDate: new Date("2025-12-08T13:34:36.747Z"),
+  deletionDate: new Date("2024-05-08T18:24:06.360Z"),
+  creationDate: new Date("2024-06-23T23:17:32.846Z"),
+  modificationDate: new Date("2025-01-26T19:16:06.007Z"),
+  completionDate: new Date("2024-12-16T22:48:29.086Z"),
 };
 ```
 

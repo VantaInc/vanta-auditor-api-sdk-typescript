@@ -8,7 +8,7 @@ This field should only be included for controls that are to be mapped to the GDP
 ```typescript
 import { Role } from "vanta-auditor-api-sdk/models/components";
 
-let value: Role = "PROCESSOR";
+let value: Role = "BOTH";
 ```
 
 ## Values

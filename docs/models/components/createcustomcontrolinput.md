@@ -8,9 +8,9 @@ import { CreateCustomControlInput } from "vanta-auditor-api-sdk/models/component
 let value: CreateCustomControlInput = {
   externalId: "<id>",
   name: "<value>",
-  description: "why however complicated form rundown phew trolley hmph",
-  effectiveDate: new Date("2023-04-17T14:16:27.461Z"),
-  category: "MOBILE_DEVICE_MANAGEMENT",
+  description: "fuss by how pull pfft toothpick",
+  effectiveDate: new Date("2024-05-14T12:41:15.358Z"),
+  category: "HUMAN_RESOURCES_SECURITY",
 };
 ```
 

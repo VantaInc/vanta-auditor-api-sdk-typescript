@@ -9,9 +9,10 @@ let value: Comment = {
   id: "<id>",
   auditEvidenceId: "<id>",
   text: "<value>",
-  creationDate: new Date("2024-07-21T22:45:05.685Z"),
-  modificationDate: new Date("2023-01-29T03:01:55.688Z"),
-  email: "Hermann58@gmail.com",
+  creationDate: new Date("2024-01-29T23:57:14.338Z"),
+  modificationDate: new Date("2025-07-07T10:47:33.821Z"),
+  deletionDate: new Date("2024-09-26T20:48:38.125Z"),
+  email: "Tatum.Kulas@hotmail.com",
 };
 ```
 
@@ -24,4 +25,5 @@ let value: Comment = {
 | `text`                                                                                                             | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | The comment message                                                                                                |
 | `creationDate`                                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                      | :heavy_check_mark:                                                                                                 | When the comment was created                                                                                       |
 | `modificationDate`                                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                      | :heavy_check_mark:                                                                                                 | When the comment was updated                                                                                       |
+| `deletionDate`                                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                      | :heavy_check_mark:                                                                                                 | When the comment was deleted                                                                                       |
 | `email`                                                                                                            | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | The email of the comment author. This acts as a unique identifier to map users between Vanta and external systems. |

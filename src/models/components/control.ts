@@ -11,6 +11,12 @@ import {
   ControlSource$inboundSchema,
   ControlSource$outboundSchema,
 } from "./controlsource.js";
+import {
+  CustomField,
+  CustomField$inboundSchema,
+  CustomField$Outbound,
+  CustomField$outboundSchema,
+} from "./customfield.js";
 
 /**
  * The control's owner.
@@ -59,7 +65,11 @@ export type Control = {
   /**
    * The control's GDPR role, if the control is a GDPR control.
    */
-  role?: string | undefined;
+  role?: string | null | undefined;
+  /**
+   * The control's custom field values, if control custom fields is included in your Vanta instance.
+   */
+  customFields: Array<CustomField>;
 };
 
 /** @internal */
@@ -128,7 +138,8 @@ export const Control$inboundSchema: z.ZodType<Control, z.ZodTypeDef, unknown> =
     source: ControlSource$inboundSchema,
     domains: z.array(z.string()),
     owner: z.nullable(z.lazy(() => ControlOwner$inboundSchema)),
-    role: z.string().optional(),
+    role: z.nullable(z.string()).optional(),
+    customFields: z.array(CustomField$inboundSchema),
   });
 
 /** @internal */
@@ -140,7 +151,8 @@ export type Control$Outbound = {
   source: string;
   domains: Array<string>;
   owner: ControlOwner$Outbound | null;
-  role?: string | undefined;
+  role?: string | null | undefined;
+  customFields: Array<CustomField$Outbound>;
 };
 
 /** @internal */
@@ -156,7 +168,8 @@ export const Control$outboundSchema: z.ZodType<
   source: ControlSource$outboundSchema,
   domains: z.array(z.string()),
   owner: z.nullable(z.lazy(() => ControlOwner$outboundSchema)),
-  role: z.string().optional(),
+  role: z.nullable(z.string()).optional(),
+  customFields: z.array(CustomField$outboundSchema),
 });
 
 /**

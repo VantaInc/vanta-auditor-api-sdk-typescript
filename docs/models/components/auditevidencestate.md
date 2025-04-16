@@ -5,7 +5,7 @@
 ```typescript
 import { AuditEvidenceState } from "vanta-auditor-api-sdk/models/components";
 
-let value: AuditEvidenceState = "Flagged";
+let value: AuditEvidenceState = "Accepted";
 ```
 
 ## Values

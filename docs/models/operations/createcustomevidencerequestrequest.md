@@ -12,10 +12,11 @@ let value: CreateCustomEvidenceRequestRequest = {
       "<value>",
     ],
     title: "<value>",
-    description: "noon obediently solicit",
-    cadence: "P1W",
-    reminderWindow: "P1D",
+    description: "irritably before correctly aha",
+    cadence: "P1D",
+    reminderWindow: "P1Y",
     isRestricted: false,
+    auditorEmail: "<value>",
   },
 };
 ```

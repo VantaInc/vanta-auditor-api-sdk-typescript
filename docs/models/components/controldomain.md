@@ -5,7 +5,7 @@
 ```typescript
 import { ControlDomain } from "vanta-auditor-api-sdk/models/components";
 
-let value: ControlDomain = "BUSINESS_CONTINUITY_&_DISASTER_RECOVERY";
+let value: ControlDomain = "CLOUD_SECURITY";
 ```
 
 ## Values

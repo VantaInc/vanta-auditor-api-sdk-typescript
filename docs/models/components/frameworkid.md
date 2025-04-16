@@ -5,7 +5,7 @@
 ```typescript
 import { FrameworkId } from "vanta-auditor-api-sdk/models/components";
 
-let value: FrameworkId = "PCI_DDS_4";
+let value: FrameworkId = "HITRUST_E1";
 ```
 
 ## Values

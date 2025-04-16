@@ -11,9 +11,10 @@ let value: CustomEvidenceRequest = {
     "<value>",
   ],
   title: "<value>",
-  description: "print known instead improbable",
-  cadence: "P1M",
-  reminderWindow: "P1D",
+  description:
+    "before mediocre waltz like boohoo expensive sunbathe homely joyously",
+  cadence: "P6M",
+  reminderWindow: "P1W",
   isRestricted: false,
 };
 ```

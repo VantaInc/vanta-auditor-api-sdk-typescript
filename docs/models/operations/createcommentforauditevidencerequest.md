@@ -10,8 +10,8 @@ let value: CreateCommentForAuditEvidenceRequest = {
   auditEvidenceId: "<id>",
   addCommentInput: {
     text: "<value>",
-    email: "Hollie65@yahoo.com",
-    creationDate: new Date("2024-08-11T11:13:21.434Z"),
+    email: "Elizabeth88@gmail.com",
+    creationDate: new Date("2024-06-24T01:05:32.743Z"),
   },
 };
 ```

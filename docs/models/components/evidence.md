@@ -8,13 +8,13 @@ import { Evidence } from "vanta-auditor-api-sdk/models/components";
 let value: Evidence = {
   id: "<id>",
   externalId: "<id>",
-  status: "Not ready for audit",
+  status: "Ready for audit",
   name: "<value>",
-  deletionDate: new Date("2023-02-04T21:29:28.328Z"),
-  creationDate: new Date("2023-06-30T12:06:54.333Z"),
-  statusUpdatedDate: new Date("2024-11-12T03:22:04.343Z"),
+  deletionDate: new Date("2024-04-17T23:47:22.892Z"),
+  creationDate: new Date("2024-10-28T20:04:57.164Z"),
+  statusUpdatedDate: new Date("2025-06-01T04:31:49.174Z"),
   testStatus: "<value>",
-  evidenceType: "Policy",
+  evidenceType: "Evidence Request",
   evidenceId: "<id>",
   relatedControls: [
     {
@@ -24,7 +24,8 @@ let value: Evidence = {
       ],
     },
   ],
-  description: "justly pfft oh delete",
+  description:
+    "quickly amid absentmindedly seemingly ostrich acceptable doodle",
 };
 ```
 

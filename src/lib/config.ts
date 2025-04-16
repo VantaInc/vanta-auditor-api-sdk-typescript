@@ -11,21 +11,32 @@ import { Params, pathToFunc } from "./url.js";
  * Contains the list of servers available to the SDK
  */
 export const ServerList = [
+  /**
+   * US Region API
+   */
   "https://api.vanta.com/v1",
+  /**
+   * EU Region API
+   */
+  "https://api.eu.vanta.com/v1",
+  /**
+   * AUS Region API
+   */
+  "https://api.aus.vanta.com/v1",
 ] as const;
 
 export type SDKOptions = {
-  bearerAuth?: string | (() => Promise<string>);
+  bearerAuth?: string | (() => Promise<string>) | undefined;
 
   httpClient?: HTTPClient;
   /**
    * Allows overriding the default server used by the SDK
    */
-  serverIdx?: number;
+  serverIdx?: number | undefined;
   /**
    * Allows overriding the default server URL used by the SDK
    */
-  serverURL?: string;
+  serverURL?: string | undefined;
   /**
    * Allows overriding the default retry config used by the SDK
    */
@@ -54,8 +65,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0.0",
-  sdkVersion: "0.1.1",
-  genVersion: "2.492.3",
+  sdkVersion: "0.2.0",
+  genVersion: "2.578.0",
   userAgent:
-    "speakeasy-sdk/typescript 0.1.1 2.492.3 1.0.0 vanta-auditor-api-sdk",
+    "speakeasy-sdk/typescript 0.2.0 2.578.0 1.0.0 vanta-auditor-api-sdk",
 } as const;
