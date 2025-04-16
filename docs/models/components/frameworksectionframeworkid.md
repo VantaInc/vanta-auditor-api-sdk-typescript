@@ -6,7 +6,7 @@
 ### `components.FrameworkId`
 
 ```typescript
-const value: components.FrameworkId = "NIST_171";
+const value: components.FrameworkId = "DORA";
 ```
 
 ### `string`

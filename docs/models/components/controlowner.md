@@ -9,8 +9,8 @@ import { ControlOwner } from "vanta-auditor-api-sdk/models/components";
 
 let value: ControlOwner = {
   id: "<id>",
-  displayName: "Layne69",
-  emailAddress: "Estella51@yahoo.com",
+  displayName: "Lucio.Gerlach",
+  emailAddress: "Mandy.Donnelly40@hotmail.com",
 };
 ```
 

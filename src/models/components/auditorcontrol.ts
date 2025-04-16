@@ -11,6 +11,18 @@ import {
   ControlSource$inboundSchema,
   ControlSource$outboundSchema,
 } from "./controlsource.js";
+import {
+  CustomField,
+  CustomField$inboundSchema,
+  CustomField$Outbound,
+  CustomField$outboundSchema,
+} from "./customfield.js";
+import {
+  Section,
+  Section$inboundSchema,
+  Section$Outbound,
+  Section$outboundSchema,
+} from "./section.js";
 
 /**
  * The control's owner.
@@ -59,11 +71,19 @@ export type AuditorControl = {
   /**
    * The control's GDPR role, if the control is a GDPR control.
    */
-  role?: string | undefined;
+  role?: string | null | undefined;
+  /**
+   * The control's custom field values, if control custom fields is included in your Vanta instance.
+   */
+  customFields: Array<CustomField>;
   /**
    * The report standard framework fulfilled by the control.
    */
   framework: string;
+  /**
+   * Sections of a framework that this control satisfies
+   */
+  sections: Array<Section>;
 };
 
 /** @internal */
@@ -132,8 +152,10 @@ export const AuditorControl$inboundSchema: z.ZodType<
   source: ControlSource$inboundSchema,
   domains: z.array(z.string()),
   owner: z.nullable(z.lazy(() => Owner$inboundSchema)),
-  role: z.string().optional(),
+  role: z.nullable(z.string()).optional(),
+  customFields: z.array(CustomField$inboundSchema),
   framework: z.string(),
+  sections: z.array(Section$inboundSchema),
 });
 
 /** @internal */
@@ -145,8 +167,10 @@ export type AuditorControl$Outbound = {
   source: string;
   domains: Array<string>;
   owner: Owner$Outbound | null;
-  role?: string | undefined;
+  role?: string | null | undefined;
+  customFields: Array<CustomField$Outbound>;
   framework: string;
+  sections: Array<Section$Outbound>;
 };
 
 /** @internal */
@@ -162,8 +186,10 @@ export const AuditorControl$outboundSchema: z.ZodType<
   source: ControlSource$outboundSchema,
   domains: z.array(z.string()),
   owner: z.nullable(z.lazy(() => Owner$outboundSchema)),
-  role: z.string().optional(),
+  role: z.nullable(z.string()).optional(),
+  customFields: z.array(CustomField$outboundSchema),
   framework: z.string(),
+  sections: z.array(Section$outboundSchema),
 });
 
 /**

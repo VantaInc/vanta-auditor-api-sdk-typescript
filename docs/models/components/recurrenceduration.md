@@ -5,7 +5,7 @@
 ```typescript
 import { RecurrenceDuration } from "vanta-auditor-api-sdk/models/components";
 
-let value: RecurrenceDuration = "P1M";
+let value: RecurrenceDuration = "P6M";
 ```
 
 ## Values

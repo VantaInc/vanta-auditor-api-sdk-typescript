@@ -10,10 +10,12 @@ let value: CreateCustomEvidenceRequestInput = {
     "<value>",
   ],
   title: "<value>",
-  description: "grave incidentally righteously gastropod ponder unibody",
-  cadence: "P0D",
-  reminderWindow: "P3M",
+  description:
+    "accountability receptor innocently wherever castanet guard diligent vibrant",
+  cadence: "P6M",
+  reminderWindow: "P1W",
   isRestricted: false,
+  auditorEmail: "<value>",
 };
 ```
 
@@ -27,3 +29,4 @@ let value: CreateCustomEvidenceRequestInput = {
 | `cadence`                                                                            | [components.RecurrenceDuration](../../models/components/recurrenceduration.md)       | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `reminderWindow`                                                                     | [components.RecurrenceDuration](../../models/components/recurrenceduration.md)       | :heavy_check_mark:                                                                   | N/A                                                                                  |
 | `isRestricted`                                                                       | *boolean*                                                                            | :heavy_check_mark:                                                                   | Whether this document contains sensitive data and needs more restrictive read access |
+| `auditorEmail`                                                                       | *string*                                                                             | :heavy_check_mark:                                                                   | Email of the auditor who created the custom evidence request.                        |

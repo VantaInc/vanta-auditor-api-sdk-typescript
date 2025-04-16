@@ -11,9 +11,10 @@ let value: PaginatedResponseCommentResults = {
       id: "<id>",
       auditEvidenceId: "<id>",
       text: "<value>",
-      creationDate: new Date("2023-01-23T15:12:14.003Z"),
-      modificationDate: new Date("2025-04-11T04:23:31.598Z"),
-      email: "Geraldine_Sipes87@gmail.com",
+      creationDate: new Date("2023-06-24T20:22:36.236Z"),
+      modificationDate: new Date("2023-08-01T19:42:01.658Z"),
+      deletionDate: new Date("2024-08-22T11:30:55.573Z"),
+      email: "Elva14@hotmail.com",
     },
   ],
   pageInfo: {

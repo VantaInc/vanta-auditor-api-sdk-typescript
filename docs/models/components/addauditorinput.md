@@ -6,7 +6,7 @@
 import { AddAuditorInput } from "vanta-auditor-api-sdk/models/components";
 
 let value: AddAuditorInput = {
-  email: "Guillermo.Osinski@gmail.com",
+  email: "Jaqueline.Hermann67@gmail.com",
   givenName: "<value>",
   familyName: "<value>",
 };

@@ -6,7 +6,7 @@
 import { FrameworkSection } from "vanta-auditor-api-sdk/models/components";
 
 let value: FrameworkSection = {
-  frameworkId: "DORA",
+  frameworkId: "<id>",
   sectionId: "<id>",
 };
 ```

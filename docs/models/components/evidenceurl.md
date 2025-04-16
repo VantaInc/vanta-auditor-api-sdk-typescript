@@ -7,7 +7,7 @@ import { EvidenceUrl } from "vanta-auditor-api-sdk/models/components";
 
 let value: EvidenceUrl = {
   id: "<id>",
-  url: "https://favorable-sand.info/",
+  url: "https://submissive-sediment.net/",
   filename: "example.file",
   isDownloadable: false,
 };

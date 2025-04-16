@@ -38,7 +38,8 @@ export class Audits extends ClientSDK {
    * List audit evidence url
    *
    * @remarks
-   * Returns a paginated list of evidence urls for an audit.
+   * Returns a paginated list of evidence urls for an audit. This endpoint should be called whenever an
+   * evidence is created or has a statusUpdatedAt field that is more recent than the most recent polling event.
    */
   async getEvidenceUrls(
     request: operations.ListAuditEvidenceUrlsRequest,

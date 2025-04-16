@@ -8,7 +8,7 @@ import { Auditor } from "vanta-auditor-api-sdk/models/components";
 let value: Auditor = {
   id: "<id>",
   organizationId: "<id>",
-  email: "Betty.Wuckert85@yahoo.com",
+  email: "Daren32@yahoo.com",
   givenName: "<value>",
   familyName: "<value>",
 };

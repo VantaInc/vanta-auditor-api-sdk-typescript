@@ -12,18 +12,31 @@ let value: PaginatedResponseAuditorControl = {
         id: "<id>",
         externalId: "<id>",
         name: "<value>",
-        description:
-          "incidentally challenge vol department brightly resort duh redact indeed",
+        description: "although alarmed aboard observe after brush apud",
         source: "Vanta",
         domains: [
           "<value>",
         ],
         owner: {
           id: "<id>",
-          displayName: "Jaida.Schmidt51",
-          emailAddress: "Vicenta.Barton@yahoo.com",
+          displayName: "Zora73",
+          emailAddress: "Sheila93@gmail.com",
         },
+        customFields: [
+          {
+            label: "<value>",
+            value: [
+              "<value>",
+            ],
+          },
+        ],
         framework: "<value>",
+        sections: [
+          {
+            name: "<value>",
+            framework: "<value>",
+          },
+        ],
       },
     ],
     pageInfo: {

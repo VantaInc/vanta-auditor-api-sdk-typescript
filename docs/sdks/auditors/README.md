@@ -22,7 +22,7 @@ const vanta = new Vanta({
 
 async function run() {
   const result = await vanta.auditors.create({
-    email: "Cooper59@hotmail.com",
+    email: "Loyal79@yahoo.com",
     givenName: "<value>",
     familyName: "<value>",
   });
@@ -50,7 +50,7 @@ const vanta = new VantaCore({
 
 async function run() {
   const res = await auditorsCreate(vanta, {
-    email: "Cooper59@hotmail.com",
+    email: "Loyal79@yahoo.com",
     givenName: "<value>",
     familyName: "<value>",
   });
