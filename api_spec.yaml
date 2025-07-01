@@ -218,6 +218,21 @@ components:
         - MEDIUM
         - UNSCORED
       type: string
+    CustomField:
+      properties:
+        label:
+          type: string
+        value:
+          anyOf:
+            - type: string
+            - items:
+                type: string
+              type: array
+      required:
+        - label
+        - value
+      type: object
+      additionalProperties: false
     Vendor:
       properties:
         id:
@@ -344,6 +359,12 @@ components:
         residualRiskLevel:
           $ref: "#/components/schemas/VendorRiskLevel"
           description: The vendor's residual risk level.
+        customFields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+          nullable: true
+          description: The vendor's custom fields.
       required:
         - id
         - name
@@ -367,6 +388,7 @@ components:
         - status
         - inherentRiskLevel
         - residualRiskLevel
+        - customFields
       type: object
       additionalProperties: false
     PaginatedResponse_Vendor_:
@@ -1544,21 +1566,6 @@ components:
         - Vanta
         - Custom
       type: string
-    CustomField:
-      properties:
-        label:
-          type: string
-        value:
-          anyOf:
-            - type: string
-            - items:
-                type: string
-              type: array
-      required:
-        - label
-        - value
-      type: object
-      additionalProperties: false
     AuditorControl:
       properties:
         id:
@@ -2541,6 +2548,7 @@ paths:
                           status: MANAGED
                           inherentRiskLevel: HIGH
                           residualRiskLevel: MEDIUM
+                          customFields: null
                       pageInfo:
                         hasNextPage: false
                         hasPreviousPage: false
