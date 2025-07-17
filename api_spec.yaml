@@ -34,6 +34,11 @@ components:
         - startCursor
       type: object
       additionalProperties: false
+    AuditFocus:
+      type: string
+      enum:
+        - EXTERNAL
+        - INTERNAL
     Audit:
       properties:
         id:
@@ -63,7 +68,7 @@ components:
           type: string
           format: date-time
           description: The end of the audit window.
-        earlyAccessStartsDate:
+        earlyAccessStartsAt:
           type: string
           format: date-time
           nullable: true
@@ -102,6 +107,9 @@ components:
           description:
             Timestamp when the audit was marked completed, and report was
             uploaded
+        auditFocus:
+          $ref: "#/components/schemas/AuditFocus"
+          description: The focus of the audit
       required:
         - id
         - customerOrganizationName
@@ -109,7 +117,7 @@ components:
         - customerOrganizationId
         - auditStartDate
         - auditEndDate
-        - earlyAccessStartsDate
+        - earlyAccessStartsAt
         - framework
         - allowAuditorEmails
         - allowAllAuditors
@@ -117,6 +125,7 @@ components:
         - creationDate
         - modificationDate
         - completionDate
+        - auditFocus
       type: object
       additionalProperties: false
     PaginatedResponse_Audit_:
@@ -137,15 +146,22 @@ components:
         - results
       type: object
       additionalProperties: false
-    PageSize:
+    ListAuditsPageSize:
       type: integer
       format: int32
       default: 10
-      description:
-        Controls the maximum number of items returned in one response from
-        the API.
+      description: >-
+        Controls the maximum number of items returned in one response from the
+        listAudits API.
+
+
+        We have increased the pagination size for this endpoint to enable our
+        upmarket audit firms to
+
+        sync in a timely manner. The rest of the API will use a pagination size
+        of 100.
       minimum: 1
-      maximum: 100
+      maximum: 200
     PageCursor:
       type: string
       description: >-
@@ -218,6 +234,319 @@ components:
         - MEDIUM
         - UNSCORED
       type: string
+    CountryCode:
+      enum:
+        - EUE
+        - AND
+        - ARE
+        - AFG
+        - ATG
+        - AIA
+        - ALB
+        - ARM
+        - AGO
+        - ATA
+        - ARG
+        - ASM
+        - AUT
+        - AUS
+        - ABW
+        - ALA
+        - AZE
+        - BIH
+        - BRB
+        - BGD
+        - BEL
+        - BFA
+        - BGR
+        - BHR
+        - BDI
+        - BEN
+        - BLM
+        - BMU
+        - BRN
+        - BOL
+        - BES
+        - BRA
+        - BHS
+        - BTN
+        - BVT
+        - BWA
+        - BLR
+        - BLZ
+        - CAN
+        - CCK
+        - COD
+        - CAF
+        - COG
+        - CHE
+        - CIV
+        - COK
+        - CHL
+        - CMR
+        - CHN
+        - COL
+        - CRI
+        - CUB
+        - CPV
+        - CUW
+        - CXR
+        - CYP
+        - CZE
+        - DEU
+        - DJI
+        - DNK
+        - DMA
+        - DOM
+        - DZA
+        - ECU
+        - EST
+        - EGY
+        - ESH
+        - ERI
+        - ESP
+        - ETH
+        - FIN
+        - FJI
+        - FLK
+        - FSM
+        - FRO
+        - FRA
+        - GAB
+        - ENG
+        - SCT
+        - GBR
+        - WAL
+        - NIR
+        - GRD
+        - GEO
+        - GUF
+        - GGY
+        - GHA
+        - GIB
+        - GRL
+        - GMB
+        - GIN
+        - GLP
+        - GNQ
+        - GRC
+        - SGS
+        - GTM
+        - GUM
+        - GNB
+        - GUY
+        - HKG
+        - HMD
+        - HND
+        - HRV
+        - HTI
+        - HUN
+        - IDN
+        - IRL
+        - ISR
+        - IMN
+        - IND
+        - IOT
+        - IRQ
+        - IRN
+        - ISL
+        - ITA
+        - JEY
+        - JAM
+        - JOR
+        - JPN
+        - KEN
+        - KGZ
+        - KHM
+        - KIR
+        - COM
+        - KNA
+        - PRK
+        - KOR
+        - KWT
+        - CYM
+        - KAZ
+        - LAO
+        - LBN
+        - LCA
+        - LIE
+        - LKA
+        - LBR
+        - LSO
+        - LTU
+        - LUX
+        - LVA
+        - LBY
+        - MAR
+        - MCO
+        - MDA
+        - MNE
+        - MAF
+        - MDG
+        - MHL
+        - MKD
+        - MLI
+        - MMR
+        - MNG
+        - MAC
+        - MNP
+        - MTQ
+        - MRT
+        - MSR
+        - MLT
+        - MUS
+        - MDV
+        - MWI
+        - MEX
+        - MYS
+        - MOZ
+        - NAM
+        - NCL
+        - NER
+        - NFK
+        - NGA
+        - NIC
+        - NLD
+        - NOR
+        - NPL
+        - NRU
+        - NIU
+        - NZL
+        - OMN
+        - PAN
+        - PER
+        - PYF
+        - PNG
+        - PHL
+        - PAK
+        - POL
+        - SPM
+        - PCN
+        - PRI
+        - PSE
+        - PRT
+        - PLW
+        - PRY
+        - QAT
+        - REU
+        - ROU
+        - SRB
+        - RUS
+        - RWA
+        - SAU
+        - SLB
+        - SYC
+        - SDN
+        - SWE
+        - SGP
+        - SHN
+        - SVN
+        - SJM
+        - SVK
+        - SLE
+        - SMR
+        - SEN
+        - SOM
+        - SUR
+        - SSD
+        - STP
+        - SLV
+        - SXM
+        - SYR
+        - SWZ
+        - TCA
+        - TCD
+        - ATF
+        - TGO
+        - THA
+        - TJK
+        - TKL
+        - TLS
+        - TKM
+        - TUN
+        - TON
+        - TUR
+        - TTO
+        - TUV
+        - TWN
+        - TZA
+        - UKR
+        - UGA
+        - UMI
+        - USA
+        - URY
+        - UZB
+        - VAT
+        - VCT
+        - VEN
+        - VGB
+        - VIR
+        - VNM
+        - VUT
+        - WLF
+        - WSM
+        - YEM
+        - MYT
+        - ZAF
+        - ZMB
+        - ZWE
+      type: string
+    CurrencyCode:
+      enum:
+        - ARS
+        - AUD
+        - BRL
+        - CAD
+        - COP
+        - CZK
+        - DKK
+        - EUR
+        - GBP
+        - ILS
+        - INR
+        - JPY
+        - MXN
+        - NOK
+        - NZD
+        - PHP
+        - PKR
+        - PLN
+        - RSD
+        - SEK
+        - SGD
+        - UAH
+        - USD
+        - ZAR
+      type: string
+    VendorContractAmount:
+      properties:
+        amount:
+          type: number
+          format: double
+          description: The amount of the contract.
+        currency:
+          $ref: "#/components/schemas/CurrencyCode"
+          description: The currency of the contract.
+      required:
+        - amount
+        - currency
+      type: object
+      additionalProperties: false
+    CustomField:
+      properties:
+        label:
+          type: string
+        value:
+          anyOf:
+            - type: string
+            - items:
+                type: string
+              type: array
+      required:
+        - label
+        - value
+      type: object
+      additionalProperties: false
     Vendor:
       properties:
         id:
@@ -344,6 +673,22 @@ components:
         residualRiskLevel:
           $ref: "#/components/schemas/VendorRiskLevel"
           description: The vendor's residual risk level.
+        vendorHeadquarters:
+          allOf:
+            - $ref: "#/components/schemas/CountryCode"
+          nullable: true
+          description: The vendor's headquarters.
+        contractAmount:
+          allOf:
+            - $ref: "#/components/schemas/VendorContractAmount"
+          nullable: true
+          description: The contract amount for the vendor.
+        customFields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+          nullable: true
+          description: The vendor's custom fields.
       required:
         - id
         - name
@@ -367,6 +712,9 @@ components:
         - status
         - inherentRiskLevel
         - residualRiskLevel
+        - vendorHeadquarters
+        - contractAmount
+        - customFields
       type: object
       additionalProperties: false
     PaginatedResponse_Vendor_:
@@ -387,6 +735,15 @@ components:
         - results
       type: object
       additionalProperties: false
+    PageSize:
+      type: integer
+      format: int32
+      default: 10
+      description:
+        Controls the maximum number of items returned in one response from
+        the API.
+      minimum: 1
+      maximum: 100
     ComputerStatusOutcome:
       description: >-
         The possible outcomes of a status check. The outcome can be one of the
@@ -1544,21 +1901,6 @@ components:
         - Vanta
         - Custom
       type: string
-    CustomField:
-      properties:
-        label:
-          type: string
-        value:
-          anyOf:
-            - type: string
-            - items:
-                type: string
-              type: array
-      required:
-        - label
-        - value
-      type: object
-      additionalProperties: false
     AuditorControl:
       properties:
         id:
@@ -2456,7 +2798,7 @@ paths:
                           customerOrganizationId: 65fc81a3359c8508c9af880f
                           auditStartDate: 2024-03-07T21:25:56.000Z
                           auditEndDate: 2024-03-14T21:25:56.000Z
-                          earlyAccessStartsDate: 2024-03-07T21:25:56.000Z
+                          earlyAccessStartsAt: 2024-03-07T21:25:56.000Z
                           framework: SOC 2 Type II
                           allowAuditorEmails:
                             - sam@auditor.com
@@ -2465,6 +2807,7 @@ paths:
                           creationDate: 2024-03-07T21:25:56.000Z
                           modificationDate: 2024-03-07T21:25:56.000Z
                           completionDate: 2024-03-07T21:25:56.000Z
+                          auditFocus: EXTERNAL
                       pageInfo:
                         hasNextPage: false
                         hasPreviousPage: false
@@ -2481,7 +2824,7 @@ paths:
           name: pageSize
           required: false
           schema:
-            $ref: "#/components/schemas/PageSize"
+            $ref: "#/components/schemas/ListAuditsPageSize"
         - in: query
           name: pageCursor
           required: false
@@ -2494,6 +2837,12 @@ paths:
           schema:
             format: date-time
             type: string
+        - description: Includes only audits with no audit report uploaded
+          in: query
+          name: isActiveAudit
+          required: false
+          schema:
+            type: boolean
   /audits/{auditId}/vendors:
     get:
       operationId: ListVendorsInAuditScope
@@ -2541,6 +2890,11 @@ paths:
                           status: MANAGED
                           inherentRiskLevel: HIGH
                           residualRiskLevel: MEDIUM
+                          vendorHeadquarters: USA
+                          contractAmount:
+                            amount: 1000000
+                            currency: USD
+                          customFields: null
                       pageInfo:
                         hasNextPage: false
                         hasPreviousPage: false
