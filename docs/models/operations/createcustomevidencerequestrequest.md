@@ -8,14 +8,12 @@ import { CreateCustomEvidenceRequestRequest } from "vanta-auditor-api-sdk/models
 let value: CreateCustomEvidenceRequestRequest = {
   auditId: "<id>",
   createCustomEvidenceRequestInput: {
-    controlIds: [
-      "<value>",
-    ],
+    controlIds: [],
     title: "<value>",
-    description: "irritably before correctly aha",
-    cadence: "P1D",
-    reminderWindow: "P1Y",
-    isRestricted: false,
+    description: "but surface healthily geez boohoo",
+    cadence: "P6M",
+    reminderWindow: "P1W",
+    isRestricted: true,
     auditorEmail: "<value>",
   },
 };

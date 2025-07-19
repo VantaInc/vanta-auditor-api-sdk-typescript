@@ -7,9 +7,7 @@ import { EvidenceControl } from "vanta-auditor-api-sdk/models/components";
 
 let value: EvidenceControl = {
   name: "<value>",
-  sectionNames: [
-    "<value>",
-  ],
+  sectionNames: [],
 };
 ```
 
