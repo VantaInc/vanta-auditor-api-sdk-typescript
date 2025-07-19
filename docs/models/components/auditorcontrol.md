@@ -9,32 +9,29 @@ let value: AuditorControl = {
   id: "<id>",
   externalId: "<id>",
   name: "<value>",
-  description:
-    "athwart porter never insistent gadzooks boohoo sesame fabricate graffiti",
+  description: "jubilantly modulo gee yuck",
   source: "Vanta",
   domains: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
   owner: {
     id: "<id>",
-    displayName: "Dino.Stark8",
-    emailAddress: "Kevin_Beier@hotmail.com",
+    displayName: "Arthur.Borer",
+    emailAddress: "Coby_Fisher78@gmail.com",
   },
   customFields: [
     {
       label: "<value>",
       value: [
-        "<value>",
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
       ],
     },
   ],
   framework: "<value>",
-  sections: [
-    {
-      name: "<value>",
-      framework: "<value>",
-    },
-  ],
+  sections: [],
 };
 ```
 

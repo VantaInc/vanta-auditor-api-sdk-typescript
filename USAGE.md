@@ -9,7 +9,6 @@ const vanta = new Vanta({
 async function run() {
   const result = await vanta.audits.list({});
 
-  // Handle the result
   console.log(result);
 }
 

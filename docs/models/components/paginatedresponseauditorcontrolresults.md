@@ -11,20 +11,25 @@ let value: PaginatedResponseAuditorControlResults = {
       id: "<id>",
       externalId: "<id>",
       name: "<value>",
-      description: "since tapioca by broadcast fully whoa twin outside",
-      source: "Custom",
+      description: "opposite round mid promptly",
+      source: "Vanta",
       domains: [
-        "<value>",
+        "<value 1>",
+        "<value 2>",
       ],
       owner: {
         id: "<id>",
-        displayName: "Jeffery.Mante6",
-        emailAddress: "Blaise_Christiansen59@yahoo.com",
+        displayName: "Arthur.Borer",
+        emailAddress: "Coby_Fisher78@gmail.com",
       },
       customFields: [
         {
           label: "<value>",
-          value: "<value>",
+          value: [
+            "<value 1>",
+            "<value 2>",
+            "<value 3>",
+          ],
         },
       ],
       framework: "<value>",
