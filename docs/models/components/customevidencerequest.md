@@ -8,13 +8,14 @@ import { CustomEvidenceRequest } from "vanta-auditor-api-sdk/models/components";
 let value: CustomEvidenceRequest = {
   id: "<id>",
   controlIds: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
   title: "<value>",
-  description:
-    "before mediocre waltz like boohoo expensive sunbathe homely joyously",
-  cadence: "P6M",
-  reminderWindow: "P1W",
+  description: "though svelte optimal flashy kissingly gently",
+  cadence: "P0D",
+  reminderWindow: "P3M",
   isRestricted: false,
 };
 ```

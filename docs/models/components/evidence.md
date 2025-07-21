@@ -10,22 +10,23 @@ let value: Evidence = {
   externalId: "<id>",
   status: "Ready for audit",
   name: "<value>",
-  deletionDate: new Date("2024-04-17T23:47:22.892Z"),
-  creationDate: new Date("2024-10-28T20:04:57.164Z"),
-  statusUpdatedDate: new Date("2025-06-01T04:31:49.174Z"),
+  deletionDate: new Date("2024-10-28T20:04:57.164Z"),
+  creationDate: new Date("2025-06-01T04:31:49.174Z"),
+  statusUpdatedDate: new Date("2023-01-24T13:10:21.019Z"),
   testStatus: "<value>",
-  evidenceType: "Evidence Request",
+  evidenceType: "Policy",
   evidenceId: "<id>",
   relatedControls: [
     {
       name: "<value>",
       sectionNames: [
-        "<value>",
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
       ],
     },
   ],
-  description:
-    "quickly amid absentmindedly seemingly ostrich acceptable doodle",
+  description: "educated towards before softly down",
 };
 ```
 

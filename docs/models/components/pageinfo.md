@@ -9,8 +9,8 @@ import { PageInfo } from "vanta-auditor-api-sdk/models/components";
 
 let value: PageInfo = {
   endCursor: "<value>",
-  hasNextPage: false,
-  hasPreviousPage: false,
+  hasNextPage: true,
+  hasPreviousPage: true,
   startCursor: "<value>",
 };
 ```

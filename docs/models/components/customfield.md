@@ -8,7 +8,8 @@ import { CustomField } from "vanta-auditor-api-sdk/models/components";
 let value: CustomField = {
   label: "<value>",
   value: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
 };
 ```

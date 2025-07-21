@@ -9,20 +9,25 @@ let value: Control = {
   id: "<id>",
   externalId: "<id>",
   name: "<value>",
-  description: "highly down woot wry",
+  description:
+    "always extremely fervently monthly poor inwardly to cuckoo zowie inventory",
   source: "Custom",
   domains: [
-    "<value>",
+    "<value 1>",
   ],
   owner: {
     id: "<id>",
-    displayName: "Kasey_Orn",
-    emailAddress: "Soledad_Cummerata96@yahoo.com",
+    displayName: "Fermin_Conn",
+    emailAddress: "Cleta75@gmail.com",
   },
   customFields: [
     {
       label: "<value>",
-      value: "<value>",
+      value: [
+        "<value 1>",
+        "<value 2>",
+        "<value 3>",
+      ],
     },
   ],
 };

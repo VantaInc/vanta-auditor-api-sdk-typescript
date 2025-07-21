@@ -14,6 +14,10 @@ export type ListAuditsRequest = {
    * Includes all audits that have changed since changedSinceDate.
    */
   changedSinceDate?: Date | undefined;
+  /**
+   * Includes only audits with no audit report uploaded
+   */
+  isActiveAudit?: boolean | undefined;
 };
 
 /** @internal */
@@ -27,6 +31,7 @@ export const ListAuditsRequest$inboundSchema: z.ZodType<
   changedSinceDate: z.string().datetime({ offset: true }).transform(v =>
     new Date(v)
   ).optional(),
+  isActiveAudit: z.boolean().optional(),
 });
 
 /** @internal */
@@ -34,6 +39,7 @@ export type ListAuditsRequest$Outbound = {
   pageSize: number;
   pageCursor?: string | undefined;
   changedSinceDate?: string | undefined;
+  isActiveAudit?: boolean | undefined;
 };
 
 /** @internal */
@@ -45,6 +51,7 @@ export const ListAuditsRequest$outboundSchema: z.ZodType<
   pageSize: z.number().int().default(10),
   pageCursor: z.string().optional(),
   changedSinceDate: z.date().transform(v => v.toISOString()).optional(),
+  isActiveAudit: z.boolean().optional(),
 });
 
 /**

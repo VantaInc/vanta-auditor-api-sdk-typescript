@@ -6,6 +6,11 @@ import * as z from "zod";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AuditFocus,
+  AuditFocus$inboundSchema,
+  AuditFocus$outboundSchema,
+} from "./auditfocus.js";
 
 export type Audit = {
   /**
@@ -35,7 +40,7 @@ export type Audit = {
   /**
    * Timestamp at which auditors gain access to the audit. Occurs before the audit window begins
    */
-  earlyAccessStartsDate: Date | null;
+  earlyAccessStartsAt: Date | null;
   /**
    * The name of the framework for the audit
    */
@@ -64,6 +69,7 @@ export type Audit = {
    * Timestamp when the audit was marked completed, and report was uploaded
    */
   completionDate: Date | null;
+  auditFocus: AuditFocus;
 };
 
 /** @internal */
@@ -79,7 +85,7 @@ export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
     auditEndDate: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)
     ),
-    earlyAccessStartsDate: z.nullable(
+    earlyAccessStartsAt: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
     framework: z.string(),
@@ -97,6 +103,7 @@ export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
     completionDate: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
+    auditFocus: AuditFocus$inboundSchema,
   });
 
 /** @internal */
@@ -107,7 +114,7 @@ export type Audit$Outbound = {
   customerOrganizationId: string;
   auditStartDate: string;
   auditEndDate: string;
-  earlyAccessStartsDate: string | null;
+  earlyAccessStartsAt: string | null;
   framework: string;
   allowAuditorEmails: Array<string>;
   allowAllAuditors: boolean;
@@ -115,6 +122,7 @@ export type Audit$Outbound = {
   creationDate: string;
   modificationDate: string | null;
   completionDate: string | null;
+  auditFocus: string;
 };
 
 /** @internal */
@@ -129,7 +137,7 @@ export const Audit$outboundSchema: z.ZodType<
   customerOrganizationId: z.string(),
   auditStartDate: z.date().transform(v => v.toISOString()),
   auditEndDate: z.date().transform(v => v.toISOString()),
-  earlyAccessStartsDate: z.nullable(z.date().transform(v => v.toISOString())),
+  earlyAccessStartsAt: z.nullable(z.date().transform(v => v.toISOString())),
   framework: z.string(),
   allowAuditorEmails: z.array(z.string()),
   allowAllAuditors: z.boolean(),
@@ -137,6 +145,7 @@ export const Audit$outboundSchema: z.ZodType<
   creationDate: z.date().transform(v => v.toISOString()),
   modificationDate: z.nullable(z.date().transform(v => v.toISOString())),
   completionDate: z.nullable(z.date().transform(v => v.toISOString())),
+  auditFocus: AuditFocus$outboundSchema,
 });
 
 /**

@@ -10,9 +10,9 @@ let value: CreateCustomControlRequest = {
   createCustomControlInput: {
     externalId: "<id>",
     name: "<value>",
-    description: "yahoo accentuate from despite supplier",
-    effectiveDate: new Date("2024-11-28T00:29:43.175Z"),
-    category: "SECURE_ENGINEERING_&_ARCHITECTURE",
+    description: "babushka especially boo happily on candid longingly quicker",
+    effectiveDate: new Date("2025-09-26T21:38:08.451Z"),
+    category: "MAINTENANCE",
   },
 };
 ```
