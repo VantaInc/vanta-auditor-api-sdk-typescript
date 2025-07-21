@@ -22,12 +22,11 @@ const vanta = new Vanta({
 
 async function run() {
   const result = await vanta.auditors.create({
-    email: "Loyal79@yahoo.com",
+    email: "Genesis_Kunze87@yahoo.com",
     givenName: "<value>",
     familyName: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -50,19 +49,16 @@ const vanta = new VantaCore({
 
 async function run() {
   const res = await auditorsCreate(vanta, {
-    email: "Loyal79@yahoo.com",
+    email: "Genesis_Kunze87@yahoo.com",
     givenName: "<value>",
     familyName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditorsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

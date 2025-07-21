@@ -7,14 +7,7 @@ import { PaginatedResponseEvidenceUrl } from "vanta-auditor-api-sdk/models/compo
 
 let value: PaginatedResponseEvidenceUrl = {
   results: {
-    data: [
-      {
-        id: "<id>",
-        url: "https://rare-knitting.com/",
-        filename: "example.file",
-        isDownloadable: false,
-      },
-    ],
+    data: [],
     pageInfo: {
       endCursor: "<value>",
       hasNextPage: false,

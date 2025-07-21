@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 1a2b10b336197dc97b4e05876d814f28
+  docChecksum: 32687d9ba29da014326cc097fdfff59d
   docVersion: 1.0.0
-  speakeasyVersion: 1.533.0
-  generationVersion: 2.578.0
-  releaseVersion: 0.2.0
-  configChecksum: 277f79a4bad56237db4b079381471e19
+  speakeasyVersion: 1.583.0
+  generationVersion: 2.658.3
+  releaseVersion: 0.3.0
+  configChecksum: b91da7768fbb2f57f5060768e05e54e1
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.11
-    core: 3.21.6
+    constsAndDefaults: 0.1.12
+    core: 3.21.14
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     enumUnions: 0.1.0
@@ -22,14 +22,14 @@ features:
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.4
-    mcpServer: 0.9.1
+    globalServerURLs: 2.82.5
+    mcpServer: 0.9.3
     nameOverrides: 2.81.2
     nullables: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
-    sdkHooks: 0.2.0
-    unions: 2.85.8
+    sdkHooks: 0.3.0
+    unions: 2.85.11
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -46,6 +46,7 @@ generatedFiles:
   - docs/models/components/auditevidencestate.md
   - docs/models/components/auditevidencetype.md
   - docs/models/components/auditevidenceupdateinput.md
+  - docs/models/components/auditfocus.md
   - docs/models/components/auditor.md
   - docs/models/components/auditorcontrol.md
   - docs/models/components/auditorenabledstatetransition.md
@@ -95,6 +96,10 @@ generatedFiles:
   - docs/sdks/audits/README.md
   - docs/sdks/vanta/README.md
   - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/auditsList.example.ts
+  - examples/package.json
   - jsr.json
   - package.json
   - src/core.ts
@@ -157,6 +162,7 @@ generatedFiles:
   - src/models/components/auditevidencestate.ts
   - src/models/components/auditevidencetype.ts
   - src/models/components/auditevidenceupdateinput.ts
+  - src/models/components/auditfocus.ts
   - src/models/components/auditor.ts
   - src/models/components/auditorcontrol.ts
   - src/models/components/auditorenabledstatetransition.ts
@@ -186,7 +192,9 @@ generatedFiles:
   - src/models/errors/apierror.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
+  - src/models/errors/responsevalidationerror.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/vantaerror.ts
   - src/models/operations/createcommentforauditevidence.ts
   - src/models/operations/createcustomcontrol.ts
   - src/models/operations/createcustomevidencerequest.ts
@@ -219,7 +227,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "customerOrganizationName": "corporation.com", "customerDisplayName": "Corporation Company", "customerOrganizationId": "65fc81a3359c8508c9af880f", "auditStartDate": "2024-03-07T21:25:56Z", "auditEndDate": "2024-03-14T21:25:56Z", "earlyAccessStartsDate": "2024-03-07T21:25:56Z", "framework": "SOC 2 Type II", "allowAuditorEmails": ["sam@auditor.com"], "allowAllAuditors": true, "deletionDate": "2024-03-07T21:25:56Z", "creationDate": "2024-03-07T21:25:56Z", "modificationDate": "2024-03-07T21:25:56Z", "completionDate": "2024-03-07T21:25:56Z"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
+          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "customerOrganizationName": "corporation.com", "customerDisplayName": "Corporation Company", "customerOrganizationId": "65fc81a3359c8508c9af880f", "auditStartDate": "2024-03-07T21:25:56Z", "auditEndDate": "2024-03-14T21:25:56Z", "earlyAccessStartsAt": "2024-03-07T21:25:56Z", "framework": "SOC 2 Type II", "allowAuditorEmails": ["sam@auditor.com"], "allowAllAuditors": true, "deletionDate": "2024-03-07T21:25:56Z", "creationDate": "2024-03-07T21:25:56Z", "modificationDate": "2024-03-07T21:25:56Z", "completionDate": "2024-03-07T21:25:56Z", "auditFocus": "EXTERNAL"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
   ListAuditEvidenceUrls:
     Example 1:
       parameters:
@@ -268,7 +276,7 @@ examples:
           auditId: "<id>"
           auditEvidenceId: "<id>"
       requestBody:
-        application/json: {"text": "<value>", "email": "Alexis74@hotmail.com", "creationDate": "2024-08-13T11:18:40.035Z"}
+        application/json: {"text": "<value>", "email": "Carmen.Bogan@yahoo.com", "creationDate": "2024-05-28T11:04:29.369Z"}
       responses:
         "200":
           application/json: {"id": "65fc81a3359c8508c9af880f", "auditEvidenceId": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56Z", "modificationDate": "2024-03-07T21:25:56Z", "deletionDate": "2024-03-07T21:25:56Z", "email": "vlad@vantaroo.com"}
@@ -289,7 +297,7 @@ examples:
         path:
           auditId: "<id>"
       requestBody:
-        application/json: {"controlIds": ["<value>"], "title": "<value>", "description": "now whoa while", "cadence": "P3M", "reminderWindow": "P0D", "isRestricted": true, "auditorEmail": "<value>"}
+        application/json: {"controlIds": ["<value 1>", "<value 2>"], "title": "<value>", "description": "pure bludgeon deliberately question although", "cadence": "P1D", "reminderWindow": "P0D", "isRestricted": false, "auditorEmail": "<value>"}
       responses:
         "200":
           application/json: {"id": "65fc81a3359c8508c9af880f", "controlIds": ["1.1.2.a"], "title": "Access Control Policy", "description": "Description for Access Control Policy", "cadence": "P6M", "reminderWindow": "P6M", "isRestricted": true}
@@ -299,16 +307,16 @@ examples:
         path:
           auditId: "<id>"
       requestBody:
-        application/json: {"externalId": "<id>", "name": "<value>", "description": "even keenly afore mmm yearningly ouch tough yearly intent", "effectiveDate": "2024-07-08T11:52:30.590Z", "category": "THREAT_MANAGEMENT"}
+        application/json: {"externalId": "<id>", "name": null, "description": "yet plus utter queasily what juvenile wound", "effectiveDate": "2024-11-10T13:58:54.564Z", "category": "CLOUD_SECURITY"}
       responses:
         "201":
           application/json: {"id": "a2f7e1b9d0c3f4e5a6c7b8d9", "externalId": "CRY-104", "name": "Data encryption utilized", "description": "Access reviews are performed to ensure that access is appropriate for the user's role and responsibilities.", "source": "Vanta", "domains": ["CRYPTOGRAPHIC_PROTECTIONS"], "owner": {"id": "65e1efde08e8478f143a8ff9", "displayName": "Example Owner", "emailAddress": "example-person@email.com"}, "role": "CONTROLLER", "customFields": [{"label": "Additional context", "value": "This control is critical for GDPR compliance"}]}
   CreateAuditor:
     Example 1:
       requestBody:
-        application/json: {"email": "Loyal79@yahoo.com", "givenName": "<value>", "familyName": "<value>"}
+        application/json: {"email": "Genesis_Kunze87@yahoo.com", "givenName": "<value>", "familyName": "<value>"}
       responses:
         "200":
           application/json: {"id": "65fc81a3359c8508c9af880f", "organizationId": "8c9af880f1a335965fc850c8", "email": "testauditor@audit.com", "givenName": "Sam", "familyName": "Auditor"}
-examplesVersion: 1.0.1
+examplesVersion: 1.0.2
 generatedTests: {}

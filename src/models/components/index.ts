@@ -8,6 +8,7 @@ export * from "./audit.js";
 export * from "./auditevidencestate.js";
 export * from "./auditevidencetype.js";
 export * from "./auditevidenceupdateinput.js";
+export * from "./auditfocus.js";
 export * from "./auditor.js";
 export * from "./auditorcontrol.js";
 export * from "./auditorenabledstatetransition.js";

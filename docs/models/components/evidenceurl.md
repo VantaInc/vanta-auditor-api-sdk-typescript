@@ -9,7 +9,7 @@ let value: EvidenceUrl = {
   id: "<id>",
   url: "https://submissive-sediment.net/",
   filename: "example.file",
-  isDownloadable: false,
+  isDownloadable: true,
 };
 ```
 

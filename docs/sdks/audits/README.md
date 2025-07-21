@@ -31,7 +31,6 @@ const vanta = new Vanta({
 async function run() {
   const result = await vanta.audits.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -54,15 +53,12 @@ const vanta = new VantaCore({
 
 async function run() {
   const res = await auditsList(vanta, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -107,7 +103,6 @@ async function run() {
     auditEvidenceId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -133,15 +128,12 @@ async function run() {
     auditId: "<id>",
     auditEvidenceId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsGetEvidenceUrls failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -184,7 +176,6 @@ async function run() {
     auditId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -209,15 +200,12 @@ async function run() {
   const res = await auditsListEvidence(vanta, {
     auditId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListEvidence failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -260,7 +248,6 @@ async function run() {
     auditId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -285,15 +272,12 @@ async function run() {
   const res = await auditsListComments(vanta, {
     auditId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListComments failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -336,7 +320,6 @@ async function run() {
     auditId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -361,15 +344,12 @@ async function run() {
   const res = await auditsListControls(vanta, {
     auditId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListControls failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -413,12 +393,11 @@ async function run() {
     auditEvidenceId: "<id>",
     addCommentInput: {
       text: "<value>",
-      email: "Alexis74@hotmail.com",
-      creationDate: new Date("2024-08-13T11:18:40.035Z"),
+      email: "Carmen.Bogan@yahoo.com",
+      creationDate: new Date("2024-05-28T11:04:29.369Z"),
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -445,19 +424,16 @@ async function run() {
     auditEvidenceId: "<id>",
     addCommentInput: {
       text: "<value>",
-      email: "Alexis74@hotmail.com",
-      creationDate: new Date("2024-08-13T11:18:40.035Z"),
+      email: "Carmen.Bogan@yahoo.com",
+      creationDate: new Date("2024-05-28T11:04:29.369Z"),
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsCreateCommentForEvidence failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -502,7 +478,6 @@ async function run() {
     auditEvidenceUpdateInput: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -529,15 +504,12 @@ async function run() {
     auditEvidenceId: "<id>",
     auditEvidenceUpdateInput: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsUpdateEvidence failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -580,18 +552,18 @@ async function run() {
     auditId: "<id>",
     createCustomEvidenceRequestInput: {
       controlIds: [
-        "<value>",
+        "<value 1>",
+        "<value 2>",
       ],
       title: "<value>",
-      description: "now whoa while",
-      cadence: "P3M",
+      description: "pure bludgeon deliberately question although",
+      cadence: "P1D",
       reminderWindow: "P0D",
-      isRestricted: true,
+      isRestricted: false,
       auditorEmail: "<value>",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -617,25 +589,23 @@ async function run() {
     auditId: "<id>",
     createCustomEvidenceRequestInput: {
       controlIds: [
-        "<value>",
+        "<value 1>",
+        "<value 2>",
       ],
       title: "<value>",
-      description: "now whoa while",
-      cadence: "P3M",
+      description: "pure bludgeon deliberately question although",
+      cadence: "P1D",
       reminderWindow: "P0D",
-      isRestricted: true,
+      isRestricted: false,
       auditorEmail: "<value>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsCreateCustomEvidenceRequest failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -678,14 +648,13 @@ async function run() {
     auditId: "<id>",
     createCustomControlInput: {
       externalId: "<id>",
-      name: "<value>",
-      description: "even keenly afore mmm yearningly ouch tough yearly intent",
-      effectiveDate: new Date("2024-07-08T11:52:30.590Z"),
-      category: "THREAT_MANAGEMENT",
+      name: null,
+      description: "yet plus utter queasily what juvenile wound",
+      effectiveDate: new Date("2024-11-10T13:58:54.564Z"),
+      category: "CLOUD_SECURITY",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -711,21 +680,18 @@ async function run() {
     auditId: "<id>",
     createCustomControlInput: {
       externalId: "<id>",
-      name: "<value>",
-      description: "even keenly afore mmm yearningly ouch tough yearly intent",
-      effectiveDate: new Date("2024-07-08T11:52:30.590Z"),
-      category: "THREAT_MANAGEMENT",
+      name: null,
+      description: "yet plus utter queasily what juvenile wound",
+      effectiveDate: new Date("2024-11-10T13:58:54.564Z"),
+      category: "CLOUD_SECURITY",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsCreateCustomControl failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
