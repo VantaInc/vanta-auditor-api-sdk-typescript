@@ -13,6 +13,7 @@ Create an auditor in Vanta.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateAuditor" method="post" path="/auditors" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 
