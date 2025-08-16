@@ -24,7 +24,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.3.0
+  version: 0.3.1
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -60,4 +60,5 @@ typescript:
   packageName: vanta-auditor-api-sdk
   responseFormat: flat
   templateVersion: v2
+  usageSDKInitImports: []
   useIndexModules: true

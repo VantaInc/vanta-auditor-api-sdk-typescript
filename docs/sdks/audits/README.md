@@ -21,6 +21,7 @@ Returns a paginated list of audits scoped to the audit firm.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListAudits" method="get" path="/audits" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 
@@ -90,6 +91,7 @@ evidence is created or has a statusUpdatedAt field that is more recent than the 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListAuditEvidenceUrls" method="get" path="/audits/{auditId}/evidence/{auditEvidenceId}/urls" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 
@@ -164,6 +166,7 @@ Returns a paginated list of evidence for an audit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListAuditEvidence" method="get" path="/audits/{auditId}/evidence" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 
@@ -236,6 +239,7 @@ Returns a paginated list of comments for an audit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListAuditComments" method="get" path="/audits/{auditId}/comments" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 
@@ -308,6 +312,7 @@ Returns a paginated list of controls for an audit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListAuditControls" method="get" path="/audits/{auditId}/controls" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 
@@ -380,6 +385,7 @@ Create a comment in Vanta for a piece of evidence.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateCommentForAuditEvidence" method="post" path="/audits/{auditId}/evidence/{auditEvidenceId}/comments" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 
@@ -464,6 +470,7 @@ Update audit evidence.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="UpdateAuditEvidence" method="patch" path="/audits/{auditId}/evidence/{auditEvidenceId}" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 
@@ -540,6 +547,7 @@ Create a custom evidence request for an audit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateCustomEvidenceRequest" method="post" path="/audits/{auditId}/evidence/custom-evidence-requests" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 
@@ -636,6 +644,7 @@ Create a custom control for an audit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateCustomControl" method="post" path="/audits/{auditId}/controls/custom-controls" -->
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
 

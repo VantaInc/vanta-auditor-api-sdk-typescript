@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the vanta-auditor-api-sdk SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx auditsList.ts
+ * npm run build && npx tsx auditsList.example.ts
  */
 
 import { Vanta } from "vanta-auditor-api-sdk";
