@@ -34,7 +34,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Vanta",
-    version: "0.3.0",
+    version: "0.4.0",
   });
 
   const client = new VantaCore({
