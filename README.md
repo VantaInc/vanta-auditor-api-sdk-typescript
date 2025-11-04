@@ -64,10 +64,7 @@ bun add vanta-auditor-api-sdk
 ### Yarn
 
 ```bash
-yarn add vanta-auditor-api-sdk zod
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
+yarn add vanta-auditor-api-sdk
 ```
 
 
@@ -236,7 +233,6 @@ run();
 * [updateEvidence](docs/sdks/audits/README.md#updateevidence) - Update audit evidence
 * [createCustomEvidenceRequest](docs/sdks/audits/README.md#createcustomevidencerequest) - Create a custom evidence request for an audit
 * [createCustomControl](docs/sdks/audits/README.md#createcustomcontrol) - Create a custom control for an audit
-
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -415,7 +411,7 @@ You can override the default server globally by passing a server index to the `s
 import { Vanta } from "vanta-auditor-api-sdk";
 
 const vanta = new Vanta({
-  serverIdx: 2,
+  serverIdx: 0,
   bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
 });
 
@@ -496,7 +492,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new Vanta({ httpClient });
+const sdk = new Vanta({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
