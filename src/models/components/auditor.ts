@@ -36,7 +36,6 @@ export const Auditor$inboundSchema: z.ZodType<Auditor, z.ZodTypeDef, unknown> =
     givenName: z.string(),
     familyName: z.string(),
   });
-
 /** @internal */
 export type Auditor$Outbound = {
   id: string;
@@ -59,23 +58,9 @@ export const Auditor$outboundSchema: z.ZodType<
   familyName: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Auditor$ {
-  /** @deprecated use `Auditor$inboundSchema` instead. */
-  export const inboundSchema = Auditor$inboundSchema;
-  /** @deprecated use `Auditor$outboundSchema` instead. */
-  export const outboundSchema = Auditor$outboundSchema;
-  /** @deprecated use `Auditor$Outbound` instead. */
-  export type Outbound = Auditor$Outbound;
-}
-
 export function auditorToJSON(auditor: Auditor): string {
   return JSON.stringify(Auditor$outboundSchema.parse(auditor));
 }
-
 export function auditorFromJSON(
   jsonString: string,
 ): SafeParseResult<Auditor, SDKValidationError> {

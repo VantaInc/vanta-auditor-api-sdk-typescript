@@ -52,19 +52,7 @@ export type ControlDomain = ClosedEnum<typeof ControlDomain>;
 export const ControlDomain$inboundSchema: z.ZodNativeEnum<
   typeof ControlDomain
 > = z.nativeEnum(ControlDomain);
-
 /** @internal */
 export const ControlDomain$outboundSchema: z.ZodNativeEnum<
   typeof ControlDomain
 > = ControlDomain$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ControlDomain$ {
-  /** @deprecated use `ControlDomain$inboundSchema` instead. */
-  export const inboundSchema = ControlDomain$inboundSchema;
-  /** @deprecated use `ControlDomain$outboundSchema` instead. */
-  export const outboundSchema = ControlDomain$outboundSchema;
-}

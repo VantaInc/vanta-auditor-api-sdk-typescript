@@ -20,19 +20,7 @@ export type RecurrenceDuration = ClosedEnum<typeof RecurrenceDuration>;
 export const RecurrenceDuration$inboundSchema: z.ZodNativeEnum<
   typeof RecurrenceDuration
 > = z.nativeEnum(RecurrenceDuration);
-
 /** @internal */
 export const RecurrenceDuration$outboundSchema: z.ZodNativeEnum<
   typeof RecurrenceDuration
 > = RecurrenceDuration$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RecurrenceDuration$ {
-  /** @deprecated use `RecurrenceDuration$inboundSchema` instead. */
-  export const inboundSchema = RecurrenceDuration$inboundSchema;
-  /** @deprecated use `RecurrenceDuration$outboundSchema` instead. */
-  export const outboundSchema = RecurrenceDuration$outboundSchema;
-}

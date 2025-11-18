@@ -40,7 +40,6 @@ export const PaginatedResponseAuditorControlResults$inboundSchema: z.ZodType<
   data: z.array(AuditorControl$inboundSchema),
   pageInfo: PageInfo$inboundSchema,
 });
-
 /** @internal */
 export type PaginatedResponseAuditorControlResults$Outbound = {
   data: Array<AuditorControl$Outbound>;
@@ -57,21 +56,6 @@ export const PaginatedResponseAuditorControlResults$outboundSchema: z.ZodType<
   pageInfo: PageInfo$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaginatedResponseAuditorControlResults$ {
-  /** @deprecated use `PaginatedResponseAuditorControlResults$inboundSchema` instead. */
-  export const inboundSchema =
-    PaginatedResponseAuditorControlResults$inboundSchema;
-  /** @deprecated use `PaginatedResponseAuditorControlResults$outboundSchema` instead. */
-  export const outboundSchema =
-    PaginatedResponseAuditorControlResults$outboundSchema;
-  /** @deprecated use `PaginatedResponseAuditorControlResults$Outbound` instead. */
-  export type Outbound = PaginatedResponseAuditorControlResults$Outbound;
-}
-
 export function paginatedResponseAuditorControlResultsToJSON(
   paginatedResponseAuditorControlResults:
     PaginatedResponseAuditorControlResults,
@@ -82,7 +66,6 @@ export function paginatedResponseAuditorControlResultsToJSON(
     ),
   );
 }
-
 export function paginatedResponseAuditorControlResultsFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseAuditorControlResults, SDKValidationError> {
@@ -102,7 +85,6 @@ export const PaginatedResponseAuditorControl$inboundSchema: z.ZodType<
 > = z.object({
   results: z.lazy(() => PaginatedResponseAuditorControlResults$inboundSchema),
 });
-
 /** @internal */
 export type PaginatedResponseAuditorControl$Outbound = {
   results: PaginatedResponseAuditorControlResults$Outbound;
@@ -117,19 +99,6 @@ export const PaginatedResponseAuditorControl$outboundSchema: z.ZodType<
   results: z.lazy(() => PaginatedResponseAuditorControlResults$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaginatedResponseAuditorControl$ {
-  /** @deprecated use `PaginatedResponseAuditorControl$inboundSchema` instead. */
-  export const inboundSchema = PaginatedResponseAuditorControl$inboundSchema;
-  /** @deprecated use `PaginatedResponseAuditorControl$outboundSchema` instead. */
-  export const outboundSchema = PaginatedResponseAuditorControl$outboundSchema;
-  /** @deprecated use `PaginatedResponseAuditorControl$Outbound` instead. */
-  export type Outbound = PaginatedResponseAuditorControl$Outbound;
-}
-
 export function paginatedResponseAuditorControlToJSON(
   paginatedResponseAuditorControl: PaginatedResponseAuditorControl,
 ): string {
@@ -139,7 +108,6 @@ export function paginatedResponseAuditorControlToJSON(
     ),
   );
 }
-
 export function paginatedResponseAuditorControlFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseAuditorControl, SDKValidationError> {

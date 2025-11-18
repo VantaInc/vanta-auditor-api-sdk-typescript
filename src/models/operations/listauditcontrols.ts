@@ -23,7 +23,6 @@ export const ListAuditControlsRequest$inboundSchema: z.ZodType<
   pageSize: z.number().int().default(10),
   pageCursor: z.string().optional(),
 });
-
 /** @internal */
 export type ListAuditControlsRequest$Outbound = {
   auditId: string;
@@ -42,19 +41,6 @@ export const ListAuditControlsRequest$outboundSchema: z.ZodType<
   pageCursor: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAuditControlsRequest$ {
-  /** @deprecated use `ListAuditControlsRequest$inboundSchema` instead. */
-  export const inboundSchema = ListAuditControlsRequest$inboundSchema;
-  /** @deprecated use `ListAuditControlsRequest$outboundSchema` instead. */
-  export const outboundSchema = ListAuditControlsRequest$outboundSchema;
-  /** @deprecated use `ListAuditControlsRequest$Outbound` instead. */
-  export type Outbound = ListAuditControlsRequest$Outbound;
-}
-
 export function listAuditControlsRequestToJSON(
   listAuditControlsRequest: ListAuditControlsRequest,
 ): string {
@@ -62,7 +48,6 @@ export function listAuditControlsRequestToJSON(
     ListAuditControlsRequest$outboundSchema.parse(listAuditControlsRequest),
   );
 }
-
 export function listAuditControlsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAuditControlsRequest, SDKValidationError> {

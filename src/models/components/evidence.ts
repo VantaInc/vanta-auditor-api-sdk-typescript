@@ -93,7 +93,6 @@ export const Evidence$inboundSchema: z.ZodType<
   relatedControls: z.array(EvidenceControl$inboundSchema),
   description: z.nullable(z.string()),
 });
-
 /** @internal */
 export type Evidence$Outbound = {
   id: string;
@@ -130,23 +129,9 @@ export const Evidence$outboundSchema: z.ZodType<
   description: z.nullable(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Evidence$ {
-  /** @deprecated use `Evidence$inboundSchema` instead. */
-  export const inboundSchema = Evidence$inboundSchema;
-  /** @deprecated use `Evidence$outboundSchema` instead. */
-  export const outboundSchema = Evidence$outboundSchema;
-  /** @deprecated use `Evidence$Outbound` instead. */
-  export type Outbound = Evidence$Outbound;
-}
-
 export function evidenceToJSON(evidence: Evidence): string {
   return JSON.stringify(Evidence$outboundSchema.parse(evidence));
 }
-
 export function evidenceFromJSON(
   jsonString: string,
 ): SafeParseResult<Evidence, SDKValidationError> {

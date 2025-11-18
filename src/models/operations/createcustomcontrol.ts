@@ -27,7 +27,6 @@ export const CreateCustomControlRequest$inboundSchema: z.ZodType<
     "CreateCustomControlInput": "createCustomControlInput",
   });
 });
-
 /** @internal */
 export type CreateCustomControlRequest$Outbound = {
   auditId: string;
@@ -48,19 +47,6 @@ export const CreateCustomControlRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateCustomControlRequest$ {
-  /** @deprecated use `CreateCustomControlRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateCustomControlRequest$inboundSchema;
-  /** @deprecated use `CreateCustomControlRequest$outboundSchema` instead. */
-  export const outboundSchema = CreateCustomControlRequest$outboundSchema;
-  /** @deprecated use `CreateCustomControlRequest$Outbound` instead. */
-  export type Outbound = CreateCustomControlRequest$Outbound;
-}
-
 export function createCustomControlRequestToJSON(
   createCustomControlRequest: CreateCustomControlRequest,
 ): string {
@@ -68,7 +54,6 @@ export function createCustomControlRequestToJSON(
     CreateCustomControlRequest$outboundSchema.parse(createCustomControlRequest),
   );
 }
-
 export function createCustomControlRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateCustomControlRequest, SDKValidationError> {

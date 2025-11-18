@@ -51,7 +51,6 @@ export const CreateCustomEvidenceRequestInput$inboundSchema: z.ZodType<
   isRestricted: z.boolean(),
   auditorEmail: z.string(),
 });
-
 /** @internal */
 export type CreateCustomEvidenceRequestInput$Outbound = {
   controlIds: Array<string>;
@@ -78,19 +77,6 @@ export const CreateCustomEvidenceRequestInput$outboundSchema: z.ZodType<
   auditorEmail: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateCustomEvidenceRequestInput$ {
-  /** @deprecated use `CreateCustomEvidenceRequestInput$inboundSchema` instead. */
-  export const inboundSchema = CreateCustomEvidenceRequestInput$inboundSchema;
-  /** @deprecated use `CreateCustomEvidenceRequestInput$outboundSchema` instead. */
-  export const outboundSchema = CreateCustomEvidenceRequestInput$outboundSchema;
-  /** @deprecated use `CreateCustomEvidenceRequestInput$Outbound` instead. */
-  export type Outbound = CreateCustomEvidenceRequestInput$Outbound;
-}
-
 export function createCustomEvidenceRequestInputToJSON(
   createCustomEvidenceRequestInput: CreateCustomEvidenceRequestInput,
 ): string {
@@ -100,7 +86,6 @@ export function createCustomEvidenceRequestInputToJSON(
     ),
   );
 }
-
 export function createCustomEvidenceRequestInputFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateCustomEvidenceRequestInput, SDKValidationError> {

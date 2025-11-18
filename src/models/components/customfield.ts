@@ -17,7 +17,6 @@ export type CustomField = {
 /** @internal */
 export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
   .union([z.string(), z.array(z.string())]);
-
 /** @internal */
 export type Value$Outbound = string | Array<string>;
 
@@ -28,23 +27,9 @@ export const Value$outboundSchema: z.ZodType<
   Value
 > = z.union([z.string(), z.array(z.string())]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Value$ {
-  /** @deprecated use `Value$inboundSchema` instead. */
-  export const inboundSchema = Value$inboundSchema;
-  /** @deprecated use `Value$outboundSchema` instead. */
-  export const outboundSchema = Value$outboundSchema;
-  /** @deprecated use `Value$Outbound` instead. */
-  export type Outbound = Value$Outbound;
-}
-
 export function valueToJSON(value: Value): string {
   return JSON.stringify(Value$outboundSchema.parse(value));
 }
-
 export function valueFromJSON(
   jsonString: string,
 ): SafeParseResult<Value, SDKValidationError> {
@@ -64,7 +49,6 @@ export const CustomField$inboundSchema: z.ZodType<
   label: z.string(),
   value: z.union([z.string(), z.array(z.string())]),
 });
-
 /** @internal */
 export type CustomField$Outbound = {
   label: string;
@@ -81,23 +65,9 @@ export const CustomField$outboundSchema: z.ZodType<
   value: z.union([z.string(), z.array(z.string())]),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CustomField$ {
-  /** @deprecated use `CustomField$inboundSchema` instead. */
-  export const inboundSchema = CustomField$inboundSchema;
-  /** @deprecated use `CustomField$outboundSchema` instead. */
-  export const outboundSchema = CustomField$outboundSchema;
-  /** @deprecated use `CustomField$Outbound` instead. */
-  export type Outbound = CustomField$Outbound;
-}
-
 export function customFieldToJSON(customField: CustomField): string {
   return JSON.stringify(CustomField$outboundSchema.parse(customField));
 }
-
 export function customFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<CustomField, SDKValidationError> {

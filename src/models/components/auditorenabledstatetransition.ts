@@ -20,19 +20,7 @@ export type AuditorEnabledStateTransition = ClosedEnum<
 export const AuditorEnabledStateTransition$inboundSchema: z.ZodNativeEnum<
   typeof AuditorEnabledStateTransition
 > = z.nativeEnum(AuditorEnabledStateTransition);
-
 /** @internal */
 export const AuditorEnabledStateTransition$outboundSchema: z.ZodNativeEnum<
   typeof AuditorEnabledStateTransition
 > = AuditorEnabledStateTransition$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AuditorEnabledStateTransition$ {
-  /** @deprecated use `AuditorEnabledStateTransition$inboundSchema` instead. */
-  export const inboundSchema = AuditorEnabledStateTransition$inboundSchema;
-  /** @deprecated use `AuditorEnabledStateTransition$outboundSchema` instead. */
-  export const outboundSchema = AuditorEnabledStateTransition$outboundSchema;
-}

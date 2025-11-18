@@ -47,18 +47,6 @@ export type FrameworkId = ClosedEnum<typeof FrameworkId>;
 /** @internal */
 export const FrameworkId$inboundSchema: z.ZodNativeEnum<typeof FrameworkId> = z
   .nativeEnum(FrameworkId);
-
 /** @internal */
 export const FrameworkId$outboundSchema: z.ZodNativeEnum<typeof FrameworkId> =
   FrameworkId$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FrameworkId$ {
-  /** @deprecated use `FrameworkId$inboundSchema` instead. */
-  export const inboundSchema = FrameworkId$inboundSchema;
-  /** @deprecated use `FrameworkId$outboundSchema` instead. */
-  export const outboundSchema = FrameworkId$outboundSchema;
-}

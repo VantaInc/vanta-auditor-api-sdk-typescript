@@ -27,7 +27,6 @@ export const EvidenceControl$inboundSchema: z.ZodType<
   name: z.string(),
   sectionNames: z.array(z.string()),
 });
-
 /** @internal */
 export type EvidenceControl$Outbound = {
   name: string;
@@ -44,25 +43,11 @@ export const EvidenceControl$outboundSchema: z.ZodType<
   sectionNames: z.array(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EvidenceControl$ {
-  /** @deprecated use `EvidenceControl$inboundSchema` instead. */
-  export const inboundSchema = EvidenceControl$inboundSchema;
-  /** @deprecated use `EvidenceControl$outboundSchema` instead. */
-  export const outboundSchema = EvidenceControl$outboundSchema;
-  /** @deprecated use `EvidenceControl$Outbound` instead. */
-  export type Outbound = EvidenceControl$Outbound;
-}
-
 export function evidenceControlToJSON(
   evidenceControl: EvidenceControl,
 ): string {
   return JSON.stringify(EvidenceControl$outboundSchema.parse(evidenceControl));
 }
-
 export function evidenceControlFromJSON(
   jsonString: string,
 ): SafeParseResult<EvidenceControl, SDKValidationError> {

@@ -28,7 +28,6 @@ export const CreateCustomEvidenceRequestRequest$inboundSchema: z.ZodType<
     "CreateCustomEvidenceRequestInput": "createCustomEvidenceRequestInput",
   });
 });
-
 /** @internal */
 export type CreateCustomEvidenceRequestRequest$Outbound = {
   auditId: string;
@@ -51,20 +50,6 @@ export const CreateCustomEvidenceRequestRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateCustomEvidenceRequestRequest$ {
-  /** @deprecated use `CreateCustomEvidenceRequestRequest$inboundSchema` instead. */
-  export const inboundSchema = CreateCustomEvidenceRequestRequest$inboundSchema;
-  /** @deprecated use `CreateCustomEvidenceRequestRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateCustomEvidenceRequestRequest$outboundSchema;
-  /** @deprecated use `CreateCustomEvidenceRequestRequest$Outbound` instead. */
-  export type Outbound = CreateCustomEvidenceRequestRequest$Outbound;
-}
-
 export function createCustomEvidenceRequestRequestToJSON(
   createCustomEvidenceRequestRequest: CreateCustomEvidenceRequestRequest,
 ): string {
@@ -74,7 +59,6 @@ export function createCustomEvidenceRequestRequestToJSON(
     ),
   );
 }
-
 export function createCustomEvidenceRequestRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateCustomEvidenceRequestRequest, SDKValidationError> {

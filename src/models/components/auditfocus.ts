@@ -14,18 +14,6 @@ export type AuditFocus = ClosedEnum<typeof AuditFocus>;
 /** @internal */
 export const AuditFocus$inboundSchema: z.ZodNativeEnum<typeof AuditFocus> = z
   .nativeEnum(AuditFocus);
-
 /** @internal */
 export const AuditFocus$outboundSchema: z.ZodNativeEnum<typeof AuditFocus> =
   AuditFocus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AuditFocus$ {
-  /** @deprecated use `AuditFocus$inboundSchema` instead. */
-  export const inboundSchema = AuditFocus$inboundSchema;
-  /** @deprecated use `AuditFocus$outboundSchema` instead. */
-  export const outboundSchema = AuditFocus$outboundSchema;
-}

@@ -82,7 +82,6 @@ export const ControlOwner$inboundSchema: z.ZodType<
   displayName: z.string(),
   emailAddress: z.string(),
 });
-
 /** @internal */
 export type ControlOwner$Outbound = {
   id: string;
@@ -101,23 +100,9 @@ export const ControlOwner$outboundSchema: z.ZodType<
   emailAddress: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ControlOwner$ {
-  /** @deprecated use `ControlOwner$inboundSchema` instead. */
-  export const inboundSchema = ControlOwner$inboundSchema;
-  /** @deprecated use `ControlOwner$outboundSchema` instead. */
-  export const outboundSchema = ControlOwner$outboundSchema;
-  /** @deprecated use `ControlOwner$Outbound` instead. */
-  export type Outbound = ControlOwner$Outbound;
-}
-
 export function controlOwnerToJSON(controlOwner: ControlOwner): string {
   return JSON.stringify(ControlOwner$outboundSchema.parse(controlOwner));
 }
-
 export function controlOwnerFromJSON(
   jsonString: string,
 ): SafeParseResult<ControlOwner, SDKValidationError> {
@@ -141,7 +126,6 @@ export const Control$inboundSchema: z.ZodType<Control, z.ZodTypeDef, unknown> =
     role: z.nullable(z.string()).optional(),
     customFields: z.array(CustomField$inboundSchema),
   });
-
 /** @internal */
 export type Control$Outbound = {
   id: string;
@@ -172,23 +156,9 @@ export const Control$outboundSchema: z.ZodType<
   customFields: z.array(CustomField$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Control$ {
-  /** @deprecated use `Control$inboundSchema` instead. */
-  export const inboundSchema = Control$inboundSchema;
-  /** @deprecated use `Control$outboundSchema` instead. */
-  export const outboundSchema = Control$outboundSchema;
-  /** @deprecated use `Control$Outbound` instead. */
-  export type Outbound = Control$Outbound;
-}
-
 export function controlToJSON(control: Control): string {
   return JSON.stringify(Control$outboundSchema.parse(control));
 }
-
 export function controlFromJSON(
   jsonString: string,
 ): SafeParseResult<Control, SDKValidationError> {

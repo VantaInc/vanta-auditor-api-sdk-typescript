@@ -30,7 +30,6 @@ export const ListAuditCommentsRequest$inboundSchema: z.ZodType<
     new Date(v)
   ).optional(),
 });
-
 /** @internal */
 export type ListAuditCommentsRequest$Outbound = {
   auditId: string;
@@ -51,19 +50,6 @@ export const ListAuditCommentsRequest$outboundSchema: z.ZodType<
   changedSinceDate: z.date().transform(v => v.toISOString()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAuditCommentsRequest$ {
-  /** @deprecated use `ListAuditCommentsRequest$inboundSchema` instead. */
-  export const inboundSchema = ListAuditCommentsRequest$inboundSchema;
-  /** @deprecated use `ListAuditCommentsRequest$outboundSchema` instead. */
-  export const outboundSchema = ListAuditCommentsRequest$outboundSchema;
-  /** @deprecated use `ListAuditCommentsRequest$Outbound` instead. */
-  export type Outbound = ListAuditCommentsRequest$Outbound;
-}
-
 export function listAuditCommentsRequestToJSON(
   listAuditCommentsRequest: ListAuditCommentsRequest,
 ): string {
@@ -71,7 +57,6 @@ export function listAuditCommentsRequestToJSON(
     ListAuditCommentsRequest$outboundSchema.parse(listAuditCommentsRequest),
   );
 }
-
 export function listAuditCommentsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAuditCommentsRequest, SDKValidationError> {

@@ -29,7 +29,6 @@ export const UpdateAuditEvidenceRequest$inboundSchema: z.ZodType<
     "AuditEvidenceUpdateInput": "auditEvidenceUpdateInput",
   });
 });
-
 /** @internal */
 export type UpdateAuditEvidenceRequest$Outbound = {
   auditId: string;
@@ -52,19 +51,6 @@ export const UpdateAuditEvidenceRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateAuditEvidenceRequest$ {
-  /** @deprecated use `UpdateAuditEvidenceRequest$inboundSchema` instead. */
-  export const inboundSchema = UpdateAuditEvidenceRequest$inboundSchema;
-  /** @deprecated use `UpdateAuditEvidenceRequest$outboundSchema` instead. */
-  export const outboundSchema = UpdateAuditEvidenceRequest$outboundSchema;
-  /** @deprecated use `UpdateAuditEvidenceRequest$Outbound` instead. */
-  export type Outbound = UpdateAuditEvidenceRequest$Outbound;
-}
-
 export function updateAuditEvidenceRequestToJSON(
   updateAuditEvidenceRequest: UpdateAuditEvidenceRequest,
 ): string {
@@ -72,7 +58,6 @@ export function updateAuditEvidenceRequestToJSON(
     UpdateAuditEvidenceRequest$outboundSchema.parse(updateAuditEvidenceRequest),
   );
 }
-
 export function updateAuditEvidenceRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<UpdateAuditEvidenceRequest, SDKValidationError> {

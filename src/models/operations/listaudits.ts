@@ -33,7 +33,6 @@ export const ListAuditsRequest$inboundSchema: z.ZodType<
   ).optional(),
   isActiveAudit: z.boolean().optional(),
 });
-
 /** @internal */
 export type ListAuditsRequest$Outbound = {
   pageSize: number;
@@ -54,19 +53,6 @@ export const ListAuditsRequest$outboundSchema: z.ZodType<
   isActiveAudit: z.boolean().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAuditsRequest$ {
-  /** @deprecated use `ListAuditsRequest$inboundSchema` instead. */
-  export const inboundSchema = ListAuditsRequest$inboundSchema;
-  /** @deprecated use `ListAuditsRequest$outboundSchema` instead. */
-  export const outboundSchema = ListAuditsRequest$outboundSchema;
-  /** @deprecated use `ListAuditsRequest$Outbound` instead. */
-  export type Outbound = ListAuditsRequest$Outbound;
-}
-
 export function listAuditsRequestToJSON(
   listAuditsRequest: ListAuditsRequest,
 ): string {
@@ -74,7 +60,6 @@ export function listAuditsRequestToJSON(
     ListAuditsRequest$outboundSchema.parse(listAuditsRequest),
   );
 }
-
 export function listAuditsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAuditsRequest, SDKValidationError> {

@@ -93,7 +93,6 @@ export const Owner$inboundSchema: z.ZodType<Owner, z.ZodTypeDef, unknown> = z
     displayName: z.string(),
     emailAddress: z.string(),
   });
-
 /** @internal */
 export type Owner$Outbound = {
   id: string;
@@ -112,23 +111,9 @@ export const Owner$outboundSchema: z.ZodType<
   emailAddress: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Owner$ {
-  /** @deprecated use `Owner$inboundSchema` instead. */
-  export const inboundSchema = Owner$inboundSchema;
-  /** @deprecated use `Owner$outboundSchema` instead. */
-  export const outboundSchema = Owner$outboundSchema;
-  /** @deprecated use `Owner$Outbound` instead. */
-  export type Outbound = Owner$Outbound;
-}
-
 export function ownerToJSON(owner: Owner): string {
   return JSON.stringify(Owner$outboundSchema.parse(owner));
 }
-
 export function ownerFromJSON(
   jsonString: string,
 ): SafeParseResult<Owner, SDKValidationError> {
@@ -157,7 +142,6 @@ export const AuditorControl$inboundSchema: z.ZodType<
   framework: z.string(),
   sections: z.array(Section$inboundSchema),
 });
-
 /** @internal */
 export type AuditorControl$Outbound = {
   id: string;
@@ -192,23 +176,9 @@ export const AuditorControl$outboundSchema: z.ZodType<
   sections: z.array(Section$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AuditorControl$ {
-  /** @deprecated use `AuditorControl$inboundSchema` instead. */
-  export const inboundSchema = AuditorControl$inboundSchema;
-  /** @deprecated use `AuditorControl$outboundSchema` instead. */
-  export const outboundSchema = AuditorControl$outboundSchema;
-  /** @deprecated use `AuditorControl$Outbound` instead. */
-  export type Outbound = AuditorControl$Outbound;
-}
-
 export function auditorControlToJSON(auditorControl: AuditorControl): string {
   return JSON.stringify(AuditorControl$outboundSchema.parse(auditorControl));
 }
-
 export function auditorControlFromJSON(
   jsonString: string,
 ): SafeParseResult<AuditorControl, SDKValidationError> {

@@ -30,7 +30,6 @@ export const ListAuditEvidenceRequest$inboundSchema: z.ZodType<
     new Date(v)
   ).optional(),
 });
-
 /** @internal */
 export type ListAuditEvidenceRequest$Outbound = {
   auditId: string;
@@ -51,19 +50,6 @@ export const ListAuditEvidenceRequest$outboundSchema: z.ZodType<
   changedSinceDate: z.date().transform(v => v.toISOString()).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAuditEvidenceRequest$ {
-  /** @deprecated use `ListAuditEvidenceRequest$inboundSchema` instead. */
-  export const inboundSchema = ListAuditEvidenceRequest$inboundSchema;
-  /** @deprecated use `ListAuditEvidenceRequest$outboundSchema` instead. */
-  export const outboundSchema = ListAuditEvidenceRequest$outboundSchema;
-  /** @deprecated use `ListAuditEvidenceRequest$Outbound` instead. */
-  export type Outbound = ListAuditEvidenceRequest$Outbound;
-}
-
 export function listAuditEvidenceRequestToJSON(
   listAuditEvidenceRequest: ListAuditEvidenceRequest,
 ): string {
@@ -71,7 +57,6 @@ export function listAuditEvidenceRequestToJSON(
     ListAuditEvidenceRequest$outboundSchema.parse(listAuditEvidenceRequest),
   );
 }
-
 export function listAuditEvidenceRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAuditEvidenceRequest, SDKValidationError> {

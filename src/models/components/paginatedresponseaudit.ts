@@ -37,7 +37,6 @@ export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
     data: z.array(Audit$inboundSchema),
     pageInfo: PageInfo$inboundSchema,
   });
-
 /** @internal */
 export type Results$Outbound = {
   data: Array<Audit$Outbound>;
@@ -54,23 +53,9 @@ export const Results$outboundSchema: z.ZodType<
   pageInfo: PageInfo$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Results$ {
-  /** @deprecated use `Results$inboundSchema` instead. */
-  export const inboundSchema = Results$inboundSchema;
-  /** @deprecated use `Results$outboundSchema` instead. */
-  export const outboundSchema = Results$outboundSchema;
-  /** @deprecated use `Results$Outbound` instead. */
-  export type Outbound = Results$Outbound;
-}
-
 export function resultsToJSON(results: Results): string {
   return JSON.stringify(Results$outboundSchema.parse(results));
 }
-
 export function resultsFromJSON(
   jsonString: string,
 ): SafeParseResult<Results, SDKValidationError> {
@@ -89,7 +74,6 @@ export const PaginatedResponseAudit$inboundSchema: z.ZodType<
 > = z.object({
   results: z.lazy(() => Results$inboundSchema),
 });
-
 /** @internal */
 export type PaginatedResponseAudit$Outbound = {
   results: Results$Outbound;
@@ -104,19 +88,6 @@ export const PaginatedResponseAudit$outboundSchema: z.ZodType<
   results: z.lazy(() => Results$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaginatedResponseAudit$ {
-  /** @deprecated use `PaginatedResponseAudit$inboundSchema` instead. */
-  export const inboundSchema = PaginatedResponseAudit$inboundSchema;
-  /** @deprecated use `PaginatedResponseAudit$outboundSchema` instead. */
-  export const outboundSchema = PaginatedResponseAudit$outboundSchema;
-  /** @deprecated use `PaginatedResponseAudit$Outbound` instead. */
-  export type Outbound = PaginatedResponseAudit$Outbound;
-}
-
 export function paginatedResponseAuditToJSON(
   paginatedResponseAudit: PaginatedResponseAudit,
 ): string {
@@ -124,7 +95,6 @@ export function paginatedResponseAuditToJSON(
     PaginatedResponseAudit$outboundSchema.parse(paginatedResponseAudit),
   );
 }
-
 export function paginatedResponseAuditFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseAudit, SDKValidationError> {

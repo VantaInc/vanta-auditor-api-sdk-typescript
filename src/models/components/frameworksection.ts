@@ -25,7 +25,6 @@ export const FrameworkSectionFrameworkId$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([FrameworkId$inboundSchema, z.string()]);
-
 /** @internal */
 export type FrameworkSectionFrameworkId$Outbound = string | string;
 
@@ -36,19 +35,6 @@ export const FrameworkSectionFrameworkId$outboundSchema: z.ZodType<
   FrameworkSectionFrameworkId
 > = z.union([FrameworkId$outboundSchema, z.string()]);
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FrameworkSectionFrameworkId$ {
-  /** @deprecated use `FrameworkSectionFrameworkId$inboundSchema` instead. */
-  export const inboundSchema = FrameworkSectionFrameworkId$inboundSchema;
-  /** @deprecated use `FrameworkSectionFrameworkId$outboundSchema` instead. */
-  export const outboundSchema = FrameworkSectionFrameworkId$outboundSchema;
-  /** @deprecated use `FrameworkSectionFrameworkId$Outbound` instead. */
-  export type Outbound = FrameworkSectionFrameworkId$Outbound;
-}
-
 export function frameworkSectionFrameworkIdToJSON(
   frameworkSectionFrameworkId: FrameworkSectionFrameworkId,
 ): string {
@@ -58,7 +44,6 @@ export function frameworkSectionFrameworkIdToJSON(
     ),
   );
 }
-
 export function frameworkSectionFrameworkIdFromJSON(
   jsonString: string,
 ): SafeParseResult<FrameworkSectionFrameworkId, SDKValidationError> {
@@ -78,7 +63,6 @@ export const FrameworkSection$inboundSchema: z.ZodType<
   frameworkId: z.union([FrameworkId$inboundSchema, z.string()]),
   sectionId: z.string(),
 });
-
 /** @internal */
 export type FrameworkSection$Outbound = {
   frameworkId: string | string;
@@ -95,19 +79,6 @@ export const FrameworkSection$outboundSchema: z.ZodType<
   sectionId: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FrameworkSection$ {
-  /** @deprecated use `FrameworkSection$inboundSchema` instead. */
-  export const inboundSchema = FrameworkSection$inboundSchema;
-  /** @deprecated use `FrameworkSection$outboundSchema` instead. */
-  export const outboundSchema = FrameworkSection$outboundSchema;
-  /** @deprecated use `FrameworkSection$Outbound` instead. */
-  export type Outbound = FrameworkSection$Outbound;
-}
-
 export function frameworkSectionToJSON(
   frameworkSection: FrameworkSection,
 ): string {
@@ -115,7 +86,6 @@ export function frameworkSectionToJSON(
     FrameworkSection$outboundSchema.parse(frameworkSection),
   );
 }
-
 export function frameworkSectionFromJSON(
   jsonString: string,
 ): SafeParseResult<FrameworkSection, SDKValidationError> {
