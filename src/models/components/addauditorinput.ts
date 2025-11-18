@@ -32,7 +32,6 @@ export const AddAuditorInput$inboundSchema: z.ZodType<
   givenName: z.string(),
   familyName: z.string(),
 });
-
 /** @internal */
 export type AddAuditorInput$Outbound = {
   email: string;
@@ -51,25 +50,11 @@ export const AddAuditorInput$outboundSchema: z.ZodType<
   familyName: z.string(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddAuditorInput$ {
-  /** @deprecated use `AddAuditorInput$inboundSchema` instead. */
-  export const inboundSchema = AddAuditorInput$inboundSchema;
-  /** @deprecated use `AddAuditorInput$outboundSchema` instead. */
-  export const outboundSchema = AddAuditorInput$outboundSchema;
-  /** @deprecated use `AddAuditorInput$Outbound` instead. */
-  export type Outbound = AddAuditorInput$Outbound;
-}
-
 export function addAuditorInputToJSON(
   addAuditorInput: AddAuditorInput,
 ): string {
   return JSON.stringify(AddAuditorInput$outboundSchema.parse(addAuditorInput));
 }
-
 export function addAuditorInputFromJSON(
   jsonString: string,
 ): SafeParseResult<AddAuditorInput, SDKValidationError> {

@@ -51,7 +51,6 @@ export const CustomEvidenceRequest$inboundSchema: z.ZodType<
   reminderWindow: RecurrenceDuration$inboundSchema,
   isRestricted: z.boolean(),
 });
-
 /** @internal */
 export type CustomEvidenceRequest$Outbound = {
   id: string;
@@ -78,19 +77,6 @@ export const CustomEvidenceRequest$outboundSchema: z.ZodType<
   isRestricted: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CustomEvidenceRequest$ {
-  /** @deprecated use `CustomEvidenceRequest$inboundSchema` instead. */
-  export const inboundSchema = CustomEvidenceRequest$inboundSchema;
-  /** @deprecated use `CustomEvidenceRequest$outboundSchema` instead. */
-  export const outboundSchema = CustomEvidenceRequest$outboundSchema;
-  /** @deprecated use `CustomEvidenceRequest$Outbound` instead. */
-  export type Outbound = CustomEvidenceRequest$Outbound;
-}
-
 export function customEvidenceRequestToJSON(
   customEvidenceRequest: CustomEvidenceRequest,
 ): string {
@@ -98,7 +84,6 @@ export function customEvidenceRequestToJSON(
     CustomEvidenceRequest$outboundSchema.parse(customEvidenceRequest),
   );
 }
-
 export function customEvidenceRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CustomEvidenceRequest, SDKValidationError> {

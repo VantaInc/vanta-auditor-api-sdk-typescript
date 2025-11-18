@@ -37,7 +37,6 @@ export const EvidenceUrl$inboundSchema: z.ZodType<
   filename: z.string(),
   isDownloadable: z.boolean(),
 });
-
 /** @internal */
 export type EvidenceUrl$Outbound = {
   id: string;
@@ -58,23 +57,9 @@ export const EvidenceUrl$outboundSchema: z.ZodType<
   isDownloadable: z.boolean(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace EvidenceUrl$ {
-  /** @deprecated use `EvidenceUrl$inboundSchema` instead. */
-  export const inboundSchema = EvidenceUrl$inboundSchema;
-  /** @deprecated use `EvidenceUrl$outboundSchema` instead. */
-  export const outboundSchema = EvidenceUrl$outboundSchema;
-  /** @deprecated use `EvidenceUrl$Outbound` instead. */
-  export type Outbound = EvidenceUrl$Outbound;
-}
-
 export function evidenceUrlToJSON(evidenceUrl: EvidenceUrl): string {
   return JSON.stringify(EvidenceUrl$outboundSchema.parse(evidenceUrl));
 }
-
 export function evidenceUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<EvidenceUrl, SDKValidationError> {

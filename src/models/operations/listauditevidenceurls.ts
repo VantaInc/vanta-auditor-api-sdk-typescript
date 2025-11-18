@@ -25,7 +25,6 @@ export const ListAuditEvidenceUrlsRequest$inboundSchema: z.ZodType<
   pageSize: z.number().int().default(10),
   pageCursor: z.string().optional(),
 });
-
 /** @internal */
 export type ListAuditEvidenceUrlsRequest$Outbound = {
   auditId: string;
@@ -46,19 +45,6 @@ export const ListAuditEvidenceUrlsRequest$outboundSchema: z.ZodType<
   pageCursor: z.string().optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAuditEvidenceUrlsRequest$ {
-  /** @deprecated use `ListAuditEvidenceUrlsRequest$inboundSchema` instead. */
-  export const inboundSchema = ListAuditEvidenceUrlsRequest$inboundSchema;
-  /** @deprecated use `ListAuditEvidenceUrlsRequest$outboundSchema` instead. */
-  export const outboundSchema = ListAuditEvidenceUrlsRequest$outboundSchema;
-  /** @deprecated use `ListAuditEvidenceUrlsRequest$Outbound` instead. */
-  export type Outbound = ListAuditEvidenceUrlsRequest$Outbound;
-}
-
 export function listAuditEvidenceUrlsRequestToJSON(
   listAuditEvidenceUrlsRequest: ListAuditEvidenceUrlsRequest,
 ): string {
@@ -68,7 +54,6 @@ export function listAuditEvidenceUrlsRequestToJSON(
     ),
   );
 }
-
 export function listAuditEvidenceUrlsRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<ListAuditEvidenceUrlsRequest, SDKValidationError> {

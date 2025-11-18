@@ -15,19 +15,7 @@ export type ControlSource = ClosedEnum<typeof ControlSource>;
 export const ControlSource$inboundSchema: z.ZodNativeEnum<
   typeof ControlSource
 > = z.nativeEnum(ControlSource);
-
 /** @internal */
 export const ControlSource$outboundSchema: z.ZodNativeEnum<
   typeof ControlSource
 > = ControlSource$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ControlSource$ {
-  /** @deprecated use `ControlSource$inboundSchema` instead. */
-  export const inboundSchema = ControlSource$inboundSchema;
-  /** @deprecated use `ControlSource$outboundSchema` instead. */
-  export const outboundSchema = ControlSource$outboundSchema;
-}

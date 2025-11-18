@@ -55,7 +55,6 @@ export const Comment$inboundSchema: z.ZodType<Comment, z.ZodTypeDef, unknown> =
     ),
     email: z.nullable(z.string()),
   });
-
 /** @internal */
 export type Comment$Outbound = {
   id: string;
@@ -82,23 +81,9 @@ export const Comment$outboundSchema: z.ZodType<
   email: z.nullable(z.string()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Comment$ {
-  /** @deprecated use `Comment$inboundSchema` instead. */
-  export const inboundSchema = Comment$inboundSchema;
-  /** @deprecated use `Comment$outboundSchema` instead. */
-  export const outboundSchema = Comment$outboundSchema;
-  /** @deprecated use `Comment$Outbound` instead. */
-  export type Outbound = Comment$Outbound;
-}
-
 export function commentToJSON(comment: Comment): string {
   return JSON.stringify(Comment$outboundSchema.parse(comment));
 }
-
 export function commentFromJSON(
   jsonString: string,
 ): SafeParseResult<Comment, SDKValidationError> {

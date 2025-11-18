@@ -73,21 +73,9 @@ export type CreateCustomControlInput = {
 export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
   Role,
 );
-
 /** @internal */
 export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
   Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Role$ {
-  /** @deprecated use `Role$inboundSchema` instead. */
-  export const inboundSchema = Role$inboundSchema;
-  /** @deprecated use `Role$outboundSchema` instead. */
-  export const outboundSchema = Role$outboundSchema;
-}
 
 /** @internal */
 export const CreateCustomControlInput$inboundSchema: z.ZodType<
@@ -105,7 +93,6 @@ export const CreateCustomControlInput$inboundSchema: z.ZodType<
   sections: z.nullable(z.array(FrameworkSection$inboundSchema)).optional(),
   role: z.nullable(Role$inboundSchema).optional(),
 });
-
 /** @internal */
 export type CreateCustomControlInput$Outbound = {
   externalId: string;
@@ -132,19 +119,6 @@ export const CreateCustomControlInput$outboundSchema: z.ZodType<
   role: z.nullable(Role$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateCustomControlInput$ {
-  /** @deprecated use `CreateCustomControlInput$inboundSchema` instead. */
-  export const inboundSchema = CreateCustomControlInput$inboundSchema;
-  /** @deprecated use `CreateCustomControlInput$outboundSchema` instead. */
-  export const outboundSchema = CreateCustomControlInput$outboundSchema;
-  /** @deprecated use `CreateCustomControlInput$Outbound` instead. */
-  export type Outbound = CreateCustomControlInput$Outbound;
-}
-
 export function createCustomControlInputToJSON(
   createCustomControlInput: CreateCustomControlInput,
 ): string {
@@ -152,7 +126,6 @@ export function createCustomControlInputToJSON(
     CreateCustomControlInput$outboundSchema.parse(createCustomControlInput),
   );
 }
-
 export function createCustomControlInputFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateCustomControlInput, SDKValidationError> {

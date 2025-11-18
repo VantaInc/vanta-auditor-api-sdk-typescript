@@ -40,7 +40,6 @@ export const PaginatedResponseCommentResults$inboundSchema: z.ZodType<
   data: z.array(Comment$inboundSchema),
   pageInfo: PageInfo$inboundSchema,
 });
-
 /** @internal */
 export type PaginatedResponseCommentResults$Outbound = {
   data: Array<Comment$Outbound>;
@@ -57,19 +56,6 @@ export const PaginatedResponseCommentResults$outboundSchema: z.ZodType<
   pageInfo: PageInfo$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaginatedResponseCommentResults$ {
-  /** @deprecated use `PaginatedResponseCommentResults$inboundSchema` instead. */
-  export const inboundSchema = PaginatedResponseCommentResults$inboundSchema;
-  /** @deprecated use `PaginatedResponseCommentResults$outboundSchema` instead. */
-  export const outboundSchema = PaginatedResponseCommentResults$outboundSchema;
-  /** @deprecated use `PaginatedResponseCommentResults$Outbound` instead. */
-  export type Outbound = PaginatedResponseCommentResults$Outbound;
-}
-
 export function paginatedResponseCommentResultsToJSON(
   paginatedResponseCommentResults: PaginatedResponseCommentResults,
 ): string {
@@ -79,7 +65,6 @@ export function paginatedResponseCommentResultsToJSON(
     ),
   );
 }
-
 export function paginatedResponseCommentResultsFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseCommentResults, SDKValidationError> {
@@ -98,7 +83,6 @@ export const PaginatedResponseComment$inboundSchema: z.ZodType<
 > = z.object({
   results: z.lazy(() => PaginatedResponseCommentResults$inboundSchema),
 });
-
 /** @internal */
 export type PaginatedResponseComment$Outbound = {
   results: PaginatedResponseCommentResults$Outbound;
@@ -113,19 +97,6 @@ export const PaginatedResponseComment$outboundSchema: z.ZodType<
   results: z.lazy(() => PaginatedResponseCommentResults$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaginatedResponseComment$ {
-  /** @deprecated use `PaginatedResponseComment$inboundSchema` instead. */
-  export const inboundSchema = PaginatedResponseComment$inboundSchema;
-  /** @deprecated use `PaginatedResponseComment$outboundSchema` instead. */
-  export const outboundSchema = PaginatedResponseComment$outboundSchema;
-  /** @deprecated use `PaginatedResponseComment$Outbound` instead. */
-  export type Outbound = PaginatedResponseComment$Outbound;
-}
-
 export function paginatedResponseCommentToJSON(
   paginatedResponseComment: PaginatedResponseComment,
 ): string {
@@ -133,7 +104,6 @@ export function paginatedResponseCommentToJSON(
     PaginatedResponseComment$outboundSchema.parse(paginatedResponseComment),
   );
 }
-
 export function paginatedResponseCommentFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseComment, SDKValidationError> {

@@ -34,7 +34,6 @@ export const AddCommentInput$inboundSchema: z.ZodType<
     new Date(v)
   ),
 });
-
 /** @internal */
 export type AddCommentInput$Outbound = {
   text: string;
@@ -53,25 +52,11 @@ export const AddCommentInput$outboundSchema: z.ZodType<
   creationDate: z.date().transform(v => v.toISOString()),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AddCommentInput$ {
-  /** @deprecated use `AddCommentInput$inboundSchema` instead. */
-  export const inboundSchema = AddCommentInput$inboundSchema;
-  /** @deprecated use `AddCommentInput$outboundSchema` instead. */
-  export const outboundSchema = AddCommentInput$outboundSchema;
-  /** @deprecated use `AddCommentInput$Outbound` instead. */
-  export type Outbound = AddCommentInput$Outbound;
-}
-
 export function addCommentInputToJSON(
   addCommentInput: AddCommentInput,
 ): string {
   return JSON.stringify(AddCommentInput$outboundSchema.parse(addCommentInput));
 }
-
 export function addCommentInputFromJSON(
   jsonString: string,
 ): SafeParseResult<AddCommentInput, SDKValidationError> {

@@ -105,7 +105,6 @@ export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
     ),
     auditFocus: AuditFocus$inboundSchema,
   });
-
 /** @internal */
 export type Audit$Outbound = {
   id: string;
@@ -148,23 +147,9 @@ export const Audit$outboundSchema: z.ZodType<
   auditFocus: AuditFocus$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Audit$ {
-  /** @deprecated use `Audit$inboundSchema` instead. */
-  export const inboundSchema = Audit$inboundSchema;
-  /** @deprecated use `Audit$outboundSchema` instead. */
-  export const outboundSchema = Audit$outboundSchema;
-  /** @deprecated use `Audit$Outbound` instead. */
-  export type Outbound = Audit$Outbound;
-}
-
 export function auditToJSON(audit: Audit): string {
   return JSON.stringify(Audit$outboundSchema.parse(audit));
 }
-
 export function auditFromJSON(
   jsonString: string,
 ): SafeParseResult<Audit, SDKValidationError> {

@@ -16,19 +16,7 @@ export type AuditEvidenceType = ClosedEnum<typeof AuditEvidenceType>;
 export const AuditEvidenceType$inboundSchema: z.ZodNativeEnum<
   typeof AuditEvidenceType
 > = z.nativeEnum(AuditEvidenceType);
-
 /** @internal */
 export const AuditEvidenceType$outboundSchema: z.ZodNativeEnum<
   typeof AuditEvidenceType
 > = AuditEvidenceType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AuditEvidenceType$ {
-  /** @deprecated use `AuditEvidenceType$inboundSchema` instead. */
-  export const inboundSchema = AuditEvidenceType$inboundSchema;
-  /** @deprecated use `AuditEvidenceType$outboundSchema` instead. */
-  export const outboundSchema = AuditEvidenceType$outboundSchema;
-}

@@ -29,7 +29,6 @@ export const CreateCommentForAuditEvidenceRequest$inboundSchema: z.ZodType<
     "AddCommentInput": "addCommentInput",
   });
 });
-
 /** @internal */
 export type CreateCommentForAuditEvidenceRequest$Outbound = {
   auditId: string;
@@ -52,21 +51,6 @@ export const CreateCommentForAuditEvidenceRequest$outboundSchema: z.ZodType<
   });
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateCommentForAuditEvidenceRequest$ {
-  /** @deprecated use `CreateCommentForAuditEvidenceRequest$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateCommentForAuditEvidenceRequest$inboundSchema;
-  /** @deprecated use `CreateCommentForAuditEvidenceRequest$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateCommentForAuditEvidenceRequest$outboundSchema;
-  /** @deprecated use `CreateCommentForAuditEvidenceRequest$Outbound` instead. */
-  export type Outbound = CreateCommentForAuditEvidenceRequest$Outbound;
-}
-
 export function createCommentForAuditEvidenceRequestToJSON(
   createCommentForAuditEvidenceRequest: CreateCommentForAuditEvidenceRequest,
 ): string {
@@ -76,7 +60,6 @@ export function createCommentForAuditEvidenceRequestToJSON(
     ),
   );
 }
-
 export function createCommentForAuditEvidenceRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CreateCommentForAuditEvidenceRequest, SDKValidationError> {

@@ -22,12 +22,13 @@ generation:
     hoistGlobalSecurity: true
   schemas:
     allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.4.0
+  version: 0.4.1
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -35,6 +36,7 @@ typescript:
     peerDependencies: {}
   additionalPackageJSON: {}
   additionalScripts: {}
+  alwaysIncludeInboundAndOutbound: false
   author: Speakeasy
   baseErrorName: VantaError
   clientServerStatusCodesAsErrors: true
@@ -45,6 +47,7 @@ typescript:
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: VANTA
+  exportZodModelNamespace: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   generateExamples: true
@@ -67,6 +70,7 @@ typescript:
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2
+  unionStrategy: left-to-right
   usageSDKInitImports: []
   useIndexModules: true
   zodVersion: v3

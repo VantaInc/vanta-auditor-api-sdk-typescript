@@ -33,7 +33,6 @@ export const StatusUpdate$inboundSchema: z.ZodType<
   auditorEmail: z.string(),
   stateTransition: AuditorEnabledStateTransition$inboundSchema,
 });
-
 /** @internal */
 export type StatusUpdate$Outbound = {
   auditorEmail: string;
@@ -50,23 +49,9 @@ export const StatusUpdate$outboundSchema: z.ZodType<
   stateTransition: AuditorEnabledStateTransition$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace StatusUpdate$ {
-  /** @deprecated use `StatusUpdate$inboundSchema` instead. */
-  export const inboundSchema = StatusUpdate$inboundSchema;
-  /** @deprecated use `StatusUpdate$outboundSchema` instead. */
-  export const outboundSchema = StatusUpdate$outboundSchema;
-  /** @deprecated use `StatusUpdate$Outbound` instead. */
-  export type Outbound = StatusUpdate$Outbound;
-}
-
 export function statusUpdateToJSON(statusUpdate: StatusUpdate): string {
   return JSON.stringify(StatusUpdate$outboundSchema.parse(statusUpdate));
 }
-
 export function statusUpdateFromJSON(
   jsonString: string,
 ): SafeParseResult<StatusUpdate, SDKValidationError> {
@@ -85,7 +70,6 @@ export const AuditEvidenceUpdateInput$inboundSchema: z.ZodType<
 > = z.object({
   statusUpdate: z.lazy(() => StatusUpdate$inboundSchema).optional(),
 });
-
 /** @internal */
 export type AuditEvidenceUpdateInput$Outbound = {
   statusUpdate?: StatusUpdate$Outbound | undefined;
@@ -100,19 +84,6 @@ export const AuditEvidenceUpdateInput$outboundSchema: z.ZodType<
   statusUpdate: z.lazy(() => StatusUpdate$outboundSchema).optional(),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AuditEvidenceUpdateInput$ {
-  /** @deprecated use `AuditEvidenceUpdateInput$inboundSchema` instead. */
-  export const inboundSchema = AuditEvidenceUpdateInput$inboundSchema;
-  /** @deprecated use `AuditEvidenceUpdateInput$outboundSchema` instead. */
-  export const outboundSchema = AuditEvidenceUpdateInput$outboundSchema;
-  /** @deprecated use `AuditEvidenceUpdateInput$Outbound` instead. */
-  export type Outbound = AuditEvidenceUpdateInput$Outbound;
-}
-
 export function auditEvidenceUpdateInputToJSON(
   auditEvidenceUpdateInput: AuditEvidenceUpdateInput,
 ): string {
@@ -120,7 +91,6 @@ export function auditEvidenceUpdateInputToJSON(
     AuditEvidenceUpdateInput$outboundSchema.parse(auditEvidenceUpdateInput),
   );
 }
-
 export function auditEvidenceUpdateInputFromJSON(
   jsonString: string,
 ): SafeParseResult<AuditEvidenceUpdateInput, SDKValidationError> {

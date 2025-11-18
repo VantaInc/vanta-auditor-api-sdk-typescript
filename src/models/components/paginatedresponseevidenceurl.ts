@@ -40,7 +40,6 @@ export const PaginatedResponseEvidenceUrlResults$inboundSchema: z.ZodType<
   data: z.array(EvidenceUrl$inboundSchema),
   pageInfo: PageInfo$inboundSchema,
 });
-
 /** @internal */
 export type PaginatedResponseEvidenceUrlResults$Outbound = {
   data: Array<EvidenceUrl$Outbound>;
@@ -57,21 +56,6 @@ export const PaginatedResponseEvidenceUrlResults$outboundSchema: z.ZodType<
   pageInfo: PageInfo$outboundSchema,
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaginatedResponseEvidenceUrlResults$ {
-  /** @deprecated use `PaginatedResponseEvidenceUrlResults$inboundSchema` instead. */
-  export const inboundSchema =
-    PaginatedResponseEvidenceUrlResults$inboundSchema;
-  /** @deprecated use `PaginatedResponseEvidenceUrlResults$outboundSchema` instead. */
-  export const outboundSchema =
-    PaginatedResponseEvidenceUrlResults$outboundSchema;
-  /** @deprecated use `PaginatedResponseEvidenceUrlResults$Outbound` instead. */
-  export type Outbound = PaginatedResponseEvidenceUrlResults$Outbound;
-}
-
 export function paginatedResponseEvidenceUrlResultsToJSON(
   paginatedResponseEvidenceUrlResults: PaginatedResponseEvidenceUrlResults,
 ): string {
@@ -81,7 +65,6 @@ export function paginatedResponseEvidenceUrlResultsToJSON(
     ),
   );
 }
-
 export function paginatedResponseEvidenceUrlResultsFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseEvidenceUrlResults, SDKValidationError> {
@@ -101,7 +84,6 @@ export const PaginatedResponseEvidenceUrl$inboundSchema: z.ZodType<
 > = z.object({
   results: z.lazy(() => PaginatedResponseEvidenceUrlResults$inboundSchema),
 });
-
 /** @internal */
 export type PaginatedResponseEvidenceUrl$Outbound = {
   results: PaginatedResponseEvidenceUrlResults$Outbound;
@@ -116,19 +98,6 @@ export const PaginatedResponseEvidenceUrl$outboundSchema: z.ZodType<
   results: z.lazy(() => PaginatedResponseEvidenceUrlResults$outboundSchema),
 });
 
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PaginatedResponseEvidenceUrl$ {
-  /** @deprecated use `PaginatedResponseEvidenceUrl$inboundSchema` instead. */
-  export const inboundSchema = PaginatedResponseEvidenceUrl$inboundSchema;
-  /** @deprecated use `PaginatedResponseEvidenceUrl$outboundSchema` instead. */
-  export const outboundSchema = PaginatedResponseEvidenceUrl$outboundSchema;
-  /** @deprecated use `PaginatedResponseEvidenceUrl$Outbound` instead. */
-  export type Outbound = PaginatedResponseEvidenceUrl$Outbound;
-}
-
 export function paginatedResponseEvidenceUrlToJSON(
   paginatedResponseEvidenceUrl: PaginatedResponseEvidenceUrl,
 ): string {
@@ -138,7 +107,6 @@ export function paginatedResponseEvidenceUrlToJSON(
     ),
   );
 }
-
 export function paginatedResponseEvidenceUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseEvidenceUrl, SDKValidationError> {

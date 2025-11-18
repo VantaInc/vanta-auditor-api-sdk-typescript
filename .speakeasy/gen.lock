@@ -3,10 +3,10 @@ id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
   docChecksum: 32687d9ba29da014326cc097fdfff59d
   docVersion: 1.0.0
-  speakeasyVersion: 1.648.0
-  generationVersion: 2.737.0
-  releaseVersion: 0.4.0
-  configChecksum: a1e44b2987d17da0c4bb47e803672ff8
+  speakeasyVersion: 1.658.2
+  generationVersion: 2.755.9
+  releaseVersion: 0.4.1
+  configChecksum: 0dcb09735596f7e491b3678e938dc145
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.26.0
+    core: 3.26.7
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.1
     enumUnions: 0.1.0
