@@ -4,10 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateCommentForAuditEvidenceRequest = {
   auditId: string;
@@ -15,20 +12,6 @@ export type CreateCommentForAuditEvidenceRequest = {
   addCommentInput: components.AddCommentInput;
 };
 
-/** @internal */
-export const CreateCommentForAuditEvidenceRequest$inboundSchema: z.ZodType<
-  CreateCommentForAuditEvidenceRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  auditId: z.string(),
-  auditEvidenceId: z.string(),
-  AddCommentInput: components.AddCommentInput$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "AddCommentInput": "addCommentInput",
-  });
-});
 /** @internal */
 export type CreateCommentForAuditEvidenceRequest$Outbound = {
   auditId: string;
@@ -58,15 +41,5 @@ export function createCommentForAuditEvidenceRequestToJSON(
     CreateCommentForAuditEvidenceRequest$outboundSchema.parse(
       createCommentForAuditEvidenceRequest,
     ),
-  );
-}
-export function createCommentForAuditEvidenceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateCommentForAuditEvidenceRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateCommentForAuditEvidenceRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateCommentForAuditEvidenceRequest' from JSON`,
   );
 }

@@ -4,30 +4,13 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateCustomEvidenceRequestRequest = {
   auditId: string;
   createCustomEvidenceRequestInput: components.CreateCustomEvidenceRequestInput;
 };
 
-/** @internal */
-export const CreateCustomEvidenceRequestRequest$inboundSchema: z.ZodType<
-  CreateCustomEvidenceRequestRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  auditId: z.string(),
-  CreateCustomEvidenceRequestInput:
-    components.CreateCustomEvidenceRequestInput$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "CreateCustomEvidenceRequestInput": "createCustomEvidenceRequestInput",
-  });
-});
 /** @internal */
 export type CreateCustomEvidenceRequestRequest$Outbound = {
   auditId: string;
@@ -57,15 +40,5 @@ export function createCustomEvidenceRequestRequestToJSON(
     CreateCustomEvidenceRequestRequest$outboundSchema.parse(
       createCustomEvidenceRequestRequest,
     ),
-  );
-}
-export function createCustomEvidenceRequestRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateCustomEvidenceRequestRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateCustomEvidenceRequestRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateCustomEvidenceRequestRequest' from JSON`,
   );
 }

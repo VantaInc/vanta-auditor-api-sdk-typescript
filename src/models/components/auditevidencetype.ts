@@ -16,7 +16,3 @@ export type AuditEvidenceType = ClosedEnum<typeof AuditEvidenceType>;
 export const AuditEvidenceType$inboundSchema: z.ZodNativeEnum<
   typeof AuditEvidenceType
 > = z.nativeEnum(AuditEvidenceType);
-/** @internal */
-export const AuditEvidenceType$outboundSchema: z.ZodNativeEnum<
-  typeof AuditEvidenceType
-> = AuditEvidenceType$inboundSchema;

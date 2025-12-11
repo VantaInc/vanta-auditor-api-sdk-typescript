@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Audit,
-  Audit$inboundSchema,
-  Audit$Outbound,
-  Audit$outboundSchema,
-} from "./audit.js";
-import {
-  PageInfo,
-  PageInfo$inboundSchema,
-  PageInfo$Outbound,
-  PageInfo$outboundSchema,
-} from "./pageinfo.js";
+import { Audit, Audit$inboundSchema } from "./audit.js";
+import { PageInfo, PageInfo$inboundSchema } from "./pageinfo.js";
 
 export type Results = {
   data: Array<Audit>;
@@ -37,25 +27,7 @@ export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
     data: z.array(Audit$inboundSchema),
     pageInfo: PageInfo$inboundSchema,
   });
-/** @internal */
-export type Results$Outbound = {
-  data: Array<Audit$Outbound>;
-  pageInfo: PageInfo$Outbound;
-};
 
-/** @internal */
-export const Results$outboundSchema: z.ZodType<
-  Results$Outbound,
-  z.ZodTypeDef,
-  Results
-> = z.object({
-  data: z.array(Audit$outboundSchema),
-  pageInfo: PageInfo$outboundSchema,
-});
-
-export function resultsToJSON(results: Results): string {
-  return JSON.stringify(Results$outboundSchema.parse(results));
-}
 export function resultsFromJSON(
   jsonString: string,
 ): SafeParseResult<Results, SDKValidationError> {
@@ -74,27 +46,7 @@ export const PaginatedResponseAudit$inboundSchema: z.ZodType<
 > = z.object({
   results: z.lazy(() => Results$inboundSchema),
 });
-/** @internal */
-export type PaginatedResponseAudit$Outbound = {
-  results: Results$Outbound;
-};
 
-/** @internal */
-export const PaginatedResponseAudit$outboundSchema: z.ZodType<
-  PaginatedResponseAudit$Outbound,
-  z.ZodTypeDef,
-  PaginatedResponseAudit
-> = z.object({
-  results: z.lazy(() => Results$outboundSchema),
-});
-
-export function paginatedResponseAuditToJSON(
-  paginatedResponseAudit: PaginatedResponseAudit,
-): string {
-  return JSON.stringify(
-    PaginatedResponseAudit$outboundSchema.parse(paginatedResponseAudit),
-  );
-}
 export function paginatedResponseAuditFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseAudit, SDKValidationError> {

@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  EvidenceUrl,
-  EvidenceUrl$inboundSchema,
-  EvidenceUrl$Outbound,
-  EvidenceUrl$outboundSchema,
-} from "./evidenceurl.js";
-import {
-  PageInfo,
-  PageInfo$inboundSchema,
-  PageInfo$Outbound,
-  PageInfo$outboundSchema,
-} from "./pageinfo.js";
+import { EvidenceUrl, EvidenceUrl$inboundSchema } from "./evidenceurl.js";
+import { PageInfo, PageInfo$inboundSchema } from "./pageinfo.js";
 
 export type PaginatedResponseEvidenceUrlResults = {
   data: Array<EvidenceUrl>;
@@ -40,31 +30,7 @@ export const PaginatedResponseEvidenceUrlResults$inboundSchema: z.ZodType<
   data: z.array(EvidenceUrl$inboundSchema),
   pageInfo: PageInfo$inboundSchema,
 });
-/** @internal */
-export type PaginatedResponseEvidenceUrlResults$Outbound = {
-  data: Array<EvidenceUrl$Outbound>;
-  pageInfo: PageInfo$Outbound;
-};
 
-/** @internal */
-export const PaginatedResponseEvidenceUrlResults$outboundSchema: z.ZodType<
-  PaginatedResponseEvidenceUrlResults$Outbound,
-  z.ZodTypeDef,
-  PaginatedResponseEvidenceUrlResults
-> = z.object({
-  data: z.array(EvidenceUrl$outboundSchema),
-  pageInfo: PageInfo$outboundSchema,
-});
-
-export function paginatedResponseEvidenceUrlResultsToJSON(
-  paginatedResponseEvidenceUrlResults: PaginatedResponseEvidenceUrlResults,
-): string {
-  return JSON.stringify(
-    PaginatedResponseEvidenceUrlResults$outboundSchema.parse(
-      paginatedResponseEvidenceUrlResults,
-    ),
-  );
-}
 export function paginatedResponseEvidenceUrlResultsFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseEvidenceUrlResults, SDKValidationError> {
@@ -84,29 +50,7 @@ export const PaginatedResponseEvidenceUrl$inboundSchema: z.ZodType<
 > = z.object({
   results: z.lazy(() => PaginatedResponseEvidenceUrlResults$inboundSchema),
 });
-/** @internal */
-export type PaginatedResponseEvidenceUrl$Outbound = {
-  results: PaginatedResponseEvidenceUrlResults$Outbound;
-};
 
-/** @internal */
-export const PaginatedResponseEvidenceUrl$outboundSchema: z.ZodType<
-  PaginatedResponseEvidenceUrl$Outbound,
-  z.ZodTypeDef,
-  PaginatedResponseEvidenceUrl
-> = z.object({
-  results: z.lazy(() => PaginatedResponseEvidenceUrlResults$outboundSchema),
-});
-
-export function paginatedResponseEvidenceUrlToJSON(
-  paginatedResponseEvidenceUrl: PaginatedResponseEvidenceUrl,
-): string {
-  return JSON.stringify(
-    PaginatedResponseEvidenceUrl$outboundSchema.parse(
-      paginatedResponseEvidenceUrl,
-    ),
-  );
-}
 export function paginatedResponseEvidenceUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseEvidenceUrl, SDKValidationError> {

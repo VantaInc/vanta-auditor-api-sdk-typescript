@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AddCommentInput = {
   /**
@@ -22,18 +19,6 @@ export type AddCommentInput = {
   creationDate: Date;
 };
 
-/** @internal */
-export const AddCommentInput$inboundSchema: z.ZodType<
-  AddCommentInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  text: z.string(),
-  email: z.string(),
-  creationDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-});
 /** @internal */
 export type AddCommentInput$Outbound = {
   text: string;
@@ -56,13 +41,4 @@ export function addCommentInputToJSON(
   addCommentInput: AddCommentInput,
 ): string {
   return JSON.stringify(AddCommentInput$outboundSchema.parse(addCommentInput));
-}
-export function addCommentInputFromJSON(
-  jsonString: string,
-): SafeParseResult<AddCommentInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AddCommentInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddCommentInput' from JSON`,
-  );
 }

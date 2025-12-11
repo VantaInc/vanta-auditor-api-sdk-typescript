@@ -37,29 +37,7 @@ export const EvidenceUrl$inboundSchema: z.ZodType<
   filename: z.string(),
   isDownloadable: z.boolean(),
 });
-/** @internal */
-export type EvidenceUrl$Outbound = {
-  id: string;
-  url: string;
-  filename: string;
-  isDownloadable: boolean;
-};
 
-/** @internal */
-export const EvidenceUrl$outboundSchema: z.ZodType<
-  EvidenceUrl$Outbound,
-  z.ZodTypeDef,
-  EvidenceUrl
-> = z.object({
-  id: z.string(),
-  url: z.string(),
-  filename: z.string(),
-  isDownloadable: z.boolean(),
-});
-
-export function evidenceUrlToJSON(evidenceUrl: EvidenceUrl): string {
-  return JSON.stringify(EvidenceUrl$outboundSchema.parse(evidenceUrl));
-}
 export function evidenceUrlFromJSON(
   jsonString: string,
 ): SafeParseResult<EvidenceUrl, SDKValidationError> {

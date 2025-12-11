@@ -14,6 +14,3 @@ export type AuditFocus = ClosedEnum<typeof AuditFocus>;
 /** @internal */
 export const AuditFocus$inboundSchema: z.ZodNativeEnum<typeof AuditFocus> = z
   .nativeEnum(AuditFocus);
-/** @internal */
-export const AuditFocus$outboundSchema: z.ZodNativeEnum<typeof AuditFocus> =
-  AuditFocus$inboundSchema;

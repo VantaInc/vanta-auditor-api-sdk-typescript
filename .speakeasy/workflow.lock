@@ -6,7 +6,7 @@ sources:
         sourceBlobDigest: sha256:8fefc2fa168b537a6f137983f6366a1d8abe9ea0a01bc6d108c601431b922a5b
         tags:
             - latest
-            - speakeasy-sdk-regen-1763485082
+            - speakeasy-sdk-regen-1765466945
             - 1.0.0
 targets:
     vanta:
@@ -15,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:234b914b23cf5d74d33cd7077560a45c8cba13a211f3bd8344041648d8733c2d
         sourceBlobDigest: sha256:8fefc2fa168b537a6f137983f6366a1d8abe9ea0a01bc6d108c601431b922a5b
         codeSamplesNamespace: conduct-an-audit-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:7c90833d15b225b4993d55a5cd7f764edf5628841dc3edbe672a1b9cd2aab208
+        codeSamplesRevisionDigest: sha256:d47fda63f9a1b47cc61a8480ac8a7e381e41deb5231ba74a46091a337e5dc8e3
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

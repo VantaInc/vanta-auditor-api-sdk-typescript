@@ -40,29 +40,7 @@ export const PageInfo$inboundSchema: z.ZodType<
   hasPreviousPage: z.boolean(),
   startCursor: z.nullable(z.string()),
 });
-/** @internal */
-export type PageInfo$Outbound = {
-  endCursor: string | null;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-  startCursor: string | null;
-};
 
-/** @internal */
-export const PageInfo$outboundSchema: z.ZodType<
-  PageInfo$Outbound,
-  z.ZodTypeDef,
-  PageInfo
-> = z.object({
-  endCursor: z.nullable(z.string()),
-  hasNextPage: z.boolean(),
-  hasPreviousPage: z.boolean(),
-  startCursor: z.nullable(z.string()),
-});
-
-export function pageInfoToJSON(pageInfo: PageInfo): string {
-  return JSON.stringify(PageInfo$outboundSchema.parse(pageInfo));
-}
 export function pageInfoFromJSON(
   jsonString: string,
 ): SafeParseResult<PageInfo, SDKValidationError> {

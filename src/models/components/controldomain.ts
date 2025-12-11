@@ -49,10 +49,6 @@ export const ControlDomain = {
 export type ControlDomain = ClosedEnum<typeof ControlDomain>;
 
 /** @internal */
-export const ControlDomain$inboundSchema: z.ZodNativeEnum<
-  typeof ControlDomain
-> = z.nativeEnum(ControlDomain);
-/** @internal */
 export const ControlDomain$outboundSchema: z.ZodNativeEnum<
   typeof ControlDomain
-> = ControlDomain$inboundSchema;
+> = z.nativeEnum(ControlDomain);

@@ -19,7 +19,3 @@ export type AuditEvidenceState = ClosedEnum<typeof AuditEvidenceState>;
 export const AuditEvidenceState$inboundSchema: z.ZodNativeEnum<
   typeof AuditEvidenceState
 > = z.nativeEnum(AuditEvidenceState);
-/** @internal */
-export const AuditEvidenceState$outboundSchema: z.ZodNativeEnum<
-  typeof AuditEvidenceState
-> = AuditEvidenceState$inboundSchema;

@@ -36,31 +36,7 @@ export const Auditor$inboundSchema: z.ZodType<Auditor, z.ZodTypeDef, unknown> =
     givenName: z.string(),
     familyName: z.string(),
   });
-/** @internal */
-export type Auditor$Outbound = {
-  id: string;
-  organizationId: string;
-  email: string;
-  givenName: string;
-  familyName: string;
-};
 
-/** @internal */
-export const Auditor$outboundSchema: z.ZodType<
-  Auditor$Outbound,
-  z.ZodTypeDef,
-  Auditor
-> = z.object({
-  id: z.string(),
-  organizationId: z.string(),
-  email: z.string(),
-  givenName: z.string(),
-  familyName: z.string(),
-});
-
-export function auditorToJSON(auditor: Auditor): string {
-  return JSON.stringify(Auditor$outboundSchema.parse(auditor));
-}
 export function auditorFromJSON(
   jsonString: string,
 ): SafeParseResult<Auditor, SDKValidationError> {

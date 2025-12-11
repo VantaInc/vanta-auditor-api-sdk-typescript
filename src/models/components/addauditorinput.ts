@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AddAuditorInput = {
   /**
@@ -22,16 +19,6 @@ export type AddAuditorInput = {
   familyName: string;
 };
 
-/** @internal */
-export const AddAuditorInput$inboundSchema: z.ZodType<
-  AddAuditorInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  email: z.string(),
-  givenName: z.string(),
-  familyName: z.string(),
-});
 /** @internal */
 export type AddAuditorInput$Outbound = {
   email: string;
@@ -54,13 +41,4 @@ export function addAuditorInputToJSON(
   addAuditorInput: AddAuditorInput,
 ): string {
   return JSON.stringify(AddAuditorInput$outboundSchema.parse(addAuditorInput));
-}
-export function addAuditorInputFromJSON(
-  jsonString: string,
-): SafeParseResult<AddAuditorInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AddAuditorInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AddAuditorInput' from JSON`,
-  );
 }

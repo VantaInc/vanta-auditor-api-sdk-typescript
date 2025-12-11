@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AuditorEnabledStateTransition,
-  AuditorEnabledStateTransition$inboundSchema,
   AuditorEnabledStateTransition$outboundSchema,
 } from "./auditorenabledstatetransition.js";
 
@@ -24,15 +20,6 @@ export type AuditEvidenceUpdateInput = {
   statusUpdate?: StatusUpdate | undefined;
 };
 
-/** @internal */
-export const StatusUpdate$inboundSchema: z.ZodType<
-  StatusUpdate,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  auditorEmail: z.string(),
-  stateTransition: AuditorEnabledStateTransition$inboundSchema,
-});
 /** @internal */
 export type StatusUpdate$Outbound = {
   auditorEmail: string;
@@ -52,24 +39,7 @@ export const StatusUpdate$outboundSchema: z.ZodType<
 export function statusUpdateToJSON(statusUpdate: StatusUpdate): string {
   return JSON.stringify(StatusUpdate$outboundSchema.parse(statusUpdate));
 }
-export function statusUpdateFromJSON(
-  jsonString: string,
-): SafeParseResult<StatusUpdate, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => StatusUpdate$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'StatusUpdate' from JSON`,
-  );
-}
 
-/** @internal */
-export const AuditEvidenceUpdateInput$inboundSchema: z.ZodType<
-  AuditEvidenceUpdateInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  statusUpdate: z.lazy(() => StatusUpdate$inboundSchema).optional(),
-});
 /** @internal */
 export type AuditEvidenceUpdateInput$Outbound = {
   statusUpdate?: StatusUpdate$Outbound | undefined;
@@ -89,14 +59,5 @@ export function auditEvidenceUpdateInputToJSON(
 ): string {
   return JSON.stringify(
     AuditEvidenceUpdateInput$outboundSchema.parse(auditEvidenceUpdateInput),
-  );
-}
-export function auditEvidenceUpdateInputFromJSON(
-  jsonString: string,
-): SafeParseResult<AuditEvidenceUpdateInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AuditEvidenceUpdateInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AuditEvidenceUpdateInput' from JSON`,
   );
 }

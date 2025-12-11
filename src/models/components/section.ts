@@ -24,25 +24,7 @@ export const Section$inboundSchema: z.ZodType<Section, z.ZodTypeDef, unknown> =
     name: z.string(),
     framework: z.string(),
   });
-/** @internal */
-export type Section$Outbound = {
-  name: string;
-  framework: string;
-};
 
-/** @internal */
-export const Section$outboundSchema: z.ZodType<
-  Section$Outbound,
-  z.ZodTypeDef,
-  Section
-> = z.object({
-  name: z.string(),
-  framework: z.string(),
-});
-
-export function sectionToJSON(section: Section): string {
-  return JSON.stringify(Section$outboundSchema.parse(section));
-}
 export function sectionFromJSON(
   jsonString: string,
 ): SafeParseResult<Section, SDKValidationError> {

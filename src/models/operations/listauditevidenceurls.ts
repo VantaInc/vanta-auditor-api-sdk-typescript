@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListAuditEvidenceUrlsRequest = {
   auditId: string;
@@ -14,17 +11,6 @@ export type ListAuditEvidenceUrlsRequest = {
   pageCursor?: string | undefined;
 };
 
-/** @internal */
-export const ListAuditEvidenceUrlsRequest$inboundSchema: z.ZodType<
-  ListAuditEvidenceUrlsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  auditId: z.string(),
-  auditEvidenceId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-});
 /** @internal */
 export type ListAuditEvidenceUrlsRequest$Outbound = {
   auditId: string;
@@ -52,14 +38,5 @@ export function listAuditEvidenceUrlsRequestToJSON(
     ListAuditEvidenceUrlsRequest$outboundSchema.parse(
       listAuditEvidenceUrlsRequest,
     ),
-  );
-}
-export function listAuditEvidenceUrlsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAuditEvidenceUrlsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAuditEvidenceUrlsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAuditEvidenceUrlsRequest' from JSON`,
   );
 }

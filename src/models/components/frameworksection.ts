@@ -3,14 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  FrameworkId,
-  FrameworkId$inboundSchema,
-  FrameworkId$outboundSchema,
-} from "./frameworkid.js";
+import { FrameworkId, FrameworkId$outboundSchema } from "./frameworkid.js";
 
 export type FrameworkSectionFrameworkId = FrameworkId | string;
 
@@ -19,12 +12,6 @@ export type FrameworkSection = {
   sectionId: string;
 };
 
-/** @internal */
-export const FrameworkSectionFrameworkId$inboundSchema: z.ZodType<
-  FrameworkSectionFrameworkId,
-  z.ZodTypeDef,
-  unknown
-> = z.union([FrameworkId$inboundSchema, z.string()]);
 /** @internal */
 export type FrameworkSectionFrameworkId$Outbound = string | string;
 
@@ -44,25 +31,7 @@ export function frameworkSectionFrameworkIdToJSON(
     ),
   );
 }
-export function frameworkSectionFrameworkIdFromJSON(
-  jsonString: string,
-): SafeParseResult<FrameworkSectionFrameworkId, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FrameworkSectionFrameworkId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FrameworkSectionFrameworkId' from JSON`,
-  );
-}
 
-/** @internal */
-export const FrameworkSection$inboundSchema: z.ZodType<
-  FrameworkSection,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  frameworkId: z.union([FrameworkId$inboundSchema, z.string()]),
-  sectionId: z.string(),
-});
 /** @internal */
 export type FrameworkSection$Outbound = {
   frameworkId: string | string;
@@ -84,14 +53,5 @@ export function frameworkSectionToJSON(
 ): string {
   return JSON.stringify(
     FrameworkSection$outboundSchema.parse(frameworkSection),
-  );
-}
-export function frameworkSectionFromJSON(
-  jsonString: string,
-): SafeParseResult<FrameworkSection, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FrameworkSection$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FrameworkSection' from JSON`,
   );
 }

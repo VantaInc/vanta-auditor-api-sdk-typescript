@@ -17,19 +17,7 @@ export type CustomField = {
 /** @internal */
 export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
   .union([z.string(), z.array(z.string())]);
-/** @internal */
-export type Value$Outbound = string | Array<string>;
 
-/** @internal */
-export const Value$outboundSchema: z.ZodType<
-  Value$Outbound,
-  z.ZodTypeDef,
-  Value
-> = z.union([z.string(), z.array(z.string())]);
-
-export function valueToJSON(value: Value): string {
-  return JSON.stringify(Value$outboundSchema.parse(value));
-}
 export function valueFromJSON(
   jsonString: string,
 ): SafeParseResult<Value, SDKValidationError> {
@@ -49,25 +37,7 @@ export const CustomField$inboundSchema: z.ZodType<
   label: z.string(),
   value: z.union([z.string(), z.array(z.string())]),
 });
-/** @internal */
-export type CustomField$Outbound = {
-  label: string;
-  value: string | Array<string>;
-};
 
-/** @internal */
-export const CustomField$outboundSchema: z.ZodType<
-  CustomField$Outbound,
-  z.ZodTypeDef,
-  CustomField
-> = z.object({
-  label: z.string(),
-  value: z.union([z.string(), z.array(z.string())]),
-});
-
-export function customFieldToJSON(customField: CustomField): string {
-  return JSON.stringify(CustomField$outboundSchema.parse(customField));
-}
 export function customFieldFromJSON(
   jsonString: string,
 ): SafeParseResult<CustomField, SDKValidationError> {

@@ -5,8 +5,8 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.658.2
   generationVersion: 2.755.9
-  releaseVersion: 0.4.1
-  configChecksum: 0dcb09735596f7e491b3678e938dc145
+  releaseVersion: 0.4.2
+  configChecksum: ceb36011d9070e3f154c3901cb36ee42
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
@@ -23,7 +23,6 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.83.0
-    mcpServer: 0.9.3
     nameOverrides: 2.81.2
     nullables: 0.1.1
     responseFormat: 0.2.3
@@ -132,29 +131,6 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
-  - src/mcp-server/build.mts
-  - src/mcp-server/cli.ts
-  - src/mcp-server/cli/start/command.ts
-  - src/mcp-server/cli/start/impl.ts
-  - src/mcp-server/console-logger.ts
-  - src/mcp-server/extensions.ts
-  - src/mcp-server/mcp-server.ts
-  - src/mcp-server/prompts.ts
-  - src/mcp-server/resources.ts
-  - src/mcp-server/scopes.ts
-  - src/mcp-server/server.ts
-  - src/mcp-server/shared.ts
-  - src/mcp-server/tools.ts
-  - src/mcp-server/tools/auditorsCreate.ts
-  - src/mcp-server/tools/auditsCreateCommentForEvidence.ts
-  - src/mcp-server/tools/auditsCreateCustomControl.ts
-  - src/mcp-server/tools/auditsCreateCustomEvidenceRequest.ts
-  - src/mcp-server/tools/auditsGetEvidenceUrls.ts
-  - src/mcp-server/tools/auditsList.ts
-  - src/mcp-server/tools/auditsListComments.ts
-  - src/mcp-server/tools/auditsListControls.ts
-  - src/mcp-server/tools/auditsListEvidence.ts
-  - src/mcp-server/tools/auditsUpdateEvidence.ts
   - src/models/components/addauditorinput.ts
   - src/models/components/addcommentinput.ts
   - src/models/components/audit.ts
@@ -319,3 +295,334 @@ examples:
           application/json: {"id": "65fc81a3359c8508c9af880f", "organizationId": "8c9af880f1a335965fc850c8", "email": "testauditor@audit.com", "givenName": "Sam", "familyName": "Auditor"}
 examplesVersion: 1.0.2
 generatedTests: {}
+trackedFiles:
+  .devcontainer/README.md:
+    last_write_checksum: sha1:50dfd6f6a95e3b795baf587c589d5f3b50edc7e5
+  .devcontainer/devcontainer.json:
+    last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
+  .devcontainer/setup.sh:
+    last_write_checksum: sha1:f8e19262665d17db3cc6fc59b030a2264b94f902
+  .gitattributes:
+    last_write_checksum: sha1:26d16d8297b104945139da8c25bd38feeaad3e25
+  .npmignore:
+    last_write_checksum: sha1:3d5eb92f81539175db1ff0280e0aefbdd701f200
+  FUNCTIONS.md:
+    last_write_checksum: sha1:675d35ac1160adf1e4fb0a9f5390302badf96e4e
+  RUNTIMES.md:
+    last_write_checksum: sha1:e45b854f02c357cbcfdb8c3663000e8339e16505
+  USAGE.md:
+    last_write_checksum: sha1:1366d6ebababf72872516a720fef49e4be765df4
+  docs/lib/utils/retryconfig.md:
+    last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
+  docs/models/components/addauditorinput.md:
+    last_write_checksum: sha1:e32760894a3defd46fe1075882ceec8e9e7b62bd
+  docs/models/components/addcommentinput.md:
+    last_write_checksum: sha1:3667dd0ad9442360e55ea8e0e2a759750f2db4eb
+  docs/models/components/audit.md:
+    last_write_checksum: sha1:df044d4b3fe52fa84d303e45c19004cb4527bf5f
+  docs/models/components/auditevidencestate.md:
+    last_write_checksum: sha1:4ad03a91468d894368a3578166662129bc79bef1
+  docs/models/components/auditevidencetype.md:
+    last_write_checksum: sha1:896d1fd39c75c5bb41c746f4b3e6e6b38a79bc44
+  docs/models/components/auditevidenceupdateinput.md:
+    last_write_checksum: sha1:20c8b568d923a8c0b17489e7c76658da32ad9055
+  docs/models/components/auditfocus.md:
+    last_write_checksum: sha1:eff55b29a4176c58a3676b06736369948a295e25
+  docs/models/components/auditor.md:
+    last_write_checksum: sha1:f34df26cdc0aa5a3b20b80e2f0e6d366154970f0
+  docs/models/components/auditorcontrol.md:
+    last_write_checksum: sha1:574e9cc39309d03a7e049a318eac4638ade2e21d
+  docs/models/components/auditorenabledstatetransition.md:
+    last_write_checksum: sha1:a4f8540cd3e46a53dd201db3800c926eecc33c3e
+  docs/models/components/comment.md:
+    last_write_checksum: sha1:4606a143c2fd55d9cc8b7477cb22fb6191d9b546
+  docs/models/components/control.md:
+    last_write_checksum: sha1:83cfb268e739c31fe4653e0e31527b2cd495c4a3
+  docs/models/components/controldomain.md:
+    last_write_checksum: sha1:7ad69404ac054f246376f0d08c0a8c9082bb6433
+  docs/models/components/controlowner.md:
+    last_write_checksum: sha1:857573391ce75a307e419936df8b412fe1dbcd83
+  docs/models/components/controlsource.md:
+    last_write_checksum: sha1:1bc5fda5526740828c68742920be1dd0a608d7ff
+  docs/models/components/createcustomcontrolinput.md:
+    last_write_checksum: sha1:d95a1e9e54a18ca2f828e776bffe3c2199bc7531
+  docs/models/components/createcustomevidencerequestinput.md:
+    last_write_checksum: sha1:3583d84c94a2921e71af7ce7753e9b1333b87fa4
+  docs/models/components/customevidencerequest.md:
+    last_write_checksum: sha1:b5a1de7d4ae776b438506e75fa306704acc30377
+  docs/models/components/customfield.md:
+    last_write_checksum: sha1:d4d7f0529f2e03fa894e5aab1eb42e0e27dd2284
+  docs/models/components/evidence.md:
+    last_write_checksum: sha1:61c93aea39fe74d2cf5f71be36bfe304904e7f51
+  docs/models/components/evidencecontrol.md:
+    last_write_checksum: sha1:d78bed300387443073e4ec4f4a7251f8738bbdc9
+  docs/models/components/evidenceurl.md:
+    last_write_checksum: sha1:e7047f389a62d02d5018514ef7e21bd8c18ae787
+  docs/models/components/frameworkid.md:
+    last_write_checksum: sha1:2ff420ec0a09b7522036ee5e5ff0a5ed35fbcf59
+  docs/models/components/frameworksection.md:
+    last_write_checksum: sha1:e65818c92468aa9108861faee7755a4d9b65d16f
+  docs/models/components/frameworksectionframeworkid.md:
+    last_write_checksum: sha1:19f553137d659e26471ac05e4a129b8c8b4e7a8b
+  docs/models/components/owner.md:
+    last_write_checksum: sha1:870687ccb0e0fff5b7987a5d809306daf7b19559
+  docs/models/components/pageinfo.md:
+    last_write_checksum: sha1:e2d2dbf98e63ea8be27507bf6824360d9203ec3a
+  docs/models/components/paginatedresponseaudit.md:
+    last_write_checksum: sha1:b09fa57f5f441e41df63b201a359ace870adad92
+  docs/models/components/paginatedresponseauditorcontrol.md:
+    last_write_checksum: sha1:9af19c39ea1713d5df9a46c6f271029502d588e9
+  docs/models/components/paginatedresponseauditorcontrolresults.md:
+    last_write_checksum: sha1:ea850884e3fe31c3c5af3e75b5ae8bbcffd64ed3
+  docs/models/components/paginatedresponsecomment.md:
+    last_write_checksum: sha1:46d7a27f2e0628b093a147035782c87917c8a276
+  docs/models/components/paginatedresponsecommentresults.md:
+    last_write_checksum: sha1:edf823d249caae11440dbbb0c56a215083f3c77d
+  docs/models/components/paginatedresponseevidence.md:
+    last_write_checksum: sha1:23c05885a8fcd37d46a9a858d975a0d296da8260
+  docs/models/components/paginatedresponseevidenceresults.md:
+    last_write_checksum: sha1:41d2a88ba502a5a57b726951a8e5ef5d1f6c906f
+  docs/models/components/paginatedresponseevidenceurl.md:
+    last_write_checksum: sha1:4df5a2a52a4016f6f0481200d8d5f8b3dea6bfac
+  docs/models/components/paginatedresponseevidenceurlresults.md:
+    last_write_checksum: sha1:e627f09cebc03bb292552ecea78c3cae85a71c39
+  docs/models/components/recurrenceduration.md:
+    last_write_checksum: sha1:1ee21f2d94a1c5932a9dc7dd88f7caa4bda5f33a
+  docs/models/components/results.md:
+    last_write_checksum: sha1:875de671d0e2e9718acd38acda264f3dbd1ddafe
+  docs/models/components/role.md:
+    last_write_checksum: sha1:777b7dd537b6368c9291de4a1aa9b21f8c662012
+  docs/models/components/section.md:
+    last_write_checksum: sha1:8907267a1ef219c7c13341e75600a4dab0a173a9
+  docs/models/components/security.md:
+    last_write_checksum: sha1:7fb2159a4d40ba5548019f228a4de05ecff90b1e
+  docs/models/components/statusupdate.md:
+    last_write_checksum: sha1:3824a344e9486ae84ce4ebad493b6f91b342e243
+  docs/models/components/value.md:
+    last_write_checksum: sha1:3973b43e057861f397a3cd4b5eb9edece6f6cde1
+  docs/models/operations/createcommentforauditevidencerequest.md:
+    last_write_checksum: sha1:e3b204aa9f9b4fd261921f91ab00c0b1b6ee7147
+  docs/models/operations/createcustomcontrolrequest.md:
+    last_write_checksum: sha1:87982ba09b551a8fbfd4478862101f9d82ddca00
+  docs/models/operations/createcustomevidencerequestrequest.md:
+    last_write_checksum: sha1:d779307aa1961dcf34012d443f3108d80b2c6414
+  docs/models/operations/listauditcommentsrequest.md:
+    last_write_checksum: sha1:27d714c68b741d5e4b392cf29c4503af006e5c58
+  docs/models/operations/listauditcontrolsrequest.md:
+    last_write_checksum: sha1:2f9b113e2a41ffbb1730ca328d9c2d004041a0df
+  docs/models/operations/listauditevidencerequest.md:
+    last_write_checksum: sha1:82e0264a34b7cac5349758d3a7e5b4bcf6482452
+  docs/models/operations/listauditevidenceurlsrequest.md:
+    last_write_checksum: sha1:e772efd2999d66006bef40436c74c0f967ed8bec
+  docs/models/operations/listauditsrequest.md:
+    last_write_checksum: sha1:3e56442b33b947910e3b3a53bc1ed98de5490cec
+  docs/models/operations/updateauditevidencerequest.md:
+    last_write_checksum: sha1:a01b203159d3a8eb658d8f66ee3bbed8e900a688
+  docs/sdks/auditors/README.md:
+    last_write_checksum: sha1:d9086aa7ce3523e33a26ff7ef84195d0ea5ef470
+  docs/sdks/audits/README.md:
+    last_write_checksum: sha1:9020a37e89c7b9b47bf4777914df2b20d36014c2
+  eslint.config.mjs:
+    last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
+  examples/.env.template:
+    last_write_checksum: sha1:9bb95dab0c96a66617378cef093de4f3cc928a82
+  examples/README.md:
+    last_write_checksum: sha1:38f03159b95998009ffab015779e0a90ea695c06
+  examples/auditsList.example.ts:
+    last_write_checksum: sha1:537639934f84769fb903354ab92dcb018c010e66
+  examples/package.json:
+    last_write_checksum: sha1:f249d3e2f99a2c606c7bfbf127ac128003072702
+  jsr.json:
+    last_write_checksum: sha1:e5022ed8c0d9bb203616914df3f9b4446b2cb3cd
+  package.json:
+    last_write_checksum: sha1:479ab390724a3758849598b81d0db6ce15c0a9fe
+  src/core.ts:
+    last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
+  src/funcs/auditorsCreate.ts:
+    last_write_checksum: sha1:b9b4fa14d77cd6a769440038a5d2f9f56b6e5df3
+  src/funcs/auditsCreateCommentForEvidence.ts:
+    last_write_checksum: sha1:000f5ac97bba2c6e0419b1e62c1b4f76115abba2
+  src/funcs/auditsCreateCustomControl.ts:
+    last_write_checksum: sha1:d13aa5b81a71357fef3c681bcd00d664d4e11b58
+  src/funcs/auditsCreateCustomEvidenceRequest.ts:
+    last_write_checksum: sha1:b0b2d847597d3da86b427f21437606afeb2c51d1
+  src/funcs/auditsGetEvidenceUrls.ts:
+    last_write_checksum: sha1:b5ccdbbe248a82e5e2ab4e60ce34c9ec22611b90
+  src/funcs/auditsList.ts:
+    last_write_checksum: sha1:e4858c12c23643d8ac727501345c2ed902f7b0d2
+  src/funcs/auditsListComments.ts:
+    last_write_checksum: sha1:33547a8b94431bf6acc307b3072c87d28bcdf52d
+  src/funcs/auditsListControls.ts:
+    last_write_checksum: sha1:da42a72ba0701d832a612d51e65260752b801e98
+  src/funcs/auditsListEvidence.ts:
+    last_write_checksum: sha1:cd8cb7d701d236b254c617abf0f39ac4de07b174
+  src/funcs/auditsUpdateEvidence.ts:
+    last_write_checksum: sha1:464316b643ee8b8134f89fca05248493a8e8aea5
+  src/hooks/hooks.ts:
+    last_write_checksum: sha1:9a569ea8f3177ddcdfe6cd903feaf5c2d2c36a9a
+  src/hooks/index.ts:
+    last_write_checksum: sha1:1a11c073a6cd792932218e1d4ed36b8567bad8ef
+  src/hooks/types.ts:
+    last_write_checksum: sha1:29372122898cc523fa47576f3f6608a28ec6080e
+  src/index.ts:
+    last_write_checksum: sha1:35c9cde3ae14b18b3f893a1afe8b6c44f8760f24
+  src/lib/base64.ts:
+    last_write_checksum: sha1:b0b12ddbd8625efb47c0e955a18641aeb10c6532
+  src/lib/config.ts:
+    last_write_checksum: sha1:0eb01d398a0c6a26a67dfa56eb5a25ad07316d7d
+  src/lib/dlv.ts:
+    last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
+  src/lib/encodings.ts:
+    last_write_checksum: sha1:d20c131976ab8ac68b22bdde2b7ed84b5b873922
+  src/lib/env.ts:
+    last_write_checksum: sha1:38d97ea91af9a099feedb2ba18dd57dc264e7885
+  src/lib/files.ts:
+    last_write_checksum: sha1:d0f325f445b8d22e7d73baf052c585ec2dd24841
+  src/lib/http.ts:
+    last_write_checksum: sha1:797cbf16d3c7c4d62d3ba0eedb08617524938457
+  src/lib/is-plain-object.ts:
+    last_write_checksum: sha1:df687f25a9590b6fd95d39df41a652ae3fd4e517
+  src/lib/logger.ts:
+    last_write_checksum: sha1:0ec9d3a2a34c362746b767e4f9a746c055d57a7b
+  src/lib/matchers.ts:
+    last_write_checksum: sha1:e7587f40d36710d499f8a7e6b610610e55a2cb40
+  src/lib/primitives.ts:
+    last_write_checksum: sha1:987869fc54790b9c22e9182099103d6aa7c67016
+  src/lib/retries.ts:
+    last_write_checksum: sha1:f3da74dffcbe2756c69393f8600205aa1dc06e68
+  src/lib/schemas.ts:
+    last_write_checksum: sha1:209cfaabfa7fc1c1310f97453215cb0755619c6e
+  src/lib/sdks.ts:
+    last_write_checksum: sha1:9a7a2bede4cdb0c9268c784ed155ed02af4756c6
+  src/lib/security.ts:
+    last_write_checksum: sha1:8adcfa72ccb5838220a5a5cbd93236434e7c4829
+  src/lib/url.ts:
+    last_write_checksum: sha1:d124050c7e755c0cce233b9e029afb584ff65201
+  src/models/components/addauditorinput.ts:
+    last_write_checksum: sha1:470253bf8b9ccee3cf990de5efc83b4b03234545
+  src/models/components/addcommentinput.ts:
+    last_write_checksum: sha1:d9bafe89c0b0d4b115002dae92aee5ee8c24ef6b
+  src/models/components/audit.ts:
+    last_write_checksum: sha1:6f6912a6a0db9ec03f9dc70f003ec40bfc34c93f
+  src/models/components/auditevidencestate.ts:
+    last_write_checksum: sha1:e48d205356a95b2df3e4042abf0edf67afaff866
+  src/models/components/auditevidencetype.ts:
+    last_write_checksum: sha1:120f7adac7ed8070b81d6edebecb7d11a45a2a49
+  src/models/components/auditevidenceupdateinput.ts:
+    last_write_checksum: sha1:bad0a7d6df2e3f2ac409806174ce6fb659802a87
+  src/models/components/auditfocus.ts:
+    last_write_checksum: sha1:0eb589abca013beefd76c54603fa79316683e1bb
+  src/models/components/auditor.ts:
+    last_write_checksum: sha1:67c201aa8c681d0c7ecda0a6a629db6b65225aa2
+  src/models/components/auditorcontrol.ts:
+    last_write_checksum: sha1:9986880f7df9b836fc2241cd9322962177a8b5ec
+  src/models/components/auditorenabledstatetransition.ts:
+    last_write_checksum: sha1:5df2b353c3661188a232745f4a5fb4e3110f82ff
+  src/models/components/comment.ts:
+    last_write_checksum: sha1:888f79885d99001720e066e852709a7c108da1d7
+  src/models/components/control.ts:
+    last_write_checksum: sha1:77e74a290c44823b506007bb562aae1bb52dde26
+  src/models/components/controldomain.ts:
+    last_write_checksum: sha1:0c6d29d7c76ed8d6822a004f90ab4fcc54858632
+  src/models/components/controlsource.ts:
+    last_write_checksum: sha1:b4e01843aba753ff5f6566e4b00fbc20bd43bd21
+  src/models/components/createcustomcontrolinput.ts:
+    last_write_checksum: sha1:5fd5e2408dce5d9a85c65f7e326d3dc351e7eefb
+  src/models/components/createcustomevidencerequestinput.ts:
+    last_write_checksum: sha1:b63975c804ef5702f9e96ac56d05d7053564c79c
+  src/models/components/customevidencerequest.ts:
+    last_write_checksum: sha1:ddfeb412fe6ec6571b8669cda11fa6356a147327
+  src/models/components/customfield.ts:
+    last_write_checksum: sha1:27b7c2c5112573542b90056abeb6c53026f1c71e
+  src/models/components/evidence.ts:
+    last_write_checksum: sha1:4c8ea0d517b91f9a6e91e6aa68b5846ee2559337
+  src/models/components/evidencecontrol.ts:
+    last_write_checksum: sha1:9c2b201cc60ab7c89253213aff572f4dafde9e4c
+  src/models/components/evidenceurl.ts:
+    last_write_checksum: sha1:d59e59499dbea8cbaf3cdbfc15fa1d2ac43e2e9c
+  src/models/components/frameworkid.ts:
+    last_write_checksum: sha1:1df852f0267653d131a0aa290ed30a9150ee9c5f
+  src/models/components/frameworksection.ts:
+    last_write_checksum: sha1:cec7afe98bec475c8e679082dbbbb1d58a36b24b
+  src/models/components/index.ts:
+    last_write_checksum: sha1:48a8635d05d4fea758896599f26e19f33fddd9c5
+  src/models/components/pageinfo.ts:
+    last_write_checksum: sha1:ab63033169c39feb2cf4b289e7fa5252f5f2fbcd
+  src/models/components/paginatedresponseaudit.ts:
+    last_write_checksum: sha1:303c364de63239d2df5207b54fefbac9b6fad898
+  src/models/components/paginatedresponseauditorcontrol.ts:
+    last_write_checksum: sha1:8629d094cd55670f5f38d1444eb88ec420bcd0ef
+  src/models/components/paginatedresponsecomment.ts:
+    last_write_checksum: sha1:008bfbdd0f5fda6015b3ae7b869afc74559b2f57
+  src/models/components/paginatedresponseevidence.ts:
+    last_write_checksum: sha1:2ca2b7bb9ce165401dfe54c48cc8488c7fe93bea
+  src/models/components/paginatedresponseevidenceurl.ts:
+    last_write_checksum: sha1:dd0b1bfc280696a00a33915ae4ecc37aa1f11df4
+  src/models/components/recurrenceduration.ts:
+    last_write_checksum: sha1:93e2b00478c1930eb3df6bb901c3ed42df18b897
+  src/models/components/section.ts:
+    last_write_checksum: sha1:6fcab6ab644fec5a341e8928ff8cec6b644add2b
+  src/models/components/security.ts:
+    last_write_checksum: sha1:14f08712e7ae6c9786e015c415b290acda66bcef
+  src/models/errors/apierror.ts:
+    last_write_checksum: sha1:efff803b9ac6b8dc6c5398aad65355f91c34792d
+  src/models/errors/httpclienterrors.ts:
+    last_write_checksum: sha1:994ced121c54fecd0af038ccfb7855fbfd3868ec
+  src/models/errors/index.ts:
+    last_write_checksum: sha1:9b0f1936bbb6422e9b8ee81fd1fa53de70860a14
+  src/models/errors/responsevalidationerror.ts:
+    last_write_checksum: sha1:fbb5ae1ce0c88ff48c94c03af01843004807a0d5
+  src/models/errors/sdkvalidationerror.ts:
+    last_write_checksum: sha1:a69da17627bcc32b820544608f3400423ea53f26
+  src/models/errors/vantaerror.ts:
+    last_write_checksum: sha1:1715c6bdba9ef16000d6a4ca8d744ef4cc02cac8
+  src/models/operations/createcommentforauditevidence.ts:
+    last_write_checksum: sha1:a356ea7b9f382880d0b9404c18daf77bc17654c4
+  src/models/operations/createcustomcontrol.ts:
+    last_write_checksum: sha1:641584d8833ea9104bd439cbe4f0831754f33c76
+  src/models/operations/createcustomevidencerequest.ts:
+    last_write_checksum: sha1:1a138bf99a82191e9e33366733d154255c0a4921
+  src/models/operations/index.ts:
+    last_write_checksum: sha1:fbe509b394222c07afbcb46165e0a167c75f870a
+  src/models/operations/listauditcomments.ts:
+    last_write_checksum: sha1:174ef03079744f7c898c30b9c36e1b63f0fa4377
+  src/models/operations/listauditcontrols.ts:
+    last_write_checksum: sha1:d4b3321656761423535e1334e9c52394060e2b20
+  src/models/operations/listauditevidence.ts:
+    last_write_checksum: sha1:2a1fd290a0e92420068a15d5da4143b9be6f0307
+  src/models/operations/listauditevidenceurls.ts:
+    last_write_checksum: sha1:4ee6d7b58b11defc4b35932b4f577d1b0ca76cae
+  src/models/operations/listaudits.ts:
+    last_write_checksum: sha1:61c9c2d3ffa964c8962a7c3f735b23922a9ab7ae
+  src/models/operations/updateauditevidence.ts:
+    last_write_checksum: sha1:6ecfa8b044262cea2a8518773be023f80a11a50d
+  src/sdk/auditors.ts:
+    last_write_checksum: sha1:1d216ecd5582ad68e632bec3715b470188e14e2c
+  src/sdk/audits.ts:
+    last_write_checksum: sha1:47d300e7fe9d1723e111b097c1ba7325dbec8192
+  src/sdk/index.ts:
+    last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
+  src/sdk/sdk.ts:
+    last_write_checksum: sha1:a393b1637159b81c4b35e41b2d61cd834587eb66
+  src/types/async.ts:
+    last_write_checksum: sha1:3ff07b3feaf390ec1aeb18ff938e139c6c4a9585
+  src/types/blobs.ts:
+    last_write_checksum: sha1:cf45d78916671cb6345a11c97c633c64402bc27c
+  src/types/constdatetime.ts:
+    last_write_checksum: sha1:dfaaf9adfaf49808bd4c9dea0039f21b7088d9c0
+  src/types/enums.ts:
+    last_write_checksum: sha1:ee590453d2c87e33e89c633d37ee46907eca0e58
+  src/types/fp.ts:
+    last_write_checksum: sha1:d24994d58f37a1ca106847fcc6d2e976c6f1c093
+  src/types/index.ts:
+    last_write_checksum: sha1:bf43b3dccb960ca9ae9c5ab940da4786255881cd
+  src/types/operations.ts:
+    last_write_checksum: sha1:c49e724cfb1259296381cb57bc0fcdd2eae45865
+  src/types/rfcdate.ts:
+    last_write_checksum: sha1:8e5f382e02fe21c2f2e24deb1b7bbf8cddd3dd16
+  src/types/streams.ts:
+    last_write_checksum: sha1:cc9ced2dd34a76c3a1bd7784ccda1cc3b37ab9a9
+  src/types/unrecognized.ts:
+    last_write_checksum: sha1:d33ac686528492f4cdc0dbf81ed343b4afe020fe
+  tsconfig.json:
+    last_write_checksum: sha1:c3ec7996536cdb9a54319e7d1eb3b199b733d34c

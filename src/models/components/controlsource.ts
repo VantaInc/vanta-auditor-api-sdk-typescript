@@ -15,7 +15,3 @@ export type ControlSource = ClosedEnum<typeof ControlSource>;
 export const ControlSource$inboundSchema: z.ZodNativeEnum<
   typeof ControlSource
 > = z.nativeEnum(ControlSource);
-/** @internal */
-export const ControlSource$outboundSchema: z.ZodNativeEnum<
-  typeof ControlSource
-> = ControlSource$inboundSchema;

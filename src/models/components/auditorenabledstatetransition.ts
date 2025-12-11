@@ -17,10 +17,6 @@ export type AuditorEnabledStateTransition = ClosedEnum<
 >;
 
 /** @internal */
-export const AuditorEnabledStateTransition$inboundSchema: z.ZodNativeEnum<
-  typeof AuditorEnabledStateTransition
-> = z.nativeEnum(AuditorEnabledStateTransition);
-/** @internal */
 export const AuditorEnabledStateTransition$outboundSchema: z.ZodNativeEnum<
   typeof AuditorEnabledStateTransition
-> = AuditorEnabledStateTransition$inboundSchema;
+> = z.nativeEnum(AuditorEnabledStateTransition);
