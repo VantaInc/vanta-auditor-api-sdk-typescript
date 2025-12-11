@@ -3,18 +3,13 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   ControlDomain,
-  ControlDomain$inboundSchema,
   ControlDomain$outboundSchema,
 } from "./controldomain.js";
 import {
   FrameworkSection,
-  FrameworkSection$inboundSchema,
   FrameworkSection$Outbound,
   FrameworkSection$outboundSchema,
 } from "./frameworksection.js";
@@ -70,29 +65,10 @@ export type CreateCustomControlInput = {
 };
 
 /** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
+export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
   Role,
 );
-/** @internal */
-export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
-  Role$inboundSchema;
 
-/** @internal */
-export const CreateCustomControlInput$inboundSchema: z.ZodType<
-  CreateCustomControlInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  externalId: z.string(),
-  name: z.nullable(z.string()),
-  description: z.string(),
-  effectiveDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  category: ControlDomain$inboundSchema,
-  sections: z.nullable(z.array(FrameworkSection$inboundSchema)).optional(),
-  role: z.nullable(Role$inboundSchema).optional(),
-});
 /** @internal */
 export type CreateCustomControlInput$Outbound = {
   externalId: string;
@@ -124,14 +100,5 @@ export function createCustomControlInputToJSON(
 ): string {
   return JSON.stringify(
     CreateCustomControlInput$outboundSchema.parse(createCustomControlInput),
-  );
-}
-export function createCustomControlInputFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateCustomControlInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateCustomControlInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateCustomControlInput' from JSON`,
   );
 }

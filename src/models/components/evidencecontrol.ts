@@ -27,27 +27,7 @@ export const EvidenceControl$inboundSchema: z.ZodType<
   name: z.string(),
   sectionNames: z.array(z.string()),
 });
-/** @internal */
-export type EvidenceControl$Outbound = {
-  name: string;
-  sectionNames: Array<string>;
-};
 
-/** @internal */
-export const EvidenceControl$outboundSchema: z.ZodType<
-  EvidenceControl$Outbound,
-  z.ZodTypeDef,
-  EvidenceControl
-> = z.object({
-  name: z.string(),
-  sectionNames: z.array(z.string()),
-});
-
-export function evidenceControlToJSON(
-  evidenceControl: EvidenceControl,
-): string {
-  return JSON.stringify(EvidenceControl$outboundSchema.parse(evidenceControl));
-}
 export function evidenceControlFromJSON(
   jsonString: string,
 ): SafeParseResult<EvidenceControl, SDKValidationError> {

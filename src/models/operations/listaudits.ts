@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListAuditsRequest = {
   pageSize?: number | undefined;
@@ -20,19 +17,6 @@ export type ListAuditsRequest = {
   isActiveAudit?: boolean | undefined;
 };
 
-/** @internal */
-export const ListAuditsRequest$inboundSchema: z.ZodType<
-  ListAuditsRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  changedSinceDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  isActiveAudit: z.boolean().optional(),
-});
 /** @internal */
 export type ListAuditsRequest$Outbound = {
   pageSize: number;
@@ -58,14 +42,5 @@ export function listAuditsRequestToJSON(
 ): string {
   return JSON.stringify(
     ListAuditsRequest$outboundSchema.parse(listAuditsRequest),
-  );
-}
-export function listAuditsRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAuditsRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAuditsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAuditsRequest' from JSON`,
   );
 }

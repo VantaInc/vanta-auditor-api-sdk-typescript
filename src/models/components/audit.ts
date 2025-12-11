@@ -6,11 +6,7 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  AuditFocus,
-  AuditFocus$inboundSchema,
-  AuditFocus$outboundSchema,
-} from "./auditfocus.js";
+import { AuditFocus, AuditFocus$inboundSchema } from "./auditfocus.js";
 
 export type Audit = {
   /**
@@ -105,51 +101,7 @@ export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
     ),
     auditFocus: AuditFocus$inboundSchema,
   });
-/** @internal */
-export type Audit$Outbound = {
-  id: string;
-  customerOrganizationName: string;
-  customerDisplayName: string | null;
-  customerOrganizationId: string;
-  auditStartDate: string;
-  auditEndDate: string;
-  earlyAccessStartsAt: string | null;
-  framework: string;
-  allowAuditorEmails: Array<string>;
-  allowAllAuditors: boolean;
-  deletionDate: string | null;
-  creationDate: string;
-  modificationDate: string | null;
-  completionDate: string | null;
-  auditFocus: string;
-};
 
-/** @internal */
-export const Audit$outboundSchema: z.ZodType<
-  Audit$Outbound,
-  z.ZodTypeDef,
-  Audit
-> = z.object({
-  id: z.string(),
-  customerOrganizationName: z.string(),
-  customerDisplayName: z.nullable(z.string()),
-  customerOrganizationId: z.string(),
-  auditStartDate: z.date().transform(v => v.toISOString()),
-  auditEndDate: z.date().transform(v => v.toISOString()),
-  earlyAccessStartsAt: z.nullable(z.date().transform(v => v.toISOString())),
-  framework: z.string(),
-  allowAuditorEmails: z.array(z.string()),
-  allowAllAuditors: z.boolean(),
-  deletionDate: z.nullable(z.date().transform(v => v.toISOString())),
-  creationDate: z.date().transform(v => v.toISOString()),
-  modificationDate: z.nullable(z.date().transform(v => v.toISOString())),
-  completionDate: z.nullable(z.date().transform(v => v.toISOString())),
-  auditFocus: AuditFocus$outboundSchema,
-});
-
-export function auditToJSON(audit: Audit): string {
-  return JSON.stringify(Audit$outboundSchema.parse(audit));
-}
 export function auditFromJSON(
   jsonString: string,
 ): SafeParseResult<Audit, SDKValidationError> {

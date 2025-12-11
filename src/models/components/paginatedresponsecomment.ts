@@ -6,18 +6,8 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  Comment,
-  Comment$inboundSchema,
-  Comment$Outbound,
-  Comment$outboundSchema,
-} from "./comment.js";
-import {
-  PageInfo,
-  PageInfo$inboundSchema,
-  PageInfo$Outbound,
-  PageInfo$outboundSchema,
-} from "./pageinfo.js";
+import { Comment, Comment$inboundSchema } from "./comment.js";
+import { PageInfo, PageInfo$inboundSchema } from "./pageinfo.js";
 
 export type PaginatedResponseCommentResults = {
   data: Array<Comment>;
@@ -40,31 +30,7 @@ export const PaginatedResponseCommentResults$inboundSchema: z.ZodType<
   data: z.array(Comment$inboundSchema),
   pageInfo: PageInfo$inboundSchema,
 });
-/** @internal */
-export type PaginatedResponseCommentResults$Outbound = {
-  data: Array<Comment$Outbound>;
-  pageInfo: PageInfo$Outbound;
-};
 
-/** @internal */
-export const PaginatedResponseCommentResults$outboundSchema: z.ZodType<
-  PaginatedResponseCommentResults$Outbound,
-  z.ZodTypeDef,
-  PaginatedResponseCommentResults
-> = z.object({
-  data: z.array(Comment$outboundSchema),
-  pageInfo: PageInfo$outboundSchema,
-});
-
-export function paginatedResponseCommentResultsToJSON(
-  paginatedResponseCommentResults: PaginatedResponseCommentResults,
-): string {
-  return JSON.stringify(
-    PaginatedResponseCommentResults$outboundSchema.parse(
-      paginatedResponseCommentResults,
-    ),
-  );
-}
 export function paginatedResponseCommentResultsFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseCommentResults, SDKValidationError> {
@@ -83,27 +49,7 @@ export const PaginatedResponseComment$inboundSchema: z.ZodType<
 > = z.object({
   results: z.lazy(() => PaginatedResponseCommentResults$inboundSchema),
 });
-/** @internal */
-export type PaginatedResponseComment$Outbound = {
-  results: PaginatedResponseCommentResults$Outbound;
-};
 
-/** @internal */
-export const PaginatedResponseComment$outboundSchema: z.ZodType<
-  PaginatedResponseComment$Outbound,
-  z.ZodTypeDef,
-  PaginatedResponseComment
-> = z.object({
-  results: z.lazy(() => PaginatedResponseCommentResults$outboundSchema),
-});
-
-export function paginatedResponseCommentToJSON(
-  paginatedResponseComment: PaginatedResponseComment,
-): string {
-  return JSON.stringify(
-    PaginatedResponseComment$outboundSchema.parse(paginatedResponseComment),
-  );
-}
 export function paginatedResponseCommentFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseComment, SDKValidationError> {

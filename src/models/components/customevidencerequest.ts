@@ -9,7 +9,6 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RecurrenceDuration,
   RecurrenceDuration$inboundSchema,
-  RecurrenceDuration$outboundSchema,
 } from "./recurrenceduration.js";
 
 export type CustomEvidenceRequest = {
@@ -51,39 +50,7 @@ export const CustomEvidenceRequest$inboundSchema: z.ZodType<
   reminderWindow: RecurrenceDuration$inboundSchema,
   isRestricted: z.boolean(),
 });
-/** @internal */
-export type CustomEvidenceRequest$Outbound = {
-  id: string;
-  controlIds: Array<string>;
-  title: string;
-  description: string;
-  cadence: string;
-  reminderWindow: string;
-  isRestricted: boolean;
-};
 
-/** @internal */
-export const CustomEvidenceRequest$outboundSchema: z.ZodType<
-  CustomEvidenceRequest$Outbound,
-  z.ZodTypeDef,
-  CustomEvidenceRequest
-> = z.object({
-  id: z.string(),
-  controlIds: z.array(z.string()),
-  title: z.string(),
-  description: z.string(),
-  cadence: RecurrenceDuration$outboundSchema,
-  reminderWindow: RecurrenceDuration$outboundSchema,
-  isRestricted: z.boolean(),
-});
-
-export function customEvidenceRequestToJSON(
-  customEvidenceRequest: CustomEvidenceRequest,
-): string {
-  return JSON.stringify(
-    CustomEvidenceRequest$outboundSchema.parse(customEvidenceRequest),
-  );
-}
 export function customEvidenceRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<CustomEvidenceRequest, SDKValidationError> {

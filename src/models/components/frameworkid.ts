@@ -45,8 +45,5 @@ export const FrameworkId = {
 export type FrameworkId = ClosedEnum<typeof FrameworkId>;
 
 /** @internal */
-export const FrameworkId$inboundSchema: z.ZodNativeEnum<typeof FrameworkId> = z
+export const FrameworkId$outboundSchema: z.ZodNativeEnum<typeof FrameworkId> = z
   .nativeEnum(FrameworkId);
-/** @internal */
-export const FrameworkId$outboundSchema: z.ZodNativeEnum<typeof FrameworkId> =
-  FrameworkId$inboundSchema;

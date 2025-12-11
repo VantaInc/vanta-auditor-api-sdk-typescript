@@ -6,23 +6,9 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  ControlSource,
-  ControlSource$inboundSchema,
-  ControlSource$outboundSchema,
-} from "./controlsource.js";
-import {
-  CustomField,
-  CustomField$inboundSchema,
-  CustomField$Outbound,
-  CustomField$outboundSchema,
-} from "./customfield.js";
-import {
-  Section,
-  Section$inboundSchema,
-  Section$Outbound,
-  Section$outboundSchema,
-} from "./section.js";
+import { ControlSource, ControlSource$inboundSchema } from "./controlsource.js";
+import { CustomField, CustomField$inboundSchema } from "./customfield.js";
+import { Section, Section$inboundSchema } from "./section.js";
 
 /**
  * The control's owner.
@@ -93,27 +79,7 @@ export const Owner$inboundSchema: z.ZodType<Owner, z.ZodTypeDef, unknown> = z
     displayName: z.string(),
     emailAddress: z.string(),
   });
-/** @internal */
-export type Owner$Outbound = {
-  id: string;
-  displayName: string;
-  emailAddress: string;
-};
 
-/** @internal */
-export const Owner$outboundSchema: z.ZodType<
-  Owner$Outbound,
-  z.ZodTypeDef,
-  Owner
-> = z.object({
-  id: z.string(),
-  displayName: z.string(),
-  emailAddress: z.string(),
-});
-
-export function ownerToJSON(owner: Owner): string {
-  return JSON.stringify(Owner$outboundSchema.parse(owner));
-}
 export function ownerFromJSON(
   jsonString: string,
 ): SafeParseResult<Owner, SDKValidationError> {
@@ -142,43 +108,7 @@ export const AuditorControl$inboundSchema: z.ZodType<
   framework: z.string(),
   sections: z.array(Section$inboundSchema),
 });
-/** @internal */
-export type AuditorControl$Outbound = {
-  id: string;
-  externalId: string | null;
-  name: string;
-  description: string;
-  source: string;
-  domains: Array<string>;
-  owner: Owner$Outbound | null;
-  role?: string | null | undefined;
-  customFields: Array<CustomField$Outbound>;
-  framework: string;
-  sections: Array<Section$Outbound>;
-};
 
-/** @internal */
-export const AuditorControl$outboundSchema: z.ZodType<
-  AuditorControl$Outbound,
-  z.ZodTypeDef,
-  AuditorControl
-> = z.object({
-  id: z.string(),
-  externalId: z.nullable(z.string()),
-  name: z.string(),
-  description: z.string(),
-  source: ControlSource$outboundSchema,
-  domains: z.array(z.string()),
-  owner: z.nullable(z.lazy(() => Owner$outboundSchema)),
-  role: z.nullable(z.string()).optional(),
-  customFields: z.array(CustomField$outboundSchema),
-  framework: z.string(),
-  sections: z.array(Section$outboundSchema),
-});
-
-export function auditorControlToJSON(auditorControl: AuditorControl): string {
-  return JSON.stringify(AuditorControl$outboundSchema.parse(auditorControl));
-}
 export function auditorControlFromJSON(
   jsonString: string,
 ): SafeParseResult<AuditorControl, SDKValidationError> {

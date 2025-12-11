@@ -55,35 +55,7 @@ export const Comment$inboundSchema: z.ZodType<Comment, z.ZodTypeDef, unknown> =
     ),
     email: z.nullable(z.string()),
   });
-/** @internal */
-export type Comment$Outbound = {
-  id: string;
-  auditEvidenceId: string;
-  text: string;
-  creationDate: string;
-  modificationDate: string | null;
-  deletionDate: string | null;
-  email: string | null;
-};
 
-/** @internal */
-export const Comment$outboundSchema: z.ZodType<
-  Comment$Outbound,
-  z.ZodTypeDef,
-  Comment
-> = z.object({
-  id: z.string(),
-  auditEvidenceId: z.string(),
-  text: z.string(),
-  creationDate: z.date().transform(v => v.toISOString()),
-  modificationDate: z.nullable(z.date().transform(v => v.toISOString())),
-  deletionDate: z.nullable(z.date().transform(v => v.toISOString())),
-  email: z.nullable(z.string()),
-});
-
-export function commentToJSON(comment: Comment): string {
-  return JSON.stringify(Comment$outboundSchema.parse(comment));
-}
 export function commentFromJSON(
   jsonString: string,
 ): SafeParseResult<Comment, SDKValidationError> {

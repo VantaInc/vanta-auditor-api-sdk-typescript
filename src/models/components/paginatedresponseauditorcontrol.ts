@@ -9,15 +9,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AuditorControl,
   AuditorControl$inboundSchema,
-  AuditorControl$Outbound,
-  AuditorControl$outboundSchema,
 } from "./auditorcontrol.js";
-import {
-  PageInfo,
-  PageInfo$inboundSchema,
-  PageInfo$Outbound,
-  PageInfo$outboundSchema,
-} from "./pageinfo.js";
+import { PageInfo, PageInfo$inboundSchema } from "./pageinfo.js";
 
 export type PaginatedResponseAuditorControlResults = {
   data: Array<AuditorControl>;
@@ -40,32 +33,7 @@ export const PaginatedResponseAuditorControlResults$inboundSchema: z.ZodType<
   data: z.array(AuditorControl$inboundSchema),
   pageInfo: PageInfo$inboundSchema,
 });
-/** @internal */
-export type PaginatedResponseAuditorControlResults$Outbound = {
-  data: Array<AuditorControl$Outbound>;
-  pageInfo: PageInfo$Outbound;
-};
 
-/** @internal */
-export const PaginatedResponseAuditorControlResults$outboundSchema: z.ZodType<
-  PaginatedResponseAuditorControlResults$Outbound,
-  z.ZodTypeDef,
-  PaginatedResponseAuditorControlResults
-> = z.object({
-  data: z.array(AuditorControl$outboundSchema),
-  pageInfo: PageInfo$outboundSchema,
-});
-
-export function paginatedResponseAuditorControlResultsToJSON(
-  paginatedResponseAuditorControlResults:
-    PaginatedResponseAuditorControlResults,
-): string {
-  return JSON.stringify(
-    PaginatedResponseAuditorControlResults$outboundSchema.parse(
-      paginatedResponseAuditorControlResults,
-    ),
-  );
-}
 export function paginatedResponseAuditorControlResultsFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseAuditorControlResults, SDKValidationError> {
@@ -85,29 +53,7 @@ export const PaginatedResponseAuditorControl$inboundSchema: z.ZodType<
 > = z.object({
   results: z.lazy(() => PaginatedResponseAuditorControlResults$inboundSchema),
 });
-/** @internal */
-export type PaginatedResponseAuditorControl$Outbound = {
-  results: PaginatedResponseAuditorControlResults$Outbound;
-};
 
-/** @internal */
-export const PaginatedResponseAuditorControl$outboundSchema: z.ZodType<
-  PaginatedResponseAuditorControl$Outbound,
-  z.ZodTypeDef,
-  PaginatedResponseAuditorControl
-> = z.object({
-  results: z.lazy(() => PaginatedResponseAuditorControlResults$outboundSchema),
-});
-
-export function paginatedResponseAuditorControlToJSON(
-  paginatedResponseAuditorControl: PaginatedResponseAuditorControl,
-): string {
-  return JSON.stringify(
-    PaginatedResponseAuditorControl$outboundSchema.parse(
-      paginatedResponseAuditorControl,
-    ),
-  );
-}
 export function paginatedResponseAuditorControlFromJSON(
   jsonString: string,
 ): SafeParseResult<PaginatedResponseAuditorControl, SDKValidationError> {

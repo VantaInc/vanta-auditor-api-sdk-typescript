@@ -4,10 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateAuditEvidenceRequest = {
   auditId: string;
@@ -15,20 +12,6 @@ export type UpdateAuditEvidenceRequest = {
   auditEvidenceUpdateInput: components.AuditEvidenceUpdateInput;
 };
 
-/** @internal */
-export const UpdateAuditEvidenceRequest$inboundSchema: z.ZodType<
-  UpdateAuditEvidenceRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  auditId: z.string(),
-  auditEvidenceId: z.string(),
-  AuditEvidenceUpdateInput: components.AuditEvidenceUpdateInput$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "AuditEvidenceUpdateInput": "auditEvidenceUpdateInput",
-  });
-});
 /** @internal */
 export type UpdateAuditEvidenceRequest$Outbound = {
   auditId: string;
@@ -56,14 +39,5 @@ export function updateAuditEvidenceRequestToJSON(
 ): string {
   return JSON.stringify(
     UpdateAuditEvidenceRequest$outboundSchema.parse(updateAuditEvidenceRequest),
-  );
-}
-export function updateAuditEvidenceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateAuditEvidenceRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateAuditEvidenceRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAuditEvidenceRequest' from JSON`,
   );
 }

@@ -4,29 +4,13 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateCustomControlRequest = {
   auditId: string;
   createCustomControlInput: components.CreateCustomControlInput;
 };
 
-/** @internal */
-export const CreateCustomControlRequest$inboundSchema: z.ZodType<
-  CreateCustomControlRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  auditId: z.string(),
-  CreateCustomControlInput: components.CreateCustomControlInput$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "CreateCustomControlInput": "createCustomControlInput",
-  });
-});
 /** @internal */
 export type CreateCustomControlRequest$Outbound = {
   auditId: string;
@@ -52,14 +36,5 @@ export function createCustomControlRequestToJSON(
 ): string {
   return JSON.stringify(
     CreateCustomControlRequest$outboundSchema.parse(createCustomControlRequest),
-  );
-}
-export function createCustomControlRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateCustomControlRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateCustomControlRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateCustomControlRequest' from JSON`,
   );
 }

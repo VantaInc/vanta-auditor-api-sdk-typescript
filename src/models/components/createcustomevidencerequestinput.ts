@@ -3,12 +3,8 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RecurrenceDuration,
-  RecurrenceDuration$inboundSchema,
   RecurrenceDuration$outboundSchema,
 } from "./recurrenceduration.js";
 
@@ -37,20 +33,6 @@ export type CreateCustomEvidenceRequestInput = {
   auditorEmail: string;
 };
 
-/** @internal */
-export const CreateCustomEvidenceRequestInput$inboundSchema: z.ZodType<
-  CreateCustomEvidenceRequestInput,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  controlIds: z.array(z.string()),
-  title: z.string(),
-  description: z.string(),
-  cadence: RecurrenceDuration$inboundSchema,
-  reminderWindow: RecurrenceDuration$inboundSchema,
-  isRestricted: z.boolean(),
-  auditorEmail: z.string(),
-});
 /** @internal */
 export type CreateCustomEvidenceRequestInput$Outbound = {
   controlIds: Array<string>;
@@ -84,14 +66,5 @@ export function createCustomEvidenceRequestInputToJSON(
     CreateCustomEvidenceRequestInput$outboundSchema.parse(
       createCustomEvidenceRequestInput,
     ),
-  );
-}
-export function createCustomEvidenceRequestInputFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateCustomEvidenceRequestInput, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateCustomEvidenceRequestInput$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateCustomEvidenceRequestInput' from JSON`,
   );
 }

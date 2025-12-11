@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListAuditEvidenceRequest = {
   auditId: string;
@@ -17,19 +14,6 @@ export type ListAuditEvidenceRequest = {
   changedSinceDate?: Date | undefined;
 };
 
-/** @internal */
-export const ListAuditEvidenceRequest$inboundSchema: z.ZodType<
-  ListAuditEvidenceRequest,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  auditId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  changedSinceDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-});
 /** @internal */
 export type ListAuditEvidenceRequest$Outbound = {
   auditId: string;
@@ -55,14 +39,5 @@ export function listAuditEvidenceRequestToJSON(
 ): string {
   return JSON.stringify(
     ListAuditEvidenceRequest$outboundSchema.parse(listAuditEvidenceRequest),
-  );
-}
-export function listAuditEvidenceRequestFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAuditEvidenceRequest, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListAuditEvidenceRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAuditEvidenceRequest' from JSON`,
   );
 }

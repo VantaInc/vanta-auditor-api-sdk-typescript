@@ -9,18 +9,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AuditEvidenceState,
   AuditEvidenceState$inboundSchema,
-  AuditEvidenceState$outboundSchema,
 } from "./auditevidencestate.js";
 import {
   AuditEvidenceType,
   AuditEvidenceType$inboundSchema,
-  AuditEvidenceType$outboundSchema,
 } from "./auditevidencetype.js";
 import {
   EvidenceControl,
   EvidenceControl$inboundSchema,
-  EvidenceControl$Outbound,
-  EvidenceControl$outboundSchema,
 } from "./evidencecontrol.js";
 
 export type Evidence = {
@@ -93,45 +89,7 @@ export const Evidence$inboundSchema: z.ZodType<
   relatedControls: z.array(EvidenceControl$inboundSchema),
   description: z.nullable(z.string()),
 });
-/** @internal */
-export type Evidence$Outbound = {
-  id: string;
-  externalId: string;
-  status: string;
-  name: string;
-  deletionDate: string | null;
-  creationDate: string;
-  statusUpdatedDate: string;
-  testStatus: string | null;
-  evidenceType: string;
-  evidenceId: string;
-  relatedControls: Array<EvidenceControl$Outbound>;
-  description: string | null;
-};
 
-/** @internal */
-export const Evidence$outboundSchema: z.ZodType<
-  Evidence$Outbound,
-  z.ZodTypeDef,
-  Evidence
-> = z.object({
-  id: z.string(),
-  externalId: z.string(),
-  status: AuditEvidenceState$outboundSchema,
-  name: z.string(),
-  deletionDate: z.nullable(z.date().transform(v => v.toISOString())),
-  creationDate: z.date().transform(v => v.toISOString()),
-  statusUpdatedDate: z.date().transform(v => v.toISOString()),
-  testStatus: z.nullable(z.string()),
-  evidenceType: AuditEvidenceType$outboundSchema,
-  evidenceId: z.string(),
-  relatedControls: z.array(EvidenceControl$outboundSchema),
-  description: z.nullable(z.string()),
-});
-
-export function evidenceToJSON(evidence: Evidence): string {
-  return JSON.stringify(Evidence$outboundSchema.parse(evidence));
-}
 export function evidenceFromJSON(
   jsonString: string,
 ): SafeParseResult<Evidence, SDKValidationError> {
