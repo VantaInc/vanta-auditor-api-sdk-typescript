@@ -94,7 +94,5 @@ actions:
     update:
       - url: https://api.vanta.com/v1
         description: US Region API
-      - url: https://api.eu.vanta.com/v1
-        description: EU Region API
-      - url: https://api.aus.vanta.com/v1
-        description: AUS Region API
+      - url: https://api.vanta-gov.com/v1
+        description: Vanta Gov (FedRAMP)
