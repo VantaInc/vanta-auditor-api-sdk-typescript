@@ -1,0 +1,18 @@
+{
+  "name": "vanta-auditor-api-sdk-smoke-test",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Live smoke test against a real Vanta API tenant. See ../SMOKE_TEST.md.",
+  "scripts": {
+    "test": "vitest run --reporter=default --reporter=junit --outputFile.junit=test-report.xml"
+  },
+  "dependencies": {
+    "vanta-auditor-api-sdk": "file:.."
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "~5.8.3",
+    "vitest": "^4.1.6"
+  }
+}

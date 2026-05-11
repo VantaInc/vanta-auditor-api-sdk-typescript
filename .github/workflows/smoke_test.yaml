@@ -1,0 +1,79 @@
+name: Smoke Test
+permissions:
+  contents: read
+  pull-requests: read
+on:
+  pull_request:
+    branches: [main]
+    # Default types are [opened, synchronize, reopened], which do not fire on
+    # label changes. We need `labeled` / `unlabeled` so applying the `skip-smoke`
+    # label after the initial run re-evaluates the bypass gate — otherwise the
+    # label silently does nothing until someone pushes a new commit.
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  workflow_dispatch: {}
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      # Branch-protection requires this job to pass. When the PR carries the
+      # `skip-smoke` label the job still runs to satisfy the required status,
+      # but exits immediately with success. The label is documented in
+      # SMOKE_TEST.md — apply it only when the failure is upstream spec/server-side
+      # and the fix is tracked elsewhere.
+      - name: Check for skip-smoke label
+        id: skip
+        if: github.event_name == 'pull_request'
+        run: |
+          labels='${{ toJson(github.event.pull_request.labels.*.name) }}'
+          if echo "$labels" | grep -q '"skip-smoke"'; then
+            echo "Smoke test bypassed via 'skip-smoke' label."
+            echo "Tracking issue must be linked in the PR description."
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skipped=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.skip.outputs.skipped != 'true'
+
+      - name: Set up Node
+        if: steps.skip.outputs.skipped != 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install SDK dependencies
+        if: steps.skip.outputs.skipped != 'true'
+        run: npm ci
+
+      # The smoke test imports the SDK as a published package via `file:..`,
+      # which resolves through the root `main` field to compiled `.js` output.
+      # Without this build step the import is unresolvable.
+      - name: Build SDK
+        if: steps.skip.outputs.skipped != 'true'
+        run: npm run build
+
+      - name: Install smoke-test dependencies
+        if: steps.skip.outputs.skipped != 'true'
+        working-directory: smoke-test
+        run: npm install
+
+      - name: Run smoke test
+        if: steps.skip.outputs.skipped != 'true'
+        working-directory: smoke-test
+        env:
+          SMOKE_OAUTH_CLIENT_ID:     ${{ secrets.SMOKE_OAUTH_CLIENT_ID }}
+          SMOKE_OAUTH_CLIENT_SECRET: ${{ secrets.SMOKE_OAUTH_CLIENT_SECRET }}
+          SMOKE_AUDIT_ID:            ${{ secrets.SMOKE_AUDIT_ID }}
+        run: npm test
+
+      - name: Upload test report
+        if: always() && steps.skip.outputs.skipped != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-report
+          path: smoke-test/test-report.xml
+          if-no-files-found: ignore
