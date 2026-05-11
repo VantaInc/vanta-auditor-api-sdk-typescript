@@ -1,6 +1,5 @@
 import { beforeAll, describe, expect, test } from "vitest";
 import { ServerList, Vanta } from "vanta-auditor-api-sdk";
-import { APIError } from "vanta-auditor-api-sdk/models/errors/apierror.js";
 
 /**
  * Live smoke test against a real Vanta API tenant. Run via `npm test` from this
@@ -109,10 +108,19 @@ describe.sequential("Vanta SDK smoke", () => {
       // rejection is fixture state, not an SDK regression. Skip with detail.
       //
       // 5xx is re-thrown: a server error is a real signal, not fixture state.
-      if (e instanceof APIError && e.statusCode >= 400 && e.statusCode < 500) {
+      //
+      // Duck-typed instead of `instanceof APIError`: when smoke-test installs
+      // the parent via `file:..`, npm's behavior varies between symlink and
+      // hard-copy across environments. A hard-copy gives us two separate
+      // class instances of APIError, and `instanceof` silently misses. The
+      // `statusCode` field is part of the documented VantaError contract.
+      const statusCode = (e as { statusCode?: unknown }).statusCode;
+      const body = (e as { body?: unknown }).body;
+      if (typeof statusCode === "number" && statusCode >= 400 && statusCode < 500) {
         ctx.skip(
-          `getEvidenceUrls returned HTTP ${e.statusCode} for evidence ${evidenceId} `
-            + `— likely fixture state, not an SDK regression. Body: ${e.body}`,
+          `getEvidenceUrls returned HTTP ${statusCode} for evidence ${evidenceId} `
+            + `— likely fixture state, not an SDK regression. Body: `
+            + `${typeof body === "string" ? body : ""}`,
         );
       }
       throw e;
