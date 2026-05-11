@@ -1,34 +1,1658 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 32687d9ba29da014326cc097fdfff59d
+  docChecksum: 1ce8e6416544c5d93a21d52c31565df4
   docVersion: 1.0.0
-  speakeasyVersion: 1.658.2
-  generationVersion: 2.755.9
-  releaseVersion: 0.4.2
-  configChecksum: ceb36011d9070e3f154c3901cb36ee42
+  speakeasyVersion: 1.762.0
+  generationVersion: 2.882.0
+  releaseVersion: 0.5.0
+  configChecksum: 4b1f0e69e8e9443af55182752d301ac9
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
+persistentEdits:
+  generation_id: 0fad9824-7bbf-4b9c-9d63-66aa593f2540
+  pristine_commit_hash: a4524864624f067c1c1486c18194ccce0f773902
+  pristine_tree_hash: 7b19be47669d9a8c09b659fde1935f49d53ebe88
 features:
   typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.12
-    core: 3.26.7
+    constsAndDefaults: 0.1.14
+    core: 3.26.50
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.14
+    globalSecurity: 2.82.16
     globalSecurityCallbacks: 0.1.0
-    globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.83.0
-    nameOverrides: 2.81.2
+    globalSecurityFlattening: 0.1.1
+    globalServerURLs: 2.83.1
+    nameOverrides: 2.81.4
     nullables: 0.1.1
-    responseFormat: 0.2.3
+    responseFormat: 0.3.0
     retries: 2.83.0
-    sdkHooks: 0.3.0
-    unions: 2.86.0
+    sdkHooks: 0.4.0
+    unions: 2.86.4
+trackedFiles:
+  .devcontainer/README.md:
+    id: b170c0f184ac
+    last_write_checksum: sha1:50dfd6f6a95e3b795baf587c589d5f3b50edc7e5
+    pristine_git_object: 53b724ffbbc8543ebff178da2153cd509eee40f5
+  .devcontainer/devcontainer.json:
+    id: b34062a34eb1
+    last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
+    pristine_git_object: 4d560dd5f40afaf10d96eb75b1f02cd48bbd640c
+  .devcontainer/setup.sh:
+    id: 5f1dfbfeb8eb
+    last_write_checksum: sha1:f8e19262665d17db3cc6fc59b030a2264b94f902
+    pristine_git_object: 2bbfae47dc587af9107ce1b9715223796a380035
+  .gitattributes:
+    id: 24139dae6567
+    last_write_checksum: sha1:26d16d8297b104945139da8c25bd38feeaad3e25
+    pristine_git_object: 113eead5093c17d43a46159132885318f281a68a
+  .npmignore:
+    id: aa70c1f807c3
+    last_write_checksum: sha1:6572da81f2e7a978ec29c22c2210bf461c5897b2
+    pristine_git_object: 670ac0a62d7e568c9d44a14f5deafb8442a255d8
+  FUNCTIONS.md:
+    id: 21b9df02aaeb
+    last_write_checksum: sha1:97d29be746a77b183654f5fd3c9d812460ec803e
+    pristine_git_object: 492f735d724853b29d89c42ad37a3998d570393e
+  RUNTIMES.md:
+    id: 620c490847b6
+    last_write_checksum: sha1:e45b854f02c357cbcfdb8c3663000e8339e16505
+    pristine_git_object: 27731c3b5ace66bedc454ed5acbe15075aacd3dc
+  USAGE.md:
+    id: 3aed33ce6e6f
+    last_write_checksum: sha1:370419f2a574319b951b508c8334cedd1300013a
+    pristine_git_object: 2c8cd11921b856c8f4a5197046c7991c93cea935
+  docs/lib/utils/retryconfig.md:
+    id: 0ce9707cb848
+    last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
+    pristine_git_object: 08f95f4552349360b2c0b01802aa71ec3a55d2c2
+  docs/models/components/acceptinformationrequestevidenceinput.md:
+    id: f6df4a79fb4b
+    last_write_checksum: sha1:0bd2b3e131fcc4ce8b20a22ee6878589d411d5e3
+    pristine_git_object: d47c46e37a9c1a841a96cb91c5be6f55aea672e8
+  docs/models/components/addauditorinput.md:
+    id: a9791ec46df4
+    last_write_checksum: sha1:e32760894a3defd46fe1075882ceec8e9e7b62bd
+    pristine_git_object: 23ed9e3bd926e214c7bd1ede33ab9a747519313f
+  docs/models/components/addcommentinput.md:
+    id: f63c9856a176
+    last_write_checksum: sha1:44edda4371afde45894835e00d205bedd224db05
+    pristine_git_object: 6e723d240ac4d914f4a8c13b9f4214955a58211d
+  docs/models/components/addedby.md:
+    id: c5e8d38ff017
+    last_write_checksum: sha1:dc6e56be5e8a846eac7b2e0d1d0c3261d1e6a498
+    pristine_git_object: 9a771f6c571c78a6f1bab28d41641c0216dff9ba
+  docs/models/components/addinformationrequestcommentinput.md:
+    id: b5adfe3a20cd
+    last_write_checksum: sha1:d259529459cd726fcf55f266a663e44e02963030
+    pristine_git_object: 862e23e6ad93989d0d589767963e2c32f6c2ee8b
+  docs/models/components/audit.md:
+    id: 17474a4db2bb
+    last_write_checksum: sha1:98678e2e5dadbfb30fd14727a855e93d610c755e
+    pristine_git_object: d6be687715280a5b8161da45a94316f588fabeaa
+  docs/models/components/auditevidencestate.md:
+    id: 49929f68560b
+    last_write_checksum: sha1:4ad03a91468d894368a3578166662129bc79bef1
+    pristine_git_object: 45f3a0b6e30c426353e9586a67709836a644d44c
+  docs/models/components/auditevidencetype.md:
+    id: 2f0dc83cf3ca
+    last_write_checksum: sha1:896d1fd39c75c5bb41c746f4b3e6e6b38a79bc44
+    pristine_git_object: 47c8cbda5b2203b5a24e31b443bf52f409e647dc
+  docs/models/components/auditevidenceupdateinput.md:
+    id: 7ad1291cef09
+    last_write_checksum: sha1:20c8b568d923a8c0b17489e7c76658da32ad9055
+    pristine_git_object: 51346abd830358951170b1dcb5e60903be29235d
+  docs/models/components/auditfocus.md:
+    id: 51b95627ce3d
+    last_write_checksum: sha1:eff55b29a4176c58a3676b06736369948a295e25
+    pristine_git_object: b3caff0b17c7b3e477e6dabf00f6eeeedeec551f
+  docs/models/components/auditor.md:
+    id: adf2e1e0bafa
+    last_write_checksum: sha1:f34df26cdc0aa5a3b20b80e2f0e6d366154970f0
+    pristine_git_object: 51b5d2d1fd23949fe4cb001d75553542d931e189
+  docs/models/components/auditorcontrol.md:
+    id: 141c18464643
+    last_write_checksum: sha1:59aff5c1160c17b7c45fe2180534fdbf80f3fab3
+    pristine_git_object: 9ca299ec6b6ce79a5d73a86be80712ee432f1df1
+  docs/models/components/auditorenabledstatetransition.md:
+    id: 8137d256b36a
+    last_write_checksum: sha1:a4f8540cd3e46a53dd201db3800c926eecc33c3e
+    pristine_git_object: 3e8835586ae1d9758189c8c5d4726fa715420c60
+  docs/models/components/auditorrequestlistmetadata.md:
+    id: d8ae3c118e4e
+    last_write_checksum: sha1:e76a301ab33a5637aeb19ca37c629ff083aba69f
+    pristine_git_object: d33eadc80fc23836c29785a4a129d0388a47947d
+  docs/models/components/cadence.md:
+    id: e56149608d48
+    last_write_checksum: sha1:ea1ec947423aaae1103dc80f5bce335f9a2dd715
+    pristine_git_object: 5e99811290325d85c10febf3a3dc65d51e9a7274
+  docs/models/components/comment.md:
+    id: bf8c05d705cb
+    last_write_checksum: sha1:4a9d3d7f502d4953c8a163a797da05a96c51e71f
+    pristine_git_object: 46ddc671e5d5e861d56406e67f0564577367250e
+  docs/models/components/control.md:
+    id: 730fe4a45de6
+    last_write_checksum: sha1:5effb997d0eac094c88ca67cd1a044a119df8eaf
+    pristine_git_object: d1b21fa88bd04fca722beea008adc7b776883a0e
+  docs/models/components/controldomain.md:
+    id: 7d579b906205
+    last_write_checksum: sha1:7ad69404ac054f246376f0d08c0a8c9082bb6433
+    pristine_git_object: 085d13635a855dd5ca722edf50a03b67cd292f82
+  docs/models/components/controlowner.md:
+    id: 944bc29f3ab6
+    last_write_checksum: sha1:857573391ce75a307e419936df8b412fe1dbcd83
+    pristine_git_object: 764a7aa5757742ee7f21b70ff3de6b95ebfa99c1
+  docs/models/components/controlsource.md:
+    id: de1d18233538
+    last_write_checksum: sha1:1bc5fda5526740828c68742920be1dd0a608d7ff
+    pristine_git_object: 3cd5a6cb6ce94eda8e9fcb105f094ba8d469d1a3
+  docs/models/components/createcustomcontrolinput.md:
+    id: bb6bd846bf14
+    last_write_checksum: sha1:3eb395d562ae79ff41d7295cc58fdb9469a90598
+    pristine_git_object: 87c1c5969d152e03b0bc471f0aec9584f5d00ee1
+  docs/models/components/createcustomevidencerequestinput.md:
+    id: 534d4a1ebe8e
+    last_write_checksum: sha1:3583d84c94a2921e71af7ce7753e9b1333b87fa4
+    pristine_git_object: 352e4daf65ccce117fad0027015ab06ff8a2b94e
+  docs/models/components/createinformationrequestinput.md:
+    id: 089e57a05319
+    last_write_checksum: sha1:f43049406b021877b16ed9b3812e85a0cc0fc3c1
+    pristine_git_object: 81da778c86a14519d3a131dd48456707ef71b361
+  docs/models/components/createinformationrequestinputcadence.md:
+    id: 5bf32d40477e
+    last_write_checksum: sha1:bc9a841607545a71f2e2d8d0f3b193adf7762cb4
+    pristine_git_object: 23c2b271ffc4aab7c115ac83b54adce55a6eca97
+  docs/models/components/customevidencerequest.md:
+    id: a4432bd700b1
+    last_write_checksum: sha1:b5a1de7d4ae776b438506e75fa306704acc30377
+    pristine_git_object: 8272f051a48ba051805603077d1801c00cab21a2
+  docs/models/components/customfield.md:
+    id: 8aae2fb50194
+    last_write_checksum: sha1:d4d7f0529f2e03fa894e5aab1eb42e0e27dd2284
+    pristine_git_object: 5112d548dbe825e85e74b9efde0b3b9603b2e485
+  docs/models/components/deleteinformationrequestcommentinput.md:
+    id: 288243d15fc4
+    last_write_checksum: sha1:09e6a87f40e1b77777e5caaadff4e8b854cf4895
+    pristine_git_object: e355337d9ccfd4ef51347f64b0f7d1af96e46696
+  docs/models/components/evidence.md:
+    id: 7f0844aa336e
+    last_write_checksum: sha1:26ff0768a628930d9e854f83bc901bb829cba58e
+    pristine_git_object: cbbb38a07d107a20c95b37467c9895d6a7004eac
+  docs/models/components/evidencecontrol.md:
+    id: bc85c9f794cc
+    last_write_checksum: sha1:d78bed300387443073e4ec4f4a7251f8738bbdc9
+    pristine_git_object: beea9e5fd6e57f65e95dc6ab45edaae321cf7749
+  docs/models/components/evidenceurl.md:
+    id: 87cad59feacf
+    last_write_checksum: sha1:75037ed95fd9b0a35b82b7ffbd878a3a8c27fb6f
+    pristine_git_object: 668ff5668d9241e1a8d3c6a9d8ff445330714f63
+  docs/models/components/filet.md:
+    id: 1d4366ab038f
+    last_write_checksum: sha1:4acecd3f48afbd65b3c9f2afe3d744e86c0acc21
+    pristine_git_object: 1121f7e96e72b1713ec547f316970e898c6dfbdf
+  docs/models/components/flaginformationrequestevidenceinput.md:
+    id: 5dcdc5ce6082
+    last_write_checksum: sha1:8244881d131e9c98797d49b14aec45b3745a1cb3
+    pristine_git_object: d72552dcfb03eed88beef85deefb0a3035b88901
+  docs/models/components/frameworkcodes.md:
+    id: f0e39fd66736
+    last_write_checksum: sha1:02a50d2ec29fa8d2282bcc2da0ab5e1d835fc021
+    pristine_git_object: c22ceb1dbf1701e24e2e6d11c27e4a0ad02477cd
+  docs/models/components/frameworkid.md:
+    id: 5a06d201cef2
+    last_write_checksum: sha1:2ff420ec0a09b7522036ee5e5ff0a5ed35fbcf59
+    pristine_git_object: 7bf0ee67b9c08b283ddf01b19c632219d2a44921
+  docs/models/components/frameworksection.md:
+    id: 3ee8f472c2b3
+    last_write_checksum: sha1:e65818c92468aa9108861faee7755a4d9b65d16f
+    pristine_git_object: bfa209931865946ab2cddd72ebd7a83925e185ed
+  docs/models/components/frameworksectionframeworkid.md:
+    id: 5084aa73e972
+    last_write_checksum: sha1:19f553137d659e26471ac05e4a129b8c8b4e7a8b
+    pristine_git_object: 3c753521a3929a113dba5da7fee4c5feb3cb0cd8
+  docs/models/components/informationrequest.md:
+    id: 6fded8bb02ba
+    last_write_checksum: sha1:e72869faf4cdb8d90e077865fb0054f3c508eae2
+    pristine_git_object: 78237fe184dec7cf88976379f76271227fa63337
+  docs/models/components/informationrequestactivitylog.md:
+    id: 1b794d9df4be
+    last_write_checksum: sha1:1e1b7a1acb4d1df9d179a6962b8db98f1aa9d309
+    pristine_git_object: bfbba85304b54f54030fe619a4db5ea330eb1ff6
+  docs/models/components/informationrequestactivitytype.md:
+    id: f6e68bffdd4e
+    last_write_checksum: sha1:438d613a8117a0e1bdbc295f0d418335df9157f9
+    pristine_git_object: 8ee2966f5e1a77ab57f0f3ec1dfc77365317687a
+  docs/models/components/informationrequestapprovalstatus.md:
+    id: 74859f946b61
+    last_write_checksum: sha1:19e4f36d343d55e6067d9e2194914790b28cd5e8
+    pristine_git_object: 39a6f208e73f9c9c5af8d59dc96c4c763def80b1
+  docs/models/components/informationrequestcadence.md:
+    id: e065ed365eff
+    last_write_checksum: sha1:864a9f33989ed777a4e2a2ac9260007d9c3721b0
+    pristine_git_object: 23046273a7d6fa183a11a36dcc7d89f295d73eed
+  docs/models/components/informationrequestcomment.md:
+    id: 9b45e5a0d1e4
+    last_write_checksum: sha1:43a4ad4bcba82c296905965b9e8376cdea2a5d9e
+    pristine_git_object: 6829706f20cafe56b0560585b4a9076e2757935b
+  docs/models/components/informationrequestevidence.md:
+    id: d28a923841d8
+    last_write_checksum: sha1:2f1265812f4c59650778acc89748a89cc4060b34
+    pristine_git_object: e2b167b394b768f1a37b5099cd44b495181f7810
+  docs/models/components/informationrequestevidenceunion.md:
+    id: 3e922499a66f
+    last_write_checksum: sha1:8d2178e758e1ec408e8f7a3ec9cb10b57013e1d2
+    pristine_git_object: 83f6ea010a03d813c98de6f343e05d955d00f24e
+  docs/models/components/informationrequestsupportedevidencetype.md:
+    id: 560e8115a47b
+    last_write_checksum: sha1:a3f83c0092511fa9af3bcb65f4c5156f6ce47937
+    pristine_git_object: 4c785219f0948b8bacf6d71125f37fe4419daf0a
+  docs/models/components/informationrequesttype.md:
+    id: 3458617c4eea
+    last_write_checksum: sha1:c95b9152c94813ea9ddba29be084360704c7366e
+    pristine_git_object: 43fd57579b70f0acabb48c7224391a56f13b1ead
+  docs/models/components/issuesnapshotitem.md:
+    id: 50c3a081948c
+    last_write_checksum: sha1:ab89bebb3eee70233d7235bd3f841a5076c53070
+    pristine_git_object: 12459543ab84a9c13f05d853c7bafa824d4bcdde
+  docs/models/components/issuesnapshotmetadata.md:
+    id: 0037410fbe9f
+    last_write_checksum: sha1:7d148715a226fd4e16041e0ea0323aa14384943b
+    pristine_git_object: f48f8a6a301cb9d7cede9df850d85405b87fa99f
+  docs/models/components/issuestatustypeforsnapshot.md:
+    id: 642254d81d28
+    last_write_checksum: sha1:7eed9b8a7bf3b2841af52a96545ddf7e88a37dea
+    pristine_git_object: 52a3a6c7a1e0d9c06f40c582189a681c1031499d
+  docs/models/components/lasteditedby.md:
+    id: e795d018dda5
+    last_write_checksum: sha1:30c9d7fc9e660c80c027e6454ee1df71e0a28ce3
+    pristine_git_object: 7653e29216e5f7c8697c99aa3389c5fea5576a2d
+  docs/models/components/linkevidence.md:
+    id: 53ab2d64125e
+    last_write_checksum: sha1:ffbac1af27d46a024a49fd34081696b138d3a253
+    pristine_git_object: b8ef77e95a00822c027fac237bc938a55f496c3d
+  docs/models/components/newstatus.md:
+    id: 81cce6e3c518
+    last_write_checksum: sha1:1e060d27ef455230b6a30a0da975e6ad4220d3b4
+    pristine_git_object: 4e40f9b02ac571640aee30f1ecea817b2e9a632d
+  docs/models/components/observationevidence.md:
+    id: 6b5e6d7c8b37
+    last_write_checksum: sha1:ba85fe198837a179900698f03064f8f3343b900a
+    pristine_git_object: 2fecdbe25b1ed6dd48c5fbe8765a5d1a5ee4c2ed
+  docs/models/components/oldstatus.md:
+    id: 7139c2d32b21
+    last_write_checksum: sha1:5700e9c9312f35a962cde958c759e5f37fcf993b
+    pristine_git_object: 09768824020656e7bb06d77db622ab6ac56a085a
+  docs/models/components/one.md:
+    id: f29ed309679e
+    last_write_checksum: sha1:fdd2a993a1ef5544c7ac526cdb7b38ab41735b5b
+    pristine_git_object: 8e57e402aa56986314e5c760797cc1daf3f3ca57
+  docs/models/components/owner.md:
+    id: f292e16c07ff
+    last_write_checksum: sha1:870687ccb0e0fff5b7987a5d809306daf7b19559
+    pristine_git_object: b0a26d8bc7e54422da1ad845aef76cd90afc2f7d
+  docs/models/components/ownerassignment.md:
+    id: 880dfdc10661
+    last_write_checksum: sha1:f8c9deb57ec59693d604d25b8f938e26d517981a
+    pristine_git_object: bf252086b425b9032f55d8a55b7f9e07b6aee872
+  docs/models/components/pageinfo.md:
+    id: af5e9da87a22
+    last_write_checksum: sha1:e2d2dbf98e63ea8be27507bf6824360d9203ec3a
+    pristine_git_object: 073d43baa2702942c03c3534d77287c1ca93127b
+  docs/models/components/paginatedissuesnapshotitemsresponse.md:
+    id: 725d64871a9f
+    last_write_checksum: sha1:b74b8585aee7eac4b99b5a06b350f8805d180ab7
+    pristine_git_object: 9408b5c96952eab69df8d95aefdf96575291f1dc
+  docs/models/components/paginatedissuesnapshotitemsresponseresults.md:
+    id: 59749657fe8e
+    last_write_checksum: sha1:72d49d8719be9fe6d1e03d565bdbade4d3dd4b2e
+    pristine_git_object: 72bb47c168cea1d4825e110c050ea21818b4978c
+  docs/models/components/paginatedissuesnapshotmetadataresponse.md:
+    id: e2829990aff8
+    last_write_checksum: sha1:774ad070590a9694b7eae482c400c4c0dec949a3
+    pristine_git_object: e933156ce935c923b5d6541a4b6332f8da4a47cd
+  docs/models/components/paginatedissuesnapshotmetadataresponseresults.md:
+    id: 6732183921df
+    last_write_checksum: sha1:02fcb7ac34e323963d505d83c08b12680fec4338
+    pristine_git_object: 7312a60911cb14084f322a089f543d334d4b3ca6
+  docs/models/components/paginatedresponseaudit.md:
+    id: 3a43bbe346c2
+    last_write_checksum: sha1:68567d554aa8fce0d3e024aa199e3ee5345df64b
+    pristine_git_object: 3618e4982f7af3c18e4a2c1909b6b27d19197266
+  docs/models/components/paginatedresponseauditorcontrol.md:
+    id: 0162c24ff2df
+    last_write_checksum: sha1:b8cc04ff2f515d000f661a00963d0f772ec9325d
+    pristine_git_object: a2d4df1bc69833178d7ea8bbe9ad46be8db13eb4
+  docs/models/components/paginatedresponseauditorcontrolresults.md:
+    id: a76256f230d6
+    last_write_checksum: sha1:17ca11a782d2c32ca5861d40810e2acb7c32e0c8
+    pristine_git_object: d87a5ad254eef66bd4221e0009c85f07b4e923c8
+  docs/models/components/paginatedresponsecomment.md:
+    id: 45af8335f6c5
+    last_write_checksum: sha1:8697b8ea5197a132b01a1c3f990913ba252b0069
+    pristine_git_object: 458ef4cfe7c66d83093c02e6f574f9a967e953c3
+  docs/models/components/paginatedresponsecommentresults.md:
+    id: 964fc28aa6c9
+    last_write_checksum: sha1:6aa696b0c03735f2f428816f9252b47f29dd9dc8
+    pristine_git_object: ec51ccd0048648acf4cc1b1ed3c2af443954b0b9
+  docs/models/components/paginatedresponseevidence.md:
+    id: b69d80d4c622
+    last_write_checksum: sha1:814b2c6a80ad7a4b497246ca1248d01be3e10f93
+    pristine_git_object: 95cf517e838a52babb45864f917948114a015d86
+  docs/models/components/paginatedresponseevidenceresults.md:
+    id: 644f1a7e6ee5
+    last_write_checksum: sha1:d21f0faf5cfe1b6804e0f98a7f51887ec9eec118
+    pristine_git_object: ab02586243b53d414bd233e324d1135baf661afc
+  docs/models/components/paginatedresponseevidenceurl.md:
+    id: 8fa3244f961c
+    last_write_checksum: sha1:f5255a800b61894df8cc5a2e25aeab9a2b6171ef
+    pristine_git_object: 79c658449a8c07a6e84d4e05e307c74d90fc90c1
+  docs/models/components/paginatedresponseevidenceurlresults.md:
+    id: 88077aee1201
+    last_write_checksum: sha1:db7ea5df3b55f4aae8d8dd99e58365d287a6cc86
+    pristine_git_object: ec1bec90f698c1f42407db9e47572a8845599e75
+  docs/models/components/paginatedresponseinformationrequest.md:
+    id: 04af7b34a9c8
+    last_write_checksum: sha1:52069ac05e94756bda5c8eb8519cd3b335b5f1e5
+    pristine_git_object: c97362944fdeb3d72eb4a9bf536cccde37b6cae4
+  docs/models/components/paginatedresponseinformationrequestactivitylog.md:
+    id: 33b9808d21bb
+    last_write_checksum: sha1:d5b8c1dca5a6b813e66f88924b65d109b0dd25e6
+    pristine_git_object: ae8b2b55c17e1bf99e8438a9b418df7a707ee863
+  docs/models/components/paginatedresponseinformationrequestactivitylogresults.md:
+    id: 42edec2bfaf7
+    last_write_checksum: sha1:50a604aa55033885f165f50c053e69162c467193
+    pristine_git_object: f689d2e3931f4903563d0288fcb609c65612dc9b
+  docs/models/components/paginatedresponseinformationrequestcomment.md:
+    id: 38584e3ed537
+    last_write_checksum: sha1:e2fed45bcd62e27b316b1426fb77109d460e73d0
+    pristine_git_object: 7e9b6ac628fa7c267a4e576c64ee69e2e8d7969b
+  docs/models/components/paginatedresponseinformationrequestcommentresults.md:
+    id: 231b57aaca83
+    last_write_checksum: sha1:fe81dbe4637c0c252c89fe99a27aa7870e6b8920
+    pristine_git_object: 86278b0dacff27c4ca7204f26d03daaecc10a9fb
+  docs/models/components/paginatedresponseinformationrequestevidence.md:
+    id: 9167d147e99d
+    last_write_checksum: sha1:a477840bec7905294218b9ecf01ab2abffb80958
+    pristine_git_object: 6fdeedfba06ac242d94e52a25d9ebc3607e68607
+  docs/models/components/paginatedresponseinformationrequestevidenceresults.md:
+    id: a1b3163fe671
+    last_write_checksum: sha1:ff1363312a8941265f62f3fa76a5a8f620a1648c
+    pristine_git_object: 53651f83f496f6bc72d0376799f248afe6d410b9
+  docs/models/components/paginatedresponseinformationrequestresults.md:
+    id: 4b2c84a4a563
+    last_write_checksum: sha1:2501a16375c02c99b156fb6c26ccc888df98dad2
+    pristine_git_object: cc7b7d38fceb340488be92e79a82f15d364b1723
+  docs/models/components/partialupdateinformationrequest.md:
+    id: e85bd491f6b2
+    last_write_checksum: sha1:5f69cc2798d49113a884faacb38a8eee76803278
+    pristine_git_object: fb362626df8936b7ffbb02a567277bf4229bd939
+  docs/models/components/principle.md:
+    id: 65fbf4966e24
+    last_write_checksum: sha1:1fc5d9d71477f443e325f2b3b14485e156cd0d8a
+    pristine_git_object: e25406784cd4a7a0e39a4a1c982805b336588548
+  docs/models/components/recurrenceduration.md:
+    id: 3b7b0459a8ad
+    last_write_checksum: sha1:c34d6eecc7752487ddc449877034ddf8dc7ff04b
+    pristine_git_object: 909acf782ccf74c0bb0478b3699b1a325e39e8ef
+  docs/models/components/results.md:
+    id: 657b3aab0ad2
+    last_write_checksum: sha1:73c299af9100d7ad137a56026f3122d5e74523f0
+    pristine_git_object: f8462df168c8798972d0604d8a644babb80ddc71
+  docs/models/components/role.md:
+    id: ab26d0e394ad
+    last_write_checksum: sha1:777b7dd537b6368c9291de4a1aa9b21f8c662012
+    pristine_git_object: af8a015cf89e5effa4e0f32458e079d6d3879125
+  docs/models/components/section.md:
+    id: 3f1b39dd070f
+    last_write_checksum: sha1:8b056f6f5b167899f919449d2ce503c59e854bd6
+    pristine_git_object: f88adc2588ae58420f3d9f81c3fbf7aadc30040e
+  docs/models/components/security.md:
+    id: 54906b49ea28
+    last_write_checksum: sha1:7fb2159a4d40ba5548019f228a4de05ecff90b1e
+    pristine_git_object: 1b92a062cb2ef4848328a1b305c027baafa9c0d1
+  docs/models/components/settings.md:
+    id: 09ac1d80b243
+    last_write_checksum: sha1:b62ecc0ed0fbcdb22eee8a1a435f86a40c55d5cc
+    pristine_git_object: 242e90c8e6d070e6c2ceceaf631a2993a8db66d6
+  docs/models/components/slaremediation.md:
+    id: 1fc359cc23ff
+    last_write_checksum: sha1:7cd00f3f9387127e20796ad853c53cb23800bf6f
+    pristine_git_object: e720af38e2de17cf6128e2baab200799556ebda8
+  docs/models/components/statusupdate.md:
+    id: 3e954ae5a360
+    last_write_checksum: sha1:3824a344e9486ae84ce4ebad493b6f91b342e243
+    pristine_git_object: ced5d181920c77da9fa5101a37b033deab954496
+  docs/models/components/testrunstatus.md:
+    id: 48c85300e6b8
+    last_write_checksum: sha1:b38209b9226521acc270c70bf6882ef42d60390a
+    pristine_git_object: 52889d0023eb7f4f24c7683b7b12dbcb017c6e2f
+  docs/models/components/two.md:
+    id: c50292f1feee
+    last_write_checksum: sha1:7c623114282316fb2c106f3307aef428dbf949e4
+    pristine_git_object: 1be0484706f72f5e7ab7a33764a929ed21097b9a
+  docs/models/components/updateinformationrequestcommentinput.md:
+    id: 56a8287d3341
+    last_write_checksum: sha1:d3f97359f4851a3cf6b617f0a5269b48add650af
+    pristine_git_object: 70047cb3997c6ee63e2893f7591329440ee536ef
+  docs/models/components/uploadeddocumentevidence.md:
+    id: bca5683fe442
+    last_write_checksum: sha1:2ebc4b32d428531e99eb0189b6a6d1e0624d3cb3
+    pristine_git_object: db03f8ce5df6076c2c3186aa678ded340ec53b9f
+  docs/models/components/value.md:
+    id: d28df86c49da
+    last_write_checksum: sha1:3973b43e057861f397a3cd4b5eb9edece6f6cde1
+    pristine_git_object: faa32f6d4d970a40a6fd38430b37e955a8f9b125
+  docs/models/components/vantadocumentevidence.md:
+    id: 872d3e0153b1
+    last_write_checksum: sha1:b546b82d4fb8d07b5c74c570462c612fdfc34e11
+    pristine_git_object: 90fff206a158ba28802d53070a6285f2adf71ad5
+  docs/models/components/vantadocumentlinkevidence.md:
+    id: b85670867f17
+    last_write_checksum: sha1:fb0e3da3a209d12f0bf485c8856f2279df09d427
+    pristine_git_object: 071b3b6f216a09a94f7f26e2a89cd0831b0ebc72
+  docs/models/components/vantadocumentuploadedevidence.md:
+    id: d39b9bcad778
+    last_write_checksum: sha1:583e76138c7f9cc9a8c4eba5650788f345e7c77c
+    pristine_git_object: d6a902e8277cb338adb0bb5e2b5676533b8635e4
+  docs/models/components/vantapolicyevidence.md:
+    id: 8acf4119ffc2
+    last_write_checksum: sha1:b69d499bd6f6834cf2e58c45d666f41835389852
+    pristine_git_object: f52b7149c2d4712c2e8bb67002b0268d6a1a94b2
+  docs/models/components/vantapolicyevidencefile.md:
+    id: 356a7e7b0a56
+    last_write_checksum: sha1:9285b2ccf1432f38a4594001f0330a94e3fac00b
+    pristine_git_object: 824a31b346dfc3c787e65e5ded838782bcffa4da
+  docs/models/components/vantatestevidence.md:
+    id: 8477b3e28f26
+    last_write_checksum: sha1:c9618cbabf017520a1cce45112723825488405ce
+    pristine_git_object: ff301b29aebe934d9dc196cf53a6e0a293a9ca6a
+  docs/models/components/vantatestevidencefile.md:
+    id: 448b8a610eaf
+    last_write_checksum: sha1:61a11a50fdfe84223b9d9457b642d32838070ae0
+    pristine_git_object: f27374e4202fe49ffe1336080678158cfeb97781
+  docs/models/components/vantatestfiletype.md:
+    id: f14b1e8e26b6
+    last_write_checksum: sha1:d9896a0ba447fa34df401dea62334c327518a2fb
+    pristine_git_object: 4611e7a77712de9c08976d18e303d03ad6d3cb06
+  docs/models/components/vantatestrunstatus.md:
+    id: 58ebbae8874d
+    last_write_checksum: sha1:0798a8b2174ae30e40f65414be9c2dd55fbb192b
+    pristine_git_object: 2c9489b74b65ded3fefeb9c1c4d2bcd3cfdb2bb0
+  docs/models/components/vantatestsnapshotevidence.md:
+    id: ab239aa67b9a
+    last_write_checksum: sha1:f72387c7f76c6fb32bc6b1ecd2b35a8f1c367b35
+    pristine_git_object: 54dc8c7dacd5668a603de0bfa0e8755abe71bc00
+  docs/models/components/vantatestsnapshotevidencedetail.md:
+    id: b7c2b74b9a9c
+    last_write_checksum: sha1:37b057ddaeb92c5b24a8159e52519b591c679d11
+    pristine_git_object: 7cbc2e4620e5c41e3b459ff771f969e05aed6451
+  docs/models/components/vantatestsnapshotintegration.md:
+    id: 8e0acdceb8d3
+    last_write_checksum: sha1:53006e6c64d8a66f2f733f16fa51d38c8385ae1a
+    pristine_git_object: 0bda6169abba3118e8625bd33317309d42fda6df
+  docs/models/components/vantatestsnapshotrawtestdatarow.md:
+    id: ba5f11e7d5bf
+    last_write_checksum: sha1:69c6617a0c21ab53acf0fa1c0d4d8d84788a67bf
+    pristine_git_object: f01b24445874b1813034ba98086b8067a6e3323a
+  docs/models/operations/acceptinformationrequestevidencerequest.md:
+    id: b2de094226c8
+    last_write_checksum: sha1:f10941c5a4d53f509956844bdd6a659dc2fd9ce0
+    pristine_git_object: 90824fb577ab23c5730abcfc470b8df7907a4dee
+  docs/models/operations/createcommentforauditevidencerequest.md:
+    id: ed61c2bf224a
+    last_write_checksum: sha1:4ffb0b3a625e15caa00e520cdf19d40a9c247ac4
+    pristine_git_object: dd8926748f10679d3d331490aa6a96427e8a436a
+  docs/models/operations/createcommentforinformationrequestrequest.md:
+    id: 861dad0ffd25
+    last_write_checksum: sha1:fe7474f0b070f3e4aaef24dd2dba2c11d82b857d
+    pristine_git_object: f9fb7ca7367ec2c01614a305eb9d3b43f00b5a8d
+  docs/models/operations/createcustomcontrolrequest.md:
+    id: 2efc7a3d912f
+    last_write_checksum: sha1:79ecd66c3e6979478ead1c26892213a5e8c1c375
+    pristine_git_object: 0676b410b07458fbbb531363110e47cf6cdd5a41
+  docs/models/operations/createcustomevidencerequestrequest.md:
+    id: c7a4f73f5998
+    last_write_checksum: sha1:a70e4533332fc6a3f2501607ae05cd66ebeec021
+    pristine_git_object: 6727f27e1330e4a3606fc1d54c07956ef38f70a2
+  docs/models/operations/createinformationrequestrequest.md:
+    id: 9e8bf093f8b1
+    last_write_checksum: sha1:1d10c9a3a144f34b37e8d60a2222063ef818c900
+    pristine_git_object: f8ab1ef67762e0f6fe8a5a756dc4a6d84163566c
+  docs/models/operations/deletecommentforinformationrequestrequest.md:
+    id: 9f0599c18e82
+    last_write_checksum: sha1:88e132f20b78a370706fb24b9e39a9bb4413f8dc
+    pristine_git_object: b023328d942a52bbc62625e42514966c269a3ae4
+  docs/models/operations/deleteinformationrequestrequest.md:
+    id: 0c26cfa9d9e0
+    last_write_checksum: sha1:e52b48070c59df03f8176a5cd4b7d1bf53b8bdd3
+    pristine_git_object: 26faad228c21fc24eceb479ebdf4ac7e7cc850dd
+  docs/models/operations/flaginformationrequestevidencerequest.md:
+    id: afd3c645bddc
+    last_write_checksum: sha1:48f717fb73800acdff37477258dac14e3d43d2f2
+    pristine_git_object: fbc060a70a7154c9e9ca927cfd1c826aafa8801f
+  docs/models/operations/getauditrequest.md:
+    id: 35a38f6a9549
+    last_write_checksum: sha1:4781286a3295c6917a76822c5cb3394cff4b4806
+    pristine_git_object: c1da420dfe80b725d58e2813e66545f8e6e12ff6
+  docs/models/operations/getframeworkcodesrequest.md:
+    id: 07a66953e63a
+    last_write_checksum: sha1:8b232de420bf7051017ca48adc3ad05d5ffa6a8c
+    pristine_git_object: 2cb3d69e978c0fd951be8a4f864be7c440c2871e
+  docs/models/operations/getinformationrequestrequest.md:
+    id: 5ca2ad608938
+    last_write_checksum: sha1:ccabed3e475b66c74dcde5d4663b5f7d070cfe22
+    pristine_git_object: cb3b59a399a7edb7ac575bc172adf2ab5d5efabc
+  docs/models/operations/getinformationrequesttestsnapshotevidencedetailrequest.md:
+    id: 6c1a46a728c4
+    last_write_checksum: sha1:8b105ab3a872dddf72679f3ff1133c00f63074f3
+    pristine_git_object: cf9e5433f0de2e75740588774b071db40fb99198
+  docs/models/operations/listauditcommentsrequest.md:
+    id: e9f1eeeb4ff3
+    last_write_checksum: sha1:27d714c68b741d5e4b392cf29c4503af006e5c58
+    pristine_git_object: 2e66597a317c1d7f87591b1d71e9f2f90abc9278
+  docs/models/operations/listauditcontrolsrequest.md:
+    id: 53d9b42134c2
+    last_write_checksum: sha1:2f9b113e2a41ffbb1730ca328d9c2d004041a0df
+    pristine_git_object: f554a9424920592c0ce75043665712b16709f6ef
+  docs/models/operations/listauditevidencerequest.md:
+    id: 7d8b77692710
+    last_write_checksum: sha1:82e0264a34b7cac5349758d3a7e5b4bcf6482452
+    pristine_git_object: 56034ff7b563494032b1cdd0f0491a0a26c841ed
+  docs/models/operations/listauditevidenceurlsrequest.md:
+    id: a61d008ff9f2
+    last_write_checksum: sha1:e772efd2999d66006bef40436c74c0f967ed8bec
+    pristine_git_object: 6100dd12d172c5aa4f1272ed37220b05705074f2
+  docs/models/operations/listauditissuesrequest.md:
+    id: e2d60962c2ca
+    last_write_checksum: sha1:0610cd462b2af34732d62f3a4ab641a894fdddf0
+    pristine_git_object: 15fa797700cd2651af3ce2cbb5b85a376c8107f4
+  docs/models/operations/listauditsnapshotsrequest.md:
+    id: ea9dda78b402
+    last_write_checksum: sha1:43f78172951716ec6d1f2dd905c7731e6d14ad57
+    pristine_git_object: 0e0a04f290956d49159ab1cd488c6b9d6401d448
+  docs/models/operations/listauditsrequest.md:
+    id: 46e4676b8af8
+    last_write_checksum: sha1:3e56442b33b947910e3b3a53bc1ed98de5490cec
+    pristine_git_object: bca0e13d7a265fb4ea07a48894a2f277e3bf1ee7
+  docs/models/operations/listcommentsforinformationrequestrequest.md:
+    id: 5e08440aa8a4
+    last_write_checksum: sha1:5898b97b4b1c3ca9889396f6652c1ac938ff6543
+    pristine_git_object: 7c4942d2c08359a846b265e295a945b15ab6cfc5
+  docs/models/operations/listinformationrequestactivityrequest.md:
+    id: f4fc1486d6da
+    last_write_checksum: sha1:d3a9eeeeaaa82e5b3e3a8066a0a497df8dbacebe
+    pristine_git_object: 6890d3f1253567598f42589b60f7b5261a125346
+  docs/models/operations/listinformationrequestevidencerequest.md:
+    id: d867b0db39e9
+    last_write_checksum: sha1:a07b5df5df2a7042ff400dc87e6710300e9eca43
+    pristine_git_object: 3ba45fb6cc3af325527d344c4f36e49cccf75451
+  docs/models/operations/listinformationrequestsforcontrolrequest.md:
+    id: a08b64c0facc
+    last_write_checksum: sha1:274b7d197a9dbdfed8b4d8d543542b62ca30c77b
+    pristine_git_object: 44404a792636d83f7e90f00c54f4e44a2327a2fe
+  docs/models/operations/listinformationrequestsrequest.md:
+    id: e463b3ac348f
+    last_write_checksum: sha1:c9c33537f6567046c41ab7b9ffe493b88eb8cb31
+    pristine_git_object: d879127370cab2d8c40fc4a47d99801c717cf8e8
+  docs/models/operations/shareinformationrequestlistrequest.md:
+    id: b226f25a5f57
+    last_write_checksum: sha1:9d6f64fb9d8bfa7d951a60318f47939b900bd9d8
+    pristine_git_object: fa606abdbe3120869ea0d001ea5927bed11e6b76
+  docs/models/operations/updateauditevidencerequest.md:
+    id: bfa100fb9a76
+    last_write_checksum: sha1:a01b203159d3a8eb658d8f66ee3bbed8e900a688
+    pristine_git_object: a1be934489b1b70f3e2a8406c7abaac5eece75d5
+  docs/models/operations/updatecommentforinformationrequestrequest.md:
+    id: c21ed5638e64
+    last_write_checksum: sha1:6fd65f29e5d1c0c0839d369f07503291be404d4d
+    pristine_git_object: 88af49557965bde1c40a7ade0283b2dc383cf92c
+  docs/models/operations/updateinformationrequestrequest.md:
+    id: 5e3f9c8ab02b
+    last_write_checksum: sha1:c772945c607b31b31103f50a6ebc801647caac5d
+    pristine_git_object: 2fa3ba354ab9428e2724cd74a04bb7ac945b5820
+  docs/sdks/auditors/README.md:
+    id: 01b93f705fd1
+    last_write_checksum: sha1:b9f8bcb67029810b663f6bd6306ee8d3adbd050c
+    pristine_git_object: 1313f60d7a761c4e6400903c6a22ac68b06ced5f
+  docs/sdks/audits/README.md:
+    id: b976aa226e19
+    last_write_checksum: sha1:5827a5a7a6a8e3d7b7a25ccb24ef78b70bce1085
+    pristine_git_object: 0b7340c3780ac8e311cad679e2147947babb2746
+  eslint.config.mjs:
+    id: 461c8d07f6da
+    last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
+    pristine_git_object: 67bccfec985be20a00970d90155752832dd47135
+  examples/.env.template:
+    id: 52cbe5afed92
+    last_write_checksum: sha1:9bb95dab0c96a66617378cef093de4f3cc928a82
+    pristine_git_object: 6e3c4951c0af75718a7436eb710d33dd84c63131
+  examples/README.md:
+    id: 9d0f69d6e677
+    last_write_checksum: sha1:38f03159b95998009ffab015779e0a90ea695c06
+    pristine_git_object: c4ec53275ab761cbd04d509de6f4498f3777df86
+  examples/auditorsCreate.example.ts:
+    id: 8acd39a36dfa
+    last_write_checksum: sha1:696ebf2a4e18b8cdc918afdfe91c950309e6098f
+    pristine_git_object: 28c07acb1577a38f64b8caea9db4a608533e3979
+  examples/package.json:
+    id: c1d7b0ec8e7e
+    last_write_checksum: sha1:f249d3e2f99a2c606c7bfbf127ac128003072702
+    pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
+  jsr.json:
+    id: 7f6ab7767282
+    last_write_checksum: sha1:0fb74e3bc50e684cfb1b32b9d2324c2922ac9bba
+    pristine_git_object: 81cd28d0c8113467490a1c92f45239a7d18a8642
+  package.json:
+    id: 7030d0b2f71b
+    last_write_checksum: sha1:b0cbd0eab5a323786a61d3a6f07e1418d05c4736
+    pristine_git_object: 6e80908692bb9bee039c70d9913ba310125ebb49
+  src/core.ts:
+    id: f431fdbcd144
+    last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
+    pristine_git_object: 070790c36463e5cd5279b7569954f608aa86cbbc
+  src/funcs/auditorsCreate.ts:
+    id: 7afd4d70a59e
+    last_write_checksum: sha1:052830daeed552ab47202c6bce59a171db0f4948
+    pristine_git_object: bc7a21a59ea79ad819ba68dbb3925aae5e95b80e
+  src/funcs/auditsAcceptInformationRequestEvidence.ts:
+    id: ed8c3d977cc8
+    last_write_checksum: sha1:cd4de10d8d049fad32387c3bc7c65c45d0b7d5d4
+    pristine_git_object: 3c0c555d2cd8be19a231761cdf9e2f6e83dea709
+  src/funcs/auditsCreateCommentForEvidence.ts:
+    id: a6fbe14f4680
+    last_write_checksum: sha1:dabfa31750e5875379272510bd4d921f470c77b9
+    pristine_git_object: 2e2446f574875e2c30ab490cd07571f8dee425b7
+  src/funcs/auditsCreateCommentForInformationRequest.ts:
+    id: 32d4d88131f1
+    last_write_checksum: sha1:8c7fbc067334e667b7bac6b3f17dff67cf47755b
+    pristine_git_object: 78a25f1e2b598eccdf68c72e4dbbff3987281d5a
+  src/funcs/auditsCreateCustomControl.ts:
+    id: 96e71ef34450
+    last_write_checksum: sha1:53c457d268bccabaae3cb10b4361a69c0c38d20b
+    pristine_git_object: 235d1a2839001027b2158827b799c50bd67bd1be
+  src/funcs/auditsCreateCustomEvidenceRequest.ts:
+    id: ff55590a5e59
+    last_write_checksum: sha1:0f9fae3dbf5fcbe5558fecf4502e15d2bb7b5679
+    pristine_git_object: cbc9e74a8fd607bba1528e5d9b984cfdc0f666d3
+  src/funcs/auditsCreateInformationRequest.ts:
+    id: 4cb77f80c10e
+    last_write_checksum: sha1:dc78eced83f94444d2a0355d5870714018d17965
+    pristine_git_object: bae4252e7cb362738270e0ca576aaca30ec60f78
+  src/funcs/auditsDeleteCommentForInformationRequest.ts:
+    id: e0476c28976e
+    last_write_checksum: sha1:bc7c3d2e4289df1929ba2abbd9867c41a50b3992
+    pristine_git_object: 5f4f3b85ee57252e3139c888bb100191a19fc356
+  src/funcs/auditsDeleteInformationRequest.ts:
+    id: 393087ea430f
+    last_write_checksum: sha1:c15ea9eb520542b111bb1784a7a4694951813dd6
+    pristine_git_object: ec89b5f9700f6bb042e2952f114065718348658a
+  src/funcs/auditsFlagInformationRequestEvidence.ts:
+    id: 498032a4df38
+    last_write_checksum: sha1:d8142638f52c777920742023a93415086c46002a
+    pristine_git_object: ffd0a67b789f8e24ebdbe8febe48d6811288af07
+  src/funcs/auditsGetAudit.ts:
+    id: 1c0477a74a46
+    last_write_checksum: sha1:dd4019fd2caaaf58d8e159d8b1a61fc4455de280
+    pristine_git_object: 5d3dc3ff7979de9d87a26ff319fc5b5e2eaf8bf4
+  src/funcs/auditsGetEvidenceUrls.ts:
+    id: ee9954db2993
+    last_write_checksum: sha1:74ff212bfb27583e310b03352cce7ba5e0dec56c
+    pristine_git_object: 39929e275b95647ac6d4a9db2d4f2a46f371d2a7
+  src/funcs/auditsGetFrameworkCodes.ts:
+    id: f81d279c85c8
+    last_write_checksum: sha1:e2cce89dd3dc7761584313a36469b7bcccad8e50
+    pristine_git_object: c6633435c178f40b4b36a82045a369ce7f35c09a
+  src/funcs/auditsGetInformationRequest.ts:
+    id: 8808b6c4d018
+    last_write_checksum: sha1:29b253d47208d6a1547f88a54c71f6be669d7fc9
+    pristine_git_object: 2d11aa2c33648eaad4f9ed2de7817662738b2bf7
+  src/funcs/auditsGetInformationRequestTestSnapshotEvidenceDetail.ts:
+    id: 07169168724a
+    last_write_checksum: sha1:a4c6a195a73765d043770529cf8111d6b981d57c
+    pristine_git_object: 668d970aaf29df1fdbcfe4a6f1a62dcd41978cc4
+  src/funcs/auditsList.ts:
+    id: 58dd6929673a
+    last_write_checksum: sha1:44050b666237598ce39df3a13e8e97d46f0c5a73
+    pristine_git_object: c6a5d89da630527f221e16bdf7a651a0fcaf87ee
+  src/funcs/auditsListAuditIssues.ts:
+    id: 175541397df7
+    last_write_checksum: sha1:11621bb112c1a738ed879305bc21dbaafa6296e5
+    pristine_git_object: 3164615c8d00c271f8363ed9a6be07f9cc9af155
+  src/funcs/auditsListAuditSnapshots.ts:
+    id: 74008875d536
+    last_write_checksum: sha1:6c102a8e3fb3576c4bd75424b11e31d60a513501
+    pristine_git_object: 87ce6557acf560a42bf9aa176e3a9d4c6114fe99
+  src/funcs/auditsListComments.ts:
+    id: 637eb09a4893
+    last_write_checksum: sha1:357bffce70426f9b55045a02ff1e0218f00c2b90
+    pristine_git_object: 5bbbc95b0829944bbd2053f36a19295b6147e801
+  src/funcs/auditsListCommentsForInformationRequest.ts:
+    id: 88b5583ec912
+    last_write_checksum: sha1:36b532a83ce1497ab37138d6c276875d1d25e7e9
+    pristine_git_object: 2619bbb47a57753cba9126cd1556273ce2543784
+  src/funcs/auditsListControls.ts:
+    id: e5e58ff40314
+    last_write_checksum: sha1:8d1e63564b90e2676d49ad8d4fdd37966e3e46e5
+    pristine_git_object: 199de487f2942c7dd0413b7f24b6ef86d0f4da18
+  src/funcs/auditsListEvidence.ts:
+    id: 5e0694a69386
+    last_write_checksum: sha1:3bc58e4415b1bf66339cb5112ea14d15527f01d9
+    pristine_git_object: 2da5c8dde941ddfdeb4d494dd3f711e2d00bf26e
+  src/funcs/auditsListInformationRequestActivity.ts:
+    id: 9b7e079a1932
+    last_write_checksum: sha1:abb99734f47bf2ff7c40db0562630c283cdfcab3
+    pristine_git_object: 2a313f51168907b4b889e8c7f5bc013a22d65e56
+  src/funcs/auditsListInformationRequestEvidence.ts:
+    id: 8f6e2a6c32a6
+    last_write_checksum: sha1:3630b30a0e749564ff04dee405e29f9680db3492
+    pristine_git_object: 13319152fb9cda40dfa516f4ff9b4683136d57ff
+  src/funcs/auditsListInformationRequests.ts:
+    id: 8e37f22487b9
+    last_write_checksum: sha1:4fac856d0798f7fc4ad9299499427de2e2a6b1a6
+    pristine_git_object: a9215c2f126645c79202b648c75c8f339d3d1f51
+  src/funcs/auditsListInformationRequestsForControl.ts:
+    id: ae674bea661c
+    last_write_checksum: sha1:617dfcf3c5c7710f1782574287acc197c8b9e5d2
+    pristine_git_object: 867d86482701e7b21224942fd3524632c72c9fb8
+  src/funcs/auditsShareInformationRequestList.ts:
+    id: 85889a98b512
+    last_write_checksum: sha1:56739cbdda9a3065261458efd0539c83c529cf7d
+    pristine_git_object: 80d50a1d13ef81e26b187cce7173535aae505f4a
+  src/funcs/auditsUpdateCommentForInformationRequest.ts:
+    id: d73cdc1da9c3
+    last_write_checksum: sha1:2932463ee85044c259ca03632d232be63a60438b
+    pristine_git_object: 1bf4d22a3a97d2ab473e0ce85aa2cc06a6f67ceb
+  src/funcs/auditsUpdateEvidence.ts:
+    id: 0b9497b5f993
+    last_write_checksum: sha1:687a85737e1fe85ac95277238c8398a047ebecf5
+    pristine_git_object: 44746cde77febf5418a1b928345a020312f75504
+  src/funcs/auditsUpdateInformationRequest.ts:
+    id: dd0a633551a8
+    last_write_checksum: sha1:1f4e4e983d8c5045be81e22e08081cf051c710f9
+    pristine_git_object: 5ca8d30dd3067b6571792cc885c40aaec2b6d9fa
+  src/hooks/hooks.ts:
+    id: a2463fc6f69b
+    last_write_checksum: sha1:9a569ea8f3177ddcdfe6cd903feaf5c2d2c36a9a
+    pristine_git_object: d34c88497fb1cfb22a725e52b4c218f36d0b5c8e
+  src/hooks/index.ts:
+    id: 5f2dab62b520
+    last_write_checksum: sha1:1a11c073a6cd792932218e1d4ed36b8567bad8ef
+    pristine_git_object: f60ec7acd76141a71d78008c5a362eb0236d8335
+  src/hooks/types.ts:
+    id: 2a02d86ec24f
+    last_write_checksum: sha1:29372122898cc523fa47576f3f6608a28ec6080e
+    pristine_git_object: 8bfe4fe8137138decea7af0a5ed791bf01201789
+  src/index.ts:
+    id: c5fb850250c7
+    last_write_checksum: sha1:35c9cde3ae14b18b3f893a1afe8b6c44f8760f24
+    pristine_git_object: dbcba164a0082e3bb8c43cf21fa7f8ffb9d35dfc
+  src/lib/base64.ts:
+    id: "598522066688"
+    last_write_checksum: sha1:b0b12ddbd8625efb47c0e955a18641aeb10c6532
+    pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
+  src/lib/config.ts:
+    id: 320761608fb3
+    last_write_checksum: sha1:232bde58bc6acd40e52d374672fb32dc52595d54
+    pristine_git_object: 78280ceae63569928276b26722ea39cbe1b0c7a3
+  src/lib/dlv.ts:
+    id: b1988214835a
+    last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
+    pristine_git_object: e81091f5e536f82739f71379b1fddc2d147c49e2
+  src/lib/encodings.ts:
+    id: 3bd8ead98afd
+    last_write_checksum: sha1:d47614c415b37e092965c34cb668562195701004
+    pristine_git_object: 2791d25bc4f7cf6eec17a65f899851e225fa3deb
+  src/lib/env.ts:
+    id: c52972a3b198
+    last_write_checksum: sha1:38d97ea91af9a099feedb2ba18dd57dc264e7885
+    pristine_git_object: 982c99eab1ac3e828a8396d1187c57738c4e0fa6
+  src/lib/files.ts:
+    id: e5efa54fcb95
+    last_write_checksum: sha1:795c14026405d547bfc47012f7ad9666e530fa7f
+    pristine_git_object: 6ca6b37d35a12448da176ee2517cc036db12c81c
+  src/lib/http.ts:
+    id: 63a80782d37e
+    last_write_checksum: sha1:797cbf16d3c7c4d62d3ba0eedb08617524938457
+    pristine_git_object: 13cf1fd7894a89f727b8d2db2ad24313a94f68c7
+  src/lib/is-plain-object.ts:
+    id: b9862591096a
+    last_write_checksum: sha1:df687f25a9590b6fd95d39df41a652ae3fd4e517
+    pristine_git_object: 61070d3d7c7e5e95b1ed7e7ea21869eb0767db77
+  src/lib/logger.ts:
+    id: 7ee7741a02bf
+    last_write_checksum: sha1:0ec9d3a2a34c362746b767e4f9a746c055d57a7b
+    pristine_git_object: d181f2937d4128afbe9b0327e0f81d1fa9c877b7
+  src/lib/matchers.ts:
+    id: d54b2253b719
+    last_write_checksum: sha1:32bda3887292d2b0430bb6688982e34038342919
+    pristine_git_object: b7ef1986eaa94795a3b1a7409e8aeed6591a11e6
+  src/lib/primitives.ts:
+    id: 74859f750b28
+    last_write_checksum: sha1:987869fc54790b9c22e9182099103d6aa7c67016
+    pristine_git_object: d21f1dc49affa4e6d324bdd60811b470fdfa7eb6
+  src/lib/retries.ts:
+    id: b24a69d15639
+    last_write_checksum: sha1:f3da74dffcbe2756c69393f8600205aa1dc06e68
+    pristine_git_object: e3ce9aba72150fc3c18f3105d39b21aba809377b
+  src/lib/schemas.ts:
+    id: deb4b531fae1
+    last_write_checksum: sha1:209cfaabfa7fc1c1310f97453215cb0755619c6e
+    pristine_git_object: 47edb9725c2482c667e2ddc8a56b1fec4285c492
+  src/lib/sdks.ts:
+    id: 8a6d91f1218d
+    last_write_checksum: sha1:79c2a33b85ed985c4c822f49d12837a066903a38
+    pristine_git_object: 9715a38a6cccdaa01b92868fb2d2c66a91d98a79
+  src/lib/security.ts:
+    id: 0502afa7922e
+    last_write_checksum: sha1:3c084709e99f585226342b1672c8b66143d315be
+    pristine_git_object: 005cd362c99183548588962026a154f5d5032759
+  src/lib/url.ts:
+    id: b0057e24ed76
+    last_write_checksum: sha1:3bceadd74bf0b31adf13eb06b7531077c3e07d65
+    pristine_git_object: 79e7ce660b3732053e3adcbb5a4cdeb51496e8aa
+  src/models/components/acceptinformationrequestevidenceinput.ts:
+    id: 7b27603e9043
+    last_write_checksum: sha1:27356990f871152a5ee1c9f5c4bdc06febcea0e6
+    pristine_git_object: 3ed9029edaad3c822d4eccbc7beaa3f2c03bee62
+  src/models/components/addauditorinput.ts:
+    id: d23dba92da3c
+    last_write_checksum: sha1:470253bf8b9ccee3cf990de5efc83b4b03234545
+    pristine_git_object: 0106bbd1ead2750df43201392588ab6af38c5658
+  src/models/components/addcommentinput.ts:
+    id: abe716ad1a8c
+    last_write_checksum: sha1:d9bafe89c0b0d4b115002dae92aee5ee8c24ef6b
+    pristine_git_object: 8596125201fc13a7ab74b654b943a18d495bf96c
+  src/models/components/addinformationrequestcommentinput.ts:
+    id: 281d8da2d35c
+    last_write_checksum: sha1:c4c7864f79e8b507d631e5d1b6bbd7e19f782a21
+    pristine_git_object: 7945299c4ce29733444486f443298accfe7a4ad6
+  src/models/components/audit.ts:
+    id: 4018c3c30ef5
+    last_write_checksum: sha1:73dbb43831f48141c44330dcb29e65716f330bbf
+    pristine_git_object: eee64fa41666b32f0d5150abaa9c8d8487a13faa
+  src/models/components/auditevidencestate.ts:
+    id: 73774636369f
+    last_write_checksum: sha1:e48d205356a95b2df3e4042abf0edf67afaff866
+    pristine_git_object: d29fc03bfc13371ca7d7a9cb790b4a418a1a787b
+  src/models/components/auditevidencetype.ts:
+    id: 8bba2c691c9f
+    last_write_checksum: sha1:120f7adac7ed8070b81d6edebecb7d11a45a2a49
+    pristine_git_object: bf7d8c034047aa96d52ec50f8db8f31d74317675
+  src/models/components/auditevidenceupdateinput.ts:
+    id: 93a9166b696a
+    last_write_checksum: sha1:bad0a7d6df2e3f2ac409806174ce6fb659802a87
+    pristine_git_object: 86949d17293b4d2a12a7986cc5a25bd484740bd6
+  src/models/components/auditfocus.ts:
+    id: e567811edcc8
+    last_write_checksum: sha1:0eb589abca013beefd76c54603fa79316683e1bb
+    pristine_git_object: c411ff2338843e95b74f47640b841590fd249153
+  src/models/components/auditor.ts:
+    id: ee80484504a3
+    last_write_checksum: sha1:67c201aa8c681d0c7ecda0a6a629db6b65225aa2
+    pristine_git_object: 5ee14464a00d6960c736ee4c5ee4ad1c0b26f487
+  src/models/components/auditorcontrol.ts:
+    id: 3b1b1a0a43ca
+    last_write_checksum: sha1:867415abd77279dfadf3abcb3664937baf86d217
+    pristine_git_object: 0ec38ac283d44a6fceb0074baac8665af9e74320
+  src/models/components/auditorenabledstatetransition.ts:
+    id: 0321ecf1c6eb
+    last_write_checksum: sha1:5df2b353c3661188a232745f4a5fb4e3110f82ff
+    pristine_git_object: 14bafee15e5012de1c4fe165c06cb78f530bc732
+  src/models/components/comment.ts:
+    id: 007fc6319a32
+    last_write_checksum: sha1:acdb9920c11eff2348ec1a94041a746c6abd573c
+    pristine_git_object: 719203f097d7ac0da9688140d660e5b89fed2ce9
+  src/models/components/control.ts:
+    id: aa88dade8d9e
+    last_write_checksum: sha1:a4d2f0b2d44aa9d0772455b303d501599d2c385f
+    pristine_git_object: 700f5ce0155864e708c10099cc1e615846588a82
+  src/models/components/controldomain.ts:
+    id: e2e60b031690
+    last_write_checksum: sha1:0c6d29d7c76ed8d6822a004f90ab4fcc54858632
+    pristine_git_object: 8f2649d3998480fb09b34ead4d3661f541903b1a
+  src/models/components/controlsource.ts:
+    id: d5923d19f0c6
+    last_write_checksum: sha1:b4e01843aba753ff5f6566e4b00fbc20bd43bd21
+    pristine_git_object: 63f43d90248005dcffcc4525861e71f8043c5720
+  src/models/components/createcustomcontrolinput.ts:
+    id: ca36240fdae0
+    last_write_checksum: sha1:5fd5e2408dce5d9a85c65f7e326d3dc351e7eefb
+    pristine_git_object: b5afbdf14486bb95c989d86f8d6306d72e1b6ee0
+  src/models/components/createcustomevidencerequestinput.ts:
+    id: 19f72e1ad084
+    last_write_checksum: sha1:b63975c804ef5702f9e96ac56d05d7053564c79c
+    pristine_git_object: 111992bc1b75f4ff509dbd258147aa4383173ebf
+  src/models/components/createinformationrequestinput.ts:
+    id: df40c1de7682
+    last_write_checksum: sha1:b6c06e3ca0298f94f068968da5565c96fe7b48c7
+    pristine_git_object: 176364bc631e6b5ca785377dafb2d64b594d0a20
+  src/models/components/customevidencerequest.ts:
+    id: b692607ec3c4
+    last_write_checksum: sha1:ddfeb412fe6ec6571b8669cda11fa6356a147327
+    pristine_git_object: 117d763a97c8d85c57812a3edb652bacf97a138f
+  src/models/components/customfield.ts:
+    id: 4a951fa91e23
+    last_write_checksum: sha1:27b7c2c5112573542b90056abeb6c53026f1c71e
+    pristine_git_object: 265043a5c0010b29e706fe11be80d63696db8a59
+  src/models/components/deleteinformationrequestcommentinput.ts:
+    id: 0af5acee530d
+    last_write_checksum: sha1:9b1d1ab1f4a1929bc71a5cf109ca6fbe04ba9734
+    pristine_git_object: 7a23cb3c07997d7a98f4c090f55786448475b34b
+  src/models/components/evidence.ts:
+    id: 2ccdf8b4cb58
+    last_write_checksum: sha1:4c8ea0d517b91f9a6e91e6aa68b5846ee2559337
+    pristine_git_object: 226cba9f122d955727af3e0be2dc59852ac8e154
+  src/models/components/evidencecontrol.ts:
+    id: 88fcc37c648f
+    last_write_checksum: sha1:9c2b201cc60ab7c89253213aff572f4dafde9e4c
+    pristine_git_object: eaca3c76b93ea877a5358973e47d0a97242b3bee
+  src/models/components/evidenceurl.ts:
+    id: 1c6685b305ba
+    last_write_checksum: sha1:3602344146e711f16023e150cc2dcb5b1276f497
+    pristine_git_object: 62751cfe18c647bcd99dcd1070bfa02a77fc8eea
+  src/models/components/flaginformationrequestevidenceinput.ts:
+    id: 9e3ba62520a4
+    last_write_checksum: sha1:e76f12a56ba9a46d3eb064534107e2cedef80d91
+    pristine_git_object: e493e75301d8d9bae1f30ef73906d19c4f7bc279
+  src/models/components/frameworkcodes.ts:
+    id: c21055ca8f9a
+    last_write_checksum: sha1:6ee58b71de284cdc28d977e1c6d88d75f6f82bdf
+    pristine_git_object: 63e00ff9221a684b2abf59c809be2fb9c73d46fd
+  src/models/components/frameworkid.ts:
+    id: 7effd508c920
+    last_write_checksum: sha1:1df852f0267653d131a0aa290ed30a9150ee9c5f
+    pristine_git_object: c89c67f08ad822cbef55eed9134a3375089325a3
+  src/models/components/frameworksection.ts:
+    id: b680a8ef784e
+    last_write_checksum: sha1:cec7afe98bec475c8e679082dbbbb1d58a36b24b
+    pristine_git_object: f3a0ad82b5b4f8893e3ee7853d50bb01b4cf976e
+  src/models/components/index.ts:
+    id: 0aa842dce54d
+    last_write_checksum: sha1:952e4ec0e492dd6f99266384a64a89340552d42a
+    pristine_git_object: 716c3f2831e0898fe036148758a9ea856fbaa377
+  src/models/components/informationrequest.ts:
+    id: f3544499333e
+    last_write_checksum: sha1:1aa35ed9b258b9114abbb7afe74dc2755a71b824
+    pristine_git_object: 6e1a30737d76b9c95eacff5f603aa598eca7c32d
+  src/models/components/informationrequestactivitylog.ts:
+    id: bc5d7aacae96
+    last_write_checksum: sha1:030ab9240c1e5ddf2ce0a5fe169d1e49ca55c3b8
+    pristine_git_object: 27b4157678def7ec7abc48ae1836f3de31ee3f23
+  src/models/components/informationrequestactivitytype.ts:
+    id: c0e4d43cef31
+    last_write_checksum: sha1:93e53762b930b5962cd24c74099aecbc0c3863b3
+    pristine_git_object: a1c2bf76106b6525c1ca3f6e21e2b066032f2f10
+  src/models/components/informationrequestapprovalstatus.ts:
+    id: 066a4523d439
+    last_write_checksum: sha1:f7c8437855c977ba1e4b527b9dd6973bf38c9931
+    pristine_git_object: a1ba27a33ec2017af785d50d441ec78242891431
+  src/models/components/informationrequestcadence.ts:
+    id: 907a128d610f
+    last_write_checksum: sha1:5f6a96bc2a77648e8d23e0b7d1f307eb8160805b
+    pristine_git_object: 0ab81e1f5a4ffed9063fb4c84da2517daeef0ca3
+  src/models/components/informationrequestcomment.ts:
+    id: 3ac55da55d6e
+    last_write_checksum: sha1:11ba4f91837c0855b0fe4aa7a83e1879929940c4
+    pristine_git_object: c58d4a500a1721eb6870295fc2ee8dc32148dd36
+  src/models/components/informationrequestevidence.ts:
+    id: e501cb79ab2f
+    last_write_checksum: sha1:283420314e5817ed4286f13b2ef635dd38df5516
+    pristine_git_object: 2135b5cc0bebdc0f46779bc54c761930180af97b
+  src/models/components/informationrequestevidenceunion.ts:
+    id: 68af9d83060b
+    last_write_checksum: sha1:2b744b523a9d6948fe90f775c662097290ae1929
+    pristine_git_object: 9e86c07c4859482e29701793ca13d35a595014cc
+  src/models/components/informationrequestsupportedevidencetype.ts:
+    id: 8adbf5786842
+    last_write_checksum: sha1:7a16c1a9eaf99ab44903226c63777468c739e521
+    pristine_git_object: 3d6d17fd684fccad4bb71a07f5815c55591e7e6b
+  src/models/components/informationrequesttype.ts:
+    id: f0c2b19ab75b
+    last_write_checksum: sha1:e0f4e169fa1d7b39cace47ae25aaed31389c97f9
+    pristine_git_object: b81b13e36b7d69ea7a98b1969cb5ef1be5768ba5
+  src/models/components/issuesnapshotitem.ts:
+    id: 4c882a0fb9f9
+    last_write_checksum: sha1:326cb44026379f0b13eb20f4e0aa1b510ea0fdae
+    pristine_git_object: 32eeaf9dace1be86fbed525b490756452d8fcb60
+  src/models/components/issuesnapshotmetadata.ts:
+    id: 33b547a94deb
+    last_write_checksum: sha1:aa7c5fab723f2d493b652faec823b0729b03ab56
+    pristine_git_object: 569ec3a1bd324f32495e67aba3b34ac0d4a3144e
+  src/models/components/issuestatustypeforsnapshot.ts:
+    id: 2046604fd140
+    last_write_checksum: sha1:022af2f00b6a3820a8fd5b26a27ac2a3018ec48a
+    pristine_git_object: 3de83e792ae13998a1a4b850db098cb2c3842e85
+  src/models/components/linkevidence.ts:
+    id: b94128220794
+    last_write_checksum: sha1:aa4121f80c4e29696a0a9d3dbb280446f8d5d2bb
+    pristine_git_object: b40cba5110ff50a4786b806dd2d1fd575f2cfb5f
+  src/models/components/observationevidence.ts:
+    id: a48b2455feba
+    last_write_checksum: sha1:52c5c1b6843d3887d4462aeee8936527c725b3af
+    pristine_git_object: 7b51bc38937a3b07c35193a5b0f9be1a4448cd9e
+  src/models/components/pageinfo.ts:
+    id: d6cde35f7299
+    last_write_checksum: sha1:ab63033169c39feb2cf4b289e7fa5252f5f2fbcd
+    pristine_git_object: fff0d0684d4f336479f585e946a61a744c2a3716
+  src/models/components/paginatedissuesnapshotitemsresponse.ts:
+    id: 2296a076e7f9
+    last_write_checksum: sha1:6a394590915919958d3acd8ff7542726057a45d9
+    pristine_git_object: 40e66027be906b82200a912a0ec435e0c36bef7e
+  src/models/components/paginatedissuesnapshotmetadataresponse.ts:
+    id: 794402b72579
+    last_write_checksum: sha1:68f327ab1ed2e2bdfc8760c94e74f48c8da9406e
+    pristine_git_object: 91eb231ff7c813ec56d75eae02ecf80c081c24d8
+  src/models/components/paginatedresponseaudit.ts:
+    id: fb538a79ad19
+    last_write_checksum: sha1:303c364de63239d2df5207b54fefbac9b6fad898
+    pristine_git_object: 3fc5ff27733e66c0a8a25ca0c85d2da094322910
+  src/models/components/paginatedresponseauditorcontrol.ts:
+    id: 93dc58b9c232
+    last_write_checksum: sha1:8629d094cd55670f5f38d1444eb88ec420bcd0ef
+    pristine_git_object: 0620d3441bbe6ae454ee9a3561827d67c06a4317
+  src/models/components/paginatedresponsecomment.ts:
+    id: c8fb8cf7a365
+    last_write_checksum: sha1:008bfbdd0f5fda6015b3ae7b869afc74559b2f57
+    pristine_git_object: df0163f004022f73570e306ff1b72172b7d67efa
+  src/models/components/paginatedresponseevidence.ts:
+    id: a2f5de2afe6c
+    last_write_checksum: sha1:2ca2b7bb9ce165401dfe54c48cc8488c7fe93bea
+    pristine_git_object: 5feb2bfc8162179aa520ad9e6772335633c4b949
+  src/models/components/paginatedresponseevidenceurl.ts:
+    id: 6a823ac16068
+    last_write_checksum: sha1:dd0b1bfc280696a00a33915ae4ecc37aa1f11df4
+    pristine_git_object: cffac013832473ad11c948a5337e54f175294130
+  src/models/components/paginatedresponseinformationrequest.ts:
+    id: 32ac3389b189
+    last_write_checksum: sha1:8ff8eede11c563d1083909ac9330accbc5534c93
+    pristine_git_object: 07f16917ac8b48bb62d3d3eb7e442bf7f289b9d8
+  src/models/components/paginatedresponseinformationrequestactivitylog.ts:
+    id: 609219a4e0a5
+    last_write_checksum: sha1:abd83fd5adf8479c7f60bea517102b62a2a2972a
+    pristine_git_object: b59e989163b33e14c3dcdbad3f5b922823e74416
+  src/models/components/paginatedresponseinformationrequestcomment.ts:
+    id: 1db7d105b777
+    last_write_checksum: sha1:fbfda15c3940b2772e9faf50c45be747b1d780b5
+    pristine_git_object: 3e087285fea9aca60ffd2d63ab17ded8df487feb
+  src/models/components/paginatedresponseinformationrequestevidence.ts:
+    id: 0e5d054228e3
+    last_write_checksum: sha1:75d08683b31e2db9cf2065d1a2223773fde9dbcc
+    pristine_git_object: eb89c57290c839f36e1b58b20fa7ed81719f65f2
+  src/models/components/partialupdateinformationrequest.ts:
+    id: b6ae50575581
+    last_write_checksum: sha1:874b006a6095cfa72e1bc38d57c84f5edf303f4e
+    pristine_git_object: 00c3bb8f74e652a9e0ebbd49a9f094828f6a55cf
+  src/models/components/recurrenceduration.ts:
+    id: 1e8fb32549c8
+    last_write_checksum: sha1:2fe005acd667483f7c31bca60bd2e31498275d59
+    pristine_git_object: 6c5b878324847a0b4ad184617bf7d3aa0c4f79a6
+  src/models/components/section.ts:
+    id: a0418ceffff2
+    last_write_checksum: sha1:7e3f8077a1b9cc503a95028ccde05a789048c4c9
+    pristine_git_object: d7eaaebb85cd579367a7e48f757d0dc52e1c633d
+  src/models/components/security.ts:
+    id: 472dde81bb1c
+    last_write_checksum: sha1:14f08712e7ae6c9786e015c415b290acda66bcef
+    pristine_git_object: fc2b9f7386b7b9a549907a4c858bc6a1d2995fec
+  src/models/components/updateinformationrequestcommentinput.ts:
+    id: 31b5315685f8
+    last_write_checksum: sha1:a9cf4ba1152aafc714df0f5741860a1810b458a4
+    pristine_git_object: 5b19982b8c02161b63c6ab8ade751ea5c6575f36
+  src/models/components/uploadeddocumentevidence.ts:
+    id: 13d4f1d534cf
+    last_write_checksum: sha1:a62f35c0eff8ac0c42b0e79442762cdd39a0b37f
+    pristine_git_object: afbf6492e34e46cafdd8078bca146f6dc65d148c
+  src/models/components/vantadocumentevidence.ts:
+    id: bea5f40a3b7d
+    last_write_checksum: sha1:400106880f7c4b3c8a3b637e97d47fe10ff36315
+    pristine_git_object: 22cead2994ebdfec59904db402478e4653236690
+  src/models/components/vantadocumentlinkevidence.ts:
+    id: 088038652bb3
+    last_write_checksum: sha1:8d35c0bc8fd17c49dabce86b94b697e8a94953cd
+    pristine_git_object: 82770aa711963074ee2037d64750c44a56956cf4
+  src/models/components/vantadocumentuploadedevidence.ts:
+    id: 9b0bd7ca45b9
+    last_write_checksum: sha1:a92ab822a1ebb47366fc2a6a0daf106a2c75d067
+    pristine_git_object: e5a846ede3f8eea726a15f607bdbcd89d612e58e
+  src/models/components/vantapolicyevidence.ts:
+    id: d0361d526fa5
+    last_write_checksum: sha1:6ce7e42938f1365622b585e1ed1c59d8c0db7432
+    pristine_git_object: 5c51777e72fa2bfdddf20a1b20ad43d0ba4dbedd
+  src/models/components/vantatestevidence.ts:
+    id: 55b856465070
+    last_write_checksum: sha1:b7df2c90ddcf90d2b42cc54ebae4f819eef636c7
+    pristine_git_object: 83b2579428b71320a7a8f33897555f5591768442
+  src/models/components/vantatestfiletype.ts:
+    id: 3825a15680eb
+    last_write_checksum: sha1:7c116034211e3cabda0ee58c26483c13c08ee9be
+    pristine_git_object: 783762844ae6f5b7a93252ae8f41b027b05d36f5
+  src/models/components/vantatestrunstatus.ts:
+    id: 4d89190e6eca
+    last_write_checksum: sha1:1f102b8487f92a15bcb4ba2dc9c02f21f60e6526
+    pristine_git_object: 0139d316a75be1a6d474bec8f5bb291d4640f20c
+  src/models/components/vantatestsnapshotevidence.ts:
+    id: 7f40243cdd61
+    last_write_checksum: sha1:39e4b2dff2382a90eebd53227cba60e509b372b8
+    pristine_git_object: 8e16b423cd12a249f28ddb060605386cc0ebf4ab
+  src/models/components/vantatestsnapshotevidencedetail.ts:
+    id: 7b3cef31e61d
+    last_write_checksum: sha1:b40e5b71125d3ea0b02ac5f68e1a1911f35235e6
+    pristine_git_object: c4a2c444fed4a3dbec666845768be9acd0401234
+  src/models/components/vantatestsnapshotintegration.ts:
+    id: 84e6d9e37bf6
+    last_write_checksum: sha1:50520c4f474853d5ca29c8b20454b185b38c5d0f
+    pristine_git_object: fd49eb7097d694e7f7770866989945d076e1fa72
+  src/models/components/vantatestsnapshotrawtestdatarow.ts:
+    id: 1d1326517094
+    last_write_checksum: sha1:0e75b0e06cb78134229aeca1e04f840a63a5ea03
+    pristine_git_object: 42da401cd25ce0b72668c7b398d675f07b6f1864
+  src/models/errors/apierror.ts:
+    id: e2280e075454
+    last_write_checksum: sha1:efff803b9ac6b8dc6c5398aad65355f91c34792d
+    pristine_git_object: 9a04aa5e72416f8fdf9db03dba8166bb75a8a16f
+  src/models/errors/httpclienterrors.ts:
+    id: 6948de76af99
+    last_write_checksum: sha1:994ced121c54fecd0af038ccfb7855fbfd3868ec
+    pristine_git_object: b34f612124c797c2a1106b9735708f679a90b74f
+  src/models/errors/index.ts:
+    id: c4e22507cb83
+    last_write_checksum: sha1:9b0f1936bbb6422e9b8ee81fd1fa53de70860a14
+    pristine_git_object: b3dfa5ef94e4c871d51b7b159ee6349f7e19911e
+  src/models/errors/responsevalidationerror.ts:
+    id: 88ff98a41be9
+    last_write_checksum: sha1:fbb5ae1ce0c88ff48c94c03af01843004807a0d5
+    pristine_git_object: 47788440b98b67bbafa85247dc7ad93dfc413eab
+  src/models/errors/sdkvalidationerror.ts:
+    id: fb6b2b49c445
+    last_write_checksum: sha1:a69da17627bcc32b820544608f3400423ea53f26
+    pristine_git_object: 6826e1208a5d7b7d310535d18909646522bf0fbd
+  src/models/errors/vantaerror.ts:
+    id: 5991b8e7925c
+    last_write_checksum: sha1:1715c6bdba9ef16000d6a4ca8d744ef4cc02cac8
+    pristine_git_object: 257e541b4901fcdfb750e5b463b8c5da99ebaf4f
+  src/models/operations/acceptinformationrequestevidence.ts:
+    id: 6bd843ede64c
+    last_write_checksum: sha1:f71e061d5823e87443e1189954442bd7873ce275
+    pristine_git_object: ece64d18042451ba7578a03f5747ff10f4338beb
+  src/models/operations/createcommentforauditevidence.ts:
+    id: 4ad024d907e2
+    last_write_checksum: sha1:a356ea7b9f382880d0b9404c18daf77bc17654c4
+    pristine_git_object: 8e4a13a296434e1f2c6315fa47a47a8128d89edf
+  src/models/operations/createcommentforinformationrequest.ts:
+    id: 61a27804e392
+    last_write_checksum: sha1:1805ecad3feb38f823f3dc0d0183d849e049d7f0
+    pristine_git_object: 02f483c4153593af61556f181100f593c7b9eef8
+  src/models/operations/createcustomcontrol.ts:
+    id: 513e8a412981
+    last_write_checksum: sha1:641584d8833ea9104bd439cbe4f0831754f33c76
+    pristine_git_object: 51b65128d82e8adbf3fcca93613882cd8a3ff7fd
+  src/models/operations/createcustomevidencerequest.ts:
+    id: aa0620e6d061
+    last_write_checksum: sha1:1a138bf99a82191e9e33366733d154255c0a4921
+    pristine_git_object: ebd4935a3e9a56a68b1a5f5683c273853568daef
+  src/models/operations/createinformationrequest.ts:
+    id: a9bfeb489fda
+    last_write_checksum: sha1:a1ca0d3d58a41624c71a2dcc8054f02d25cef51f
+    pristine_git_object: eeff6774546ffd5f21aad685b43da42feb8f83eb
+  src/models/operations/deletecommentforinformationrequest.ts:
+    id: e58a9a89e2a9
+    last_write_checksum: sha1:314095590bac32521db210a32cb1653626a8b206
+    pristine_git_object: c816c8ae07693c1bf12d684592b8825004efed74
+  src/models/operations/deleteinformationrequest.ts:
+    id: 108b5a5177ca
+    last_write_checksum: sha1:a8e76956c01367fa765ed007e85944577a0c580d
+    pristine_git_object: 688967135e828aaa30d8dd23983669f8a94f6f0d
+  src/models/operations/flaginformationrequestevidence.ts:
+    id: a6702ae1c888
+    last_write_checksum: sha1:fe81ad279c0306f92ae531f85c21f6452a7f6124
+    pristine_git_object: 3fdaf20a20bd97ab5ad185e6543572d9cf28d8dc
+  src/models/operations/getaudit.ts:
+    id: fc2dffc1e364
+    last_write_checksum: sha1:a14b321f75446d1f780298e933ee13ca0bc44f60
+    pristine_git_object: 597e3413e7ca5b6e468e9ff1896467ef6ec135b6
+  src/models/operations/getframeworkcodes.ts:
+    id: 2a6242b1abe5
+    last_write_checksum: sha1:8fa51094e255720e4de04aa495219b6cf31af782
+    pristine_git_object: 6961a0c917b0959f5b71792c812daeedeb7b74e0
+  src/models/operations/getinformationrequest.ts:
+    id: b0bb68839f6c
+    last_write_checksum: sha1:3d83326799bfedffdbfd16bbdd503e03904cd7f4
+    pristine_git_object: 59898aa2e3b3c5f466a7cdd1093d80a3a9399e49
+  src/models/operations/getinformationrequesttestsnapshotevidencedetail.ts:
+    id: 22901a222060
+    last_write_checksum: sha1:eb100c0c7e44cdb3878778b1f7d552be53e6f2aa
+    pristine_git_object: e31af6d26ec862fbfa5b7852e6ded0a34653b690
+  src/models/operations/index.ts:
+    id: 0d9ffaf774d2
+    last_write_checksum: sha1:ab2388e3a8fd00ca2de57e653c5ccd011882d860
+    pristine_git_object: b29d416867b9d9522ca81d029993949688b0210e
+  src/models/operations/listauditcomments.ts:
+    id: ef13857b5290
+    last_write_checksum: sha1:174ef03079744f7c898c30b9c36e1b63f0fa4377
+    pristine_git_object: 876ebd93e4a66d59e5bfd3b6175e6e55b89b408d
+  src/models/operations/listauditcontrols.ts:
+    id: 340f75d52004
+    last_write_checksum: sha1:d4b3321656761423535e1334e9c52394060e2b20
+    pristine_git_object: a52ae014ce4916a23d38ca7f51d6c2c6a400aefc
+  src/models/operations/listauditevidence.ts:
+    id: 3e085dbe407a
+    last_write_checksum: sha1:2a1fd290a0e92420068a15d5da4143b9be6f0307
+    pristine_git_object: b6517febd819f26ffc4d4605a1d6e49dbbd2c706
+  src/models/operations/listauditevidenceurls.ts:
+    id: b0382e239280
+    last_write_checksum: sha1:4ee6d7b58b11defc4b35932b4f577d1b0ca76cae
+    pristine_git_object: 781fb62ff4713931f2415c01272c80243b774dd2
+  src/models/operations/listauditissues.ts:
+    id: 926f49539771
+    last_write_checksum: sha1:1abd973f476e9a6ca8ead08d0d76162d5090a092
+    pristine_git_object: 1f295c506c1feec7460f933af436b47c7aca8427
+  src/models/operations/listaudits.ts:
+    id: 5eae5c5e6b2f
+    last_write_checksum: sha1:61c9c2d3ffa964c8962a7c3f735b23922a9ab7ae
+    pristine_git_object: 47b3e99e8ced270be0e9d40e5805c7b697f594b8
+  src/models/operations/listauditsnapshots.ts:
+    id: 94c04802cf2a
+    last_write_checksum: sha1:c46916919679bfbbe2e2a26c3c8e6e539c596e86
+    pristine_git_object: 8e7b0b0bde01fc5d2ee0d9505d3db57a1439cd9a
+  src/models/operations/listcommentsforinformationrequest.ts:
+    id: 1bbeadcbb0e5
+    last_write_checksum: sha1:63502ceb8d99dd98f68f7b2bb1d3c33e287e5f99
+    pristine_git_object: 44992723886d43787ea6e7a496b0418f0572c2f9
+  src/models/operations/listinformationrequestactivity.ts:
+    id: 51fc3f13cfce
+    last_write_checksum: sha1:3ac15c3ec6bdc89af3cc1e98286cb52e29d64f52
+    pristine_git_object: e7e3992e066586030f17169a3148e8a7d2b59463
+  src/models/operations/listinformationrequestevidence.ts:
+    id: 26d84b13280a
+    last_write_checksum: sha1:d200ec790c7d220f5d80d1c827372a8cee35acb3
+    pristine_git_object: 51f1042b48a54d9c592aef3d0c315195c47fac2d
+  src/models/operations/listinformationrequests.ts:
+    id: 69b9038f8941
+    last_write_checksum: sha1:4d744029ccad6fc1fd5c21bda6bf9e3e1e03a70c
+    pristine_git_object: f1f142b60f18cdbbdc12088dfdf36c3f3561f222
+  src/models/operations/listinformationrequestsforcontrol.ts:
+    id: dd49dd829f4c
+    last_write_checksum: sha1:eeccfba6707c7f92ce9c6669f9dd6154fdbfbd60
+    pristine_git_object: 9f91818d2670fc6c3873324ad1ced920821645c8
+  src/models/operations/shareinformationrequestlist.ts:
+    id: 10c660ac7a54
+    last_write_checksum: sha1:e364d56a09dce8b53b97128687dcdc609cae93fc
+    pristine_git_object: e0185fa7b9b79b32df94520a304dd4d171f86a88
+  src/models/operations/updateauditevidence.ts:
+    id: 1b5d62cf8fa6
+    last_write_checksum: sha1:6ecfa8b044262cea2a8518773be023f80a11a50d
+    pristine_git_object: 4fe261187c812b2907ecfd07a60052e500183647
+  src/models/operations/updatecommentforinformationrequest.ts:
+    id: 89eecba5ff1a
+    last_write_checksum: sha1:05eaf86f93abb233ba516bddbb070b7a9702ee7d
+    pristine_git_object: 58b24590eefc8f29e39ad43de660ebf90878bacb
+  src/models/operations/updateinformationrequest.ts:
+    id: e373476836ea
+    last_write_checksum: sha1:8369325b5f6b3d2f3809a86fe0a03164aa1041cf
+    pristine_git_object: d3941a4a35dec36d159ee95b6e5f4c9f0cfbff7d
+  src/sdk/auditors.ts:
+    id: 5da0287a31a6
+    last_write_checksum: sha1:1d216ecd5582ad68e632bec3715b470188e14e2c
+    pristine_git_object: c3f3d8f7eee1763142b91a4391f2f63e05240b97
+  src/sdk/audits.ts:
+    id: ab43f5ff5412
+    last_write_checksum: sha1:49ca119315ddeea56f656ec474c3f5cfe8c96fb8
+    pristine_git_object: 46a28f74651b49e5441bc08c01e8010c6d6c91a7
+  src/sdk/index.ts:
+    id: a857902a703f
+    last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
+    pristine_git_object: ecac2264817bb369ff2dbf0f0e9029807e67ff77
+  src/sdk/sdk.ts:
+    id: 784571af2f69
+    last_write_checksum: sha1:3009214ae141a90529e39df5e6e33062435a2311
+    pristine_git_object: aa74ef4065d73d958f7b8391dab47b970940121e
+  src/types/async.ts:
+    id: fac8da972f86
+    last_write_checksum: sha1:3ff07b3feaf390ec1aeb18ff938e139c6c4a9585
+    pristine_git_object: 689dba5de50e8769e5f3bb913e3f42a146d15bc1
+  src/types/blobs.ts:
+    id: f8ab9b326c86
+    last_write_checksum: sha1:cf45d78916671cb6345a11c97c633c64402bc27c
+    pristine_git_object: cce2892d4f573a120ef3907db90ab15f5979cfda
+  src/types/constdatetime.ts:
+    id: 0f7b6f513917
+    last_write_checksum: sha1:dfaaf9adfaf49808bd4c9dea0039f21b7088d9c0
+    pristine_git_object: fe62144eaf6a2054fc8ca9a98466e70f41b5434d
+  src/types/enums.ts:
+    id: 4d03ddfe5100
+    last_write_checksum: sha1:ee590453d2c87e33e89c633d37ee46907eca0e58
+    pristine_git_object: aba0ffd2a3308a31e516d83b52823d80aa65a8f9
+  src/types/fp.ts:
+    id: ae9f0fb8aab6
+    last_write_checksum: sha1:d24994d58f37a1ca106847fcc6d2e976c6f1c093
+    pristine_git_object: ccbe51eac69dfb0da5131f14fd753c4b47c1d527
+  src/types/index.ts:
+    id: cd7a0a5ed005
+    last_write_checksum: sha1:bf43b3dccb960ca9ae9c5ab940da4786255881cd
+    pristine_git_object: abf0b7ab8f196829df8946da40d627a46da68e3c
+  src/types/operations.ts:
+    id: 314da01dca47
+    last_write_checksum: sha1:c49e724cfb1259296381cb57bc0fcdd2eae45865
+    pristine_git_object: beb81e10f0b9eee2ed398a853fe6f737b743f818
+  src/types/rfcdate.ts:
+    id: 9eb64906dcd6
+    last_write_checksum: sha1:8e5f382e02fe21c2f2e24deb1b7bbf8cddd3dd16
+    pristine_git_object: c79b3f53a3dd922aa2ace5a4191c8652cf9a8e89
+  src/types/streams.ts:
+    id: f99be9c4bf14
+    last_write_checksum: sha1:cc9ced2dd34a76c3a1bd7784ccda1cc3b37ab9a9
+    pristine_git_object: a0163e7a99cea88f21d0ad4ce3af1c720180ee20
+  src/types/unrecognized.ts:
+    id: 476605c40716
+    last_write_checksum: sha1:d33ac686528492f4cdc0dbf81ed343b4afe020fe
+    pristine_git_object: b7a2a13f3dff50663429df24ae2f55b647ff1084
+  tsconfig.json:
+    id: 61ebb9fd6e8c
+    last_write_checksum: sha1:79dc1550d921fefec69f8632ed3b24dad41ca2f6
+    pristine_git_object: 76110f883cac40bb04fb2f376cd69ea8c8d6d215
+examples:
+  ListAudits:
+    Example 1:
+      parameters:
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "customerOrganizationName": "corporation.com", "customerDisplayName": "Corporation Company", "customerOrganizationId": "65fc81a3359c8508c9af880f", "auditStartDate": "2024-03-07T21:25:56.000Z", "auditEndDate": "2024-03-14T21:25:56.000Z", "earlyAccessStartsAt": "2024-03-07T21:25:56.000Z", "framework": "SOC 2 Type II", "displayName": "Q1 2024 SOC 2 Audit", "allowAuditorEmails": ["sam@auditor.com"], "allowAllAuditors": true, "deletionDate": "2024-03-07T21:25:56.000Z", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "completionDate": "2024-03-07T21:25:56.000Z", "auditFocus": "EXTERNAL", "auditorRequestListMetadata": {"requestsSharedWithCustomer": "2024-03-07T21:25:56.000Z"}}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
+  ListAuditEvidenceUrls:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          auditEvidenceId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "NjVmYzgxYTMzNTljODUwOGM5YWY4ODBm", "url": "https://s3.amazonaws.com/audit-evidence/2022/audit.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=secret%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20221104T140227Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b228dbec8c1008c80c162e1210e4503dceead1e4d4751b4d9787314fd6da4d55", "filename": "example.jpg", "isDownloadable": true, "mimeType": "image/jpeg"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
+  ListAuditEvidence:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "externalId": "cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=", "status": "Ready for audit", "name": "Access Control Policy", "deletionDate": "2024-03-07T21:25:56.000Z", "creationDate": "2024-03-07T21:25:56.000Z", "statusUpdatedDate": "2024-03-07T21:25:56.000Z", "testStatus": "The test was passing during this period", "evidenceType": "Policy", "evidenceId": "access-control-policy", "relatedControls": [{"name": "CRY-104", "sectionNames": ["Article 13"]}], "description": "example description of test"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
+  ListAuditComments:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "auditEvidenceId": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "deletionDate": "2024-03-07T21:25:56.000Z", "email": "vlad@vantaroo.com", "authorName": "Vlad Vantaroo"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
+  ListAuditControls:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "a2f7e1b9d0c3f4e5a6c7b8d9", "externalId": "CRY-104", "name": "Data encryption utilized", "description": "Access reviews are performed to ensure that access is appropriate for the user's role and responsibilities.", "source": "Vanta", "domains": ["CRYPTOGRAPHIC_PROTECTIONS"], "owner": {"id": "65e1efde08e8478f143a8ff9", "displayName": "Example Owner", "emailAddress": "example-person@email.com"}, "role": null, "customFields": [], "creationDate": null, "modificationDate": null, "framework": "soc2", "sections": [{"name": "CC 1.1", "framework": "SOC 2", "principle": {"id": "CC 1.0", "name": "Control Environment"}}]}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
+  CreateCommentForAuditEvidence:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          auditEvidenceId: "<id>"
+      requestBody:
+        application/json: {"text": "<value>", "email": "Carmen.Bogan@yahoo.com", "creationDate": "2024-05-28T11:04:29.369Z"}
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "auditEvidenceId": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "deletionDate": "2024-03-07T21:25:56.000Z", "email": "vlad@vantaroo.com", "authorName": "Vlad Vantaroo"}
+  UpdateAuditEvidence:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          auditEvidenceId: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "externalId": "cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=", "status": "Ready for audit", "name": "Access Control Policy", "deletionDate": "2024-03-07T21:25:56.000Z", "creationDate": "2024-03-07T21:25:56.000Z", "statusUpdatedDate": "2024-03-07T21:25:56.000Z", "testStatus": "The test was passing during this period", "evidenceType": "Policy", "evidenceId": "access-control-policy", "relatedControls": [{"name": "CRY-104", "sectionNames": ["Article 13"]}], "description": "example description of test"}
+  CreateCustomEvidenceRequest:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+      requestBody:
+        application/json: {"controlIds": ["<value 1>", "<value 2>"], "title": "<value>", "description": "pure bludgeon deliberately question although", "cadence": "P1D", "reminderWindow": "P0D", "isRestricted": false, "auditorEmail": "<value>"}
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "controlIds": ["1.1.2.a"], "title": "Access Control Policy", "description": "Description for Access Control Policy", "cadence": "P6M", "reminderWindow": "P6M", "isRestricted": true}
+  CreateCustomControl:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+      requestBody:
+        application/json: {"externalId": "<id>", "name": null, "description": "yet plus utter queasily what juvenile wound", "effectiveDate": "2024-11-10T13:58:54.564Z", "category": "CLOUD_SECURITY"}
+      responses:
+        "201":
+          application/json: {"id": "a2f7e1b9d0c3f4e5a6c7b8d9", "externalId": "CRY-104", "name": "Data encryption utilized", "description": "Access reviews are performed to ensure that access is appropriate for the user's role and responsibilities.", "source": "Vanta", "domains": ["CRYPTOGRAPHIC_PROTECTIONS"], "owner": {"id": "65e1efde08e8478f143a8ff9", "displayName": "Example Owner", "emailAddress": "example-person@email.com"}, "role": "CONTROLLER", "customFields": [{"label": "Additional context", "value": "This control is critical for GDPR compliance"}], "creationDate": null, "modificationDate": null}
+  CreateAuditor:
+    Example 1:
+      requestBody:
+        application/json: {"email": "Genesis_Kunze87@yahoo.com", "givenName": "<value>", "familyName": "<value>"}
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "organizationId": "8c9af880f1a335965fc850c8", "email": "testauditor@audit.com", "givenName": "Sam", "familyName": "Auditor"}
+  GetAudit:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "customerOrganizationName": "corporation.com", "customerDisplayName": "Corporation Company", "customerOrganizationId": "65fc81a3359c8508c9af880f", "auditStartDate": "2024-03-07T21:25:56.000Z", "auditEndDate": "2024-03-14T21:25:56.000Z", "earlyAccessStartsAt": "2024-03-07T21:25:56.000Z", "framework": "SOC 2 Type II", "displayName": "Q1 2024 SOC 2 Audit", "allowAuditorEmails": ["sam@auditor.com"], "allowAllAuditors": true, "deletionDate": "2024-03-07T21:25:56.000Z", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "completionDate": "2024-03-07T21:25:56.000Z", "auditFocus": "EXTERNAL", "auditorRequestListMetadata": {"requestsSharedWithCustomer": "2024-03-07T21:25:56.000Z"}}
+  ListInformationRequestsForControl:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          controlId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "6890e473dce1da5d8406f5e7", "uniqueId": "1466132", "additionalControlIds": [], "approvalStatus": "NEEDS_EVIDENCE", "cadence": "ANNUALLY", "frameworkCodes": ["SOC2_CC6.1"], "description": "Provide the data deletion evidence for a sample of terminated customers", "dueDate": "2025-10-28T00:00:00.000Z", "evidenceCaptureDate": "2025-10-28T00:00:00.000Z", "requestId": null, "requestType": "SAMPLE", "title": "Terminated Customer Deletion Evidence", "creationDate": "2025-08-01T12:34:56.000Z", "modificationDate": "2025-08-02T08:00:00.000Z", "deletionDate": null, "ownerAssignment": {"displayName": "John Doe", "id": "507f1f77bcf86cd799439011", "type": "user"}}], "pageInfo": {"endCursor": "Njg5MGU0NzNkY2UxZGE1Z", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "Njg5MGU0NzNkY2UxZGE1Z"}}}
+  GetFrameworkCodes:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+      responses:
+        "200":
+          application/json: {"frameworkCodes": ["CC1.1", "CC1.2", "CC1.3", "CC2.1", "CC2.2", "CC3.1", "CC3.2", "CC4.1", "CC4.2", "CC5.1", "CC5.2", "CC6.1", "CC6.2", "CC7.1", "CC7.2", "CC8.1", "CC8.2"]}
+  ListInformationRequests:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "6890e473dce1da5d8406f5e7", "uniqueId": "1466132", "additionalControlIds": [], "approvalStatus": "NEEDS_EVIDENCE", "cadence": "ANNUALLY", "frameworkCodes": ["SOC2_CC6.1"], "description": "Provide the data deletion evidence for a sample of terminated customers", "dueDate": "2025-10-28T00:00:00.000Z", "evidenceCaptureDate": "2025-10-28T00:00:00.000Z", "requestId": null, "requestType": "SAMPLE", "title": "Terminated Customer Deletion Evidence", "creationDate": "2025-08-01T12:34:56.000Z", "modificationDate": "2025-08-02T08:00:00.000Z", "deletionDate": null, "ownerAssignment": {"displayName": "John Doe", "id": "507f1f77bcf86cd799439011", "type": "user"}}], "pageInfo": {"endCursor": "Njg5MGU0NzNkY2UxZGE1Z", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "Njg5MGU0NzNkY2UxZGE1Z"}}}
+  CreateInformationRequest:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+      requestBody:
+        application/json: {"uniqueId": "<id>", "title": "<value>", "requestType": "SAMPLE", "frameworkCodes": []}
+      responses:
+        "201":
+          application/json: {"id": "6890e473dce1da5d8406f5e7", "uniqueId": "1466132", "additionalControlIds": [], "approvalStatus": "NEEDS_EVIDENCE", "cadence": "ANNUALLY", "frameworkCodes": ["SOC2_CC6.1"], "description": "Provide the data deletion evidence for a sample of terminated customers", "dueDate": "2025-10-28T00:00:00.000Z", "evidenceCaptureDate": "2025-10-28T00:00:00.000Z", "requestId": null, "requestType": "SAMPLE", "title": "Terminated Customer Deletion Evidence", "creationDate": "2025-08-01T12:34:56.000Z", "modificationDate": "2025-08-02T08:00:00.000Z", "deletionDate": null, "ownerAssignment": {"displayName": "John Doe", "id": "507f1f77bcf86cd799439011", "type": "user"}}
+  GetInformationRequest:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "6890e473dce1da5d8406f5e7", "uniqueId": "1466132", "additionalControlIds": [], "approvalStatus": "NEEDS_EVIDENCE", "cadence": "ANNUALLY", "frameworkCodes": ["SOC2_CC6.1"], "description": "Provide the data deletion evidence for a sample of terminated customers", "dueDate": "2025-10-28T00:00:00.000Z", "evidenceCaptureDate": "2025-10-28T00:00:00.000Z", "requestId": null, "requestType": "SAMPLE", "title": "Terminated Customer Deletion Evidence", "creationDate": "2025-08-01T12:34:56.000Z", "modificationDate": "2025-08-02T08:00:00.000Z", "deletionDate": null, "ownerAssignment": {"displayName": "John Doe", "id": "507f1f77bcf86cd799439011", "type": "user"}}
+  UpdateInformationRequest:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"id": "6890e473dce1da5d8406f5e7", "uniqueId": "1466132", "additionalControlIds": [], "approvalStatus": "NEEDS_EVIDENCE", "cadence": "ANNUALLY", "frameworkCodes": ["SOC2_CC6.1"], "description": "Provide the data deletion evidence for a sample of terminated customers", "dueDate": "2025-10-28T00:00:00.000Z", "evidenceCaptureDate": "2025-10-28T00:00:00.000Z", "requestId": null, "requestType": "SAMPLE", "title": "Terminated Customer Deletion Evidence", "creationDate": "2025-08-01T12:34:56.000Z", "modificationDate": "2025-08-02T08:00:00.000Z", "deletionDate": null, "ownerAssignment": {"displayName": "John Doe", "id": "507f1f77bcf86cd799439011", "type": "user"}}
+  DeleteInformationRequest:
+    speakeasy-default-delete-information-request:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+  AcceptInformationRequestEvidence:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+      requestBody:
+        application/json: {"auditorEmail": "<value>"}
+      responses:
+        "200":
+          application/json: {"id": "6890e473dce1da5d8406f5e7", "uniqueId": "1466132", "additionalControlIds": [], "approvalStatus": "NEEDS_EVIDENCE", "cadence": "ANNUALLY", "frameworkCodes": ["SOC2_CC6.1"], "description": "Provide the data deletion evidence for a sample of terminated customers", "dueDate": "2025-10-28T00:00:00.000Z", "evidenceCaptureDate": "2025-10-28T00:00:00.000Z", "requestId": null, "requestType": "SAMPLE", "title": "Terminated Customer Deletion Evidence", "creationDate": "2025-08-01T12:34:56.000Z", "modificationDate": "2025-08-02T08:00:00.000Z", "deletionDate": null, "ownerAssignment": {"displayName": "John Doe", "id": "507f1f77bcf86cd799439011", "type": "user"}}
+  ListInformationRequestActivity:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "6650a7d13680f3b61a0cd3c1", "activityType": "CHANGE_STATUS", "timestamp": "2024-05-05T12:00:00.000Z", "userEmail": "user@example.com", "oldStatus": "NEEDS_EVIDENCE", "newStatus": "READY_FOR_AUDIT", "reason": "Status updated after review"}], "pageInfo": {"endCursor": "NjY1MGE3ZDEzNjgwZjNiNjFhMGNkM2Mx", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "NjY1MGE3ZDEzNjgwZjNiNjFhMGNkM2Mx"}}}
+  ListCommentsForInformationRequest:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "deletionDate": "2024-03-07T21:25:56.000Z", "email": "vlad@vantaroo.com", "authorName": "Vlad Vantaroo"}], "pageInfo": {"endCursor": "Njg5MGU0NzNkY2UxZGE1Z", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "Njg5MGU0NzNkY2UxZGE1Z"}}}
+  CreateCommentForInformationRequest:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+      requestBody:
+        application/json: {"text": "<value>", "email": "Daryl.Bartell38@gmail.com", "creationDate": "2024-06-25T05:04:31.105Z"}
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "deletionDate": "2024-03-07T21:25:56.000Z", "email": "vlad@vantaroo.com", "authorName": "Vlad Vantaroo"}
+  UpdateCommentForInformationRequest:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+          commentId: "<id>"
+      requestBody:
+        application/json: {"text": "<value>", "email": "Gerald_Gusikowski36@yahoo.com"}
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "deletionDate": "2024-03-07T21:25:56.000Z", "email": "vlad@vantaroo.com", "authorName": "Vlad Vantaroo"}
+  DeleteCommentForInformationRequest:
+    speakeasy-default-delete-comment-for-information-request:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+          commentId: "<id>"
+      requestBody:
+        application/json: {"email": "Ole.Adams@gmail.com"}
+  ListInformationRequestEvidence:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "6890e473dce1da5d8406f5e8", "evidenceType": "UPLOADED_DOCUMENT", "visibleToAuditorDate": "2025-10-16T12:00:00.000Z", "creationDate": "2025-10-15T10:30:00.000Z", "modificationDate": "2025-10-16T12:00:00.000Z", "deletionDate": null, "evidence": {"id": "6890e473dce1da5d8406f5ea", "filename": "security-policy.pdf", "mimeType": "application/pdf", "url": "https://example.com/presigned-url"}}], "pageInfo": {"endCursor": "Njg5MGU0NzNkY2UxZGE1ZDg0MDZmNWU4", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "Njg5MGU0NzNkY2UxZGE1ZDg0MDZmNWU4"}}}
+  GetInformationRequestTestSnapshotEvidenceDetail:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+          evidenceId: "<id>"
+      responses:
+        "200":
+          application/json: {"testId": "test.okta.account-creation", "testName": "Okta user provisioning test", "description": "Verify Okta user accounts are created via SSO.", "evaluationCriteria": "Confirms that all human user accounts in Okta were provisioned via the SSO workflow.", "integrations": [{"integrationId": "okta", "displayName": "Okta"}], "slaRemediation": {"id": "sla-30d", "settings": {"numericValue": 30, "unit": "DAYS"}}, "rawTestData": [{"resourceId": "6890e473dce1da5d8406f700", "resourceType": "OktaUser", "rawJson": {"id": "6890e473dce1da5d8406f700", "status": "ACTIVE"}}]}
+  FlagInformationRequestEvidence:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+      requestBody:
+        application/json: {"auditorEmail": "<value>", "reason": "<value>"}
+      responses:
+        "200":
+          application/json: {"id": "6890e473dce1da5d8406f5e7", "uniqueId": "1466132", "additionalControlIds": [], "approvalStatus": "NEEDS_EVIDENCE", "cadence": "ANNUALLY", "frameworkCodes": ["SOC2_CC6.1"], "description": "Provide the data deletion evidence for a sample of terminated customers", "dueDate": "2025-10-28T00:00:00.000Z", "evidenceCaptureDate": "2025-10-28T00:00:00.000Z", "requestId": null, "requestType": "SAMPLE", "title": "Terminated Customer Deletion Evidence", "creationDate": "2025-08-01T12:34:56.000Z", "modificationDate": "2025-08-02T08:00:00.000Z", "deletionDate": null, "ownerAssignment": {"displayName": "John Doe", "id": "507f1f77bcf86cd799439011", "type": "user"}}
+  ListAuditIssues:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5824", "title": "User accounts with weak passwords", "description": "The following user accounts have passwords that do not meet the company's password policy: [list of accounts]. Weak passwords increase the risk of unauthorized access to systems and data.", "readableIssueId": "ISS-1234", "issueId": "5f2c939a52855e725c8d5825", "snapshotId": "5f2c939a52855e725c8d5823", "dueDate": "2023-12-31T23:59:59.000Z", "status": "CLOSED", "lastModifiedAt": "2024-06-15T10:30:00.000Z", "createdAt": "2024-06-01T09:00:00.000Z", "detectedAt": "2024-05-30T14:45:00.000Z"}], "pageInfo": {"endCursor": null, "hasNextPage": false, "hasPreviousPage": false, "startCursor": null}}}
+  ListAuditSnapshots:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+        query:
+          pageSize: 10
+      responses:
+        "200":
+          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5823", "title": "Snapshot taken on 2024-06-01T00:00:00Z", "description": "This snapshot captures all open issues as of June 1st, 2024.", "createdAt": "2024-06-01T00:00:00.000Z"}], "pageInfo": {"endCursor": null, "hasNextPage": false, "hasPreviousPage": false, "startCursor": null}}}
+  ShareInformationRequestList:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "customerOrganizationName": "corporation.com", "customerDisplayName": "Corporation Company", "customerOrganizationId": "65fc81a3359c8508c9af880f", "auditStartDate": "2024-03-07T21:25:56.000Z", "auditEndDate": "2024-03-14T21:25:56.000Z", "earlyAccessStartsAt": "2024-03-07T21:25:56.000Z", "framework": "SOC 2 Type II", "displayName": "Q1 2024 SOC 2 Audit", "allowAuditorEmails": ["sam@auditor.com"], "allowAllAuditors": true, "deletionDate": "2024-03-07T21:25:56.000Z", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "completionDate": "2024-03-07T21:25:56.000Z", "auditFocus": "EXTERNAL", "auditorRequestListMetadata": {"requestsSharedWithCustomer": "2024-03-07T21:25:56.000Z"}}
+examplesVersion: 1.0.2
+generatedTests: {}
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -194,435 +1818,3 @@ generatedFiles:
   - src/types/rfcdate.ts
   - src/types/streams.ts
   - tsconfig.json
-examples:
-  ListAudits:
-    Example 1:
-      parameters:
-        query:
-          pageSize: 10
-      responses:
-        "200":
-          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "customerOrganizationName": "corporation.com", "customerDisplayName": "Corporation Company", "customerOrganizationId": "65fc81a3359c8508c9af880f", "auditStartDate": "2024-03-07T21:25:56Z", "auditEndDate": "2024-03-14T21:25:56Z", "earlyAccessStartsAt": "2024-03-07T21:25:56Z", "framework": "SOC 2 Type II", "allowAuditorEmails": ["sam@auditor.com"], "allowAllAuditors": true, "deletionDate": "2024-03-07T21:25:56Z", "creationDate": "2024-03-07T21:25:56Z", "modificationDate": "2024-03-07T21:25:56Z", "completionDate": "2024-03-07T21:25:56Z", "auditFocus": "EXTERNAL"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
-  ListAuditEvidenceUrls:
-    Example 1:
-      parameters:
-        path:
-          auditId: "<id>"
-          auditEvidenceId: "<id>"
-        query:
-          pageSize: 10
-      responses:
-        "200":
-          application/json: {"results": {"data": [{"id": "NjVmYzgxYTMzNTljODUwOGM5YWY4ODBm", "url": "https://s3.amazonaws.com/audit-evidence/2022/audit.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=secret%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20221104T140227Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b228dbec8c1008c80c162e1210e4503dceead1e4d4751b4d9787314fd6da4d55", "filename": "example.jpg", "isDownloadable": true}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
-  ListAuditEvidence:
-    Example 1:
-      parameters:
-        path:
-          auditId: "<id>"
-        query:
-          pageSize: 10
-      responses:
-        "200":
-          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "externalId": "cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=", "status": "Ready for audit", "name": "Access Control Policy", "deletionDate": "2024-03-07T21:25:56Z", "creationDate": "2024-03-07T21:25:56Z", "statusUpdatedDate": "2024-03-07T21:25:56Z", "testStatus": "The test was passing during this period", "evidenceType": "Policy", "evidenceId": "access-control-policy", "relatedControls": [{"name": "CRY-104", "sectionNames": ["Article 13"]}], "description": "example description of test"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
-  ListAuditComments:
-    Example 1:
-      parameters:
-        path:
-          auditId: "<id>"
-        query:
-          pageSize: 10
-      responses:
-        "200":
-          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "auditEvidenceId": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56Z", "modificationDate": "2024-03-07T21:25:56Z", "deletionDate": "2024-03-07T21:25:56Z", "email": "vlad@vantaroo.com"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
-  ListAuditControls:
-    Example 1:
-      parameters:
-        path:
-          auditId: "<id>"
-        query:
-          pageSize: 10
-      responses:
-        "200":
-          application/json: {"results": {"data": [{"id": "a2f7e1b9d0c3f4e5a6c7b8d9", "externalId": "CRY-104", "name": "Data encryption utilized", "description": "Access reviews are performed to ensure that access is appropriate for the user's role and responsibilities.", "source": "Vanta", "domains": ["CRYPTOGRAPHIC_PROTECTIONS"], "owner": {"id": "65e1efde08e8478f143a8ff9", "displayName": "Example Owner", "emailAddress": "example-person@email.com"}, "role": null, "customFields": [], "framework": "soc2", "sections": [{"name": "IPP", "framework": "HITRUST"}]}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
-  CreateCommentForAuditEvidence:
-    Example 1:
-      parameters:
-        path:
-          auditId: "<id>"
-          auditEvidenceId: "<id>"
-      requestBody:
-        application/json: {"text": "<value>", "email": "Carmen.Bogan@yahoo.com", "creationDate": "2024-05-28T11:04:29.369Z"}
-      responses:
-        "200":
-          application/json: {"id": "65fc81a3359c8508c9af880f", "auditEvidenceId": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56Z", "modificationDate": "2024-03-07T21:25:56Z", "deletionDate": "2024-03-07T21:25:56Z", "email": "vlad@vantaroo.com"}
-  UpdateAuditEvidence:
-    Example 1:
-      parameters:
-        path:
-          auditId: "<id>"
-          auditEvidenceId: "<id>"
-      requestBody:
-        application/json: {}
-      responses:
-        "200":
-          application/json: {"id": "65fc81a3359c8508c9af880f", "externalId": "cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=", "status": "Ready for audit", "name": "Access Control Policy", "deletionDate": "2024-03-07T21:25:56Z", "creationDate": "2024-03-07T21:25:56Z", "statusUpdatedDate": "2024-03-07T21:25:56Z", "testStatus": "The test was passing during this period", "evidenceType": "Policy", "evidenceId": "access-control-policy", "relatedControls": [{"name": "CRY-104", "sectionNames": ["Article 13"]}], "description": "example description of test"}
-  CreateCustomEvidenceRequest:
-    Example 1:
-      parameters:
-        path:
-          auditId: "<id>"
-      requestBody:
-        application/json: {"controlIds": ["<value 1>", "<value 2>"], "title": "<value>", "description": "pure bludgeon deliberately question although", "cadence": "P1D", "reminderWindow": "P0D", "isRestricted": false, "auditorEmail": "<value>"}
-      responses:
-        "200":
-          application/json: {"id": "65fc81a3359c8508c9af880f", "controlIds": ["1.1.2.a"], "title": "Access Control Policy", "description": "Description for Access Control Policy", "cadence": "P6M", "reminderWindow": "P6M", "isRestricted": true}
-  CreateCustomControl:
-    Example 1:
-      parameters:
-        path:
-          auditId: "<id>"
-      requestBody:
-        application/json: {"externalId": "<id>", "name": null, "description": "yet plus utter queasily what juvenile wound", "effectiveDate": "2024-11-10T13:58:54.564Z", "category": "CLOUD_SECURITY"}
-      responses:
-        "201":
-          application/json: {"id": "a2f7e1b9d0c3f4e5a6c7b8d9", "externalId": "CRY-104", "name": "Data encryption utilized", "description": "Access reviews are performed to ensure that access is appropriate for the user's role and responsibilities.", "source": "Vanta", "domains": ["CRYPTOGRAPHIC_PROTECTIONS"], "owner": {"id": "65e1efde08e8478f143a8ff9", "displayName": "Example Owner", "emailAddress": "example-person@email.com"}, "role": "CONTROLLER", "customFields": [{"label": "Additional context", "value": "This control is critical for GDPR compliance"}]}
-  CreateAuditor:
-    Example 1:
-      requestBody:
-        application/json: {"email": "Genesis_Kunze87@yahoo.com", "givenName": "<value>", "familyName": "<value>"}
-      responses:
-        "200":
-          application/json: {"id": "65fc81a3359c8508c9af880f", "organizationId": "8c9af880f1a335965fc850c8", "email": "testauditor@audit.com", "givenName": "Sam", "familyName": "Auditor"}
-examplesVersion: 1.0.2
-generatedTests: {}
-trackedFiles:
-  .devcontainer/README.md:
-    last_write_checksum: sha1:50dfd6f6a95e3b795baf587c589d5f3b50edc7e5
-  .devcontainer/devcontainer.json:
-    last_write_checksum: sha1:d0b15193202c961e7d1875864ddb15f9d17c84dd
-  .devcontainer/setup.sh:
-    last_write_checksum: sha1:f8e19262665d17db3cc6fc59b030a2264b94f902
-  .gitattributes:
-    last_write_checksum: sha1:26d16d8297b104945139da8c25bd38feeaad3e25
-  .npmignore:
-    last_write_checksum: sha1:3d5eb92f81539175db1ff0280e0aefbdd701f200
-  FUNCTIONS.md:
-    last_write_checksum: sha1:675d35ac1160adf1e4fb0a9f5390302badf96e4e
-  RUNTIMES.md:
-    last_write_checksum: sha1:e45b854f02c357cbcfdb8c3663000e8339e16505
-  USAGE.md:
-    last_write_checksum: sha1:1366d6ebababf72872516a720fef49e4be765df4
-  docs/lib/utils/retryconfig.md:
-    last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
-  docs/models/components/addauditorinput.md:
-    last_write_checksum: sha1:e32760894a3defd46fe1075882ceec8e9e7b62bd
-  docs/models/components/addcommentinput.md:
-    last_write_checksum: sha1:3667dd0ad9442360e55ea8e0e2a759750f2db4eb
-  docs/models/components/audit.md:
-    last_write_checksum: sha1:df044d4b3fe52fa84d303e45c19004cb4527bf5f
-  docs/models/components/auditevidencestate.md:
-    last_write_checksum: sha1:4ad03a91468d894368a3578166662129bc79bef1
-  docs/models/components/auditevidencetype.md:
-    last_write_checksum: sha1:896d1fd39c75c5bb41c746f4b3e6e6b38a79bc44
-  docs/models/components/auditevidenceupdateinput.md:
-    last_write_checksum: sha1:20c8b568d923a8c0b17489e7c76658da32ad9055
-  docs/models/components/auditfocus.md:
-    last_write_checksum: sha1:eff55b29a4176c58a3676b06736369948a295e25
-  docs/models/components/auditor.md:
-    last_write_checksum: sha1:f34df26cdc0aa5a3b20b80e2f0e6d366154970f0
-  docs/models/components/auditorcontrol.md:
-    last_write_checksum: sha1:574e9cc39309d03a7e049a318eac4638ade2e21d
-  docs/models/components/auditorenabledstatetransition.md:
-    last_write_checksum: sha1:a4f8540cd3e46a53dd201db3800c926eecc33c3e
-  docs/models/components/comment.md:
-    last_write_checksum: sha1:4606a143c2fd55d9cc8b7477cb22fb6191d9b546
-  docs/models/components/control.md:
-    last_write_checksum: sha1:83cfb268e739c31fe4653e0e31527b2cd495c4a3
-  docs/models/components/controldomain.md:
-    last_write_checksum: sha1:7ad69404ac054f246376f0d08c0a8c9082bb6433
-  docs/models/components/controlowner.md:
-    last_write_checksum: sha1:857573391ce75a307e419936df8b412fe1dbcd83
-  docs/models/components/controlsource.md:
-    last_write_checksum: sha1:1bc5fda5526740828c68742920be1dd0a608d7ff
-  docs/models/components/createcustomcontrolinput.md:
-    last_write_checksum: sha1:d95a1e9e54a18ca2f828e776bffe3c2199bc7531
-  docs/models/components/createcustomevidencerequestinput.md:
-    last_write_checksum: sha1:3583d84c94a2921e71af7ce7753e9b1333b87fa4
-  docs/models/components/customevidencerequest.md:
-    last_write_checksum: sha1:b5a1de7d4ae776b438506e75fa306704acc30377
-  docs/models/components/customfield.md:
-    last_write_checksum: sha1:d4d7f0529f2e03fa894e5aab1eb42e0e27dd2284
-  docs/models/components/evidence.md:
-    last_write_checksum: sha1:61c93aea39fe74d2cf5f71be36bfe304904e7f51
-  docs/models/components/evidencecontrol.md:
-    last_write_checksum: sha1:d78bed300387443073e4ec4f4a7251f8738bbdc9
-  docs/models/components/evidenceurl.md:
-    last_write_checksum: sha1:e7047f389a62d02d5018514ef7e21bd8c18ae787
-  docs/models/components/frameworkid.md:
-    last_write_checksum: sha1:2ff420ec0a09b7522036ee5e5ff0a5ed35fbcf59
-  docs/models/components/frameworksection.md:
-    last_write_checksum: sha1:e65818c92468aa9108861faee7755a4d9b65d16f
-  docs/models/components/frameworksectionframeworkid.md:
-    last_write_checksum: sha1:19f553137d659e26471ac05e4a129b8c8b4e7a8b
-  docs/models/components/owner.md:
-    last_write_checksum: sha1:870687ccb0e0fff5b7987a5d809306daf7b19559
-  docs/models/components/pageinfo.md:
-    last_write_checksum: sha1:e2d2dbf98e63ea8be27507bf6824360d9203ec3a
-  docs/models/components/paginatedresponseaudit.md:
-    last_write_checksum: sha1:b09fa57f5f441e41df63b201a359ace870adad92
-  docs/models/components/paginatedresponseauditorcontrol.md:
-    last_write_checksum: sha1:9af19c39ea1713d5df9a46c6f271029502d588e9
-  docs/models/components/paginatedresponseauditorcontrolresults.md:
-    last_write_checksum: sha1:ea850884e3fe31c3c5af3e75b5ae8bbcffd64ed3
-  docs/models/components/paginatedresponsecomment.md:
-    last_write_checksum: sha1:46d7a27f2e0628b093a147035782c87917c8a276
-  docs/models/components/paginatedresponsecommentresults.md:
-    last_write_checksum: sha1:edf823d249caae11440dbbb0c56a215083f3c77d
-  docs/models/components/paginatedresponseevidence.md:
-    last_write_checksum: sha1:23c05885a8fcd37d46a9a858d975a0d296da8260
-  docs/models/components/paginatedresponseevidenceresults.md:
-    last_write_checksum: sha1:41d2a88ba502a5a57b726951a8e5ef5d1f6c906f
-  docs/models/components/paginatedresponseevidenceurl.md:
-    last_write_checksum: sha1:4df5a2a52a4016f6f0481200d8d5f8b3dea6bfac
-  docs/models/components/paginatedresponseevidenceurlresults.md:
-    last_write_checksum: sha1:e627f09cebc03bb292552ecea78c3cae85a71c39
-  docs/models/components/recurrenceduration.md:
-    last_write_checksum: sha1:1ee21f2d94a1c5932a9dc7dd88f7caa4bda5f33a
-  docs/models/components/results.md:
-    last_write_checksum: sha1:875de671d0e2e9718acd38acda264f3dbd1ddafe
-  docs/models/components/role.md:
-    last_write_checksum: sha1:777b7dd537b6368c9291de4a1aa9b21f8c662012
-  docs/models/components/section.md:
-    last_write_checksum: sha1:8907267a1ef219c7c13341e75600a4dab0a173a9
-  docs/models/components/security.md:
-    last_write_checksum: sha1:7fb2159a4d40ba5548019f228a4de05ecff90b1e
-  docs/models/components/statusupdate.md:
-    last_write_checksum: sha1:3824a344e9486ae84ce4ebad493b6f91b342e243
-  docs/models/components/value.md:
-    last_write_checksum: sha1:3973b43e057861f397a3cd4b5eb9edece6f6cde1
-  docs/models/operations/createcommentforauditevidencerequest.md:
-    last_write_checksum: sha1:e3b204aa9f9b4fd261921f91ab00c0b1b6ee7147
-  docs/models/operations/createcustomcontrolrequest.md:
-    last_write_checksum: sha1:87982ba09b551a8fbfd4478862101f9d82ddca00
-  docs/models/operations/createcustomevidencerequestrequest.md:
-    last_write_checksum: sha1:d779307aa1961dcf34012d443f3108d80b2c6414
-  docs/models/operations/listauditcommentsrequest.md:
-    last_write_checksum: sha1:27d714c68b741d5e4b392cf29c4503af006e5c58
-  docs/models/operations/listauditcontrolsrequest.md:
-    last_write_checksum: sha1:2f9b113e2a41ffbb1730ca328d9c2d004041a0df
-  docs/models/operations/listauditevidencerequest.md:
-    last_write_checksum: sha1:82e0264a34b7cac5349758d3a7e5b4bcf6482452
-  docs/models/operations/listauditevidenceurlsrequest.md:
-    last_write_checksum: sha1:e772efd2999d66006bef40436c74c0f967ed8bec
-  docs/models/operations/listauditsrequest.md:
-    last_write_checksum: sha1:3e56442b33b947910e3b3a53bc1ed98de5490cec
-  docs/models/operations/updateauditevidencerequest.md:
-    last_write_checksum: sha1:a01b203159d3a8eb658d8f66ee3bbed8e900a688
-  docs/sdks/auditors/README.md:
-    last_write_checksum: sha1:d9086aa7ce3523e33a26ff7ef84195d0ea5ef470
-  docs/sdks/audits/README.md:
-    last_write_checksum: sha1:9020a37e89c7b9b47bf4777914df2b20d36014c2
-  eslint.config.mjs:
-    last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
-  examples/.env.template:
-    last_write_checksum: sha1:9bb95dab0c96a66617378cef093de4f3cc928a82
-  examples/README.md:
-    last_write_checksum: sha1:38f03159b95998009ffab015779e0a90ea695c06
-  examples/auditsList.example.ts:
-    last_write_checksum: sha1:537639934f84769fb903354ab92dcb018c010e66
-  examples/package.json:
-    last_write_checksum: sha1:f249d3e2f99a2c606c7bfbf127ac128003072702
-  jsr.json:
-    last_write_checksum: sha1:e5022ed8c0d9bb203616914df3f9b4446b2cb3cd
-  package.json:
-    last_write_checksum: sha1:479ab390724a3758849598b81d0db6ce15c0a9fe
-  src/core.ts:
-    last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
-  src/funcs/auditorsCreate.ts:
-    last_write_checksum: sha1:b9b4fa14d77cd6a769440038a5d2f9f56b6e5df3
-  src/funcs/auditsCreateCommentForEvidence.ts:
-    last_write_checksum: sha1:000f5ac97bba2c6e0419b1e62c1b4f76115abba2
-  src/funcs/auditsCreateCustomControl.ts:
-    last_write_checksum: sha1:d13aa5b81a71357fef3c681bcd00d664d4e11b58
-  src/funcs/auditsCreateCustomEvidenceRequest.ts:
-    last_write_checksum: sha1:b0b2d847597d3da86b427f21437606afeb2c51d1
-  src/funcs/auditsGetEvidenceUrls.ts:
-    last_write_checksum: sha1:b5ccdbbe248a82e5e2ab4e60ce34c9ec22611b90
-  src/funcs/auditsList.ts:
-    last_write_checksum: sha1:e4858c12c23643d8ac727501345c2ed902f7b0d2
-  src/funcs/auditsListComments.ts:
-    last_write_checksum: sha1:33547a8b94431bf6acc307b3072c87d28bcdf52d
-  src/funcs/auditsListControls.ts:
-    last_write_checksum: sha1:da42a72ba0701d832a612d51e65260752b801e98
-  src/funcs/auditsListEvidence.ts:
-    last_write_checksum: sha1:cd8cb7d701d236b254c617abf0f39ac4de07b174
-  src/funcs/auditsUpdateEvidence.ts:
-    last_write_checksum: sha1:464316b643ee8b8134f89fca05248493a8e8aea5
-  src/hooks/hooks.ts:
-    last_write_checksum: sha1:9a569ea8f3177ddcdfe6cd903feaf5c2d2c36a9a
-  src/hooks/index.ts:
-    last_write_checksum: sha1:1a11c073a6cd792932218e1d4ed36b8567bad8ef
-  src/hooks/types.ts:
-    last_write_checksum: sha1:29372122898cc523fa47576f3f6608a28ec6080e
-  src/index.ts:
-    last_write_checksum: sha1:35c9cde3ae14b18b3f893a1afe8b6c44f8760f24
-  src/lib/base64.ts:
-    last_write_checksum: sha1:b0b12ddbd8625efb47c0e955a18641aeb10c6532
-  src/lib/config.ts:
-    last_write_checksum: sha1:0eb01d398a0c6a26a67dfa56eb5a25ad07316d7d
-  src/lib/dlv.ts:
-    last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
-  src/lib/encodings.ts:
-    last_write_checksum: sha1:d20c131976ab8ac68b22bdde2b7ed84b5b873922
-  src/lib/env.ts:
-    last_write_checksum: sha1:38d97ea91af9a099feedb2ba18dd57dc264e7885
-  src/lib/files.ts:
-    last_write_checksum: sha1:d0f325f445b8d22e7d73baf052c585ec2dd24841
-  src/lib/http.ts:
-    last_write_checksum: sha1:797cbf16d3c7c4d62d3ba0eedb08617524938457
-  src/lib/is-plain-object.ts:
-    last_write_checksum: sha1:df687f25a9590b6fd95d39df41a652ae3fd4e517
-  src/lib/logger.ts:
-    last_write_checksum: sha1:0ec9d3a2a34c362746b767e4f9a746c055d57a7b
-  src/lib/matchers.ts:
-    last_write_checksum: sha1:e7587f40d36710d499f8a7e6b610610e55a2cb40
-  src/lib/primitives.ts:
-    last_write_checksum: sha1:987869fc54790b9c22e9182099103d6aa7c67016
-  src/lib/retries.ts:
-    last_write_checksum: sha1:f3da74dffcbe2756c69393f8600205aa1dc06e68
-  src/lib/schemas.ts:
-    last_write_checksum: sha1:209cfaabfa7fc1c1310f97453215cb0755619c6e
-  src/lib/sdks.ts:
-    last_write_checksum: sha1:9a7a2bede4cdb0c9268c784ed155ed02af4756c6
-  src/lib/security.ts:
-    last_write_checksum: sha1:8adcfa72ccb5838220a5a5cbd93236434e7c4829
-  src/lib/url.ts:
-    last_write_checksum: sha1:d124050c7e755c0cce233b9e029afb584ff65201
-  src/models/components/addauditorinput.ts:
-    last_write_checksum: sha1:470253bf8b9ccee3cf990de5efc83b4b03234545
-  src/models/components/addcommentinput.ts:
-    last_write_checksum: sha1:d9bafe89c0b0d4b115002dae92aee5ee8c24ef6b
-  src/models/components/audit.ts:
-    last_write_checksum: sha1:6f6912a6a0db9ec03f9dc70f003ec40bfc34c93f
-  src/models/components/auditevidencestate.ts:
-    last_write_checksum: sha1:e48d205356a95b2df3e4042abf0edf67afaff866
-  src/models/components/auditevidencetype.ts:
-    last_write_checksum: sha1:120f7adac7ed8070b81d6edebecb7d11a45a2a49
-  src/models/components/auditevidenceupdateinput.ts:
-    last_write_checksum: sha1:bad0a7d6df2e3f2ac409806174ce6fb659802a87
-  src/models/components/auditfocus.ts:
-    last_write_checksum: sha1:0eb589abca013beefd76c54603fa79316683e1bb
-  src/models/components/auditor.ts:
-    last_write_checksum: sha1:67c201aa8c681d0c7ecda0a6a629db6b65225aa2
-  src/models/components/auditorcontrol.ts:
-    last_write_checksum: sha1:9986880f7df9b836fc2241cd9322962177a8b5ec
-  src/models/components/auditorenabledstatetransition.ts:
-    last_write_checksum: sha1:5df2b353c3661188a232745f4a5fb4e3110f82ff
-  src/models/components/comment.ts:
-    last_write_checksum: sha1:888f79885d99001720e066e852709a7c108da1d7
-  src/models/components/control.ts:
-    last_write_checksum: sha1:77e74a290c44823b506007bb562aae1bb52dde26
-  src/models/components/controldomain.ts:
-    last_write_checksum: sha1:0c6d29d7c76ed8d6822a004f90ab4fcc54858632
-  src/models/components/controlsource.ts:
-    last_write_checksum: sha1:b4e01843aba753ff5f6566e4b00fbc20bd43bd21
-  src/models/components/createcustomcontrolinput.ts:
-    last_write_checksum: sha1:5fd5e2408dce5d9a85c65f7e326d3dc351e7eefb
-  src/models/components/createcustomevidencerequestinput.ts:
-    last_write_checksum: sha1:b63975c804ef5702f9e96ac56d05d7053564c79c
-  src/models/components/customevidencerequest.ts:
-    last_write_checksum: sha1:ddfeb412fe6ec6571b8669cda11fa6356a147327
-  src/models/components/customfield.ts:
-    last_write_checksum: sha1:27b7c2c5112573542b90056abeb6c53026f1c71e
-  src/models/components/evidence.ts:
-    last_write_checksum: sha1:4c8ea0d517b91f9a6e91e6aa68b5846ee2559337
-  src/models/components/evidencecontrol.ts:
-    last_write_checksum: sha1:9c2b201cc60ab7c89253213aff572f4dafde9e4c
-  src/models/components/evidenceurl.ts:
-    last_write_checksum: sha1:d59e59499dbea8cbaf3cdbfc15fa1d2ac43e2e9c
-  src/models/components/frameworkid.ts:
-    last_write_checksum: sha1:1df852f0267653d131a0aa290ed30a9150ee9c5f
-  src/models/components/frameworksection.ts:
-    last_write_checksum: sha1:cec7afe98bec475c8e679082dbbbb1d58a36b24b
-  src/models/components/index.ts:
-    last_write_checksum: sha1:48a8635d05d4fea758896599f26e19f33fddd9c5
-  src/models/components/pageinfo.ts:
-    last_write_checksum: sha1:ab63033169c39feb2cf4b289e7fa5252f5f2fbcd
-  src/models/components/paginatedresponseaudit.ts:
-    last_write_checksum: sha1:303c364de63239d2df5207b54fefbac9b6fad898
-  src/models/components/paginatedresponseauditorcontrol.ts:
-    last_write_checksum: sha1:8629d094cd55670f5f38d1444eb88ec420bcd0ef
-  src/models/components/paginatedresponsecomment.ts:
-    last_write_checksum: sha1:008bfbdd0f5fda6015b3ae7b869afc74559b2f57
-  src/models/components/paginatedresponseevidence.ts:
-    last_write_checksum: sha1:2ca2b7bb9ce165401dfe54c48cc8488c7fe93bea
-  src/models/components/paginatedresponseevidenceurl.ts:
-    last_write_checksum: sha1:dd0b1bfc280696a00a33915ae4ecc37aa1f11df4
-  src/models/components/recurrenceduration.ts:
-    last_write_checksum: sha1:93e2b00478c1930eb3df6bb901c3ed42df18b897
-  src/models/components/section.ts:
-    last_write_checksum: sha1:6fcab6ab644fec5a341e8928ff8cec6b644add2b
-  src/models/components/security.ts:
-    last_write_checksum: sha1:14f08712e7ae6c9786e015c415b290acda66bcef
-  src/models/errors/apierror.ts:
-    last_write_checksum: sha1:efff803b9ac6b8dc6c5398aad65355f91c34792d
-  src/models/errors/httpclienterrors.ts:
-    last_write_checksum: sha1:994ced121c54fecd0af038ccfb7855fbfd3868ec
-  src/models/errors/index.ts:
-    last_write_checksum: sha1:9b0f1936bbb6422e9b8ee81fd1fa53de70860a14
-  src/models/errors/responsevalidationerror.ts:
-    last_write_checksum: sha1:fbb5ae1ce0c88ff48c94c03af01843004807a0d5
-  src/models/errors/sdkvalidationerror.ts:
-    last_write_checksum: sha1:a69da17627bcc32b820544608f3400423ea53f26
-  src/models/errors/vantaerror.ts:
-    last_write_checksum: sha1:1715c6bdba9ef16000d6a4ca8d744ef4cc02cac8
-  src/models/operations/createcommentforauditevidence.ts:
-    last_write_checksum: sha1:a356ea7b9f382880d0b9404c18daf77bc17654c4
-  src/models/operations/createcustomcontrol.ts:
-    last_write_checksum: sha1:641584d8833ea9104bd439cbe4f0831754f33c76
-  src/models/operations/createcustomevidencerequest.ts:
-    last_write_checksum: sha1:1a138bf99a82191e9e33366733d154255c0a4921
-  src/models/operations/index.ts:
-    last_write_checksum: sha1:fbe509b394222c07afbcb46165e0a167c75f870a
-  src/models/operations/listauditcomments.ts:
-    last_write_checksum: sha1:174ef03079744f7c898c30b9c36e1b63f0fa4377
-  src/models/operations/listauditcontrols.ts:
-    last_write_checksum: sha1:d4b3321656761423535e1334e9c52394060e2b20
-  src/models/operations/listauditevidence.ts:
-    last_write_checksum: sha1:2a1fd290a0e92420068a15d5da4143b9be6f0307
-  src/models/operations/listauditevidenceurls.ts:
-    last_write_checksum: sha1:4ee6d7b58b11defc4b35932b4f577d1b0ca76cae
-  src/models/operations/listaudits.ts:
-    last_write_checksum: sha1:61c9c2d3ffa964c8962a7c3f735b23922a9ab7ae
-  src/models/operations/updateauditevidence.ts:
-    last_write_checksum: sha1:6ecfa8b044262cea2a8518773be023f80a11a50d
-  src/sdk/auditors.ts:
-    last_write_checksum: sha1:1d216ecd5582ad68e632bec3715b470188e14e2c
-  src/sdk/audits.ts:
-    last_write_checksum: sha1:47d300e7fe9d1723e111b097c1ba7325dbec8192
-  src/sdk/index.ts:
-    last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
-  src/sdk/sdk.ts:
-    last_write_checksum: sha1:a393b1637159b81c4b35e41b2d61cd834587eb66
-  src/types/async.ts:
-    last_write_checksum: sha1:3ff07b3feaf390ec1aeb18ff938e139c6c4a9585
-  src/types/blobs.ts:
-    last_write_checksum: sha1:cf45d78916671cb6345a11c97c633c64402bc27c
-  src/types/constdatetime.ts:
-    last_write_checksum: sha1:dfaaf9adfaf49808bd4c9dea0039f21b7088d9c0
-  src/types/enums.ts:
-    last_write_checksum: sha1:ee590453d2c87e33e89c633d37ee46907eca0e58
-  src/types/fp.ts:
-    last_write_checksum: sha1:d24994d58f37a1ca106847fcc6d2e976c6f1c093
-  src/types/index.ts:
-    last_write_checksum: sha1:bf43b3dccb960ca9ae9c5ab940da4786255881cd
-  src/types/operations.ts:
-    last_write_checksum: sha1:c49e724cfb1259296381cb57bc0fcdd2eae45865
-  src/types/rfcdate.ts:
-    last_write_checksum: sha1:8e5f382e02fe21c2f2e24deb1b7bbf8cddd3dd16
-  src/types/streams.ts:
-    last_write_checksum: sha1:cc9ced2dd34a76c3a1bd7784ccda1cc3b37ab9a9
-  src/types/unrecognized.ts:
-    last_write_checksum: sha1:d33ac686528492f4cdc0dbf81ed343b4afe020fe
-  tsconfig.json:
-    last_write_checksum: sha1:c3ec7996536cdb9a54319e7d1eb3b199b733d34c

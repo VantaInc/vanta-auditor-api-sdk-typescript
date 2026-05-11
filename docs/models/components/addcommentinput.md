@@ -8,7 +8,7 @@ import { AddCommentInput } from "vanta-auditor-api-sdk/models/components";
 let value: AddCommentInput = {
   text: "<value>",
   email: "Tatyana_Harber86@gmail.com",
-  creationDate: new Date("2024-01-09T06:42:28.502Z"),
+  creationDate: new Date("2025-01-08T06:42:28.502Z"),
 };
 ```
 

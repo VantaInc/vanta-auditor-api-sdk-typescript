@@ -36,6 +36,15 @@ export type Comment = {
    * The email of the comment author. This acts as a unique identifier to map users between Vanta and external systems.
    */
   email: string | null;
+  /**
+   * Human-readable display name of the comment author.
+   *
+   * @remarks
+   * Null if the author's name is not available (e.g., user was deleted).
+   * This enables correct author attribution in integrations where users cannot
+   * be reliably matched across systems by email alone.
+   */
+  authorName: string | null;
 };
 
 /** @internal */
@@ -54,6 +63,7 @@ export const Comment$inboundSchema: z.ZodType<Comment, z.ZodTypeDef, unknown> =
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
     email: z.nullable(z.string()),
+    authorName: z.nullable(z.string()),
   });
 
 export function commentFromJSON(

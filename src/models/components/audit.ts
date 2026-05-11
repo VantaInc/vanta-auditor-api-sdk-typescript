@@ -8,6 +8,20 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AuditFocus, AuditFocus$inboundSchema } from "./auditfocus.js";
 
+/**
+ * Metadata about the auditor request list. This field is only present for IRL (Information
+ *
+ * @remarks
+ * Request List) based audits and will be undefined for standard audits. Use the presence
+ * of this field to differentiate between IRL and non-IRL audits.
+ */
+export type AuditorRequestListMetadata = {
+  /**
+   * Timestamp when information requests were shared with the customer. Null if not shared.
+   */
+  requestsSharedWithCustomer: Date | null;
+};
+
 export type Audit = {
   /**
    * The unique identifier for the audit.
@@ -42,6 +56,13 @@ export type Audit = {
    */
   framework: string;
   /**
+   * The display name for the audit. Returns the custom audit name if set,
+   *
+   * @remarks
+   * otherwise returns the framework name.
+   */
+  displayName: string;
+  /**
    * Emails of auditors with access to audit
    */
   allowAuditorEmails: Array<string>;
@@ -66,7 +87,36 @@ export type Audit = {
    */
   completionDate: Date | null;
   auditFocus: AuditFocus;
+  /**
+   * Metadata about the auditor request list. This field is only present for IRL (Information
+   *
+   * @remarks
+   * Request List) based audits and will be undefined for standard audits. Use the presence
+   * of this field to differentiate between IRL and non-IRL audits.
+   */
+  auditorRequestListMetadata?: AuditorRequestListMetadata | undefined;
 };
+
+/** @internal */
+export const AuditorRequestListMetadata$inboundSchema: z.ZodType<
+  AuditorRequestListMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  requestsSharedWithCustomer: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ),
+});
+
+export function auditorRequestListMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<AuditorRequestListMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AuditorRequestListMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AuditorRequestListMetadata' from JSON`,
+  );
+}
 
 /** @internal */
 export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
@@ -85,6 +135,7 @@ export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
     framework: z.string(),
+    displayName: z.string(),
     allowAuditorEmails: z.array(z.string()),
     allowAllAuditors: z.boolean(),
     deletionDate: z.nullable(
@@ -100,6 +151,9 @@ export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
     auditFocus: AuditFocus$inboundSchema,
+    auditorRequestListMetadata: z.lazy(() =>
+      AuditorRequestListMetadata$inboundSchema
+    ).optional(),
   });
 
 export function auditFromJSON(

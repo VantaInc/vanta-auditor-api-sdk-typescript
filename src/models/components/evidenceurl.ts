@@ -24,6 +24,10 @@ export type EvidenceUrl = {
    * Set to true if this is a presigned s3 url. Set to false if this is a customer uploaded link
    */
   isDownloadable: boolean;
+  /**
+   * MIME type of the evidence file (e.g., "application/pdf", "image/png")
+   */
+  mimeType: string | null;
 };
 
 /** @internal */
@@ -36,6 +40,7 @@ export const EvidenceUrl$inboundSchema: z.ZodType<
   url: z.string(),
   filename: z.string(),
   isDownloadable: z.boolean(),
+  mimeType: z.nullable(z.string()),
 });
 
 export function evidenceUrlFromJSON(

@@ -4,6 +4,7 @@
 
 import { VantaCore } from "../core.js";
 import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -31,6 +32,8 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Returns a paginated list of evidence urls for an audit. This endpoint should be called whenever an
  * evidence is created or has a statusUpdatedAt field that is more recent than the most recent polling event.
+ *
+ * Evidence must be in one of the following states to retrieve URLs: "Ready for audit", "Accepted", "Flagged", or "NA".
  */
 export function auditsGetEvidenceUrls(
   client: VantaCore,
@@ -98,7 +101,6 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-
   const path = pathToFunc("/audits/{auditId}/evidence/{auditEvidenceId}/urls")(
     pathParams,
   );
@@ -149,7 +151,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

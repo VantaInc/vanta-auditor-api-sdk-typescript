@@ -61,6 +61,14 @@ export type Control = {
    * The control's custom field values, if control custom fields is included in your Vanta instance.
    */
   customFields: Array<CustomField>;
+  /**
+   * When the control was created. Returns null for Vanta library controls.
+   */
+  creationDate: Date | null;
+  /**
+   * When the control was last modified. Returns null for Vanta library controls.
+   */
+  modificationDate: Date | null;
 };
 
 /** @internal */
@@ -96,6 +104,12 @@ export const Control$inboundSchema: z.ZodType<Control, z.ZodTypeDef, unknown> =
     owner: z.nullable(z.lazy(() => ControlOwner$inboundSchema)),
     role: z.nullable(z.string()).optional(),
     customFields: z.array(CustomField$inboundSchema),
+    creationDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    modificationDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
   });
 
 export function controlFromJSON(

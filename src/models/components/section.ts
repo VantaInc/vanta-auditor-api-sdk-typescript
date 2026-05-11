@@ -7,6 +7,20 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The principle that groups this section, if any.
+ */
+export type Principle = {
+  /**
+   * The principle's unique ID.
+   */
+  id: string;
+  /**
+   * The principle's name.
+   */
+  name: string;
+};
+
 export type Section = {
   /**
    * The section name
@@ -16,13 +30,38 @@ export type Section = {
    * The section framework
    */
   framework: string;
+  /**
+   * The principle that groups this section, if any.
+   */
+  principle: Principle | null;
 };
+
+/** @internal */
+export const Principle$inboundSchema: z.ZodType<
+  Principle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+export function principleFromJSON(
+  jsonString: string,
+): SafeParseResult<Principle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Principle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Principle' from JSON`,
+  );
+}
 
 /** @internal */
 export const Section$inboundSchema: z.ZodType<Section, z.ZodTypeDef, unknown> =
   z.object({
     name: z.string(),
     framework: z.string(),
+    principle: z.nullable(z.lazy(() => Principle$inboundSchema)),
   });
 
 export function sectionFromJSON(

@@ -63,6 +63,14 @@ export type AuditorControl = {
    */
   customFields: Array<CustomField>;
   /**
+   * When the control was created. Returns null for Vanta library controls.
+   */
+  creationDate: Date | null;
+  /**
+   * When the control was last modified. Returns null for Vanta library controls.
+   */
+  modificationDate: Date | null;
+  /**
    * The report standard framework fulfilled by the control.
    */
   framework: string;
@@ -105,6 +113,12 @@ export const AuditorControl$inboundSchema: z.ZodType<
   owner: z.nullable(z.lazy(() => Owner$inboundSchema)),
   role: z.nullable(z.string()).optional(),
   customFields: z.array(CustomField$inboundSchema),
+  creationDate: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ),
+  modificationDate: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ),
   framework: z.string(),
   sections: z.array(Section$inboundSchema),
 });
