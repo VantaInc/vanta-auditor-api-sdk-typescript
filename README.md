@@ -13,6 +13,8 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 ## Summary
 
 Conduct an audit: The Auditor API lets audit firms conduct audits from a tool outside of Vanta. Unlock data syncing with Vanta through this API.
+
+**Note for Vanta Gov (FedRAMP) customers:** Select `Vanta Gov (FedRAMP)` from the server dropdown to issue requests against `https://api.vanta-gov.com`. The OAuth token URL shown below defaults to the commercial host — replace it with `https://api.vanta-gov.com/oauth/token`.
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -133,21 +135,41 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [auditors](docs/sdks/auditors/README.md)
+### [Auditors](docs/sdks/auditors/README.md)
 
 * [create](docs/sdks/auditors/README.md#create) - Create an auditor
 
-### [audits](docs/sdks/audits/README.md)
+### [Audits](docs/sdks/audits/README.md)
 
 * [list](docs/sdks/audits/README.md#list) - List audits
-* [getEvidenceUrls](docs/sdks/audits/README.md#getevidenceurls) - List audit evidence url
-* [listEvidence](docs/sdks/audits/README.md#listevidence) - List audit evidence
+* [getAudit](docs/sdks/audits/README.md#getaudit) - Get audit by ID
 * [listComments](docs/sdks/audits/README.md#listcomments) - List audit comments
 * [listControls](docs/sdks/audits/README.md#listcontrols) - List audit controls
-* [createCommentForEvidence](docs/sdks/audits/README.md#createcommentforevidence) - Create a comment for audit evidence
-* [updateEvidence](docs/sdks/audits/README.md#updateevidence) - Update audit evidence
-* [createCustomEvidenceRequest](docs/sdks/audits/README.md#createcustomevidencerequest) - Create a custom evidence request for an audit
 * [createCustomControl](docs/sdks/audits/README.md#createcustomcontrol) - Create a custom control for an audit
+* [listInformationRequestsForControl](docs/sdks/audits/README.md#listinformationrequestsforcontrol) - List information requests linked to a control within an audit
+* [listEvidence](docs/sdks/audits/README.md#listevidence) - List audit evidence
+* [createCustomEvidenceRequest](docs/sdks/audits/README.md#createcustomevidencerequest) - Create a custom evidence request for an audit
+* [updateEvidence](docs/sdks/audits/README.md#updateevidence) - Update audit evidence
+* [createCommentForEvidence](docs/sdks/audits/README.md#createcommentforevidence) - Create a comment for audit evidence
+* [getEvidenceUrls](docs/sdks/audits/README.md#getevidenceurls) - List audit evidence url
+* [getFrameworkCodes](docs/sdks/audits/README.md#getframeworkcodes) - Get framework codes for an audit
+* [listInformationRequests](docs/sdks/audits/README.md#listinformationrequests) - List information requests for an audit
+* [createInformationRequest](docs/sdks/audits/README.md#createinformationrequest) - Create a new information request
+* [getInformationRequest](docs/sdks/audits/README.md#getinformationrequest) - Get an information request by ID
+* [updateInformationRequest](docs/sdks/audits/README.md#updateinformationrequest) - Update an information request for an audit
+* [deleteInformationRequest](docs/sdks/audits/README.md#deleteinformationrequest) - Delete an information request for an audit
+* [acceptInformationRequestEvidence](docs/sdks/audits/README.md#acceptinformationrequestevidence) - Accept evidence for an information request
+* [listInformationRequestActivity](docs/sdks/audits/README.md#listinformationrequestactivity) - List information request activity
+* [listCommentsForInformationRequest](docs/sdks/audits/README.md#listcommentsforinformationrequest) - List comments for an information request
+* [createCommentForInformationRequest](docs/sdks/audits/README.md#createcommentforinformationrequest) - Create a comment for an information request
+* [updateCommentForInformationRequest](docs/sdks/audits/README.md#updatecommentforinformationrequest) - Update a comment for an information request
+* [deleteCommentForInformationRequest](docs/sdks/audits/README.md#deletecommentforinformationrequest) - Delete a comment for an information request
+* [listInformationRequestEvidence](docs/sdks/audits/README.md#listinformationrequestevidence) - List evidence for an information request
+* [getInformationRequestTestSnapshotEvidenceDetail](docs/sdks/audits/README.md#getinformationrequesttestsnapshotevidencedetail) - Get test snapshot detail for an evidence row
+* [flagInformationRequestEvidence](docs/sdks/audits/README.md#flaginformationrequestevidence) - Flag evidence for an information request
+* [listAuditIssues](docs/sdks/audits/README.md#listauditissues) - List snapshotted issues for an audit
+* [listAuditSnapshots](docs/sdks/audits/README.md#listauditsnapshots) - List snapshotted issues for an audit
+* [shareInformationRequestList](docs/sdks/audits/README.md#shareinformationrequestlist) - Share information request list with customer
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -168,15 +190,35 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 <summary>Available standalone functions</summary>
 
 - [`auditorsCreate`](docs/sdks/auditors/README.md#create) - Create an auditor
+- [`auditsAcceptInformationRequestEvidence`](docs/sdks/audits/README.md#acceptinformationrequestevidence) - Accept evidence for an information request
 - [`auditsCreateCommentForEvidence`](docs/sdks/audits/README.md#createcommentforevidence) - Create a comment for audit evidence
+- [`auditsCreateCommentForInformationRequest`](docs/sdks/audits/README.md#createcommentforinformationrequest) - Create a comment for an information request
 - [`auditsCreateCustomControl`](docs/sdks/audits/README.md#createcustomcontrol) - Create a custom control for an audit
 - [`auditsCreateCustomEvidenceRequest`](docs/sdks/audits/README.md#createcustomevidencerequest) - Create a custom evidence request for an audit
+- [`auditsCreateInformationRequest`](docs/sdks/audits/README.md#createinformationrequest) - Create a new information request
+- [`auditsDeleteCommentForInformationRequest`](docs/sdks/audits/README.md#deletecommentforinformationrequest) - Delete a comment for an information request
+- [`auditsDeleteInformationRequest`](docs/sdks/audits/README.md#deleteinformationrequest) - Delete an information request for an audit
+- [`auditsFlagInformationRequestEvidence`](docs/sdks/audits/README.md#flaginformationrequestevidence) - Flag evidence for an information request
+- [`auditsGetAudit`](docs/sdks/audits/README.md#getaudit) - Get audit by ID
 - [`auditsGetEvidenceUrls`](docs/sdks/audits/README.md#getevidenceurls) - List audit evidence url
+- [`auditsGetFrameworkCodes`](docs/sdks/audits/README.md#getframeworkcodes) - Get framework codes for an audit
+- [`auditsGetInformationRequest`](docs/sdks/audits/README.md#getinformationrequest) - Get an information request by ID
+- [`auditsGetInformationRequestTestSnapshotEvidenceDetail`](docs/sdks/audits/README.md#getinformationrequesttestsnapshotevidencedetail) - Get test snapshot detail for an evidence row
 - [`auditsList`](docs/sdks/audits/README.md#list) - List audits
+- [`auditsListAuditIssues`](docs/sdks/audits/README.md#listauditissues) - List snapshotted issues for an audit
+- [`auditsListAuditSnapshots`](docs/sdks/audits/README.md#listauditsnapshots) - List snapshotted issues for an audit
 - [`auditsListComments`](docs/sdks/audits/README.md#listcomments) - List audit comments
+- [`auditsListCommentsForInformationRequest`](docs/sdks/audits/README.md#listcommentsforinformationrequest) - List comments for an information request
 - [`auditsListControls`](docs/sdks/audits/README.md#listcontrols) - List audit controls
 - [`auditsListEvidence`](docs/sdks/audits/README.md#listevidence) - List audit evidence
+- [`auditsListInformationRequestActivity`](docs/sdks/audits/README.md#listinformationrequestactivity) - List information request activity
+- [`auditsListInformationRequestEvidence`](docs/sdks/audits/README.md#listinformationrequestevidence) - List evidence for an information request
+- [`auditsListInformationRequests`](docs/sdks/audits/README.md#listinformationrequests) - List information requests for an audit
+- [`auditsListInformationRequestsForControl`](docs/sdks/audits/README.md#listinformationrequestsforcontrol) - List information requests linked to a control within an audit
+- [`auditsShareInformationRequestList`](docs/sdks/audits/README.md#shareinformationrequestlist) - Share information request list with customer
+- [`auditsUpdateCommentForInformationRequest`](docs/sdks/audits/README.md#updatecommentforinformationrequest) - Update a comment for an information request
 - [`auditsUpdateEvidence`](docs/sdks/audits/README.md#updateevidence) - Update audit evidence
+- [`auditsUpdateInformationRequest`](docs/sdks/audits/README.md#updateinformationrequest) - Update an information request for an audit
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -314,11 +356,10 @@ run();
 
 You can override the default server globally by passing a server index to the `serverIdx: number` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| #   | Server                         | Description    |
-| --- | ------------------------------ | -------------- |
-| 0   | `https://api.vanta.com/v1`     | US Region API  |
-| 1   | `https://api.eu.vanta.com/v1`  | EU Region API  |
-| 2   | `https://api.aus.vanta.com/v1` | AUS Region API |
+| #   | Server                         | Description         |
+| --- | ------------------------------ | ------------------- |
+| 0   | `https://api.vanta.com/v1`     | US Region API       |
+| 1   | `https://api.vanta-gov.com/v1` | Vanta Gov (FedRAMP) |
 
 #### Example
 
@@ -347,7 +388,7 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { Vanta } from "vanta-auditor-api-sdk";
 
 const vanta = new Vanta({
-  serverURL: "https://api.aus.vanta.com/v1",
+  serverURL: "https://api.vanta-gov.com/v1",
   bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
 });
 
@@ -375,19 +416,23 @@ The `HTTPClient` constructor takes an optional `fetcher` argument that can be
 used to integrate a third-party HTTP client or when writing tests to mock out
 the HTTP client and feed in fixtures.
 
-The following example shows how to use the `"beforeRequest"` hook to to add a
-custom header and a timeout to requests and how to use the `"requestError"` hook
-to log errors:
+The following example shows how to:
+- route requests through a proxy server using [undici](https://www.npmjs.com/package/undici)'s ProxyAgent
+- use the `"beforeRequest"` hook to add a custom header and a timeout to requests
+- use the `"requestError"` hook to log errors
 
 ```typescript
 import { Vanta } from "vanta-auditor-api-sdk";
+import { ProxyAgent } from "undici";
 import { HTTPClient } from "vanta-auditor-api-sdk/lib/http";
 
+const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
+
 const httpClient = new HTTPClient({
-  // fetcher takes a function that has the same signature as native `fetch`.
-  fetcher: (request) => {
-    return fetch(request);
-  }
+  // 'fetcher' takes a function that has the same signature as native 'fetch'.
+  fetcher: (input, init) =>
+    // 'dispatcher' is specific to undici and not part of the standard Fetch API.
+    fetch(input, { ...init, dispatcher } as RequestInit),
 });
 
 httpClient.addHook("beforeRequest", (request) => {

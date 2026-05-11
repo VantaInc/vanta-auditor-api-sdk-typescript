@@ -73,6 +73,19 @@ actions:
       after: sdk.audits.list()
       created_at: 1736516640306
 
+  # Pin the headline example shown in README.md / USAGE.md / FUNCTIONS.md to
+  # `audits.list`. Without this, Speakeasy picks the first operation in the
+  # spec — which silently flipped to `auditors.create` when the spec source
+  # moved from the local file to the Mintlify URL. `audits.list` is the
+  # better landing example for an auditor API; `position: 0` keeps it first
+  # regardless of future operation ordering changes.
+  - target: $["paths"]["/audits"]["get"]
+    update:
+      x-speakeasy-usage-example:
+        position: 0
+        tags:
+          - usage
+
   # Removing extranous endpoints
   - target: $["paths"]["/audits/{auditId}/vendors"]
     remove: true

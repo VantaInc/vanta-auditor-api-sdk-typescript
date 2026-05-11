@@ -33,11 +33,17 @@ let value: PaginatedResponseAuditorControl = {
             ],
           },
         ],
+        creationDate: new Date("2025-11-15T21:47:21.999Z"),
+        modificationDate: new Date("2024-01-04T15:06:44.365Z"),
         framework: "<value>",
         sections: [
           {
             name: "<value>",
             framework: "<value>",
+            principle: {
+              id: "<id>",
+              name: "<value>",
+            },
           },
         ],
       },
@@ -45,7 +51,7 @@ let value: PaginatedResponseAuditorControl = {
     pageInfo: {
       endCursor: "<value>",
       hasNextPage: false,
-      hasPreviousPage: false,
+      hasPreviousPage: true,
       startCursor: "<value>",
     },
   },

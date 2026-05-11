@@ -7,13 +7,13 @@ import { Auditors } from "./auditors.js";
 import { Audits } from "./audits.js";
 
 export class Vanta extends ClientSDK {
-  private _audits?: Audits;
-  get audits(): Audits {
-    return (this._audits ??= new Audits(this._options));
-  }
-
   private _auditors?: Auditors;
   get auditors(): Auditors {
     return (this._auditors ??= new Auditors(this._options));
+  }
+
+  private _audits?: Audits;
+  get audits(): Audits {
+    return (this._audits ??= new Audits(this._options));
   }
 }

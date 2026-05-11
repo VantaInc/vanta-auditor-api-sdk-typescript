@@ -16,13 +16,9 @@ export const ServerList = [
    */
   "https://api.vanta.com/v1",
   /**
-   * EU Region API
+   * Vanta Gov (FedRAMP)
    */
-  "https://api.eu.vanta.com/v1",
-  /**
-   * AUS Region API
-   */
-  "https://api.aus.vanta.com/v1",
+  "https://api.vanta-gov.com/v1",
 ] as const;
 
 export type SDKOptions = {
@@ -69,8 +65,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0.0",
-  sdkVersion: "0.4.2",
-  genVersion: "2.755.9",
+  sdkVersion: "0.5.0",
+  genVersion: "2.882.0",
   userAgent:
-    "speakeasy-sdk/typescript 0.4.2 2.755.9 1.0.0 vanta-auditor-api-sdk",
+    "speakeasy-sdk/typescript 0.5.0 2.882.0 1.0.0 vanta-auditor-api-sdk",
 } as const;

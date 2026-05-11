@@ -10,7 +10,7 @@ let value: PaginatedResponseEvidenceUrlResults = {
   pageInfo: {
     endCursor: "<value>",
     hasNextPage: false,
-    hasPreviousPage: false,
+    hasPreviousPage: true,
     startCursor: "<value>",
   },
 };

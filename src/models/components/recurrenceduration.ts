@@ -13,6 +13,7 @@ export const RecurrenceDuration = {
   P3M: "P3M",
   P6M: "P6M",
   P1Y: "P1Y",
+  P2Y: "P2Y",
 } as const;
 export type RecurrenceDuration = ClosedEnum<typeof RecurrenceDuration>;
 

@@ -9,7 +9,7 @@ let value: CreateCustomControlInput = {
   externalId: "<id>",
   name: "<value>",
   description: "impact extremely barring oh um irk splendid gee as",
-  effectiveDate: new Date("2024-12-26T03:54:30.377Z"),
+  effectiveDate: new Date("2025-12-26T03:54:30.377Z"),
   category: "INFORMATION_ASSURANCE",
 };
 ```

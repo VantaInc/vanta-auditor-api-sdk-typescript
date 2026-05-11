@@ -1,0 +1,39 @@
+# VantaPolicyEvidence
+
+Evidence in the form of a Vanta Policy.
+Vanta Policies are compliance policies with metadata like locale,
+effective dates, and versioning. Policies are always uploaded files
+stored in Vanta's system.
+
+## Example Usage
+
+```typescript
+import { VantaPolicyEvidence } from "vanta-auditor-api-sdk/models/components";
+
+let value: VantaPolicyEvidence = {
+  title: "<value>",
+  policyId: "<id>",
+  policyVersionId: "<id>",
+  policyVersionFileId: "<id>",
+  file: {
+    effectiveOrCreationDate: new Date("2024-02-19T17:41:10.303Z"),
+    locale: "it",
+    url: "https://private-rim.biz",
+    mimeType: "<value>",
+    id: "<id>",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                          | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `title`                                                                                                                                                                        | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The title of the policy as displayed in Vanta.                                                                                                                                 |
+| `description`                                                                                                                                                                  | *string*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | Optional description providing additional context about the policy.                                                                                                            |
+| `expirationDate`                                                                                                                                                               | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                  | :heavy_minus_sign:                                                                                                                                                             | The date when the policy version expires and should be renewed.<br/>Undefined if no expiration is set.<br/>Format: ISO 8601 UTC timestamp.                                     |
+| `lastEditedBy`                                                                                                                                                                 | [components.LastEditedBy](../../models/components/lasteditedby.md)                                                                                                             | :heavy_minus_sign:                                                                                                                                                             | Information about the user who last edited this policy version.<br/>Undefined if the user information is not available.                                                        |
+| `policyId`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The policy type this evidence belongs to (e.g. "information-security-policy-bsi").<br/>Policies prefixed with "custom-" are customer-defined; others are Vanta-provided templates. |
+| `policyVersionId`                                                                                                                                                              | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The identifier of the approved policy version that was submitted as evidence.<br/>A new version is created each time a policy is updated and approved.                         |
+| `policyVersionFileId`                                                                                                                                                          | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The identifier of the locale-specific file within the policy version.<br/>Each policy version may contain multiple files, one per supported language.                          |
+| `file`                                                                                                                                                                         | [components.VantaPolicyEvidenceFile](../../models/components/vantapolicyevidencefile.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The uploaded policy file for this version.                                                                                                                                     |

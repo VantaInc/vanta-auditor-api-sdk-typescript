@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the vanta-auditor-api-sdk SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx auditsList.example.ts
+ * npm run build && npx tsx auditorsCreate.example.ts
  */
 
 import { Vanta } from "vanta-auditor-api-sdk";
@@ -18,7 +18,11 @@ const vanta = new Vanta({
 });
 
 async function main() {
-  const result = await vanta.audits.list({});
+  const result = await vanta.auditors.create({
+    email: "Genesis_Kunze87@yahoo.com",
+    givenName: "<value>",
+    familyName: "<value>",
+  });
 
   console.log(result);
 }
