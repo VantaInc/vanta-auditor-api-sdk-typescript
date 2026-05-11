@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { VantaCore } from "vanta-auditor-api-sdk/core.js";
-import { auditorsCreate } from "vanta-auditor-api-sdk/funcs/auditorsCreate.js";
+import { auditsList } from "vanta-auditor-api-sdk/funcs/auditsList.js";
 
 // Use `VantaCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,16 +29,12 @@ const vanta = new VantaCore({
 });
 
 async function run() {
-  const res = await auditorsCreate(vanta, {
-    email: "Genesis_Kunze87@yahoo.com",
-    givenName: "<value>",
-    familyName: "<value>",
-  });
+  const res = await auditsList(vanta, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("auditorsCreate failed:", res.error);
+    console.log("auditsList failed:", res.error);
   }
 }
 
