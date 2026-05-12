@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 1ce8e6416544c5d93a21d52c31565df4
+  docChecksum: 62d451e7a61f422cd0150721ee96dc2e
   docVersion: 1.0.0
   speakeasyVersion: 1.762.0
   generationVersion: 2.882.0
-  releaseVersion: 0.5.0
-  configChecksum: 4b1f0e69e8e9443af55182752d301ac9
+  releaseVersion: 0.6.0
+  configChecksum: ec2722ef7204f7fb2cc63d31ea48d7b3
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: 0fad9824-7bbf-4b9c-9d63-66aa593f2540
-  pristine_commit_hash: a4524864624f067c1c1486c18194ccce0f773902
-  pristine_tree_hash: 7b19be47669d9a8c09b659fde1935f49d53ebe88
+  generation_id: 6f41d804-e168-40de-a28e-e86cbc60452a
+  pristine_commit_hash: 5bcb9b814b068b5cbcf0a32db992630a85161306
+  pristine_tree_hash: 5c5f52af7841c2a2b34a258c4bf906fabb896e3f
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -23,6 +23,7 @@ features:
     devContainers: 2.90.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
+    examples: 2.82.5
     globalSecurity: 2.82.16
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.1
@@ -56,16 +57,16 @@ trackedFiles:
     pristine_git_object: 670ac0a62d7e568c9d44a14f5deafb8442a255d8
   FUNCTIONS.md:
     id: 21b9df02aaeb
-    last_write_checksum: sha1:97d29be746a77b183654f5fd3c9d812460ec803e
-    pristine_git_object: 492f735d724853b29d89c42ad37a3998d570393e
+    last_write_checksum: sha1:9a0f5dbb08419af00c11943a73a75a81e720649b
+    pristine_git_object: b6572dbf1aa9dc7f75eca870b805d4f73e56dcc9
   RUNTIMES.md:
     id: 620c490847b6
     last_write_checksum: sha1:e45b854f02c357cbcfdb8c3663000e8339e16505
     pristine_git_object: 27731c3b5ace66bedc454ed5acbe15075aacd3dc
   USAGE.md:
     id: 3aed33ce6e6f
-    last_write_checksum: sha1:370419f2a574319b951b508c8334cedd1300013a
-    pristine_git_object: 2c8cd11921b856c8f4a5197046c7991c93cea935
+    last_write_checksum: sha1:1366d6ebababf72872516a720fef49e4be765df4
+    pristine_git_object: c8cb2ff46872b2d58226b03c3ea090a936439e6e
   docs/lib/utils/retryconfig.md:
     id: 0ce9707cb848
     last_write_checksum: sha1:bc4454e196fcd219f5a78da690375a884f5ed07b
@@ -634,22 +635,22 @@ trackedFiles:
     id: 9d0f69d6e677
     last_write_checksum: sha1:38f03159b95998009ffab015779e0a90ea695c06
     pristine_git_object: c4ec53275ab761cbd04d509de6f4498f3777df86
-  examples/auditorsCreate.example.ts:
-    id: 8acd39a36dfa
-    last_write_checksum: sha1:696ebf2a4e18b8cdc918afdfe91c950309e6098f
-    pristine_git_object: 28c07acb1577a38f64b8caea9db4a608533e3979
+  examples/auditsList.example.ts:
+    id: 1eb258e8eb70
+    last_write_checksum: sha1:537639934f84769fb903354ab92dcb018c010e66
+    pristine_git_object: 8f6bd1eddf732631f364c047edc5b327618d3a44
   examples/package.json:
     id: c1d7b0ec8e7e
     last_write_checksum: sha1:f249d3e2f99a2c606c7bfbf127ac128003072702
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:0fb74e3bc50e684cfb1b32b9d2324c2922ac9bba
-    pristine_git_object: 81cd28d0c8113467490a1c92f45239a7d18a8642
+    last_write_checksum: sha1:fc9b82572831a96dea30f370808914268ab6f8ae
+    pristine_git_object: 82d02c42de58f88774303ed71a179df6b60f25b5
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b0cbd0eab5a323786a61d3a6f07e1418d05c4736
-    pristine_git_object: 6e80908692bb9bee039c70d9913ba310125ebb49
+    last_write_checksum: sha1:0ba01ba0b3adb998f5bb53914456e1bfbc1e069f
+    pristine_git_object: 7dc86e051884f6c8ad56dad09ec4d6ff96282ce9
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -796,8 +797,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:232bde58bc6acd40e52d374672fb32dc52595d54
-    pristine_git_object: 78280ceae63569928276b26722ea39cbe1b0c7a3
+    last_write_checksum: sha1:d2890531a0b8afa6283d14f1f0d62f73c9b4a1ef
+    pristine_git_object: e7010735b87bfc5b4ffc78c423964e3b7f1091b1
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
