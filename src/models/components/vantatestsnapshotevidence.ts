@@ -14,8 +14,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export const TestRunStatus = {
   Na: "NA",
   InProgress: "IN_PROGRESS",
-  Pass: "PASS",
   Fail: "FAIL",
+  Pass: "PASS",
   Invalid: "INVALID",
   Disabled: "DISABLED",
 } as const;

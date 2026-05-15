@@ -11,5 +11,5 @@ let value: VantaTestRunStatus = "NA";
 ## Values
 
 ```typescript
-"NA" | "IN_PROGRESS" | "PASS" | "FAIL" | "INVALID" | "DISABLED"
+"NA" | "IN_PROGRESS" | "FAIL" | "PASS" | "INVALID" | "DISABLED"
 ```

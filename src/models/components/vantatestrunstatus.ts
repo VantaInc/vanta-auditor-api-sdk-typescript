@@ -8,8 +8,8 @@ import { ClosedEnum } from "../../types/enums.js";
 export const VantaTestRunStatus = {
   Na: "NA",
   InProgress: "IN_PROGRESS",
-  Pass: "PASS",
   Fail: "FAIL",
+  Pass: "PASS",
   Invalid: "INVALID",
   Disabled: "DISABLED",
 } as const;
