@@ -13,5 +13,5 @@ let value: TestRunStatus = "IN_PROGRESS";
 ## Values
 
 ```typescript
-"NA" | "IN_PROGRESS" | "PASS" | "FAIL" | "INVALID" | "DISABLED"
+"NA" | "IN_PROGRESS" | "FAIL" | "PASS" | "INVALID" | "DISABLED"
 ```

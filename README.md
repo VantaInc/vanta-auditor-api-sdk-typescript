@@ -119,7 +119,11 @@ const vanta = new Vanta({
 });
 
 async function run() {
-  const result = await vanta.audits.list({});
+  const result = await vanta.auditors.create({
+    email: "Genesis_Kunze87@yahoo.com",
+    givenName: "<value>",
+    familyName: "<value>",
+  });
 
   console.log(result);
 }
@@ -237,7 +241,11 @@ const vanta = new Vanta({
 });
 
 async function run() {
-  const result = await vanta.audits.list({}, {
+  const result = await vanta.auditors.create({
+    email: "Genesis_Kunze87@yahoo.com",
+    givenName: "<value>",
+    familyName: "<value>",
+  }, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -276,7 +284,11 @@ const vanta = new Vanta({
 });
 
 async function run() {
-  const result = await vanta.audits.list({});
+  const result = await vanta.auditors.create({
+    email: "Genesis_Kunze87@yahoo.com",
+    givenName: "<value>",
+    familyName: "<value>",
+  });
 
   console.log(result);
 }
@@ -310,7 +322,11 @@ const vanta = new Vanta({
 
 async function run() {
   try {
-    const result = await vanta.audits.list({});
+    const result = await vanta.auditors.create({
+      email: "Genesis_Kunze87@yahoo.com",
+      givenName: "<value>",
+      familyName: "<value>",
+    });
 
     console.log(result);
   } catch (error) {
@@ -372,7 +388,11 @@ const vanta = new Vanta({
 });
 
 async function run() {
-  const result = await vanta.audits.list({});
+  const result = await vanta.auditors.create({
+    email: "Genesis_Kunze87@yahoo.com",
+    givenName: "<value>",
+    familyName: "<value>",
+  });
 
   console.log(result);
 }
@@ -393,7 +413,11 @@ const vanta = new Vanta({
 });
 
 async function run() {
-  const result = await vanta.audits.list({});
+  const result = await vanta.auditors.create({
+    email: "Genesis_Kunze87@yahoo.com",
+    givenName: "<value>",
+    familyName: "<value>",
+  });
 
   console.log(result);
 }

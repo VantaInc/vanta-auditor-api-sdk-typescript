@@ -65,8 +65,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0.0",
-  sdkVersion: "0.6.0",
-  genVersion: "2.882.0",
+  sdkVersion: "0.6.1",
+  genVersion: "2.884.4",
   userAgent:
-    "speakeasy-sdk/typescript 0.6.0 2.882.0 1.0.0 vanta-auditor-api-sdk",
+    "speakeasy-sdk/typescript 0.6.1 2.884.4 1.0.0 vanta-auditor-api-sdk",
 } as const;

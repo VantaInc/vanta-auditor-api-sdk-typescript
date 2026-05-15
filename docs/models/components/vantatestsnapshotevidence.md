@@ -17,7 +17,7 @@ let value: VantaTestSnapshotEvidence = {
   testId: "<id>",
   testRunId: "<id>",
   testRunTitle: "<value>",
-  testRunStatus: "PASS",
+  testRunStatus: "FAIL",
   testRunExecutedAt: new Date("2025-06-17T05:02:25.953Z"),
 };
 ```
