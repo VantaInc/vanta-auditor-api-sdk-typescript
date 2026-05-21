@@ -94,6 +94,12 @@ actions:
           maxInterval: 50
           maxElapsedTime: 100
           exponent: 1.1
+        statusCodes:
+          - "429"
+          - "500"
+          - "502"
+          - "503"
+          - "504"
 
   # Removing extranous endpoints
   - target: $["paths"]["/audits/{auditId}/vendors"]
