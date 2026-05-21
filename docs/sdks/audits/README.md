@@ -6,6 +6,7 @@
 
 * [list](#list) - List audits
 * [getAudit](#getaudit) - Get audit by ID
+* [listCodeChanges](#listcodechanges) - List code changes for an audit
 * [listComments](#listcomments) - List audit comments
 * [listControls](#listcontrols) - List audit controls
 * [createCustomControl](#createcustomcontrol) - Create a custom control for an audit
@@ -32,6 +33,13 @@
 * [flagInformationRequestEvidence](#flaginformationrequestevidence) - Flag evidence for an information request
 * [listAuditIssues](#listauditissues) - List snapshotted issues for an audit
 * [listAuditSnapshots](#listauditsnapshots) - List snapshotted issues for an audit
+* [listVendors](#listvendors) - List vendors for an audit
+* [listAccountAccessServices](#listaccountaccessservices) - List account access services for an audit
+* [listPersonnelAccountAccess](#listpersonnelaccountaccess) - List account access records for an audit
+* [listPersonnelGroups](#listpersonnelgroups) - List groups for an audit
+* [listPersonnelPeople](#listpersonnelpeople) - List people for an audit
+* [listRiskSnapshots](#listrisksnapshots) - List risk snapshots for an audit
+* [listAuditRisks](#listauditrisks) - List risks for an audit
 * [shareInformationRequestList](#shareinformationrequestlist) - Share information request list with customer
 
 ## list
@@ -177,6 +185,95 @@ run();
 ### Response
 
 **Promise\<[components.Audit](../../models/components/audit.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listCodeChanges
+
+Retrieves code changes population data for an audit.
+
+This endpoint provides access to code change records (pull requests)
+visible to auditors during an audit engagement.
+
+Supports filtering by:
+- `search`: Searches code change titles and repository names (case-insensitive)
+- `sourcesMatchesAny`: Filters by version control source (accepted values: github, gitlab, bitbucket, azuredevops)
+- `startDate` / `endDate`: Filters by the closed date range
+
+Uses cursor-based pagination. To paginate:
+1. Make initial request with desired `pageSize`
+2. Check `results.pageInfo.hasNextPage`
+3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+Results are sorted by closed date (newest first). This sort order is
+fixed and cannot be customized via query parameters.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListCodeChanges" method="get" path="/audits/{auditId}/assets/code-changes" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.listCodeChanges({
+    auditId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsListCodeChanges } from "vanta-auditor-api-sdk/funcs/auditsListCodeChanges.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsListCodeChanges(vanta, {
+    auditId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListCodeChanges failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListCodeChangesRequest](../../models/operations/listcodechangesrequest.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PaginatedResponseCodeChange](../../models/components/paginatedresponsecodechange.md)\>**
 
 ### Errors
 
@@ -2270,7 +2367,9 @@ Supports filtering by:
 - `search`: full text search across issue title and description
 - `snapshotId`: filtering to a specific snapshot or snapshots, which represent point-in-time captures of issues. Use the GET /audits/{auditId}/issues/snapshots endpoint to retrieve snapshot IDs and metadata.
 
-Results are sorted by issue creation date in descending order (newest first).
+Results are sorted by issue creation date in descending order (newest first) by default.
+Use `orderBy` and `orderDirection` to customize sorting.
+Sort parameters must remain consistent across paginated requests.
 
 Uses cursor-based pagination. To paginate:
 1. Make initial request with desired `pageSize`
@@ -2425,6 +2524,666 @@ run();
 ### Response
 
 **Promise\<[components.PaginatedIssueSnapshotMetadataResponse](../../models/components/paginatedissuesnapshotmetadataresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listVendors
+
+Retrieves vendor population data for an audit.
+
+This endpoint provides access to vendor records visible to auditors
+during an audit engagement.
+
+Supports filtering by:
+- `search`: Searches vendor names (case-insensitive)
+- `vendorStatusesMatchesAny`: Filters by vendor status (ACTIVE, ARCHIVED, IN_PROCUREMENT)
+- `inherentRiskMatchesAny`: Filters by inherent risk level
+
+Results are sorted by name (ascending) by default.
+Use `orderBy` and `orderDirection` to customize sorting.
+Sort parameters must remain consistent across paginated requests.
+
+Uses cursor-based pagination. To paginate:
+1. Make initial request with desired `pageSize`
+2. Check `results.pageInfo.hasNextPage`
+3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListVendors" method="get" path="/audits/{auditId}/managed-vendors" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.listVendors({
+    auditId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsListVendors } from "vanta-auditor-api-sdk/funcs/auditsListVendors.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsListVendors(vanta, {
+    auditId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListVendors failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListVendorsRequest](../../models/operations/listvendorsrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PaginatedResponseAuditVendor](../../models/components/paginatedresponseauditvendor.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listAccountAccessServices
+
+Retrieves connected account access services for an audit.
+
+Returns the list of identity providers and access integrations (such as
+Okta, Azure AD, Google Workspace, AWS IAM) that are connected to the
+organization and provide account access data for personnel.
+
+These integrations are used to verify user access and identity management
+during an audit engagement.
+
+Uses cursor-based pagination. To paginate:
+1. Make initial request with desired `pageSize`
+2. Check `results.pageInfo.hasNextPage`
+3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+Results are returned in connection order. Sort order is not guaranteed
+and cannot be customized via query parameters.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListAccountAccessServices" method="get" path="/audits/{auditId}/personnel/account-access/services" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.listAccountAccessServices({
+    auditId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsListAccountAccessServices } from "vanta-auditor-api-sdk/funcs/auditsListAccountAccessServices.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsListAccountAccessServices(vanta, {
+    auditId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListAccountAccessServices failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListAccountAccessServicesRequest](../../models/operations/listaccountaccessservicesrequest.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PaginatedResponseAccountAccessService](../../models/components/paginatedresponseaccountaccessservice.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listPersonnelAccountAccess
+
+Retrieves account access population data for an audit.
+
+This endpoint provides access to account access records visible to auditors
+during an audit engagement. Account access data comes from various sources:
+
+- **IDP Services** (Identity Providers): Okta, Azure AD, Google Workspace, OneLogin, PingOne
+
+  - Returns user accounts from identity providers
+  - Supports filtering by search and status
+
+- **Role Grants Services**: GCP, Azure (when role grants are enabled)
+
+  - Returns accounts with role-based access grants
+  - Supports filtering by search and status
+
+- **First-Party Account Services**: AWS, Oracle Cloud, Azure (when not using role grants), etc.
+
+  - Returns cloud provider account access records
+  - Supports filtering by search and status
+
+- **Received Account Services**: External applications (Jira, GitHub, Slack, etc.)
+
+  - Returns user accounts from third-party integrations
+  - Supports filtering by search and status
+
+
+Supports filtering by:
+- `search`: Searches account names/emails (case-insensitive)
+- `status`: Filters by account status
+
+Uses cursor-based pagination. To paginate:
+1. Make initial request with desired `pageSize`
+2. Check `results.pageInfo.hasNextPage`
+3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+The default sort order depends on the service type:
+- Identity provider services (e.g. Okta, Azure AD): sorted by email, ascending
+- Cloud provider services (e.g. AWS, GCP): sorted by account name, ascending
+- Role grant services: sorted by account name, ascending
+- Third-party application services (e.g. GitHub, Jira): sorted by account name, ascending
+
+Sort order cannot be customized via query parameters.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListPersonnelAccountAccess" method="get" path="/audits/{auditId}/personnel/account-access/{serviceId}" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.listPersonnelAccountAccess({
+    auditId: "<id>",
+    serviceId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsListPersonnelAccountAccess } from "vanta-auditor-api-sdk/funcs/auditsListPersonnelAccountAccess.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsListPersonnelAccountAccess(vanta, {
+    auditId: "<id>",
+    serviceId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListPersonnelAccountAccess failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListPersonnelAccountAccessRequest](../../models/operations/listpersonnelaccountaccessrequest.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PaginatedResponseAccountAccess](../../models/components/paginatedresponseaccountaccess.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listPersonnelGroups
+
+Retrieves groups population data for an audit.
+
+This endpoint provides access to the group records visible to auditors
+during an audit engagement. Groups represent organizational units that
+contain people, either imported from an identity provider (IDP) or
+created manually in Vanta.
+
+Only Controlled Audit View (CAV) audits are supported. Full Audit
+View audits are rejected with 403.
+
+Supports filtering by:
+- `search`: Searches group names (case-insensitive)
+- `sourcesMatchesAny`: Filters by IDP source service names
+
+Results are sorted by name (ascending) by default.
+Use `orderBy` and `orderDirection` to customize sorting.
+Sort parameters must remain consistent across paginated requests.
+
+Uses cursor-based pagination. To paginate:
+1. Make initial request with desired `pageSize`
+2. Check `results.pageInfo.hasNextPage`
+3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListPersonnelGroups" method="get" path="/audits/{auditId}/personnel/groups" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.listPersonnelGroups({
+    auditId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsListPersonnelGroups } from "vanta-auditor-api-sdk/funcs/auditsListPersonnelGroups.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsListPersonnelGroups(vanta, {
+    auditId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListPersonnelGroups failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListPersonnelGroupsRequest](../../models/operations/listpersonnelgroupsrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PaginatedResponsePersonnelGroup](../../models/components/paginatedresponsepersonnelgroup.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listPersonnelPeople
+
+Retrieves people population data for an audit.
+
+This endpoint provides access to the people records visible to auditors
+during an audit engagement. Only Controlled Audit View (CAV) audits
+are supported. Full Audit View audits are rejected with 403.
+
+Supports filtering by:
+- `search`: Searches names and email addresses
+- `status`: Filters by employment status
+- `groupsMatchesAny`: Filter people by group/role IDs
+
+Results are sorted by name (ascending) by default.
+Use `orderBy` and `orderDirection` to customize sorting.
+Sort parameters must remain consistent across paginated requests.
+
+Uses cursor-based pagination. To paginate:
+1. Make initial request with desired `pageSize`
+2. Check `results.pageInfo.hasNextPage`
+3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListPersonnelPeople" method="get" path="/audits/{auditId}/personnel/people" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.listPersonnelPeople({
+    auditId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsListPersonnelPeople } from "vanta-auditor-api-sdk/funcs/auditsListPersonnelPeople.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsListPersonnelPeople(vanta, {
+    auditId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListPersonnelPeople failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListPersonnelPeopleRequest](../../models/operations/listpersonnelpeoplerequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PaginatedResponsePersonnelPerson](../../models/components/paginatedresponsepersonnelperson.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listRiskSnapshots
+
+Returns a paginated list of risk assessment snapshots available for an audit.
+
+Risk snapshots capture the state of an organization's risk register at a
+point in time. Each snapshot has an `id` that can be used with the
+`/audits/{auditId}/risks` endpoint to retrieve the individual risk
+scenarios within that snapshot.
+
+Results are sorted by creation date (newest first). This sort order is
+fixed and cannot be customized via query parameters. Only snapshots
+that are shared with auditors are included.
+
+Uses cursor-based pagination. To paginate:
+1. Make initial request with desired `pageSize`
+2. Check `results.pageInfo.hasNextPage`
+3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListRiskSnapshots" method="get" path="/audits/{auditId}/risks/snapshots" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.listRiskSnapshots({
+    auditId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsListRiskSnapshots } from "vanta-auditor-api-sdk/funcs/auditsListRiskSnapshots.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsListRiskSnapshots(vanta, {
+    auditId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListRiskSnapshots failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListRiskSnapshotsRequest](../../models/operations/listrisksnapshotsrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PaginatedResponseRiskSnapshot](../../models/components/paginatedresponserisksnapshot.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listAuditRisks
+
+Retrieves risk population data for an audit.
+
+This endpoint provides access to the risk records visible to auditors
+during an audit engagement. Risk data is scoped to a specific risk
+assessment snapshot identified by the `snapshotId` parameter.
+
+Only Controlled Audit View (CAV) audits are supported. Full Audit
+View audits are rejected with 403.
+
+Supports filtering by:
+- `search`: Searches risk scenario descriptions (case-insensitive)
+
+Results are sorted by identified date (newest first) by default.
+Use `orderBy` and `orderDirection` to customize sorting.
+Sort parameters must remain consistent across paginated requests.
+
+Uses cursor-based pagination. To paginate:
+1. Make initial request with desired `pageSize`
+2. Check `results.pageInfo.hasNextPage`
+3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListAuditRisks" method="get" path="/audits/{auditId}/risks/{snapshotId}" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.listAuditRisks({
+    auditId: "<id>",
+    snapshotId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsListAuditRisks } from "vanta-auditor-api-sdk/funcs/auditsListAuditRisks.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsListAuditRisks(vanta, {
+    auditId: "<id>",
+    snapshotId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListAuditRisks failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListAuditRisksRequest](../../models/operations/listauditrisksrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PaginatedResponseAuditRisk](../../models/components/paginatedresponseauditrisk.md)\>**
 
 ### Errors
 

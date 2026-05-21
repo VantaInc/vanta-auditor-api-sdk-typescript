@@ -17,8 +17,11 @@ import { auditsGetFrameworkCodes } from "../funcs/auditsGetFrameworkCodes.js";
 import { auditsGetInformationRequest } from "../funcs/auditsGetInformationRequest.js";
 import { auditsGetInformationRequestTestSnapshotEvidenceDetail } from "../funcs/auditsGetInformationRequestTestSnapshotEvidenceDetail.js";
 import { auditsList } from "../funcs/auditsList.js";
+import { auditsListAccountAccessServices } from "../funcs/auditsListAccountAccessServices.js";
 import { auditsListAuditIssues } from "../funcs/auditsListAuditIssues.js";
+import { auditsListAuditRisks } from "../funcs/auditsListAuditRisks.js";
 import { auditsListAuditSnapshots } from "../funcs/auditsListAuditSnapshots.js";
+import { auditsListCodeChanges } from "../funcs/auditsListCodeChanges.js";
 import { auditsListComments } from "../funcs/auditsListComments.js";
 import { auditsListCommentsForInformationRequest } from "../funcs/auditsListCommentsForInformationRequest.js";
 import { auditsListControls } from "../funcs/auditsListControls.js";
@@ -27,6 +30,11 @@ import { auditsListInformationRequestActivity } from "../funcs/auditsListInforma
 import { auditsListInformationRequestEvidence } from "../funcs/auditsListInformationRequestEvidence.js";
 import { auditsListInformationRequests } from "../funcs/auditsListInformationRequests.js";
 import { auditsListInformationRequestsForControl } from "../funcs/auditsListInformationRequestsForControl.js";
+import { auditsListPersonnelAccountAccess } from "../funcs/auditsListPersonnelAccountAccess.js";
+import { auditsListPersonnelGroups } from "../funcs/auditsListPersonnelGroups.js";
+import { auditsListPersonnelPeople } from "../funcs/auditsListPersonnelPeople.js";
+import { auditsListRiskSnapshots } from "../funcs/auditsListRiskSnapshots.js";
+import { auditsListVendors } from "../funcs/auditsListVendors.js";
 import { auditsShareInformationRequestList } from "../funcs/auditsShareInformationRequestList.js";
 import { auditsUpdateCommentForInformationRequest } from "../funcs/auditsUpdateCommentForInformationRequest.js";
 import { auditsUpdateEvidence } from "../funcs/auditsUpdateEvidence.js";
@@ -73,6 +81,39 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Audit> {
     return unwrapAsync(auditsGetAudit(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List code changes for an audit
+   *
+   * @remarks
+   * Retrieves code changes population data for an audit.
+   *
+   * This endpoint provides access to code change records (pull requests)
+   * visible to auditors during an audit engagement.
+   *
+   * Supports filtering by:
+   * - `search`: Searches code change titles and repository names (case-insensitive)
+   * - `sourcesMatchesAny`: Filters by version control source (accepted values: github, gitlab, bitbucket, azuredevops)
+   * - `startDate` / `endDate`: Filters by the closed date range
+   *
+   * Uses cursor-based pagination. To paginate:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage`
+   * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Results are sorted by closed date (newest first). This sort order is
+   * fixed and cannot be customized via query parameters.
+   */
+  async listCodeChanges(
+    request: operations.ListCodeChangesRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseCodeChange> {
+    return unwrapAsync(auditsListCodeChanges(
       this,
       request,
       options,
@@ -683,7 +724,9 @@ export class Audits extends ClientSDK {
    * - `search`: full text search across issue title and description
    * - `snapshotId`: filtering to a specific snapshot or snapshots, which represent point-in-time captures of issues. Use the GET /audits/{auditId}/issues/snapshots endpoint to retrieve snapshot IDs and metadata.
    *
-   * Results are sorted by issue creation date in descending order (newest first).
+   * Results are sorted by issue creation date in descending order (newest first) by default.
+   * Use `orderBy` and `orderDirection` to customize sorting.
+   * Sort parameters must remain consistent across paginated requests.
    *
    * Uses cursor-based pagination. To paginate:
    * 1. Make initial request with desired `pageSize`
@@ -725,6 +768,269 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.PaginatedIssueSnapshotMetadataResponse> {
     return unwrapAsync(auditsListAuditSnapshots(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List vendors for an audit
+   *
+   * @remarks
+   * Retrieves vendor population data for an audit.
+   *
+   * This endpoint provides access to vendor records visible to auditors
+   * during an audit engagement.
+   *
+   * Supports filtering by:
+   * - `search`: Searches vendor names (case-insensitive)
+   * - `vendorStatusesMatchesAny`: Filters by vendor status (ACTIVE, ARCHIVED, IN_PROCUREMENT)
+   * - `inherentRiskMatchesAny`: Filters by inherent risk level
+   *
+   * Results are sorted by name (ascending) by default.
+   * Use `orderBy` and `orderDirection` to customize sorting.
+   * Sort parameters must remain consistent across paginated requests.
+   *
+   * Uses cursor-based pagination. To paginate:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage`
+   * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   */
+  async listVendors(
+    request: operations.ListVendorsRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseAuditVendor> {
+    return unwrapAsync(auditsListVendors(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List account access services for an audit
+   *
+   * @remarks
+   * Retrieves connected account access services for an audit.
+   *
+   * Returns the list of identity providers and access integrations (such as
+   * Okta, Azure AD, Google Workspace, AWS IAM) that are connected to the
+   * organization and provide account access data for personnel.
+   *
+   * These integrations are used to verify user access and identity management
+   * during an audit engagement.
+   *
+   * Uses cursor-based pagination. To paginate:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage`
+   * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Results are returned in connection order. Sort order is not guaranteed
+   * and cannot be customized via query parameters.
+   */
+  async listAccountAccessServices(
+    request: operations.ListAccountAccessServicesRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseAccountAccessService> {
+    return unwrapAsync(auditsListAccountAccessServices(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List account access records for an audit
+   *
+   * @remarks
+   * Retrieves account access population data for an audit.
+   *
+   * This endpoint provides access to account access records visible to auditors
+   * during an audit engagement. Account access data comes from various sources:
+   *
+   * - **IDP Services** (Identity Providers): Okta, Azure AD, Google Workspace, OneLogin, PingOne
+   *
+   *   - Returns user accounts from identity providers
+   *   - Supports filtering by search and status
+   *
+   * - **Role Grants Services**: GCP, Azure (when role grants are enabled)
+   *
+   *   - Returns accounts with role-based access grants
+   *   - Supports filtering by search and status
+   *
+   * - **First-Party Account Services**: AWS, Oracle Cloud, Azure (when not using role grants), etc.
+   *
+   *   - Returns cloud provider account access records
+   *   - Supports filtering by search and status
+   *
+   * - **Received Account Services**: External applications (Jira, GitHub, Slack, etc.)
+   *
+   *   - Returns user accounts from third-party integrations
+   *   - Supports filtering by search and status
+   *
+   * Supports filtering by:
+   * - `search`: Searches account names/emails (case-insensitive)
+   * - `status`: Filters by account status
+   *
+   * Uses cursor-based pagination. To paginate:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage`
+   * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * The default sort order depends on the service type:
+   * - Identity provider services (e.g. Okta, Azure AD): sorted by email, ascending
+   * - Cloud provider services (e.g. AWS, GCP): sorted by account name, ascending
+   * - Role grant services: sorted by account name, ascending
+   * - Third-party application services (e.g. GitHub, Jira): sorted by account name, ascending
+   *
+   * Sort order cannot be customized via query parameters.
+   */
+  async listPersonnelAccountAccess(
+    request: operations.ListPersonnelAccountAccessRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseAccountAccess> {
+    return unwrapAsync(auditsListPersonnelAccountAccess(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List groups for an audit
+   *
+   * @remarks
+   * Retrieves groups population data for an audit.
+   *
+   * This endpoint provides access to the group records visible to auditors
+   * during an audit engagement. Groups represent organizational units that
+   * contain people, either imported from an identity provider (IDP) or
+   * created manually in Vanta.
+   *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit
+   * View audits are rejected with 403.
+   *
+   * Supports filtering by:
+   * - `search`: Searches group names (case-insensitive)
+   * - `sourcesMatchesAny`: Filters by IDP source service names
+   *
+   * Results are sorted by name (ascending) by default.
+   * Use `orderBy` and `orderDirection` to customize sorting.
+   * Sort parameters must remain consistent across paginated requests.
+   *
+   * Uses cursor-based pagination. To paginate:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage`
+   * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   */
+  async listPersonnelGroups(
+    request: operations.ListPersonnelGroupsRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponsePersonnelGroup> {
+    return unwrapAsync(auditsListPersonnelGroups(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List people for an audit
+   *
+   * @remarks
+   * Retrieves people population data for an audit.
+   *
+   * This endpoint provides access to the people records visible to auditors
+   * during an audit engagement. Only Controlled Audit View (CAV) audits
+   * are supported. Full Audit View audits are rejected with 403.
+   *
+   * Supports filtering by:
+   * - `search`: Searches names and email addresses
+   * - `status`: Filters by employment status
+   * - `groupsMatchesAny`: Filter people by group/role IDs
+   *
+   * Results are sorted by name (ascending) by default.
+   * Use `orderBy` and `orderDirection` to customize sorting.
+   * Sort parameters must remain consistent across paginated requests.
+   *
+   * Uses cursor-based pagination. To paginate:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage`
+   * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   */
+  async listPersonnelPeople(
+    request: operations.ListPersonnelPeopleRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponsePersonnelPerson> {
+    return unwrapAsync(auditsListPersonnelPeople(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List risk snapshots for an audit
+   *
+   * @remarks
+   * Returns a paginated list of risk assessment snapshots available for an audit.
+   *
+   * Risk snapshots capture the state of an organization's risk register at a
+   * point in time. Each snapshot has an `id` that can be used with the
+   * `/audits/{auditId}/risks` endpoint to retrieve the individual risk
+   * scenarios within that snapshot.
+   *
+   * Results are sorted by creation date (newest first). This sort order is
+   * fixed and cannot be customized via query parameters. Only snapshots
+   * that are shared with auditors are included.
+   *
+   * Uses cursor-based pagination. To paginate:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage`
+   * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   */
+  async listRiskSnapshots(
+    request: operations.ListRiskSnapshotsRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseRiskSnapshot> {
+    return unwrapAsync(auditsListRiskSnapshots(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List risks for an audit
+   *
+   * @remarks
+   * Retrieves risk population data for an audit.
+   *
+   * This endpoint provides access to the risk records visible to auditors
+   * during an audit engagement. Risk data is scoped to a specific risk
+   * assessment snapshot identified by the `snapshotId` parameter.
+   *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit
+   * View audits are rejected with 403.
+   *
+   * Supports filtering by:
+   * - `search`: Searches risk scenario descriptions (case-insensitive)
+   *
+   * Results are sorted by identified date (newest first) by default.
+   * Use `orderBy` and `orderDirection` to customize sorting.
+   * Sort parameters must remain consistent across paginated requests.
+   *
+   * Uses cursor-based pagination. To paginate:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage`
+   * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   */
+  async listAuditRisks(
+    request: operations.ListAuditRisksRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseAuditRisk> {
+    return unwrapAsync(auditsListAuditRisks(
       this,
       request,
       options,
