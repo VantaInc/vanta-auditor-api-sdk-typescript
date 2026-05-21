@@ -40,6 +40,18 @@ actions:
       before: sdk.Auditors.CreateAuditor()
       after: sdk.auditors.create()
       created_at: 1736516640306
+
+  # Stable examples for generated auditors.create snippets (README, docs, etc.)
+  - target: $["components"]["schemas"]["AddAuditorInput"]["properties"]["email"]
+    update:
+      example: "auditor@example.com"
+  - target: $["components"]["schemas"]["AddAuditorInput"]["properties"]["givenName"]
+    update:
+      example: "Sam"
+  - target: $["components"]["schemas"]["AddAuditorInput"]["properties"]["familyName"]
+    update:
+      example: "Auditor"
+
   - target: $["paths"]["/audits/{auditId}/evidence/{auditEvidenceId}/comments"]["post"]
     update:
       x-speakeasy-name-override: createCommentForEvidence
@@ -73,9 +85,8 @@ actions:
       after: sdk.audits.list()
       created_at: 1736516640306
 
-  # Pin README / USAGE / FUNCTIONS examples to `audits.list`. The `errors` tag
-  # requires an operation with an error response that has a JSON body; ListAudits
-  # is 200-only in the published spec, so Error Handling uses GetAudit instead.
+  # Pin README / USAGE / FUNCTIONS examples to `audits.list`.
+  # `x-speakeasy-retries` is required for the `retries` tag to take effect.
   - target: $["paths"]["/audits"]["get"]
     update:
       x-speakeasy-usage-example:
@@ -98,25 +109,6 @@ actions:
           - "502"
           - "503"
           - "504"
-
-  - target: $["paths"]["/audits/{auditId}"]["get"]["responses"]["404"]
-    update:
-      description: Audit not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-                description: Error message
-            required:
-              - message
-  - target: $["paths"]["/audits/{auditId}"]["get"]
-    update:
-      x-speakeasy-usage-example:
-        tags:
-          - errors
 
   # Removing extranous endpoints
   - target: $["paths"]["/audits/{auditId}/vendors"]
