@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import * as components from "../components/index.js";
 
 export type ListAuditIssuesRequest = {
   /**
@@ -25,6 +26,14 @@ export type ListAuditIssuesRequest = {
    * Filter issues to specific snapshots by snapshot ID
    */
   snapshotIdMatchesAny?: Array<string> | undefined;
+  /**
+   * Field to sort results by. Allowed: "createdAt", "lastModifiedAt". Default: "createdAt"
+   */
+  orderBy?: components.IssueSnapshotItemOrderBy | undefined;
+  /**
+   * Sort direction: "asc" or "desc". Default: "desc"
+   */
+  orderDirection?: components.OrderDirection | undefined;
 };
 
 /** @internal */
@@ -34,6 +43,8 @@ export type ListAuditIssuesRequest$Outbound = {
   pageCursor?: string | undefined;
   search?: string | undefined;
   snapshotIdMatchesAny?: Array<string> | undefined;
+  orderBy?: string | undefined;
+  orderDirection?: string | undefined;
 };
 
 /** @internal */
@@ -47,6 +58,8 @@ export const ListAuditIssuesRequest$outboundSchema: z.ZodType<
   pageCursor: z.string().optional(),
   search: z.string().optional(),
   snapshotIdMatchesAny: z.array(z.string()).optional(),
+  orderBy: components.IssueSnapshotItemOrderBy$outboundSchema.optional(),
+  orderDirection: components.OrderDirection$outboundSchema.optional(),
 });
 
 export function listAuditIssuesRequestToJSON(

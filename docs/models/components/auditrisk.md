@@ -1,0 +1,63 @@
+# AuditRisk
+
+A risk record from the risk population.
+
+`id` and `riskId` are required. All other fields are optional to support customizable field visibility.
+
+Omitted keys mean the column is not in the response; `null` means the column is present but empty.
+
+## Example Usage
+
+```typescript
+import { AuditRisk } from "vanta-auditor-api-sdk/models/components";
+
+let value: AuditRisk = {
+  id: "5f2c939a52855e725c8d5824",
+  riskId: "RISK-001",
+  riskScenario: "Unauthorized access to production database",
+  likelihood: 4,
+  impact: 5,
+  inherentRisk: 20,
+  treatment: "MITIGATE",
+  treatmentStatus: "IN_PROGRESS",
+  residualRisk: 6,
+  reviewStatus: "APPROVED",
+  owner: {
+    displayName: "Jane Doe",
+    imageUrl: "https://app.vanta.com/avatar.png",
+  },
+  categories: [
+    "Cryptography",
+    "Privacy",
+  ],
+  ciaCategories: [
+    "CONFIDENTIALITY",
+    "INTEGRITY",
+  ],
+  linkedControlIds: [
+    "control-1",
+    "control-2",
+  ],
+  identified: "2023-01-15T10:00:00.000Z",
+};
+```
+
+## Fields
+
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    | Example                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                           | *string*                                                                                                                       | :heavy_check_mark:                                                                                                             | Unique identifier for the risk scenario version.                                                                               | 5f2c939a52855e725c8d5824                                                                                                       |
+| `riskId`                                                                                                                       | *string*                                                                                                                       | :heavy_check_mark:                                                                                                             | Custom risk ID (e.g., "RISK-001"), or null if not available.                                                                   | RISK-001                                                                                                                       |
+| `riskScenario`                                                                                                                 | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Description of the risk scenario, or null if not available.                                                                    | Unauthorized access to production database                                                                                     |
+| `likelihood`                                                                                                                   | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Likelihood score of the risk, or null if not scored.<br/>Full Audit View only - omitted in Controlled Audit View.              | 4                                                                                                                              |
+| `impact`                                                                                                                       | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Impact score of the risk, or null if not scored.<br/>Full Audit View only - omitted in Controlled Audit View.                  | 5                                                                                                                              |
+| `inherentRisk`                                                                                                                 | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Inherent risk score (likelihood * impact), or null if not calculable.                                                          | 20                                                                                                                             |
+| `treatment`                                                                                                                    | [components.Treatment](../../models/components/treatment.md)                                                                   | :heavy_minus_sign:                                                                                                             | Risk treatment strategy, or null if not set.                                                                                   | MITIGATE                                                                                                                       |
+| `treatmentStatus`                                                                                                              | [components.TreatmentStatus](../../models/components/treatmentstatus.md)                                                       | :heavy_minus_sign:                                                                                                             | Treatment implementation status, or null if not set.                                                                           | IN_PROGRESS                                                                                                                    |
+| `residualRisk`                                                                                                                 | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Residual risk score after treatment, or null if not calculable.                                                                | 6                                                                                                                              |
+| `reviewStatus`                                                                                                                 | [components.ReviewStatus](../../models/components/reviewstatus.md)                                                             | :heavy_minus_sign:                                                                                                             | Review status of the risk scenario, or null if not set.                                                                        | APPROVED                                                                                                                       |
+| `owner`                                                                                                                        | [components.AuditRiskOwner](../../models/components/auditriskowner.md)                                                         | :heavy_minus_sign:                                                                                                             | Risk owner information, or null if no owner assigned.                                                                          | {<br/>"displayName": "Jane Doe",<br/>"imageUrl": "https://app.vanta.com/avatar.png"<br/>}                                      |
+| `categories`                                                                                                                   | *string*[]                                                                                                                     | :heavy_minus_sign:                                                                                                             | Risk category names, or empty array if not categorized.                                                                        | [<br/>"Cryptography",<br/>"Privacy"<br/>]                                                                                      |
+| `ciaCategories`                                                                                                                | [components.AuditRiskCia](../../models/components/auditriskcia.md)[]                                                           | :heavy_minus_sign:                                                                                                             | CIA triad categories, or empty array if not categorized.                                                                       | [<br/>"CONFIDENTIALITY",<br/>"INTEGRITY"<br/>]                                                                                 |
+| `linkedControlIds`                                                                                                             | *string*[]                                                                                                                     | :heavy_minus_sign:                                                                                                             | IDs of controls linked to this risk scenario, or empty array if none.<br/>Full Audit View only - omitted in Controlled Audit View. | [<br/>"control-1",<br/>"control-2"<br/>]                                                                                       |
+| `identified`                                                                                                                   | *string*                                                                                                                       | :heavy_minus_sign:                                                                                                             | When the risk was identified, or null if not recorded.<br/>ISO 8601 format.                                                    | 2023-01-15T10:00:00.000Z                                                                                                       |

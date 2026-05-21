@@ -119,6 +119,16 @@ async function $do(
     securitySource: client._options.bearerAuth,
     retryConfig: options?.retries
       || client._options.retryConfig
+      || {
+        strategy: "backoff",
+        backoff: {
+          initialInterval: 1,
+          maxInterval: 50,
+          exponent: 1.1,
+          maxElapsedTime: 100,
+        },
+        retryConnectionErrors: true,
+      }
       || { strategy: "none" },
     retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };

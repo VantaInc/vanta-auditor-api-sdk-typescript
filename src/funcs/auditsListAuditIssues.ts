@@ -40,7 +40,9 @@ import { Result } from "../types/fp.js";
  * - `search`: full text search across issue title and description
  * - `snapshotId`: filtering to a specific snapshot or snapshots, which represent point-in-time captures of issues. Use the GET /audits/{auditId}/issues/snapshots endpoint to retrieve snapshot IDs and metadata.
  *
- * Results are sorted by issue creation date in descending order (newest first).
+ * Results are sorted by issue creation date in descending order (newest first) by default.
+ * Use `orderBy` and `orderDirection` to customize sorting.
+ * Sort parameters must remain consistent across paginated requests.
  *
  * Uses cursor-based pagination. To paginate:
  * 1. Make initial request with desired `pageSize`
@@ -111,6 +113,8 @@ async function $do(
   const path = pathToFunc("/audits/{auditId}/issues/items")(pathParams);
 
   const query = encodeFormQuery({
+    "orderBy": payload.orderBy,
+    "orderDirection": payload.orderDirection,
     "pageCursor": payload.pageCursor,
     "pageSize": payload.pageSize,
     "search": payload.search,

@@ -73,10 +73,9 @@ actions:
       after: sdk.audits.list()
       created_at: 1736516640306
 
-  # Pin README / USAGE / FUNCTIONS examples to `audits.list`. The main
-  # `usage` section only covers SDK Example Usage; feature sections (auth,
-  # retries, errors, server) each pick their own operation unless tagged here.
-  # `x-speakeasy-retries` is required for the `retries` tag to take effect.
+  # Pin README / USAGE / FUNCTIONS examples to `audits.list`. The `errors` tag
+  # requires an operation with an error response that has a JSON body; ListAudits
+  # is 200-only in the published spec, so Error Handling uses GetAudit instead.
   - target: $["paths"]["/audits"]["get"]
     update:
       x-speakeasy-usage-example:
@@ -85,7 +84,6 @@ actions:
           - usage
           - security
           - retries
-          - errors
           - server
       x-speakeasy-retries:
         strategy: backoff
@@ -100,6 +98,25 @@ actions:
           - "502"
           - "503"
           - "504"
+
+  - target: $["paths"]["/audits/{auditId}"]["get"]["responses"]["404"]
+    update:
+      description: Audit not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Error message
+            required:
+              - message
+  - target: $["paths"]["/audits/{auditId}"]["get"]
+    update:
+      x-speakeasy-usage-example:
+        tags:
+          - errors
 
   # Removing extranous endpoints
   - target: $["paths"]["/audits/{auditId}/vendors"]
