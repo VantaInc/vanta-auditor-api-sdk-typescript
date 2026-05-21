@@ -40,6 +40,18 @@ actions:
       before: sdk.Auditors.CreateAuditor()
       after: sdk.auditors.create()
       created_at: 1736516640306
+
+  # Stable examples for generated auditors.create snippets (README, docs, etc.)
+  - target: $["components"]["schemas"]["AddAuditorInput"]["properties"]["email"]
+    update:
+      example: "auditor@example.com"
+  - target: $["components"]["schemas"]["AddAuditorInput"]["properties"]["givenName"]
+    update:
+      example: "Sam"
+  - target: $["components"]["schemas"]["AddAuditorInput"]["properties"]["familyName"]
+    update:
+      example: "Auditor"
+
   - target: $["paths"]["/audits/{auditId}/evidence/{auditEvidenceId}/comments"]["post"]
     update:
       x-speakeasy-name-override: createCommentForEvidence
