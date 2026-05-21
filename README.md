@@ -326,10 +326,8 @@ const vanta = new Vanta({
 
 async function run() {
   try {
-    const result = await vanta.auditors.create({
-      email: "Genesis_Kunze87@yahoo.com",
-      givenName: "<value>",
-      familyName: "<value>",
+    const result = await vanta.audits.getAudit({
+      auditId: "<id>",
     });
 
     console.log(result);
