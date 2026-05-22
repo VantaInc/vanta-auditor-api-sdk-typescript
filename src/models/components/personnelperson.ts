@@ -19,7 +19,7 @@ import {
 /**
  * Employment status, or null if not available.
  */
-export const EmploymentStatus = {
+export const PersonnelPersonEmploymentStatus = {
   CurrentlyEmployed: "CURRENTLY_EMPLOYED",
   InactiveEmployee: "INACTIVE_EMPLOYEE",
   NotPeople: "NOT_PEOPLE",
@@ -30,7 +30,9 @@ export const EmploymentStatus = {
 /**
  * Employment status, or null if not available.
  */
-export type EmploymentStatus = ClosedEnum<typeof EmploymentStatus>;
+export type PersonnelPersonEmploymentStatus = ClosedEnum<
+  typeof PersonnelPersonEmploymentStatus
+>;
 
 export type Groups = {
   name: string;
@@ -59,7 +61,7 @@ export type Source = {
  * @remarks
  * Full Audit View only - omitted in Controlled Audit View.
  */
-export type TaskStatus = {
+export type PersonnelPersonTaskStatus = {
   /**
    * Overall user task status.
    */
@@ -241,7 +243,7 @@ export type PersonnelPerson = {
   /**
    * Employment status, or null if not available.
    */
-  employmentStatus?: EmploymentStatus | null | undefined;
+  employmentStatus?: PersonnelPersonEmploymentStatus | null | undefined;
   /**
    * Start date in ISO 8601 format (YYYY-MM-DD), or null if not available.
    *
@@ -274,7 +276,7 @@ export type PersonnelPerson = {
    * @remarks
    * Full Audit View only - omitted in Controlled Audit View.
    */
-  taskStatus?: TaskStatus | null | undefined;
+  taskStatus?: PersonnelPersonTaskStatus | null | undefined;
   /**
    * Last date user was sent an onboarding reminder email in ISO 8601 format, or null if never reminded.
    *
@@ -327,9 +329,9 @@ export type PersonnelPerson = {
 };
 
 /** @internal */
-export const EmploymentStatus$inboundSchema: z.ZodNativeEnum<
-  typeof EmploymentStatus
-> = z.nativeEnum(EmploymentStatus);
+export const PersonnelPersonEmploymentStatus$inboundSchema: z.ZodNativeEnum<
+  typeof PersonnelPersonEmploymentStatus
+> = z.nativeEnum(PersonnelPersonEmploymentStatus);
 
 /** @internal */
 export const Groups$inboundSchema: z.ZodType<Groups, z.ZodTypeDef, unknown> = z
@@ -365,8 +367,8 @@ export function sourceFromJSON(
 }
 
 /** @internal */
-export const TaskStatus$inboundSchema: z.ZodType<
-  TaskStatus,
+export const PersonnelPersonTaskStatus$inboundSchema: z.ZodType<
+  PersonnelPersonTaskStatus,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -378,13 +380,13 @@ export const TaskStatus$inboundSchema: z.ZodType<
   numTasksDueSoon: z.nullable(z.number()),
 });
 
-export function taskStatusFromJSON(
+export function personnelPersonTaskStatusFromJSON(
   jsonString: string,
-): SafeParseResult<TaskStatus, SDKValidationError> {
+): SafeParseResult<PersonnelPersonTaskStatus, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TaskStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TaskStatus' from JSON`,
+    (x) => PersonnelPersonTaskStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PersonnelPersonTaskStatus' from JSON`,
   );
 }
 
@@ -524,12 +526,14 @@ export const PersonnelPerson$inboundSchema: z.ZodType<
   name: z.string(),
   email: z.string(),
   jobTitle: z.nullable(z.string()).optional(),
-  employmentStatus: z.nullable(EmploymentStatus$inboundSchema).optional(),
+  employmentStatus: z.nullable(PersonnelPersonEmploymentStatus$inboundSchema)
+    .optional(),
   startDate: z.nullable(z.string()).optional(),
   endDate: z.nullable(z.string()).optional(),
   groups: z.array(z.lazy(() => Groups$inboundSchema)).optional(),
   source: z.nullable(z.lazy(() => Source$inboundSchema)).optional(),
-  taskStatus: z.nullable(z.lazy(() => TaskStatus$inboundSchema)).optional(),
+  taskStatus: z.nullable(z.lazy(() => PersonnelPersonTaskStatus$inboundSchema))
+    .optional(),
   lastReminded: z.nullable(z.string()).optional(),
   policies: z.nullable(z.lazy(() => Policies$inboundSchema)).optional(),
   trainings: z.nullable(z.lazy(() => Trainings$inboundSchema)).optional(),
