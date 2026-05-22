@@ -16,6 +16,7 @@ import { auditsGetEvidenceUrls } from "../funcs/auditsGetEvidenceUrls.js";
 import { auditsGetFrameworkCodes } from "../funcs/auditsGetFrameworkCodes.js";
 import { auditsGetInformationRequest } from "../funcs/auditsGetInformationRequest.js";
 import { auditsGetInformationRequestTestSnapshotEvidenceDetail } from "../funcs/auditsGetInformationRequestTestSnapshotEvidenceDetail.js";
+import { auditsGetVulnerableAssets } from "../funcs/auditsGetVulnerableAssets.js";
 import { auditsList } from "../funcs/auditsList.js";
 import { auditsListAccountAccessServices } from "../funcs/auditsListAccountAccessServices.js";
 import { auditsListAuditIssues } from "../funcs/auditsListAuditIssues.js";
@@ -30,11 +31,16 @@ import { auditsListInformationRequestActivity } from "../funcs/auditsListInforma
 import { auditsListInformationRequestEvidence } from "../funcs/auditsListInformationRequestEvidence.js";
 import { auditsListInformationRequests } from "../funcs/auditsListInformationRequests.js";
 import { auditsListInformationRequestsForControl } from "../funcs/auditsListInformationRequestsForControl.js";
+import { auditsListMonitoredComputersInAuditScope } from "../funcs/auditsListMonitoredComputersInAuditScope.js";
+import { auditsListPeopleInAuditScope } from "../funcs/auditsListPeopleInAuditScope.js";
 import { auditsListPersonnelAccountAccess } from "../funcs/auditsListPersonnelAccountAccess.js";
 import { auditsListPersonnelGroups } from "../funcs/auditsListPersonnelGroups.js";
 import { auditsListPersonnelPeople } from "../funcs/auditsListPersonnelPeople.js";
 import { auditsListRiskSnapshots } from "../funcs/auditsListRiskSnapshots.js";
 import { auditsListVendors } from "../funcs/auditsListVendors.js";
+import { auditsListVendorsInAuditScope } from "../funcs/auditsListVendorsInAuditScope.js";
+import { auditsListVulnerabilities } from "../funcs/auditsListVulnerabilities.js";
+import { auditsListVulnerabilityRemediationsInAuditScope } from "../funcs/auditsListVulnerabilityRemediationsInAuditScope.js";
 import { auditsShareInformationRequestList } from "../funcs/auditsShareInformationRequestList.js";
 import { auditsUpdateCommentForInformationRequest } from "../funcs/auditsUpdateCommentForInformationRequest.js";
 import { auditsUpdateEvidence } from "../funcs/auditsUpdateEvidence.js";
@@ -809,6 +815,42 @@ export class Audits extends ClientSDK {
   }
 
   /**
+   * List monitored computers
+   *
+   * @remarks
+   * Returns a list of computers monitored by an MDM (with an integration built
+   * by Vanta) or by the Vanta Agent. Currently this list does not include
+   * resources from partner or customer-built integrations.
+   */
+  async listMonitoredComputersInAuditScope(
+    request: operations.ListMonitoredComputersInAuditScopeRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseMonitoredComputer> {
+    return unwrapAsync(auditsListMonitoredComputersInAuditScope(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List of people who are in scope for this audit
+   *
+   * @remarks
+   * Returns a list of people who are in scope for this audit.
+   */
+  async listPeopleInAuditScope(
+    request: operations.ListPeopleInAuditScopeRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponsePerson> {
+    return unwrapAsync(auditsListPeopleInAuditScope(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * List account access services for an audit
    *
    * @remarks
@@ -1050,6 +1092,74 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Audit> {
     return unwrapAsync(auditsShareInformationRequestList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List of vendors who are in scope for this audit
+   *
+   * @remarks
+   * Returns a list of vendors who are in scope for this audit.
+   */
+  async listVendorsInAuditScope(
+    request: operations.ListVendorsInAuditScopeRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseVendor> {
+    return unwrapAsync(auditsListVendorsInAuditScope(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List vulnerabilities within the scope of a given audit
+   *
+   * @remarks
+   * List all vulnerabilities based on selected filters.
+   */
+  async listVulnerabilities(
+    request: operations.ListVulnerabilitiesRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseAuditorApiVulnerability> {
+    return unwrapAsync(auditsListVulnerabilities(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List vulnerability remediations that are in scope for this audit
+   *
+   * @remarks
+   * List all vulnerability remediations based on selected filters that are in scope for this audit.
+   */
+  async listVulnerabilityRemediationsInAuditScope(
+    request: operations.ListVulnerabilityRemediationsInAuditScopeRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseVulnerabilityRemediation> {
+    return unwrapAsync(auditsListVulnerabilityRemediationsInAuditScope(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List assets associated with vulnerabilities
+   *
+   * @remarks
+   * List assets that Vanta monitors that are associated with vulnerabilities.
+   */
+  async getVulnerableAssets(
+    request: operations.GetVulnerableAssetsRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseVulnerableAsset> {
+    return unwrapAsync(auditsGetVulnerableAssets(
       this,
       request,
       options,
