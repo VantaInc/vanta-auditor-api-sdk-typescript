@@ -821,6 +821,10 @@ export class Audits extends ClientSDK {
    * Returns a list of computers monitored by an MDM (with an integration built
    * by Vanta) or by the Vanta Agent. Currently this list does not include
    * resources from partner or customer-built integrations.
+   *
+   * End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listMonitoredComputersInAuditScope(
     request: operations.ListMonitoredComputersInAuditScopeRequest,
@@ -838,6 +842,10 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Returns a list of people who are in scope for this audit.
+   *
+   * End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listPeopleInAuditScope(
     request: operations.ListPeopleInAuditScopeRequest,
@@ -1103,6 +1111,10 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Returns a list of vendors who are in scope for this audit.
+   *
+   * End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listVendorsInAuditScope(
     request: operations.ListVendorsInAuditScopeRequest,
@@ -1120,6 +1132,10 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * List all vulnerabilities based on selected filters.
+   *
+   * End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listVulnerabilities(
     request: operations.ListVulnerabilitiesRequest,
@@ -1137,6 +1153,10 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * List all vulnerability remediations based on selected filters that are in scope for this audit.
+   *
+   * End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listVulnerabilityRemediationsInAuditScope(
     request: operations.ListVulnerabilityRemediationsInAuditScopeRequest,
@@ -1154,6 +1174,10 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * List assets that Vanta monitors that are associated with vulnerabilities.
+   *
+   * End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async getVulnerableAssets(
     request: operations.GetVulnerableAssetsRequest,
