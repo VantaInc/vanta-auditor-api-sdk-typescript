@@ -34,8 +34,8 @@
 * [listAuditIssues](#listauditissues) - List snapshotted issues for an audit
 * [listAuditSnapshots](#listauditsnapshots) - List snapshotted issues for an audit
 * [listVendors](#listvendors) - List vendors for an audit
-* [listMonitoredComputersInAuditScope](#listmonitoredcomputersinauditscope) - List monitored computers
-* [listPeopleInAuditScope](#listpeopleinauditscope) - List of people who are in scope for this audit
+* [~~listMonitoredComputersInAuditScope~~](#listmonitoredcomputersinauditscope) - List monitored computers :warning: **Deprecated**
+* [~~listPeopleInAuditScope~~](#listpeopleinauditscope) - List of people who are in scope for this audit :warning: **Deprecated**
 * [listAccountAccessServices](#listaccountaccessservices) - List account access services for an audit
 * [listPersonnelAccountAccess](#listpersonnelaccountaccess) - List account access records for an audit
 * [listPersonnelGroups](#listpersonnelgroups) - List groups for an audit
@@ -43,10 +43,10 @@
 * [listRiskSnapshots](#listrisksnapshots) - List risk snapshots for an audit
 * [listAuditRisks](#listauditrisks) - List risks for an audit
 * [shareInformationRequestList](#shareinformationrequestlist) - Share information request list with customer
-* [listVendorsInAuditScope](#listvendorsinauditscope) - List of vendors who are in scope for this audit
-* [listVulnerabilities](#listvulnerabilities) - List vulnerabilities within the scope of a given audit
-* [listVulnerabilityRemediationsInAuditScope](#listvulnerabilityremediationsinauditscope) - List vulnerability remediations that are in scope for this audit
-* [getVulnerableAssets](#getvulnerableassets) - List assets associated with vulnerabilities
+* [~~listVendorsInAuditScope~~](#listvendorsinauditscope) - List of vendors who are in scope for this audit :warning: **Deprecated**
+* [~~listVulnerabilities~~](#listvulnerabilities) - List vulnerabilities within the scope of a given audit :warning: **Deprecated**
+* [~~listVulnerabilityRemediationsInAuditScope~~](#listvulnerabilityremediationsinauditscope) - List vulnerability remediations that are in scope for this audit :warning: **Deprecated**
+* [~~getVulnerableAssets~~](#getvulnerableassets) - List assets associated with vulnerabilities :warning: **Deprecated**
 
 ## list
 
@@ -2627,11 +2627,15 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## listMonitoredComputersInAuditScope
+## ~~listMonitoredComputersInAuditScope~~
 
 Returns a list of computers monitored by an MDM (with an integration built
 by Vanta) or by the Vanta Agent. Currently this list does not include
 resources from partner or customer-built integrations.
+
+End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -2702,9 +2706,13 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## listPeopleInAuditScope
+## ~~listPeopleInAuditScope~~
 
 Returns a list of people who are in scope for this audit.
+
+End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -3420,9 +3428,13 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## listVendorsInAuditScope
+## ~~listVendorsInAuditScope~~
 
 Returns a list of vendors who are in scope for this audit.
+
+End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -3493,9 +3505,13 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## listVulnerabilities
+## ~~listVulnerabilities~~
 
 List all vulnerabilities based on selected filters.
+
+End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -3566,9 +3582,13 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## listVulnerabilityRemediationsInAuditScope
+## ~~listVulnerabilityRemediationsInAuditScope~~
 
 List all vulnerability remediations based on selected filters that are in scope for this audit.
+
+End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -3639,9 +3659,13 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getVulnerableAssets
+## ~~getVulnerableAssets~~
 
 List assets that Vanta monitors that are associated with vulnerabilities.
+
+End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

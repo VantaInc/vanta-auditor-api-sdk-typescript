@@ -171,8 +171,8 @@ run();
 * [listAuditIssues](docs/sdks/audits/README.md#listauditissues) - List snapshotted issues for an audit
 * [listAuditSnapshots](docs/sdks/audits/README.md#listauditsnapshots) - List snapshotted issues for an audit
 * [listVendors](docs/sdks/audits/README.md#listvendors) - List vendors for an audit
-* [listMonitoredComputersInAuditScope](docs/sdks/audits/README.md#listmonitoredcomputersinauditscope) - List monitored computers
-* [listPeopleInAuditScope](docs/sdks/audits/README.md#listpeopleinauditscope) - List of people who are in scope for this audit
+* [~~listMonitoredComputersInAuditScope~~](docs/sdks/audits/README.md#listmonitoredcomputersinauditscope) - List monitored computers :warning: **Deprecated**
+* [~~listPeopleInAuditScope~~](docs/sdks/audits/README.md#listpeopleinauditscope) - List of people who are in scope for this audit :warning: **Deprecated**
 * [listAccountAccessServices](docs/sdks/audits/README.md#listaccountaccessservices) - List account access services for an audit
 * [listPersonnelAccountAccess](docs/sdks/audits/README.md#listpersonnelaccountaccess) - List account access records for an audit
 * [listPersonnelGroups](docs/sdks/audits/README.md#listpersonnelgroups) - List groups for an audit
@@ -180,10 +180,10 @@ run();
 * [listRiskSnapshots](docs/sdks/audits/README.md#listrisksnapshots) - List risk snapshots for an audit
 * [listAuditRisks](docs/sdks/audits/README.md#listauditrisks) - List risks for an audit
 * [shareInformationRequestList](docs/sdks/audits/README.md#shareinformationrequestlist) - Share information request list with customer
-* [listVendorsInAuditScope](docs/sdks/audits/README.md#listvendorsinauditscope) - List of vendors who are in scope for this audit
-* [listVulnerabilities](docs/sdks/audits/README.md#listvulnerabilities) - List vulnerabilities within the scope of a given audit
-* [listVulnerabilityRemediationsInAuditScope](docs/sdks/audits/README.md#listvulnerabilityremediationsinauditscope) - List vulnerability remediations that are in scope for this audit
-* [getVulnerableAssets](docs/sdks/audits/README.md#getvulnerableassets) - List assets associated with vulnerabilities
+* [~~listVendorsInAuditScope~~](docs/sdks/audits/README.md#listvendorsinauditscope) - List of vendors who are in scope for this audit :warning: **Deprecated**
+* [~~listVulnerabilities~~](docs/sdks/audits/README.md#listvulnerabilities) - List vulnerabilities within the scope of a given audit :warning: **Deprecated**
+* [~~listVulnerabilityRemediationsInAuditScope~~](docs/sdks/audits/README.md#listvulnerabilityremediationsinauditscope) - List vulnerability remediations that are in scope for this audit :warning: **Deprecated**
+* [~~getVulnerableAssets~~](docs/sdks/audits/README.md#getvulnerableassets) - List assets associated with vulnerabilities :warning: **Deprecated**
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -218,7 +218,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsGetFrameworkCodes`](docs/sdks/audits/README.md#getframeworkcodes) - Get framework codes for an audit
 - [`auditsGetInformationRequest`](docs/sdks/audits/README.md#getinformationrequest) - Get an information request by ID
 - [`auditsGetInformationRequestTestSnapshotEvidenceDetail`](docs/sdks/audits/README.md#getinformationrequesttestsnapshotevidencedetail) - Get test snapshot detail for an evidence row
-- [`auditsGetVulnerableAssets`](docs/sdks/audits/README.md#getvulnerableassets) - List assets associated with vulnerabilities
 - [`auditsList`](docs/sdks/audits/README.md#list) - List audits
 - [`auditsListAccountAccessServices`](docs/sdks/audits/README.md#listaccountaccessservices) - List account access services for an audit
 - [`auditsListAuditIssues`](docs/sdks/audits/README.md#listauditissues) - List snapshotted issues for an audit
@@ -233,20 +232,21 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsListInformationRequestEvidence`](docs/sdks/audits/README.md#listinformationrequestevidence) - List evidence for an information request
 - [`auditsListInformationRequests`](docs/sdks/audits/README.md#listinformationrequests) - List information requests for an audit
 - [`auditsListInformationRequestsForControl`](docs/sdks/audits/README.md#listinformationrequestsforcontrol) - List information requests linked to a control within an audit
-- [`auditsListMonitoredComputersInAuditScope`](docs/sdks/audits/README.md#listmonitoredcomputersinauditscope) - List monitored computers
-- [`auditsListPeopleInAuditScope`](docs/sdks/audits/README.md#listpeopleinauditscope) - List of people who are in scope for this audit
 - [`auditsListPersonnelAccountAccess`](docs/sdks/audits/README.md#listpersonnelaccountaccess) - List account access records for an audit
 - [`auditsListPersonnelGroups`](docs/sdks/audits/README.md#listpersonnelgroups) - List groups for an audit
 - [`auditsListPersonnelPeople`](docs/sdks/audits/README.md#listpersonnelpeople) - List people for an audit
 - [`auditsListRiskSnapshots`](docs/sdks/audits/README.md#listrisksnapshots) - List risk snapshots for an audit
 - [`auditsListVendors`](docs/sdks/audits/README.md#listvendors) - List vendors for an audit
-- [`auditsListVendorsInAuditScope`](docs/sdks/audits/README.md#listvendorsinauditscope) - List of vendors who are in scope for this audit
-- [`auditsListVulnerabilities`](docs/sdks/audits/README.md#listvulnerabilities) - List vulnerabilities within the scope of a given audit
-- [`auditsListVulnerabilityRemediationsInAuditScope`](docs/sdks/audits/README.md#listvulnerabilityremediationsinauditscope) - List vulnerability remediations that are in scope for this audit
 - [`auditsShareInformationRequestList`](docs/sdks/audits/README.md#shareinformationrequestlist) - Share information request list with customer
 - [`auditsUpdateCommentForInformationRequest`](docs/sdks/audits/README.md#updatecommentforinformationrequest) - Update a comment for an information request
 - [`auditsUpdateEvidence`](docs/sdks/audits/README.md#updateevidence) - Update audit evidence
 - [`auditsUpdateInformationRequest`](docs/sdks/audits/README.md#updateinformationrequest) - Update an information request for an audit
+- ~~[`auditsGetVulnerableAssets`](docs/sdks/audits/README.md#getvulnerableassets)~~ - List assets associated with vulnerabilities :warning: **Deprecated**
+- ~~[`auditsListMonitoredComputersInAuditScope`](docs/sdks/audits/README.md#listmonitoredcomputersinauditscope)~~ - List monitored computers :warning: **Deprecated**
+- ~~[`auditsListPeopleInAuditScope`](docs/sdks/audits/README.md#listpeopleinauditscope)~~ - List of people who are in scope for this audit :warning: **Deprecated**
+- ~~[`auditsListVendorsInAuditScope`](docs/sdks/audits/README.md#listvendorsinauditscope)~~ - List of vendors who are in scope for this audit :warning: **Deprecated**
+- ~~[`auditsListVulnerabilities`](docs/sdks/audits/README.md#listvulnerabilities)~~ - List vulnerabilities within the scope of a given audit :warning: **Deprecated**
+- ~~[`auditsListVulnerabilityRemediationsInAuditScope`](docs/sdks/audits/README.md#listvulnerabilityremediationsinauditscope)~~ - List vulnerability remediations that are in scope for this audit :warning: **Deprecated**
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->

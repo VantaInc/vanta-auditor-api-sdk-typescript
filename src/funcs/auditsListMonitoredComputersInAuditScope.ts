@@ -33,6 +33,10 @@ import { Result } from "../types/fp.js";
  * Returns a list of computers monitored by an MDM (with an integration built
  * by Vanta) or by the Vanta Agent. Currently this list does not include
  * resources from partner or customer-built integrations.
+ *
+ * End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function auditsListMonitoredComputersInAuditScope(
   client: VantaCore,
