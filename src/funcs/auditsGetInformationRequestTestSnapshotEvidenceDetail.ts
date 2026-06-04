@@ -47,6 +47,10 @@ import { Result } from "../types/fp.js";
  * The `outOfScopeResources` field lists resources excluded at the test
  * level (customer-disabled) and the framework level (segment
  * configuration). Empty exclusion groups are filtered out.
+ *
+ * The `apiRequests` array contains the HTTP requests captured during API
+ * introspection tests. Empty when the test does not perform API
+ * introspection.
  */
 export function auditsGetInformationRequestTestSnapshotEvidenceDetail(
   client: VantaCore,

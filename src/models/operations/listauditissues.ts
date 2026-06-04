@@ -27,7 +27,23 @@ export type ListAuditIssuesRequest = {
    */
   snapshotIdMatchesAny?: Array<string> | undefined;
   /**
-   * Field to sort results by. Allowed: "createdAt", "lastModifiedAt". Default: "createdAt"
+   * Filter to issues created on or after this date (ISO 8601)
+   */
+  createdAfterDate?: Date | undefined;
+  /**
+   * Filter to issues created on or before this date (ISO 8601)
+   */
+  createdBeforeDate?: Date | undefined;
+  /**
+   * Filter to issues detected on or after this date (ISO 8601)
+   */
+  detectedAfterDate?: Date | undefined;
+  /**
+   * Filter to issues detected on or before this date (ISO 8601)
+   */
+  detectedBeforeDate?: Date | undefined;
+  /**
+   * Field to sort results by. Allowed: "createdAt", "lastModifiedAt", "detectedAt". Default: "createdAt"
    */
   orderBy?: components.IssueSnapshotItemOrderBy | undefined;
   /**
@@ -43,6 +59,10 @@ export type ListAuditIssuesRequest$Outbound = {
   pageCursor?: string | undefined;
   search?: string | undefined;
   snapshotIdMatchesAny?: Array<string> | undefined;
+  createdAfterDate?: string | undefined;
+  createdBeforeDate?: string | undefined;
+  detectedAfterDate?: string | undefined;
+  detectedBeforeDate?: string | undefined;
   orderBy?: string | undefined;
   orderDirection?: string | undefined;
 };
@@ -58,6 +78,10 @@ export const ListAuditIssuesRequest$outboundSchema: z.ZodType<
   pageCursor: z.string().optional(),
   search: z.string().optional(),
   snapshotIdMatchesAny: z.array(z.string()).optional(),
+  createdAfterDate: z.date().transform(v => v.toISOString()).optional(),
+  createdBeforeDate: z.date().transform(v => v.toISOString()).optional(),
+  detectedAfterDate: z.date().transform(v => v.toISOString()).optional(),
+  detectedBeforeDate: z.date().transform(v => v.toISOString()).optional(),
   orderBy: components.IssueSnapshotItemOrderBy$outboundSchema.optional(),
   orderDirection: components.OrderDirection$outboundSchema.optional(),
 });

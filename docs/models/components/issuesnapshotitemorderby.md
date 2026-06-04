@@ -7,11 +7,11 @@ Allowed values for the `orderBy` query parameter on issue snapshot item endpoint
 ```typescript
 import { IssueSnapshotItemOrderBy } from "vanta-auditor-api-sdk/models/components";
 
-let value: IssueSnapshotItemOrderBy = "lastModifiedAt";
+let value: IssueSnapshotItemOrderBy = "detectedAt";
 ```
 
 ## Values
 
 ```typescript
-"createdAt" | "lastModifiedAt"
+"createdAt" | "lastModifiedAt" | "detectedAt"
 ```

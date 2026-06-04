@@ -105,7 +105,7 @@ export class Audits extends ClientSDK {
    * Supports filtering by:
    * - `search`: Searches code change titles and repository names (case-insensitive)
    * - `sourcesMatchesAny`: Filters by version control source (accepted values: github, gitlab, bitbucket, azuredevops)
-   * - `startDate` / `endDate`: Filters by the closed date range
+   * - `closedAfterDate` / `closedBeforeDate`: Filters by the closed date range
    *
    * Uses cursor-based pagination. To paginate:
    * 1. Make initial request with desired `pageSize`
@@ -676,6 +676,10 @@ export class Audits extends ClientSDK {
    * The `outOfScopeResources` field lists resources excluded at the test
    * level (customer-disabled) and the framework level (segment
    * configuration). Empty exclusion groups are filtered out.
+   *
+   * The `apiRequests` array contains the HTTP requests captured during API
+   * introspection tests. Empty when the test does not perform API
+   * introspection.
    */
   async getInformationRequestTestSnapshotEvidenceDetail(
     request: operations.GetInformationRequestTestSnapshotEvidenceDetailRequest,
@@ -733,6 +737,8 @@ export class Audits extends ClientSDK {
    * Supports filtering by:
    * - `search`: full text search across issue title and description
    * - `snapshotId`: filtering to a specific snapshot or snapshots, which represent point-in-time captures of issues. Use the GET /audits/{auditId}/issues/snapshots endpoint to retrieve snapshot IDs and metadata.
+   * - `createdAfterDate` / `createdBeforeDate`: filter to issues created within a date range (inclusive)
+   * - `detectedAfterDate` / `detectedBeforeDate`: filter to issues detected within a date range (inclusive)
    *
    * Results are sorted by issue creation date in descending order (newest first) by default.
    * Use `orderBy` and `orderDirection` to customize sorting.
