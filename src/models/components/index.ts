@@ -142,6 +142,7 @@ export * from "./vantapolicyevidence.js";
 export * from "./vantatestevidence.js";
 export * from "./vantatestfiletype.js";
 export * from "./vantatestrunstatus.js";
+export * from "./vantatestsnapshotapirequest.js";
 export * from "./vantatestsnapshotevidence.js";
 export * from "./vantatestsnapshotevidencedetail.js";
 export * from "./vantatestsnapshotexcludeditem.js";

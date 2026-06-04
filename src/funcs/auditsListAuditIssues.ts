@@ -39,6 +39,8 @@ import { Result } from "../types/fp.js";
  * Supports filtering by:
  * - `search`: full text search across issue title and description
  * - `snapshotId`: filtering to a specific snapshot or snapshots, which represent point-in-time captures of issues. Use the GET /audits/{auditId}/issues/snapshots endpoint to retrieve snapshot IDs and metadata.
+ * - `createdAfterDate` / `createdBeforeDate`: filter to issues created within a date range (inclusive)
+ * - `detectedAfterDate` / `detectedBeforeDate`: filter to issues detected within a date range (inclusive)
  *
  * Results are sorted by issue creation date in descending order (newest first) by default.
  * Use `orderBy` and `orderDirection` to customize sorting.
@@ -113,6 +115,10 @@ async function $do(
   const path = pathToFunc("/audits/{auditId}/issues/items")(pathParams);
 
   const query = encodeFormQuery({
+    "createdAfterDate": payload.createdAfterDate,
+    "createdBeforeDate": payload.createdBeforeDate,
+    "detectedAfterDate": payload.detectedAfterDate,
+    "detectedBeforeDate": payload.detectedBeforeDate,
     "orderBy": payload.orderBy,
     "orderDirection": payload.orderDirection,
     "pageCursor": payload.pageCursor,

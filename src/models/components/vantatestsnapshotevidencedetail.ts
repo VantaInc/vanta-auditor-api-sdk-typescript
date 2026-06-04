@@ -7,6 +7,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  VantaTestSnapshotApiRequest,
+  VantaTestSnapshotApiRequest$inboundSchema,
+} from "./vantatestsnapshotapirequest.js";
+import {
   VantaTestSnapshotIntegration,
   VantaTestSnapshotIntegration$inboundSchema,
 } from "./vantatestsnapshotintegration.js";
@@ -80,6 +84,14 @@ export type VantaTestSnapshotEvidenceDetail = {
    * segment configuration.
    */
   outOfScopeResources?: VantaTestSnapshotOutOfScopeResources | undefined;
+  /**
+   * API requests captured during the test run. Absent when the snapshot
+   *
+   * @remarks
+   * data could not be loaded. Empty array when the test does not perform
+   * API introspection.
+   */
+  apiRequests?: Array<VantaTestSnapshotApiRequest> | undefined;
 };
 
 /** @internal */
@@ -137,6 +149,7 @@ export const VantaTestSnapshotEvidenceDetail$inboundSchema: z.ZodType<
   rawTestData: z.array(VantaTestSnapshotRawTestDataRow$inboundSchema),
   outOfScopeResources: VantaTestSnapshotOutOfScopeResources$inboundSchema
     .optional(),
+  apiRequests: z.array(VantaTestSnapshotApiRequest$inboundSchema).optional(),
 });
 
 export function vantaTestSnapshotEvidenceDetailFromJSON(

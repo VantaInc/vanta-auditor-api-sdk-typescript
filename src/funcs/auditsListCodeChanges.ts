@@ -38,7 +38,7 @@ import { Result } from "../types/fp.js";
  * Supports filtering by:
  * - `search`: Searches code change titles and repository names (case-insensitive)
  * - `sourcesMatchesAny`: Filters by version control source (accepted values: github, gitlab, bitbucket, azuredevops)
- * - `startDate` / `endDate`: Filters by the closed date range
+ * - `closedAfterDate` / `closedBeforeDate`: Filters by the closed date range
  *
  * Uses cursor-based pagination. To paginate:
  * 1. Make initial request with desired `pageSize`
@@ -112,12 +112,12 @@ async function $do(
   const path = pathToFunc("/audits/{auditId}/assets/code-changes")(pathParams);
 
   const query = encodeFormQuery({
-    "endDate": payload.endDate,
+    "closedAfterDate": payload.closedAfterDate,
+    "closedBeforeDate": payload.closedBeforeDate,
     "pageCursor": payload.pageCursor,
     "pageSize": payload.pageSize,
     "search": payload.search,
     "sourcesMatchesAny": payload.sourcesMatchesAny,
-    "startDate": payload.startDate,
   });
 
   const headers = new Headers(compactMap({

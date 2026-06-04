@@ -29,11 +29,11 @@ export type ListCodeChangesRequest = {
   /**
    * Filter code changes closed on or after this date (ISO 8601)
    */
-  startDate?: Date | undefined;
+  closedAfterDate?: Date | undefined;
   /**
    * Filter code changes closed on or before this date (ISO 8601)
    */
-  endDate?: Date | undefined;
+  closedBeforeDate?: Date | undefined;
 };
 
 /** @internal */
@@ -43,8 +43,8 @@ export type ListCodeChangesRequest$Outbound = {
   pageCursor?: string | undefined;
   search?: string | undefined;
   sourcesMatchesAny?: Array<string> | undefined;
-  startDate?: string | undefined;
-  endDate?: string | undefined;
+  closedAfterDate?: string | undefined;
+  closedBeforeDate?: string | undefined;
 };
 
 /** @internal */
@@ -59,8 +59,8 @@ export const ListCodeChangesRequest$outboundSchema: z.ZodType<
   search: z.string().optional(),
   sourcesMatchesAny: z.array(components.ApiCodeChangeSource$outboundSchema)
     .optional(),
-  startDate: z.date().transform(v => v.toISOString()).optional(),
-  endDate: z.date().transform(v => v.toISOString()).optional(),
+  closedAfterDate: z.date().transform(v => v.toISOString()).optional(),
+  closedBeforeDate: z.date().transform(v => v.toISOString()).optional(),
 });
 
 export function listCodeChangesRequestToJSON(

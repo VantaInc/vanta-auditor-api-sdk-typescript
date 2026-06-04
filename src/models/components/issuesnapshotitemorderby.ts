@@ -11,6 +11,7 @@ import { ClosedEnum } from "../../types/enums.js";
 export const IssueSnapshotItemOrderBy = {
   CreatedAt: "createdAt",
   LastModifiedAt: "lastModifiedAt",
+  DetectedAt: "detectedAt",
 } as const;
 /**
  * Allowed values for the `orderBy` query parameter on issue snapshot item endpoints.
