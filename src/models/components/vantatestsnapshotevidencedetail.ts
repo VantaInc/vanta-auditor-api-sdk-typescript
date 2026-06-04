@@ -11,6 +11,10 @@ import {
   VantaTestSnapshotIntegration$inboundSchema,
 } from "./vantatestsnapshotintegration.js";
 import {
+  VantaTestSnapshotOutOfScopeResources,
+  VantaTestSnapshotOutOfScopeResources$inboundSchema,
+} from "./vantatestsnapshotoutofscoperesources.js";
+import {
   VantaTestSnapshotRawTestDataRow,
   VantaTestSnapshotRawTestDataRow$inboundSchema,
 } from "./vantatestsnapshotrawtestdatarow.js";
@@ -67,6 +71,15 @@ export type VantaTestSnapshotEvidenceDetail = {
    * Raw test data captured at snapshot time.
    */
   rawTestData: Array<VantaTestSnapshotRawTestDataRow>;
+  /**
+   * Resources excluded from the test at snapshot time, grouped by exclusion
+   *
+   * @remarks
+   * reason.  `testLevel` contains resources the customer disabled for the
+   * test; `frameworkLevel` contains resources scoped out by the framework's
+   * segment configuration.
+   */
+  outOfScopeResources?: VantaTestSnapshotOutOfScopeResources | undefined;
 };
 
 /** @internal */
@@ -122,6 +135,8 @@ export const VantaTestSnapshotEvidenceDetail$inboundSchema: z.ZodType<
   integrations: z.array(VantaTestSnapshotIntegration$inboundSchema),
   slaRemediation: z.nullable(z.lazy(() => SlaRemediation$inboundSchema)),
   rawTestData: z.array(VantaTestSnapshotRawTestDataRow$inboundSchema),
+  outOfScopeResources: VantaTestSnapshotOutOfScopeResources$inboundSchema
+    .optional(),
 });
 
 export function vantaTestSnapshotEvidenceDetailFromJSON(
