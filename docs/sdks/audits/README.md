@@ -2178,17 +2178,21 @@ run();
 
 Retrieves the rich detail for a single VANTA_TEST_SNAPSHOT evidence row
 attached to an information request. The response includes test-level
-metadata (description, integrations, SLA) and the raw test data captured
-at snapshot time, presented as a uniform array of rows regardless of
-whether the snapshot is structured or unstructured.
+metadata (description, integrations, SLA), the raw test data captured
+at snapshot time, and the resources that were excluded from the test
+(out-of-scope resources).
 
-For structured snapshots, the array contains one row per resource the
-test ran against; each row carries `resourceId`, `resourceType`, and the
-raw JSON for that resource.
+For structured snapshots, the `rawTestData` array contains one row per
+resource the test ran against; each row carries `resourceId`,
+`resourceType`, and the raw JSON for that resource.
 
-For unstructured snapshots, the array contains a single row with
-`resourceId` and `resourceType` set to `null` and `rawJson` containing
-the entire test-run JSON blob.
+For unstructured snapshots, the `rawTestData` array contains a single
+row with `resourceId` and `resourceType` set to `null` and `rawJson`
+containing the entire test-run JSON blob.
+
+The `outOfScopeResources` field lists resources excluded at the test
+level (customer-disabled) and the framework level (segment
+configuration). Empty exclusion groups are filtered out.
 
 ### Example Usage
 
