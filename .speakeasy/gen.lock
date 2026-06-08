@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 8ddb6b47e4724913ba6b0668adc1dd7b
+  docChecksum: a1f8bc492e6236a52e81da7e09034670
   docVersion: 1.0.0
-  speakeasyVersion: 1.770.0
+  speakeasyVersion: 1.771.0
   generationVersion: 2.893.0
-  releaseVersion: 0.7.3
-  configChecksum: 940a90e61a3869e8b18f4b4af1c48920
+  releaseVersion: 0.7.4
+  configChecksum: 878b88fbd0afd52e6daf1837ff5e1121
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: 2a71e3e7-8b3e-49c2-ac53-e24593c3a127
-  pristine_commit_hash: 12b6d8d25bf94eabb430cd8a66dcb1204d5b5e0f
-  pristine_tree_hash: 2d472b53ef374d564dcce2e1f6e29530d7ac0737
+  generation_id: 3e350f65-41cc-4ff1-8b5b-52552750b0e6
+  pristine_commit_hash: 12a694fbefd6879b543cabf658119ec01eb05441
+  pristine_tree_hash: f9e9cb67c52b787ccad6c170704f9da645341745
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1238,8 +1238,8 @@ trackedFiles:
     pristine_git_object: 1313f60d7a761c4e6400903c6a22ac68b06ced5f
   docs/sdks/audits/README.md:
     id: b976aa226e19
-    last_write_checksum: sha1:1cc59ea60b3ca2caf3822c689298707e6db80bde
-    pristine_git_object: d1f7f48a2208d8a11ae4248c0deb65dca20ea90a
+    last_write_checksum: sha1:7969beb5bdc618ab78729f66e31e7474685692d1
+    pristine_git_object: 3281018585812549f471767331d6702b25f8b6b3
   eslint.config.mjs:
     id: 461c8d07f6da
     last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
@@ -1262,12 +1262,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:dedd131bba8d1d235a43dfa46fc88553bcebd922
-    pristine_git_object: 9919f7bdec72ad363559688dd7622c25df1df1ef
+    last_write_checksum: sha1:c073179183904ad7b5d9490a23b0c107f07311a0
+    pristine_git_object: 21213532d14c903d6e344bc2d97283bee6854911
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:7f2e6459bc88ec129012345e49df9931fe2601c7
-    pristine_git_object: c643fc09777333290652fb95134c419570a52019
+    last_write_checksum: sha1:24c20d9ed923dc9370001714c1da7e8fa95e78ca
+    pristine_git_object: b0625ae6ec2d1b6ad1ab7a422d7a4b25901545eb
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1334,8 +1334,8 @@ trackedFiles:
     pristine_git_object: ca16a5f048257d51339bf8e63de503ab463e6f58
   src/funcs/auditsGetVulnerableAssets.ts:
     id: 35f8b37dfd0c
-    last_write_checksum: sha1:8218f05c57e0422269dc99ca3e8f7b02d702a946
-    pristine_git_object: 8f7638fb26fb50e35946c6aae012f9e67e6c2448
+    last_write_checksum: sha1:35082e3d2ee491f780223fecc705f819855c14c1
+    pristine_git_object: f0e819b55600a15562641dd7dd6187081950513d
   src/funcs/auditsList.ts:
     id: 58dd6929673a
     last_write_checksum: sha1:fcbbd15ebf84065d6584aae7e2c2b81e5fa67822
@@ -1394,12 +1394,12 @@ trackedFiles:
     pristine_git_object: 867d86482701e7b21224942fd3524632c72c9fb8
   src/funcs/auditsListMonitoredComputersInAuditScope.ts:
     id: ed5ee2dd0e49
-    last_write_checksum: sha1:56f89455f8539781756cd147c9a4c23f5166abce
-    pristine_git_object: 324ba64cd5a49d9ec97382417b6b979de6e80700
+    last_write_checksum: sha1:16fc1e59ba137e03f211e1aeb5ef89aef0dd24c6
+    pristine_git_object: 697778b28b589c453d5b1e5056eb8f70f1683d98
   src/funcs/auditsListPeopleInAuditScope.ts:
     id: cdc786dca26f
-    last_write_checksum: sha1:14ea1859355aed141962607d4489bdd3774ff03e
-    pristine_git_object: 7564e7c7bfecdd93f99e56af90713a800d58828d
+    last_write_checksum: sha1:2a913199231b80f60c4757953b6515fd200aadea
+    pristine_git_object: 20cdd259d2a97445737cc420db2233b560f0e217
   src/funcs/auditsListPersonnelAccountAccess.ts:
     id: 9343557adddb
     last_write_checksum: sha1:b09f987a3ef06bd37219d9e0fe395af669fc7725
@@ -1422,16 +1422,16 @@ trackedFiles:
     pristine_git_object: 5460726a58ce7d84b22ce1602d1c113f85de9883
   src/funcs/auditsListVendorsInAuditScope.ts:
     id: 5697b221f4da
-    last_write_checksum: sha1:645c8e89c692f5a06e4a0c362687068b7f6cee0e
-    pristine_git_object: 477c8c28a0e94f964e0a862d628c3fbcc5e8f184
+    last_write_checksum: sha1:fe8cce260bad8ad772ec36a5e7689fbdcfa9cf10
+    pristine_git_object: b1defb9a8a0e5d9260c16f71debfb6189f8f6e68
   src/funcs/auditsListVulnerabilities.ts:
     id: c05a345f0691
-    last_write_checksum: sha1:17ceb364a883431aa9aa120df69362a06e1f2339
-    pristine_git_object: 7e617f01bcb81cf813ccbeaa254d3067b517c3a2
+    last_write_checksum: sha1:72918056daedd63ed0840a06cf47e0e16dd6ed2d
+    pristine_git_object: b1f3b6ced0d2e902ebec4139eea8ca00f55566e7
   src/funcs/auditsListVulnerabilityRemediationsInAuditScope.ts:
     id: 090544d37e58
-    last_write_checksum: sha1:89a1cf1340bba619168457c00e0e3f0faef479ac
-    pristine_git_object: 52d6c4138df875d29687ca119e265218af9b8779
+    last_write_checksum: sha1:6a1376db966e69fce9c29cc52d681b768e4bf629
+    pristine_git_object: e0dea7460cbfa74f727531e7a49831aba5cb6f57
   src/funcs/auditsShareInformationRequestList.ts:
     id: 85889a98b512
     last_write_checksum: sha1:56739cbdda9a3065261458efd0539c83c529cf7d
@@ -1470,8 +1470,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:efeb6a95bff7ecd619ff44e0d7928957e9d5b000
-    pristine_git_object: 8846b2248006adfda82965b7b6389d24f564b8ed
+    last_write_checksum: sha1:3498c712b239b140c724ebb6bdba72a73a31c25c
+    pristine_git_object: f8cf87565e8d8088ac7c840443ef444b8bf9a67f
   src/lib/dlv.ts:
     id: b1988214835a
     last_write_checksum: sha1:1dd3e3fbb4550c4bf31f5ef997faff355d6f3250
@@ -2374,8 +2374,8 @@ trackedFiles:
     pristine_git_object: c3f3d8f7eee1763142b91a4391f2f63e05240b97
   src/sdk/audits.ts:
     id: ab43f5ff5412
-    last_write_checksum: sha1:19802be169e9d8e936e5c259f9270b0fb6a30088
-    pristine_git_object: 6aa02e38269fc8b5523cc5e20df3f328091a7df2
+    last_write_checksum: sha1:30c2113b86aafcc5aae7ff06af66caf9867383fb
+    pristine_git_object: fca88874f9f7fc77e65eb9224bb8cb99fec23d9b
   src/sdk/index.ts:
     id: a857902a703f
     last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f

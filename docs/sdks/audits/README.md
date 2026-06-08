@@ -2643,7 +2643,9 @@ Returns a list of computers monitored by an MDM (with an integration built
 by Vanta) or by the Vanta Agent. Currently this list does not include
 resources from partner or customer-built integrations.
 
-End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+End of life — this endpoint works for legacy audits only; it does not support
+controlled audit view. It remains available for existing legacy audits but will be removed once
+legacy audits are fully phased out, so do not build new integrations on it.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
@@ -2720,7 +2722,9 @@ run();
 
 Returns a list of people who are in scope for this audit.
 
-End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+End of life — this endpoint works for legacy audits only; it does not support
+controlled audit view. It remains available for existing legacy audits but will be removed once
+legacy audits are fully phased out, so do not build new integrations on it.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
@@ -3442,7 +3446,9 @@ run();
 
 Returns a list of vendors who are in scope for this audit.
 
-End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+End of life — this endpoint works for legacy audits only; it does not support
+controlled audit view. It remains available for existing legacy audits but will be removed once
+legacy audits are fully phased out, so do not build new integrations on it.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
@@ -3519,7 +3525,9 @@ run();
 
 List all vulnerabilities based on selected filters.
 
-End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+End of life — this endpoint works for legacy audits only; it does not support
+controlled audit view. It remains available for existing legacy audits but will be removed once
+legacy audits are fully phased out, so do not build new integrations on it.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
@@ -3596,7 +3604,9 @@ run();
 
 List all vulnerability remediations based on selected filters that are in scope for this audit.
 
-End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+End of life — this endpoint works for legacy audits only; it does not support
+controlled audit view. It remains available for existing legacy audits but will be removed once
+legacy audits are fully phased out, so do not build new integrations on it.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
@@ -3673,7 +3683,9 @@ run();
 
 List assets that Vanta monitors that are associated with vulnerabilities.
 
-End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+End of life — this endpoint works for legacy audits only; it does not support
+controlled audit view. It remains available for existing legacy audits but will be removed once
+legacy audits are fully phased out, so do not build new integrations on it.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
