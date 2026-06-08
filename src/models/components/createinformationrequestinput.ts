@@ -89,6 +89,16 @@ export type CreateInformationRequestInput = {
    * Format: ISO 8601 UTC timestamp.
    */
   evidenceCaptureDate?: Date | null | undefined;
+  /**
+   * Control IDs to link directly to this request, beyond those automatically
+   *
+   * @remarks
+   * mapped from framework codes. Each must be the `id` of an existing control in
+   * the customer's organization (the identifier returned by the controls endpoints).
+   * The request is rejected if any ID does not match a control.
+   * Omit or pass an empty array for no direct control links.
+   */
+  additionalControlIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -107,6 +117,7 @@ export type CreateInformationRequestInput$Outbound = {
   cadence?: string | null | undefined;
   dueDate?: string | null | undefined;
   evidenceCaptureDate?: string | null | undefined;
+  additionalControlIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -125,6 +136,7 @@ export const CreateInformationRequestInput$outboundSchema: z.ZodType<
   dueDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
   evidenceCaptureDate: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
+  additionalControlIds: z.array(z.string()).optional(),
 });
 
 export function createInformationRequestInputToJSON(

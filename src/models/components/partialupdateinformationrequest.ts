@@ -63,6 +63,17 @@ export type PartialUpdateInformationRequest = {
    * Frequency cadence for the information request, indicating how often it recurs.
    */
   cadence?: InformationRequestCadence | undefined;
+  /**
+   * Control IDs to link directly to this request, beyond those automatically
+   *
+   * @remarks
+   * mapped from framework codes. Replaces the existing set: pass the complete
+   * desired list, an empty array to clear all direct control links, or omit to
+   * leave them unchanged. Each must be the `id` of an existing control in the
+   * customer's organization (the identifier returned by the controls endpoints).
+   * The request is rejected if any ID does not match a control.
+   */
+  additionalControlIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -74,6 +85,7 @@ export type PartialUpdateInformationRequest$Outbound = {
   requestType?: string | undefined;
   title?: string | undefined;
   cadence?: string | undefined;
+  additionalControlIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -90,6 +102,7 @@ export const PartialUpdateInformationRequest$outboundSchema: z.ZodType<
   requestType: InformationRequestType$outboundSchema.optional(),
   title: z.string().optional(),
   cadence: InformationRequestCadence$outboundSchema.optional(),
+  additionalControlIds: z.array(z.string()).optional(),
 });
 
 export function partialUpdateInformationRequestToJSON(
