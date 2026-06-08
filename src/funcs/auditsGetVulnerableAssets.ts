@@ -32,7 +32,9 @@ import { Result } from "../types/fp.js";
  * @remarks
  * List assets that Vanta monitors that are associated with vulnerabilities.
  *
- * End of life — this endpoint works for legacy audits only and does not support controlled audit view.
+ * End of life — this endpoint works for legacy audits only; it does not support
+ * controlled audit view. It remains available for existing legacy audits but will be removed once
+ * legacy audits are fully phased out, so do not build new integrations on it.
  *
  * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
