@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const InformationRequestActivityType = {
+  AuditDuplicationAuditTrail: "AUDIT_DUPLICATION_AUDIT_TRAIL",
   ChangeStatus: "CHANGE_STATUS",
   EditRequest: "EDIT_REQUEST",
   RemoveEvidence: "REMOVE_EVIDENCE",

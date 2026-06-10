@@ -13,5 +13,5 @@ let value: Method = "O_AUTH";
 ## Values
 
 ```typescript
-"AUTH_0" | "AZURE_AD" | "GOOGLE_WORKSPACE" | "O_AUTH" | "O365" | "OKTA" | "ONE_LOGIN" | "OWA" | "SSO" | "USERNAME_PASSWORD"
+"AUTH_0" | "AZURE_AD" | "GOOGLE_WORKSPACE" | "O_AUTH" | "O365" | "OKTA" | "ONE_LOGIN" | "OWA" | "SSO" | "USERNAME_PASSWORD" | "OTHER"
 ```

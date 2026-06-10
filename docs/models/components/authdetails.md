@@ -12,7 +12,7 @@ let value: AuthDetails = {
   passwordRequiresSymbol: null,
   passwordRequiresNumber: true,
   passwordMFA: false,
-  method: "ONE_LOGIN",
+  method: "OWA",
 };
 ```
 
