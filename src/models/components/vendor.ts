@@ -40,6 +40,7 @@ export const Method = {
   Owa: "OWA",
   Sso: "SSO",
   UsernamePassword: "USERNAME_PASSWORD",
+  Other: "OTHER",
 } as const;
 /**
  * The vendor's authentication method.
