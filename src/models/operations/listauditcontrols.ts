@@ -8,6 +8,10 @@ export type ListAuditControlsRequest = {
   auditId: string;
   pageSize?: number | undefined;
   pageCursor?: string | undefined;
+  /**
+   * Filter controls whose externalId matches any of the provided values (exact, case-sensitive match).
+   */
+  externalIdMatchesAny?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -15,6 +19,7 @@ export type ListAuditControlsRequest$Outbound = {
   auditId: string;
   pageSize: number;
   pageCursor?: string | undefined;
+  externalIdMatchesAny?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -26,6 +31,7 @@ export const ListAuditControlsRequest$outboundSchema: z.ZodType<
   auditId: z.string(),
   pageSize: z.number().int().default(10),
   pageCursor: z.string().optional(),
+  externalIdMatchesAny: z.array(z.string()).optional(),
 });
 
 export function listAuditControlsRequestToJSON(

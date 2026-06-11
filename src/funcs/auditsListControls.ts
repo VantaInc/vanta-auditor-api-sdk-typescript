@@ -96,6 +96,7 @@ async function $do(
   const path = pathToFunc("/audits/{auditId}/controls")(pathParams);
 
   const query = encodeFormQuery({
+    "externalIdMatchesAny": payload.externalIdMatchesAny,
     "pageCursor": payload.pageCursor,
     "pageSize": payload.pageSize,
   });

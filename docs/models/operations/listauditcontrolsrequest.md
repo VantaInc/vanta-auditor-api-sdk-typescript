@@ -12,8 +12,9 @@ let value: ListAuditControlsRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `auditId`          | *string*           | :heavy_check_mark: | N/A                |
-| `pageSize`         | *number*           | :heavy_minus_sign: | N/A                |
-| `pageCursor`       | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `auditId`                                                                                          | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `pageSize`                                                                                         | *number*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `pageCursor`                                                                                       | *string*                                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `externalIdMatchesAny`                                                                             | *string*[]                                                                                         | :heavy_minus_sign:                                                                                 | Filter controls whose externalId matches any of the provided values (exact, case-sensitive match). |
