@@ -6,14 +6,26 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
- * Sort direction: "asc" for ascending, "desc" for descending.
+ * Sort direction shared across the external REST API surface.
+ *
+ * @remarks
+ *
+ * `"asc"` for ascending, `"desc"` for descending. Endpoints expose this as the
+ * `orderDirection` / `sortDirection` query parameter and map it onto whatever
+ * internal direction representation the underlying service expects.
  */
 export const OrderDirection = {
   Asc: "asc",
   Desc: "desc",
 } as const;
 /**
- * Sort direction: "asc" for ascending, "desc" for descending.
+ * Sort direction shared across the external REST API surface.
+ *
+ * @remarks
+ *
+ * `"asc"` for ascending, `"desc"` for descending. Endpoints expose this as the
+ * `orderDirection` / `sortDirection` query parameter and map it onto whatever
+ * internal direction representation the underlying service expects.
  */
 export type OrderDirection = ClosedEnum<typeof OrderDirection>;
 
