@@ -48,6 +48,8 @@ import { Result } from "../types/fp.js";
  * 3. Only activity created since that timestamp is returned
  * 4. Process updates to track all changes to the information request
  * 5. Update your last sync timestamp to the current time
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsListInformationRequestActivity(
   client: VantaCore,

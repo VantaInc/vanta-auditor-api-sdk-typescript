@@ -31,6 +31,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Create a custom control for an audit.
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsCreateCustomControl(
   client: VantaCore,

@@ -41,6 +41,8 @@ import { Result } from "../types/fp.js";
  *
  * Note: The `modificationDate` is automatically updated to the current timestamp
  * when any field is changed.
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsUpdateInformationRequest(
   client: VantaCore,

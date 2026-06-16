@@ -60,6 +60,8 @@ export class Audits extends ClientSDK {
    * To identify IRL (Information Request List) audits, check for the presence of the
    * `auditorRequestListMetadata` field. This field is only present for IRL-based audits
    * and will be `undefined` for standard audits.
+   *
+   * Rate limit: 250 requests / minute.
    */
   async list(
     request: operations.ListAuditsRequest,
@@ -81,6 +83,8 @@ export class Audits extends ClientSDK {
    * To identify IRL (Information Request List) audits, check for the presence of the
    * `auditorRequestListMetadata` field. This field is only present for IRL-based audits
    * and will be `undefined` for standard audits.
+   *
+   * Rate limit: 250 requests / minute.
    */
   async getAudit(
     request: operations.GetAuditRequest,
@@ -114,6 +118,8 @@ export class Audits extends ClientSDK {
    *
    * Results are sorted by closed date (newest first). This sort order is
    * fixed and cannot be customized via query parameters.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listCodeChanges(
     request: operations.ListCodeChangesRequest,
@@ -131,6 +137,8 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Returns a paginated list of comments for an audit.
+   *
+   * Rate limit: 250 requests / minute.
    */
   async listComments(
     request: operations.ListAuditCommentsRequest,
@@ -148,6 +156,8 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Returns a paginated list of controls for an audit.
+   *
+   * Rate limit: 250 requests / minute.
    */
   async listControls(
     request: operations.ListAuditControlsRequest,
@@ -165,6 +175,8 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Create a custom control for an audit.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async createCustomControl(
     request: operations.CreateCustomControlRequest,
@@ -198,6 +210,8 @@ export class Audits extends ClientSDK {
    * 2. Check `results.pageInfo.hasNextPage` to see if more data exists
    * 3. If true, use `results.pageInfo.endCursor` as `pageCursor` in next request
    * 4. Repeat until `hasNextPage` is false
+   *
+   * Rate limit: 50 requests / minute.
    */
   async listInformationRequestsForControl(
     request: operations.ListInformationRequestsForControlRequest,
@@ -215,6 +229,8 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Returns a paginated list of evidence for an audit.
+   *
+   * Rate limit: 250 requests / minute.
    */
   async listEvidence(
     request: operations.ListAuditEvidenceRequest,
@@ -232,6 +248,8 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Create a custom evidence request for an audit.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async createCustomEvidenceRequest(
     request: operations.CreateCustomEvidenceRequestRequest,
@@ -249,6 +267,8 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Update audit evidence.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async updateEvidence(
     request: operations.UpdateAuditEvidenceRequest,
@@ -266,6 +286,8 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Create a comment in Vanta for a piece of evidence.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async createCommentForEvidence(
     request: operations.CreateCommentForAuditEvidenceRequest,
@@ -286,6 +308,8 @@ export class Audits extends ClientSDK {
    * evidence is created or has a statusUpdatedAt field that is more recent than the most recent polling event.
    *
    * Evidence must be in one of the following states to retrieve URLs: "Ready for audit", "Accepted", "Flagged", or "NA".
+   *
+   * Rate limit: 600 requests / minute.
    */
   async getEvidenceUrls(
     request: operations.ListAuditEvidenceUrlsRequest,
@@ -308,6 +332,8 @@ export class Audits extends ClientSDK {
    * - Discover available framework codes before creating information requests
    * - Validate framework codes against the audit's framework
    * - Get context about what framework codes are available for the audit type
+   *
+   * Rate limit: 10 requests / minute.
    */
   async getFrameworkCodes(
     request: operations.GetFrameworkCodesRequest,
@@ -346,6 +372,8 @@ export class Audits extends ClientSDK {
    * 3. Only requests created, modified, or deleted since that timestamp are returned
    * 4. Process updates and soft-deletes by checking the `deletionDate` field
    * 5. Update your last sync timestamp to the current time
+   *
+   * Rate limit: 50 requests / minute.
    */
   async listInformationRequests(
     request: operations.ListInformationRequestsRequest,
@@ -370,6 +398,8 @@ export class Audits extends ClientSDK {
    *
    * New requests are created in an initial state indicating evidence is needed. The status
    * progresses through the workflow: initial state → awaiting review → approved or flagged.
+   *
+   * Rate limit: 600 requests / minute.
    */
   async createInformationRequest(
     request: operations.CreateInformationRequestRequest,
@@ -392,6 +422,8 @@ export class Audits extends ClientSDK {
    *
    * Soft-deleted records (where `deletionDate !== null`) are included in the response.
    * Clients should check `deletionDate` to determine whether the request has been deleted.
+   *
+   * Rate limit: 50 requests / minute.
    */
   async getInformationRequest(
     request: operations.GetInformationRequestRequest,
@@ -419,6 +451,8 @@ export class Audits extends ClientSDK {
    *
    * Note: The `modificationDate` is automatically updated to the current timestamp
    * when any field is changed.
+   *
+   * Rate limit: 50 requests / minute.
    */
   async updateInformationRequest(
     request: operations.UpdateInformationRequestRequest,
@@ -446,6 +480,8 @@ export class Audits extends ClientSDK {
    * After deletion:
    * - The request will not appear in normal list responses (without `changedSinceDate`)
    * - The request's `deletionDate` field will be populated
+   *
+   * Rate limit: 10 requests / minute.
    */
   async deleteInformationRequest(
     request: operations.DeleteInformationRequestRequest,
@@ -476,6 +512,8 @@ export class Audits extends ClientSDK {
    * - Evidence quality meets audit standards
    * - Evidence addresses all specified framework codes
    * - No additional information is needed
+   *
+   * Rate limit: 50 requests / minute.
    */
   async acceptInformationRequestEvidence(
     request: operations.AcceptInformationRequestEvidenceRequest,
@@ -510,6 +548,8 @@ export class Audits extends ClientSDK {
    * 3. Only activity created since that timestamp is returned
    * 4. Process updates to track all changes to the information request
    * 5. Update your last sync timestamp to the current time
+   *
+   * Rate limit: 50 requests / minute.
    */
   async listInformationRequestActivity(
     request: operations.ListInformationRequestActivityRequest,
@@ -548,6 +588,8 @@ export class Audits extends ClientSDK {
    * 3. Only comments created, modified, or deleted since that timestamp are returned
    * 4. Process updates, including soft-deletes (deletionDate !== null)
    * 5. Update your last sync timestamp to the current time
+   *
+   * Rate limit: 50 requests / minute.
    */
   async listCommentsForInformationRequest(
     request: operations.ListCommentsForInformationRequestRequest,
@@ -567,6 +609,8 @@ export class Audits extends ClientSDK {
    * Creates a new comment for an information request. The comment author must be an auditor
    * in the audit firm making the request. The comment will be associated with the information
    * request and visible to all authorized users.
+   *
+   * Rate limit: 50 requests / minute.
    */
   async createCommentForInformationRequest(
     request: operations.CreateCommentForInformationRequestRequest,
@@ -586,6 +630,8 @@ export class Audits extends ClientSDK {
    * Updates an existing comment for an information request. Only the original author
    * of the comment can update it. The author is identified by their email address,
    * which must match the email of the user who created the comment.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async updateCommentForInformationRequest(
     request: operations.UpdateCommentForInformationRequestRequest,
@@ -605,6 +651,8 @@ export class Audits extends ClientSDK {
    * Deletes an existing comment for an information request. Only the original author
    * of the comment can delete it. The author is identified by their email address,
    * which must match the email of the user who created the comment.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async deleteCommentForInformationRequest(
     request: operations.DeleteCommentForInformationRequestRequest,
@@ -643,6 +691,8 @@ export class Audits extends ClientSDK {
    * 3. Only evidence created, modified, shared, or deleted since that timestamp is returned
    * 4. Process updates, including soft-deletes (deletionDate !== null)
    * 5. Update your last sync timestamp to the current time
+   *
+   * Rate limit: 50 requests / minute.
    */
   async listInformationRequestEvidence(
     request: operations.ListInformationRequestEvidenceRequest,
@@ -680,6 +730,8 @@ export class Audits extends ClientSDK {
    * The `apiRequests` array contains the HTTP requests captured during API
    * introspection tests. Empty when the test does not perform API
    * introspection.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async getInformationRequestTestSnapshotEvidenceDetail(
     request: operations.GetInformationRequestTestSnapshotEvidenceDetailRequest,
@@ -712,6 +764,8 @@ export class Audits extends ClientSDK {
    * The `reason` field should clearly explain what's missing or incorrect so the
    * customer knows exactly what to fix. This reason is visible to the customer
    * and appears in the activity log.
+   *
+   * Rate limit: 50 requests / minute.
    */
   async flagInformationRequestEvidence(
     request: operations.FlagInformationRequestEvidenceRequest,
@@ -748,6 +802,8 @@ export class Audits extends ClientSDK {
    * 1. Make initial request with desired `pageSize`
    * 2. Check `results.pageInfo.hasNextPage`
    * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listAuditIssues(
     request: operations.ListAuditIssuesRequest,
@@ -778,6 +834,8 @@ export class Audits extends ClientSDK {
    * 1. Make initial request with desired `pageSize`
    * 2. Check `results.pageInfo.hasNextPage`
    * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listAuditSnapshots(
     request: operations.ListAuditSnapshotsRequest,
@@ -812,6 +870,8 @@ export class Audits extends ClientSDK {
    * 1. Make initial request with desired `pageSize`
    * 2. Check `results.pageInfo.hasNextPage`
    * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listVendors(
     request: operations.ListVendorsRequest,
@@ -836,6 +896,8 @@ export class Audits extends ClientSDK {
    * controlled audit view. It remains available for existing legacy audits but will be removed once
    * legacy audits are fully phased out, so do not build new integrations on it.
    *
+   * Rate limit: 10 requests / minute.
+   *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listMonitoredComputersInAuditScope(
@@ -858,6 +920,8 @@ export class Audits extends ClientSDK {
    * End of life — this endpoint works for legacy audits only; it does not support
    * controlled audit view. It remains available for existing legacy audits but will be removed once
    * legacy audits are fully phased out, so do not build new integrations on it.
+   *
+   * Rate limit: 10 requests / minute.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -892,6 +956,8 @@ export class Audits extends ClientSDK {
    *
    * Results are returned in connection order. Sort order is not guaranteed
    * and cannot be customized via query parameters.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listAccountAccessServices(
     request: operations.ListAccountAccessServicesRequest,
@@ -949,6 +1015,8 @@ export class Audits extends ClientSDK {
    * - Third-party application services (e.g. GitHub, Jira): sorted by account name, ascending
    *
    * Sort order cannot be customized via query parameters.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listPersonnelAccountAccess(
     request: operations.ListPersonnelAccountAccessRequest,
@@ -987,6 +1055,8 @@ export class Audits extends ClientSDK {
    * 1. Make initial request with desired `pageSize`
    * 2. Check `results.pageInfo.hasNextPage`
    * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listPersonnelGroups(
     request: operations.ListPersonnelGroupsRequest,
@@ -1022,6 +1092,8 @@ export class Audits extends ClientSDK {
    * 1. Make initial request with desired `pageSize`
    * 2. Check `results.pageInfo.hasNextPage`
    * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listPersonnelPeople(
     request: operations.ListPersonnelPeopleRequest,
@@ -1053,6 +1125,8 @@ export class Audits extends ClientSDK {
    * 1. Make initial request with desired `pageSize`
    * 2. Check `results.pageInfo.hasNextPage`
    * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listRiskSnapshots(
     request: operations.ListRiskSnapshotsRequest,
@@ -1089,6 +1163,8 @@ export class Audits extends ClientSDK {
    * 1. Make initial request with desired `pageSize`
    * 2. Check `results.pageInfo.hasNextPage`
    * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Rate limit: 10 requests / minute.
    */
   async listAuditRisks(
     request: operations.ListAuditRisksRequest,
@@ -1108,6 +1184,8 @@ export class Audits extends ClientSDK {
    * Shares the current information request list for an audit with the customer organization,
    * making it visible in their portal. This action allows the customer to see all information
    * requests that have been created for their audit. Only IRL audits are supported.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async shareInformationRequestList(
     request: operations.ShareInformationRequestListRequest,
@@ -1129,6 +1207,8 @@ export class Audits extends ClientSDK {
    * End of life — this endpoint works for legacy audits only; it does not support
    * controlled audit view. It remains available for existing legacy audits but will be removed once
    * legacy audits are fully phased out, so do not build new integrations on it.
+   *
+   * Rate limit: 10 requests / minute.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -1153,6 +1233,8 @@ export class Audits extends ClientSDK {
    * controlled audit view. It remains available for existing legacy audits but will be removed once
    * legacy audits are fully phased out, so do not build new integrations on it.
    *
+   * Rate limit: 10 requests / minute.
+   *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listVulnerabilities(
@@ -1176,6 +1258,8 @@ export class Audits extends ClientSDK {
    * controlled audit view. It remains available for existing legacy audits but will be removed once
    * legacy audits are fully phased out, so do not build new integrations on it.
    *
+   * Rate limit: 10 requests / minute.
+   *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async listVulnerabilityRemediationsInAuditScope(
@@ -1198,6 +1282,8 @@ export class Audits extends ClientSDK {
    * End of life — this endpoint works for legacy audits only; it does not support
    * controlled audit view. It remains available for existing legacy audits but will be removed once
    * legacy audits are fully phased out, so do not build new integrations on it.
+   *
+   * Rate limit: 10 requests / minute.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */

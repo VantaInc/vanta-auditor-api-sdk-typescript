@@ -52,6 +52,8 @@ import { Result } from "../types/fp.js";
  * 3. Only requests created, modified, or deleted since that timestamp are returned
  * 4. Process updates and soft-deletes by checking the `deletionDate` field
  * 5. Update your last sync timestamp to the current time
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsListInformationRequests(
   client: VantaCore,

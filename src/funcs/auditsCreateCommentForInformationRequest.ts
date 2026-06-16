@@ -33,6 +33,8 @@ import { Result } from "../types/fp.js";
  * Creates a new comment for an information request. The comment author must be an auditor
  * in the audit firm making the request. The comment will be associated with the information
  * request and visible to all authorized users.
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsCreateCommentForInformationRequest(
   client: VantaCore,

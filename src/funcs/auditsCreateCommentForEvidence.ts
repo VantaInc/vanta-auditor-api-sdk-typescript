@@ -31,6 +31,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Create a comment in Vanta for a piece of evidence.
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsCreateCommentForEvidence(
   client: VantaCore,

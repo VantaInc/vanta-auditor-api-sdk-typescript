@@ -46,6 +46,8 @@ import { Result } from "../types/fp.js";
  *
  * Results are returned in connection order. Sort order is not guaranteed
  * and cannot be customized via query parameters.
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsListAccountAccessServices(
   client: VantaCore,

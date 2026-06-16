@@ -47,6 +47,8 @@ import { Result } from "../types/fp.js";
  *
  * Results are sorted by closed date (newest first). This sort order is
  * fixed and cannot be customized via query parameters.
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsListCodeChanges(
   client: VantaCore,

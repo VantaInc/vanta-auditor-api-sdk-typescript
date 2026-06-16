@@ -41,6 +41,8 @@ import { Result } from "../types/fp.js";
  * After deletion:
  * - The request will not appear in normal list responses (without `changedSinceDate`)
  * - The request's `deletionDate` field will be populated
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsDeleteInformationRequest(
   client: VantaCore,

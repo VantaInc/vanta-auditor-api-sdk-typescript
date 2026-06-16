@@ -36,6 +36,8 @@ import { Result } from "../types/fp.js";
  *
  * Soft-deleted records (where `deletionDate !== null`) are included in the response.
  * Clients should check `deletionDate` to determine whether the request has been deleted.
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsGetInformationRequest(
   client: VantaCore,

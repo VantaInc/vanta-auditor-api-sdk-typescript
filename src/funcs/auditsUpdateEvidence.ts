@@ -31,6 +31,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Update audit evidence.
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsUpdateEvidence(
   client: VantaCore,

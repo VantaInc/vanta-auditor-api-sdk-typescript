@@ -71,6 +71,8 @@ import { Result } from "../types/fp.js";
  * - Third-party application services (e.g. GitHub, Jira): sorted by account name, ascending
  *
  * Sort order cannot be customized via query parameters.
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsListPersonnelAccountAccess(
   client: VantaCore,

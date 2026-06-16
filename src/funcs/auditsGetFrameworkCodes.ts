@@ -36,6 +36,8 @@ import { Result } from "../types/fp.js";
  * - Discover available framework codes before creating information requests
  * - Validate framework codes against the audit's framework
  * - Get context about what framework codes are available for the audit type
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsGetFrameworkCodes(
   client: VantaCore,

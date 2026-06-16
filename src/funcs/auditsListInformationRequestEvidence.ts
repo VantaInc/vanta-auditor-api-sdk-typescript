@@ -52,6 +52,8 @@ import { Result } from "../types/fp.js";
  * 3. Only evidence created, modified, shared, or deleted since that timestamp is returned
  * 4. Process updates, including soft-deletes (deletionDate !== null)
  * 5. Update your last sync timestamp to the current time
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsListInformationRequestEvidence(
   client: VantaCore,
