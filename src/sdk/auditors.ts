@@ -13,6 +13,8 @@ export class Auditors extends ClientSDK {
    *
    * @remarks
    * Create an auditor in Vanta.
+   *
+   * Rate limit: 10 requests / minute.
    */
   async create(
     request: components.AddAuditorInput,

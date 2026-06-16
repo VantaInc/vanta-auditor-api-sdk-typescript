@@ -46,6 +46,8 @@ import { Result } from "../types/fp.js";
  * The `reason` field should clearly explain what's missing or incorrect so the
  * customer knows exactly what to fix. This reason is visible to the customer
  * and appears in the activity log.
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsFlagInformationRequestEvidence(
   client: VantaCore,

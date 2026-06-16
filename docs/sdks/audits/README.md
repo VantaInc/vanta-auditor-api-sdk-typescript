@@ -56,6 +56,8 @@ To identify IRL (Information Request List) audits, check for the presence of the
 `auditorRequestListMetadata` field. This field is only present for IRL-based audits
 and will be `undefined` for standard audits.
 
+Rate limit: 250 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListAudits" method="get" path="/audits" example="Example 1" -->
@@ -128,6 +130,8 @@ Returns a single audit by ID, scoped to the audit firm.
 To identify IRL (Information Request List) audits, check for the presence of the
 `auditorRequestListMetadata` field. This field is only present for IRL-based audits
 and will be `undefined` for standard audits.
+
+Rate limit: 250 requests / minute.
 
 ### Example Usage
 
@@ -218,6 +222,8 @@ Uses cursor-based pagination. To paginate:
 Results are sorted by closed date (newest first). This sort order is
 fixed and cannot be customized via query parameters.
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListCodeChanges" method="get" path="/audits/{auditId}/assets/code-changes" example="Example 1" -->
@@ -290,6 +296,8 @@ run();
 ## listComments
 
 Returns a paginated list of comments for an audit.
+
+Rate limit: 250 requests / minute.
 
 ### Example Usage
 
@@ -364,6 +372,8 @@ run();
 
 Returns a paginated list of controls for an audit.
 
+Rate limit: 250 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListAuditControls" method="get" path="/audits/{auditId}/controls" example="Example 1" -->
@@ -436,6 +446,8 @@ run();
 ## createCustomControl
 
 Create a custom control for an audit.
+
+Rate limit: 10 requests / minute.
 
 ### Example Usage
 
@@ -540,6 +552,8 @@ Pagination usage:
 3. If true, use `results.pageInfo.endCursor` as `pageCursor` in next request
 4. Repeat until `hasNextPage` is false
 
+Rate limit: 50 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListInformationRequestsForControl" method="get" path="/audits/{auditId}/controls/{controlId}/information-requests" example="Example 1" -->
@@ -615,6 +629,8 @@ run();
 
 Returns a paginated list of evidence for an audit.
 
+Rate limit: 250 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListAuditEvidence" method="get" path="/audits/{auditId}/evidence" example="Example 1" -->
@@ -687,6 +703,8 @@ run();
 ## createCustomEvidenceRequest
 
 Create a custom evidence request for an audit.
+
+Rate limit: 10 requests / minute.
 
 ### Example Usage
 
@@ -785,6 +803,8 @@ run();
 
 Update audit evidence.
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="UpdateAuditEvidence" method="patch" path="/audits/{auditId}/evidence/{auditEvidenceId}" example="Example 1" -->
@@ -861,6 +881,8 @@ run();
 ## createCommentForEvidence
 
 Create a comment in Vanta for a piece of evidence.
+
+Rate limit: 10 requests / minute.
 
 ### Example Usage
 
@@ -950,6 +972,8 @@ evidence is created or has a statusUpdatedAt field that is more recent than the 
 
 Evidence must be in one of the following states to retrieve URLs: "Ready for audit", "Accepted", "Flagged", or "NA".
 
+Rate limit: 600 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListAuditEvidenceUrls" method="get" path="/audits/{auditId}/evidence/{auditEvidenceId}/urls" example="Example 1" -->
@@ -1029,6 +1053,8 @@ Use this endpoint to:
 - Discover available framework codes before creating information requests
 - Validate framework codes against the audit's framework
 - Get context about what framework codes are available for the audit type
+
+Rate limit: 10 requests / minute.
 
 ### Example Usage
 
@@ -1124,6 +1150,8 @@ Delta sync usage:
 4. Process updates and soft-deletes by checking the `deletionDate` field
 5. Update your last sync timestamp to the current time
 
+Rate limit: 50 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListInformationRequests" method="get" path="/audits/{auditId}/information-requests" example="Example 1" -->
@@ -1203,6 +1231,8 @@ visible only to auditors.
 
 New requests are created in an initial state indicating evidence is needed. The status
 progresses through the workflow: initial state → awaiting review → approved or flagged.
+
+Rate limit: 600 requests / minute.
 
 ### Example Usage
 
@@ -1294,6 +1324,8 @@ paginating through the full list.
 Soft-deleted records (where `deletionDate !== null`) are included in the response.
 Clients should check `deletionDate` to determine whether the request has been deleted.
 
+Rate limit: 50 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="GetInformationRequest" method="get" path="/audits/{auditId}/information-requests/{requestId}" example="Example 1" -->
@@ -1378,6 +1410,8 @@ Common use cases:
 
 Note: The `modificationDate` is automatically updated to the current timestamp
 when any field is changed.
+
+Rate limit: 50 requests / minute.
 
 ### Example Usage
 
@@ -1466,6 +1500,8 @@ After deletion:
 - The request will not appear in normal list responses (without `changedSinceDate`)
 - The request's `deletionDate` field will be populated
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="DeleteInformationRequest" method="delete" path="/audits/{auditId}/information-requests/{requestId}" -->
@@ -1553,6 +1589,8 @@ Use this endpoint when:
 - Evidence quality meets audit standards
 - Evidence addresses all specified framework codes
 - No additional information is needed
+
+Rate limit: 50 requests / minute.
 
 ### Example Usage
 
@@ -1652,6 +1690,8 @@ Delta sync usage:
 4. Process updates to track all changes to the information request
 5. Update your last sync timestamp to the current time
 
+Rate limit: 50 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListInformationRequestActivity" method="get" path="/audits/{auditId}/information-requests/{requestId}/activity" example="Example 1" -->
@@ -1748,6 +1788,8 @@ Delta sync usage:
 4. Process updates, including soft-deletes (deletionDate !== null)
 5. Update your last sync timestamp to the current time
 
+Rate limit: 50 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListCommentsForInformationRequest" method="get" path="/audits/{auditId}/information-requests/{requestId}/comments" example="Example 1" -->
@@ -1824,6 +1866,8 @@ run();
 Creates a new comment for an information request. The comment author must be an auditor
 in the audit firm making the request. The comment will be associated with the information
 request and visible to all authorized users.
+
+Rate limit: 50 requests / minute.
 
 ### Example Usage
 
@@ -1912,6 +1956,8 @@ Updates an existing comment for an information request. Only the original author
 of the comment can update it. The author is identified by their email address,
 which must match the email of the user who created the comment.
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="UpdateCommentForInformationRequest" method="patch" path="/audits/{auditId}/information-requests/{requestId}/comments/{commentId}" example="Example 1" -->
@@ -1998,6 +2044,8 @@ run();
 Deletes an existing comment for an information request. Only the original author
 of the comment can delete it. The author is identified by their email address,
 which must match the email of the user who created the comment.
+
+Rate limit: 10 requests / minute.
 
 ### Example Usage
 
@@ -2103,6 +2151,8 @@ Delta sync usage:
 4. Process updates, including soft-deletes (deletionDate !== null)
 5. Update your last sync timestamp to the current time
 
+Rate limit: 50 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListInformationRequestEvidence" method="get" path="/audits/{auditId}/information-requests/{requestId}/evidence" example="Example 1" -->
@@ -2198,6 +2248,8 @@ The `apiRequests` array contains the HTTP requests captured during API
 introspection tests. Empty when the test does not perform API
 introspection.
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="GetInformationRequestTestSnapshotEvidenceDetail" method="get" path="/audits/{auditId}/information-requests/{requestId}/evidence/{evidenceId}/test-snapshot" example="Example 1" -->
@@ -2289,6 +2341,8 @@ Flagging workflow:
 The `reason` field should clearly explain what's missing or incorrect so the
 customer knows exactly what to fix. This reason is visible to the customer
 and appears in the activity log.
+
+Rate limit: 50 requests / minute.
 
 ### Example Usage
 
@@ -2392,6 +2446,8 @@ Uses cursor-based pagination. To paginate:
 2. Check `results.pageInfo.hasNextPage`
 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListAuditIssues" method="get" path="/audits/{auditId}/issues/items" example="Example 1" -->
@@ -2477,6 +2533,8 @@ Uses cursor-based pagination. To paginate:
 1. Make initial request with desired `pageSize`
 2. Check `results.pageInfo.hasNextPage`
 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+Rate limit: 10 requests / minute.
 
 ### Example Usage
 
@@ -2568,6 +2626,8 @@ Uses cursor-based pagination. To paginate:
 2. Check `results.pageInfo.hasNextPage`
 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListVendors" method="get" path="/audits/{auditId}/managed-vendors" example="Example 1" -->
@@ -2647,6 +2707,8 @@ End of life — this endpoint works for legacy audits only; it does not support
 controlled audit view. It remains available for existing legacy audits but will be removed once
 legacy audits are fully phased out, so do not build new integrations on it.
 
+Rate limit: 10 requests / minute.
+
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
@@ -2725,6 +2787,8 @@ Returns a list of people who are in scope for this audit.
 End of life — this endpoint works for legacy audits only; it does not support
 controlled audit view. It remains available for existing legacy audits but will be removed once
 legacy audits are fully phased out, so do not build new integrations on it.
+
+Rate limit: 10 requests / minute.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
@@ -2815,6 +2879,8 @@ Uses cursor-based pagination. To paginate:
 
 Results are returned in connection order. Sort order is not guaranteed
 and cannot be customized via query parameters.
+
+Rate limit: 10 requests / minute.
 
 ### Example Usage
 
@@ -2930,6 +2996,8 @@ The default sort order depends on the service type:
 
 Sort order cannot be customized via query parameters.
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListPersonnelAccountAccess" method="get" path="/audits/{auditId}/personnel/account-access/{serviceId}" example="Example 1" -->
@@ -3026,6 +3094,8 @@ Uses cursor-based pagination. To paginate:
 2. Check `results.pageInfo.hasNextPage`
 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListPersonnelGroups" method="get" path="/audits/{auditId}/personnel/groups" example="Example 1" -->
@@ -3117,6 +3187,8 @@ Uses cursor-based pagination. To paginate:
 2. Check `results.pageInfo.hasNextPage`
 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListPersonnelPeople" method="get" path="/audits/{auditId}/personnel/people" example="Example 1" -->
@@ -3203,6 +3275,8 @@ Uses cursor-based pagination. To paginate:
 1. Make initial request with desired `pageSize`
 2. Check `results.pageInfo.hasNextPage`
 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+
+Rate limit: 10 requests / minute.
 
 ### Example Usage
 
@@ -3296,6 +3370,8 @@ Uses cursor-based pagination. To paginate:
 2. Check `results.pageInfo.hasNextPage`
 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ListAuditRisks" method="get" path="/audits/{auditId}/risks/{snapshotId}" example="Example 1" -->
@@ -3373,6 +3449,8 @@ Shares the current information request list for an audit with the customer organ
 making it visible in their portal. This action allows the customer to see all information
 requests that have been created for their audit. Only IRL audits are supported.
 
+Rate limit: 10 requests / minute.
+
 ### Example Usage
 
 <!-- UsageSnippet language="typescript" operationID="ShareInformationRequestList" method="post" path="/audits/{auditId}/share-information-request-list" example="Example 1" -->
@@ -3449,6 +3527,8 @@ Returns a list of vendors who are in scope for this audit.
 End of life — this endpoint works for legacy audits only; it does not support
 controlled audit view. It remains available for existing legacy audits but will be removed once
 legacy audits are fully phased out, so do not build new integrations on it.
+
+Rate limit: 10 requests / minute.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
@@ -3529,6 +3609,8 @@ End of life — this endpoint works for legacy audits only; it does not support
 controlled audit view. It remains available for existing legacy audits but will be removed once
 legacy audits are fully phased out, so do not build new integrations on it.
 
+Rate limit: 10 requests / minute.
+
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
@@ -3608,6 +3690,8 @@ End of life — this endpoint works for legacy audits only; it does not support
 controlled audit view. It remains available for existing legacy audits but will be removed once
 legacy audits are fully phased out, so do not build new integrations on it.
 
+Rate limit: 10 requests / minute.
+
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
@@ -3686,6 +3770,8 @@ List assets that Vanta monitors that are associated with vulnerabilities.
 End of life — this endpoint works for legacy audits only; it does not support
 controlled audit view. It remains available for existing legacy audits but will be removed once
 legacy audits are fully phased out, so do not build new integrations on it.
+
+Rate limit: 10 requests / minute.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 

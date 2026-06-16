@@ -52,6 +52,8 @@ import { Result } from "../types/fp.js";
  * 1. Make initial request with desired `pageSize`
  * 2. Check `results.pageInfo.hasNextPage`
  * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsListPersonnelGroups(
   client: VantaCore,

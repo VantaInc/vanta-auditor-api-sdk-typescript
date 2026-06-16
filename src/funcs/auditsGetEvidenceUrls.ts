@@ -34,6 +34,8 @@ import { Result } from "../types/fp.js";
  * evidence is created or has a statusUpdatedAt field that is more recent than the most recent polling event.
  *
  * Evidence must be in one of the following states to retrieve URLs: "Ready for audit", "Accepted", "Flagged", or "NA".
+ *
+ * Rate limit: 600 requests / minute.
  */
 export function auditsGetEvidenceUrls(
   client: VantaCore,

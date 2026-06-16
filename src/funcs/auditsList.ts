@@ -35,6 +35,8 @@ import { Result } from "../types/fp.js";
  * To identify IRL (Information Request List) audits, check for the presence of the
  * `auditorRequestListMetadata` field. This field is only present for IRL-based audits
  * and will be `undefined` for standard audits.
+ *
+ * Rate limit: 250 requests / minute.
  */
 export function auditsList(
   client: VantaCore,

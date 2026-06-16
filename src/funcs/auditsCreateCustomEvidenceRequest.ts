@@ -31,6 +31,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Create a custom evidence request for an audit.
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsCreateCustomEvidenceRequest(
   client: VantaCore,

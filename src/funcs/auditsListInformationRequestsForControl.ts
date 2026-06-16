@@ -47,6 +47,8 @@ import { Result } from "../types/fp.js";
  * 2. Check `results.pageInfo.hasNextPage` to see if more data exists
  * 3. If true, use `results.pageInfo.endCursor` as `pageCursor` in next request
  * 4. Repeat until `hasNextPage` is false
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsListInformationRequestsForControl(
   client: VantaCore,

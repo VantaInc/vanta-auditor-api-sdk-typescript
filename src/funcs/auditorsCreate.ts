@@ -30,6 +30,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Create an auditor in Vanta.
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditorsCreate(
   client: VantaCore,

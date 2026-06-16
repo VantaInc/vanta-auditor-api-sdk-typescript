@@ -44,6 +44,8 @@ import { Result } from "../types/fp.js";
  * - Evidence quality meets audit standards
  * - Evidence addresses all specified framework codes
  * - No additional information is needed
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsAcceptInformationRequestEvidence(
   client: VantaCore,

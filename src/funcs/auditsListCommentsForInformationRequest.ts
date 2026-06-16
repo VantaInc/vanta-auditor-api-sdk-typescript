@@ -52,6 +52,8 @@ import { Result } from "../types/fp.js";
  * 3. Only comments created, modified, or deleted since that timestamp are returned
  * 4. Process updates, including soft-deletes (deletionDate !== null)
  * 5. Update your last sync timestamp to the current time
+ *
+ * Rate limit: 50 requests / minute.
  */
 export function auditsListCommentsForInformationRequest(
   client: VantaCore,

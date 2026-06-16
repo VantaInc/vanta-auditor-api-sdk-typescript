@@ -31,6 +31,8 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Returns a paginated list of evidence for an audit.
+ *
+ * Rate limit: 250 requests / minute.
  */
 export function auditsListEvidence(
   client: VantaCore,

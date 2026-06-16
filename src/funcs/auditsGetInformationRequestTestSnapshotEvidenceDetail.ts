@@ -51,6 +51,8 @@ import { Result } from "../types/fp.js";
  * The `apiRequests` array contains the HTTP requests captured during API
  * introspection tests. Empty when the test does not perform API
  * introspection.
+ *
+ * Rate limit: 10 requests / minute.
  */
 export function auditsGetInformationRequestTestSnapshotEvidenceDetail(
   client: VantaCore,

@@ -38,6 +38,8 @@ import { Result } from "../types/fp.js";
  *
  * New requests are created in an initial state indicating evidence is needed. The status
  * progresses through the workflow: initial state → awaiting review → approved or flagged.
+ *
+ * Rate limit: 600 requests / minute.
  */
 export function auditsCreateInformationRequest(
   client: VantaCore,
