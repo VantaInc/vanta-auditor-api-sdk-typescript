@@ -20,21 +20,24 @@ let value: VulnerableAsset = {
       imageTags: [],
       assetTags: [],
       parentAccountOrOrganization: "<value>",
-      biosUuid: "<id>",
-      ipv4s: null,
-      ipv6s: [
+      biosUuid: null,
+      ipv4s: [
         "<value 1>",
         "<value 2>",
       ],
-      macAddresses: [],
-      hostnames: null,
+      ipv6s: [],
+      macAddresses: null,
+      hostnames: [
+        "<value 1>",
+      ],
       fqdns: [
         "<value 1>",
+        "<value 2>",
+        "<value 3>",
       ],
       operatingSystems: [
         "<value 1>",
         "<value 2>",
-        "<value 3>",
       ],
       targetId: "<id>",
     },
