@@ -16,15 +16,21 @@ let value: VulnerableAssetScanner = {
   biosUuid: "<id>",
   ipv4s: [
     "<value 1>",
-    "<value 2>",
   ],
   ipv6s: [
     "<value 1>",
     "<value 2>",
+    "<value 3>",
   ],
-  macAddresses: [],
-  hostnames: [],
-  fqdns: [],
+  macAddresses: [
+    "<value 1>",
+  ],
+  hostnames: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  fqdns: null,
   operatingSystems: [
     "<value 1>",
   ],

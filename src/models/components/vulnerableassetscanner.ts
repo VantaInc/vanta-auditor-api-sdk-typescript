@@ -40,7 +40,7 @@ export type VulnerableAssetScanner = {
   /**
    * BIOS UUID of the scanned asset.
    */
-  biosUuid: string;
+  biosUuid: string | null;
   /**
    * IPV4s of the scanned asset.
    */
@@ -86,7 +86,7 @@ export const VulnerableAssetScanner$inboundSchema: z.ZodType<
   imageTags: z.nullable(z.array(z.string())),
   assetTags: z.nullable(z.array(KeyValuePair$inboundSchema)),
   parentAccountOrOrganization: z.nullable(z.string()),
-  biosUuid: z.string(),
+  biosUuid: z.nullable(z.string()),
   ipv4s: z.nullable(z.array(z.string())),
   ipv6s: z.nullable(z.array(z.string())),
   macAddresses: z.nullable(z.array(z.string())),
