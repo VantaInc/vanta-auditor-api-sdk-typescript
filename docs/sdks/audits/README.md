@@ -10,6 +10,7 @@
 * [listComments](#listcomments) - List audit comments
 * [listControls](#listcontrols) - List audit controls
 * [createCustomControl](#createcustomcontrol) - Create a custom control for an audit
+* [listCommentsForControl](#listcommentsforcontrol) - List comments for a control within an audit
 * [listInformationRequestsForControl](#listinformationrequestsforcontrol) - List information requests linked to a control within an audit
 * [listEvidence](#listevidence) - List audit evidence
 * [createCustomEvidenceRequest](#createcustomevidencerequest) - Create a custom evidence request for an audit
@@ -525,6 +526,106 @@ run();
 ### Response
 
 **Promise\<[components.Control](../../models/components/control.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listCommentsForControl
+
+Retrieves a paginated list of comments on a control within an IRL audit,
+enabling auditors to view collaboration history on the control.
+
+This endpoint always includes soft-deleted records (where `deletionDate !== null`).
+Clients should check the `deletionDate` field to identify and handle deleted records
+appropriately in their systems.
+
+This endpoint supports delta synchronization via the `changedSinceDate` parameter,
+allowing efficient polling for changes without retrieving the entire dataset.
+
+Returns 404 when the control is not part of the audit.
+
+Pagination usage:
+1. Make initial request with desired `pageSize`
+2. Check `results.pageInfo.hasNextPage` to see if more data exists
+3. If true, use `results.pageInfo.endCursor` as `pageCursor` in next request
+4. Repeat until `hasNextPage` is false
+
+Delta sync usage:
+1. Store the timestamp of your last sync
+2. Pass that timestamp as `changedSinceDate`
+3. Only comments created, modified, or deleted since that timestamp are returned
+4. Process updates, including soft-deletes (deletionDate !== null)
+5. Update your last sync timestamp to the current time
+
+Rate limit: 50 requests / minute.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListCommentsForControl" method="get" path="/audits/{auditId}/controls/{controlId}/comments" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.listCommentsForControl({
+    auditId: "<id>",
+    controlId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsListCommentsForControl } from "vanta-auditor-api-sdk/funcs/auditsListCommentsForControl.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsListCommentsForControl(vanta, {
+    auditId: "<id>",
+    controlId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsListCommentsForControl failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListCommentsForControlRequest](../../models/operations/listcommentsforcontrolrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.PaginatedResponseAuditControlComment](../../models/components/paginatedresponseauditcontrolcomment.md)\>**
 
 ### Errors
 

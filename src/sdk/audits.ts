@@ -24,6 +24,7 @@ import { auditsListAuditRisks } from "../funcs/auditsListAuditRisks.js";
 import { auditsListAuditSnapshots } from "../funcs/auditsListAuditSnapshots.js";
 import { auditsListCodeChanges } from "../funcs/auditsListCodeChanges.js";
 import { auditsListComments } from "../funcs/auditsListComments.js";
+import { auditsListCommentsForControl } from "../funcs/auditsListCommentsForControl.js";
 import { auditsListCommentsForInformationRequest } from "../funcs/auditsListCommentsForInformationRequest.js";
 import { auditsListControls } from "../funcs/auditsListControls.js";
 import { auditsListEvidence } from "../funcs/auditsListEvidence.js";
@@ -183,6 +184,48 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Control> {
     return unwrapAsync(auditsCreateCustomControl(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List comments for a control within an audit
+   *
+   * @remarks
+   * Retrieves a paginated list of comments on a control within an IRL audit,
+   * enabling auditors to view collaboration history on the control.
+   *
+   * This endpoint always includes soft-deleted records (where `deletionDate !== null`).
+   * Clients should check the `deletionDate` field to identify and handle deleted records
+   * appropriately in their systems.
+   *
+   * This endpoint supports delta synchronization via the `changedSinceDate` parameter,
+   * allowing efficient polling for changes without retrieving the entire dataset.
+   *
+   * Returns 404 when the control is not part of the audit.
+   *
+   * Pagination usage:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage` to see if more data exists
+   * 3. If true, use `results.pageInfo.endCursor` as `pageCursor` in next request
+   * 4. Repeat until `hasNextPage` is false
+   *
+   * Delta sync usage:
+   * 1. Store the timestamp of your last sync
+   * 2. Pass that timestamp as `changedSinceDate`
+   * 3. Only comments created, modified, or deleted since that timestamp are returned
+   * 4. Process updates, including soft-deletes (deletionDate !== null)
+   * 5. Update your last sync timestamp to the current time
+   *
+   * Rate limit: 50 requests / minute.
+   */
+  async listCommentsForControl(
+    request: operations.ListCommentsForControlRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseAuditControlComment> {
+    return unwrapAsync(auditsListCommentsForControl(
       this,
       request,
       options,
