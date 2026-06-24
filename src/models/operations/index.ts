@@ -26,6 +26,7 @@ export * from "./listauditrisks.js";
 export * from "./listaudits.js";
 export * from "./listauditsnapshots.js";
 export * from "./listcodechanges.js";
+export * from "./listcommentsforcontrol.js";
 export * from "./listcommentsforinformationrequest.js";
 export * from "./listinformationrequestactivity.js";
 export * from "./listinformationrequestevidence.js";
