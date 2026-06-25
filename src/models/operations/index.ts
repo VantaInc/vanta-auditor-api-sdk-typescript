@@ -4,6 +4,7 @@
 
 export * from "./acceptinformationrequestevidence.js";
 export * from "./createcommentforauditevidence.js";
+export * from "./createcommentforcontrol.js";
 export * from "./createcommentforinformationrequest.js";
 export * from "./createcustomcontrol.js";
 export * from "./createcustomevidencerequest.js";

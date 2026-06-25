@@ -7,6 +7,7 @@ export * from "./acceptpoliciestasksummary.js";
 export * from "./accountaccess.js";
 export * from "./accountaccessservice.js";
 export * from "./accountaccessstatus.js";
+export * from "./addauditcontrolcommentinput.js";
 export * from "./addauditorinput.js";
 export * from "./addcommentinput.js";
 export * from "./addinformationrequestcommentinput.js";

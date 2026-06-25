@@ -3,6 +3,7 @@
  */
 
 import { auditsAcceptInformationRequestEvidence } from "../funcs/auditsAcceptInformationRequestEvidence.js";
+import { auditsCreateCommentForControl } from "../funcs/auditsCreateCommentForControl.js";
 import { auditsCreateCommentForEvidence } from "../funcs/auditsCreateCommentForEvidence.js";
 import { auditsCreateCommentForInformationRequest } from "../funcs/auditsCreateCommentForInformationRequest.js";
 import { auditsCreateCustomControl } from "../funcs/auditsCreateCustomControl.js";
@@ -226,6 +227,29 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.PaginatedResponseAuditControlComment> {
     return unwrapAsync(auditsListCommentsForControl(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Create a comment for a control within an audit
+   *
+   * @remarks
+   * Creates a new comment on a control within an IRL audit. The comment author
+   * must be an auditor in the audit firm making the request. The comment will be
+   * associated with the control and visible to all authorized users.
+   *
+   * Returns 404 when the control is not part of the audit.
+   *
+   * Rate limit: 50 requests / minute.
+   */
+  async createCommentForControl(
+    request: operations.CreateCommentForControlRequest,
+    options?: RequestOptions,
+  ): Promise<components.AuditControlComment> {
+    return unwrapAsync(auditsCreateCommentForControl(
       this,
       request,
       options,
