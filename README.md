@@ -148,6 +148,7 @@ run();
 * [listControls](docs/sdks/audits/README.md#listcontrols) - List audit controls
 * [createCustomControl](docs/sdks/audits/README.md#createcustomcontrol) - Create a custom control for an audit
 * [listCommentsForControl](docs/sdks/audits/README.md#listcommentsforcontrol) - List comments for a control within an audit
+* [createCommentForControl](docs/sdks/audits/README.md#createcommentforcontrol) - Create a comment for a control within an audit
 * [listInformationRequestsForControl](docs/sdks/audits/README.md#listinformationrequestsforcontrol) - List information requests linked to a control within an audit
 * [listEvidence](docs/sdks/audits/README.md#listevidence) - List audit evidence
 * [createCustomEvidenceRequest](docs/sdks/audits/README.md#createcustomevidencerequest) - Create a custom evidence request for an audit
@@ -206,6 +207,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 - [`auditorsCreate`](docs/sdks/auditors/README.md#create) - Create an auditor
 - [`auditsAcceptInformationRequestEvidence`](docs/sdks/audits/README.md#acceptinformationrequestevidence) - Accept evidence for an information request
+- [`auditsCreateCommentForControl`](docs/sdks/audits/README.md#createcommentforcontrol) - Create a comment for a control within an audit
 - [`auditsCreateCommentForEvidence`](docs/sdks/audits/README.md#createcommentforevidence) - Create a comment for audit evidence
 - [`auditsCreateCommentForInformationRequest`](docs/sdks/audits/README.md#createcommentforinformationrequest) - Create a comment for an information request
 - [`auditsCreateCustomControl`](docs/sdks/audits/README.md#createcustomcontrol) - Create a custom control for an audit
