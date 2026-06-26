@@ -9,6 +9,7 @@ import { auditsCreateCommentForInformationRequest } from "../funcs/auditsCreateC
 import { auditsCreateCustomControl } from "../funcs/auditsCreateCustomControl.js";
 import { auditsCreateCustomEvidenceRequest } from "../funcs/auditsCreateCustomEvidenceRequest.js";
 import { auditsCreateInformationRequest } from "../funcs/auditsCreateInformationRequest.js";
+import { auditsDeleteCommentForControl } from "../funcs/auditsDeleteCommentForControl.js";
 import { auditsDeleteCommentForInformationRequest } from "../funcs/auditsDeleteCommentForInformationRequest.js";
 import { auditsDeleteInformationRequest } from "../funcs/auditsDeleteInformationRequest.js";
 import { auditsFlagInformationRequestEvidence } from "../funcs/auditsFlagInformationRequestEvidence.js";
@@ -44,6 +45,7 @@ import { auditsListVendorsInAuditScope } from "../funcs/auditsListVendorsInAudit
 import { auditsListVulnerabilities } from "../funcs/auditsListVulnerabilities.js";
 import { auditsListVulnerabilityRemediationsInAuditScope } from "../funcs/auditsListVulnerabilityRemediationsInAuditScope.js";
 import { auditsShareInformationRequestList } from "../funcs/auditsShareInformationRequestList.js";
+import { auditsUpdateCommentForControl } from "../funcs/auditsUpdateCommentForControl.js";
 import { auditsUpdateCommentForInformationRequest } from "../funcs/auditsUpdateCommentForInformationRequest.js";
 import { auditsUpdateEvidence } from "../funcs/auditsUpdateEvidence.js";
 import { auditsUpdateInformationRequest } from "../funcs/auditsUpdateInformationRequest.js";
@@ -250,6 +252,48 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.AuditControlComment> {
     return unwrapAsync(auditsCreateCommentForControl(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a comment for a control within an audit
+   *
+   * @remarks
+   * Updates an existing comment on a control. Only the original author
+   * of the comment can update it. The author is identified by their email address,
+   * which must match the email of the user who created the comment.
+   *
+   * Rate limit: 10 requests / minute.
+   */
+  async updateCommentForControl(
+    request: operations.UpdateCommentForControlRequest,
+    options?: RequestOptions,
+  ): Promise<components.AuditControlComment> {
+    return unwrapAsync(auditsUpdateCommentForControl(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a comment for a control within an audit
+   *
+   * @remarks
+   * Deletes an existing comment on a control. Only the original author
+   * of the comment can delete it. The author is identified by their email address,
+   * which must match the email of the user who created the comment.
+   *
+   * Rate limit: 10 requests / minute.
+   */
+  async deleteCommentForControl(
+    request: operations.DeleteCommentForControlRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(auditsDeleteCommentForControl(
       this,
       request,
       options,

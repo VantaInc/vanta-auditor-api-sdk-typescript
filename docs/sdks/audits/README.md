@@ -12,6 +12,8 @@
 * [createCustomControl](#createcustomcontrol) - Create a custom control for an audit
 * [listCommentsForControl](#listcommentsforcontrol) - List comments for a control within an audit
 * [createCommentForControl](#createcommentforcontrol) - Create a comment for a control within an audit
+* [updateCommentForControl](#updatecommentforcontrol) - Update a comment for a control within an audit
+* [deleteCommentForControl](#deletecommentforcontrol) - Delete a comment for a control within an audit
 * [listInformationRequestsForControl](#listinformationrequestsforcontrol) - List information requests linked to a control within an audit
 * [listEvidence](#listevidence) - List audit evidence
 * [createCustomEvidenceRequest](#createcustomevidencerequest) - Create a custom evidence request for an audit
@@ -718,6 +720,182 @@ run();
 ### Response
 
 **Promise\<[components.AuditControlComment](../../models/components/auditcontrolcomment.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## updateCommentForControl
+
+Updates an existing comment on a control. Only the original author
+of the comment can update it. The author is identified by their email address,
+which must match the email of the user who created the comment.
+
+Rate limit: 10 requests / minute.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="UpdateCommentForControl" method="patch" path="/audits/{auditId}/controls/{controlId}/comments/{commentId}" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.updateCommentForControl({
+    auditId: "<id>",
+    controlId: "<id>",
+    commentId: "<id>",
+    updateAuditControlCommentInput: {
+      text: "<value>",
+      email: "Leonardo71@hotmail.com",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsUpdateCommentForControl } from "vanta-auditor-api-sdk/funcs/auditsUpdateCommentForControl.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsUpdateCommentForControl(vanta, {
+    auditId: "<id>",
+    controlId: "<id>",
+    commentId: "<id>",
+    updateAuditControlCommentInput: {
+      text: "<value>",
+      email: "Leonardo71@hotmail.com",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsUpdateCommentForControl failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateCommentForControlRequest](../../models/operations/updatecommentforcontrolrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.AuditControlComment](../../models/components/auditcontrolcomment.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## deleteCommentForControl
+
+Deletes an existing comment on a control. Only the original author
+of the comment can delete it. The author is identified by their email address,
+which must match the email of the user who created the comment.
+
+Rate limit: 10 requests / minute.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="DeleteCommentForControl" method="delete" path="/audits/{auditId}/controls/{controlId}/comments/{commentId}" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  await vanta.audits.deleteCommentForControl({
+    auditId: "<id>",
+    controlId: "<id>",
+    commentId: "<id>",
+    deleteAuditControlCommentInput: {
+      email: "Lorenzo.Ondricka@yahoo.com",
+    },
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsDeleteCommentForControl } from "vanta-auditor-api-sdk/funcs/auditsDeleteCommentForControl.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsDeleteCommentForControl(vanta, {
+    auditId: "<id>",
+    controlId: "<id>",
+    commentId: "<id>",
+    deleteAuditControlCommentInput: {
+      email: "Lorenzo.Ondricka@yahoo.com",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("auditsDeleteCommentForControl failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteCommentForControlRequest](../../models/operations/deletecommentforcontrolrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
 
 ### Errors
 
