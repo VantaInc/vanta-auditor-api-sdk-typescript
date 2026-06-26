@@ -55,6 +55,25 @@ export const NewStatus = {
 export type NewStatus = ClosedEnum<typeof NewStatus>;
 
 /**
+ * Result of an automated evidence fill.
+ *
+ * @remarks
+ * Only populated for evidence fill activities. Null for all other activity types.
+ */
+export const FillOutcome = {
+  Success: "SUCCESS",
+  Partial: "PARTIAL",
+  Failed: "FAILED",
+} as const;
+/**
+ * Result of an automated evidence fill.
+ *
+ * @remarks
+ * Only populated for evidence fill activities. Null for all other activity types.
+ */
+export type FillOutcome = ClosedEnum<typeof FillOutcome>;
+
+/**
  * Activity log entry tracking changes and actions on an information request.
  *
  * @remarks
@@ -110,6 +129,13 @@ export type InformationRequestActivityLog = {
    * (e.g., when flagging evidence). Null for all other cases.
    */
   reason: string | null;
+  /**
+   * Result of an automated evidence fill.
+   *
+   * @remarks
+   * Only populated for evidence fill activities. Null for all other activity types.
+   */
+  fillOutcome: FillOutcome | null;
 };
 
 /** @internal */
@@ -119,6 +145,10 @@ export const OldStatus$inboundSchema: z.ZodNativeEnum<typeof OldStatus> = z
 /** @internal */
 export const NewStatus$inboundSchema: z.ZodNativeEnum<typeof NewStatus> = z
   .nativeEnum(NewStatus);
+
+/** @internal */
+export const FillOutcome$inboundSchema: z.ZodNativeEnum<typeof FillOutcome> = z
+  .nativeEnum(FillOutcome);
 
 /** @internal */
 export const InformationRequestActivityLog$inboundSchema: z.ZodType<
@@ -133,6 +163,7 @@ export const InformationRequestActivityLog$inboundSchema: z.ZodType<
   oldStatus: z.nullable(OldStatus$inboundSchema),
   newStatus: z.nullable(NewStatus$inboundSchema),
   reason: z.nullable(z.string()),
+  fillOutcome: z.nullable(FillOutcome$inboundSchema),
 });
 
 export function informationRequestActivityLogFromJSON(

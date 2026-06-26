@@ -149,6 +149,8 @@ run();
 * [createCustomControl](docs/sdks/audits/README.md#createcustomcontrol) - Create a custom control for an audit
 * [listCommentsForControl](docs/sdks/audits/README.md#listcommentsforcontrol) - List comments for a control within an audit
 * [createCommentForControl](docs/sdks/audits/README.md#createcommentforcontrol) - Create a comment for a control within an audit
+* [updateCommentForControl](docs/sdks/audits/README.md#updatecommentforcontrol) - Update a comment for a control within an audit
+* [deleteCommentForControl](docs/sdks/audits/README.md#deletecommentforcontrol) - Delete a comment for a control within an audit
 * [listInformationRequestsForControl](docs/sdks/audits/README.md#listinformationrequestsforcontrol) - List information requests linked to a control within an audit
 * [listEvidence](docs/sdks/audits/README.md#listevidence) - List audit evidence
 * [createCustomEvidenceRequest](docs/sdks/audits/README.md#createcustomevidencerequest) - Create a custom evidence request for an audit
@@ -213,6 +215,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsCreateCustomControl`](docs/sdks/audits/README.md#createcustomcontrol) - Create a custom control for an audit
 - [`auditsCreateCustomEvidenceRequest`](docs/sdks/audits/README.md#createcustomevidencerequest) - Create a custom evidence request for an audit
 - [`auditsCreateInformationRequest`](docs/sdks/audits/README.md#createinformationrequest) - Create a new information request
+- [`auditsDeleteCommentForControl`](docs/sdks/audits/README.md#deletecommentforcontrol) - Delete a comment for a control within an audit
 - [`auditsDeleteCommentForInformationRequest`](docs/sdks/audits/README.md#deletecommentforinformationrequest) - Delete a comment for an information request
 - [`auditsDeleteInformationRequest`](docs/sdks/audits/README.md#deleteinformationrequest) - Delete an information request for an audit
 - [`auditsFlagInformationRequestEvidence`](docs/sdks/audits/README.md#flaginformationrequestevidence) - Flag evidence for an information request
@@ -242,6 +245,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsListRiskSnapshots`](docs/sdks/audits/README.md#listrisksnapshots) - List risk snapshots for an audit
 - [`auditsListVendors`](docs/sdks/audits/README.md#listvendors) - List vendors for an audit
 - [`auditsShareInformationRequestList`](docs/sdks/audits/README.md#shareinformationrequestlist) - Share information request list with customer
+- [`auditsUpdateCommentForControl`](docs/sdks/audits/README.md#updatecommentforcontrol) - Update a comment for a control within an audit
 - [`auditsUpdateCommentForInformationRequest`](docs/sdks/audits/README.md#updatecommentforinformationrequest) - Update a comment for an information request
 - [`auditsUpdateEvidence`](docs/sdks/audits/README.md#updateevidence) - Update audit evidence
 - [`auditsUpdateInformationRequest`](docs/sdks/audits/README.md#updateinformationrequest) - Update an information request for an audit
