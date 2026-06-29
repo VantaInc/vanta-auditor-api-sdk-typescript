@@ -18,6 +18,8 @@ import { auditsGetEvidenceUrls } from "../funcs/auditsGetEvidenceUrls.js";
 import { auditsGetFrameworkCodes } from "../funcs/auditsGetFrameworkCodes.js";
 import { auditsGetInformationRequest } from "../funcs/auditsGetInformationRequest.js";
 import { auditsGetInformationRequestTestSnapshotEvidenceDetail } from "../funcs/auditsGetInformationRequestTestSnapshotEvidenceDetail.js";
+import { auditsGetOrganizationInformation } from "../funcs/auditsGetOrganizationInformation.js";
+import { auditsGetOrganizationNotifications } from "../funcs/auditsGetOrganizationNotifications.js";
 import { auditsGetVulnerableAssets } from "../funcs/auditsGetVulnerableAssets.js";
 import { auditsList } from "../funcs/auditsList.js";
 import { auditsListAccountAccessServices } from "../funcs/auditsListAccountAccessServices.js";
@@ -34,6 +36,7 @@ import { auditsListInformationRequestActivity } from "../funcs/auditsListInforma
 import { auditsListInformationRequestEvidence } from "../funcs/auditsListInformationRequestEvidence.js";
 import { auditsListInformationRequests } from "../funcs/auditsListInformationRequests.js";
 import { auditsListInformationRequestsForControl } from "../funcs/auditsListInformationRequestsForControl.js";
+import { auditsListIntegrations } from "../funcs/auditsListIntegrations.js";
 import { auditsListMonitoredComputersInAuditScope } from "../funcs/auditsListMonitoredComputersInAuditScope.js";
 import { auditsListPeopleInAuditScope } from "../funcs/auditsListPeopleInAuditScope.js";
 import { auditsListPersonnelAccountAccess } from "../funcs/auditsListPersonnelAccountAccess.js";
@@ -890,6 +893,42 @@ export class Audits extends ClientSDK {
   }
 
   /**
+   * List integrations for an audit
+   *
+   * @remarks
+   * Retrieves integration population data for an audit.
+   *
+   * This endpoint provides access to integration records visible to auditors
+   * during an audit engagement. Integrations represent connected services
+   * (e.g., GitHub, AWS, Slack) that provide data for the audit.
+   *
+   * Supports filtering by:
+   * - `search`: Searches integration names (case-insensitive)
+   * - `tagsMatchesAny`: Filters by integration tag (ACCESS, COMPUTERS, etc.)
+   * - `categoriesMatchesAny`: Filters by service category (CLOUD_PROVIDER, HR_PROVIDER, etc.)
+   *
+   * Uses cursor-based pagination. To paginate:
+   * 1. Make initial request with desired `pageSize`
+   * 2. Check `results.pageInfo.hasNextPage`
+   * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
+   *
+   * Results are sorted by integration display name (ascending). This sort order
+   * is fixed and cannot be customized via query parameters.
+   *
+   * Rate limit: 10 requests / minute.
+   */
+  async listIntegrations(
+    request: operations.ListIntegrationsRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseAuditIntegration> {
+    return unwrapAsync(auditsListIntegrations(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * List snapshotted issues for an audit
    *
    * @remarks
@@ -1016,6 +1055,58 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.PaginatedResponseMonitoredComputer> {
     return unwrapAsync(auditsListMonitoredComputersInAuditScope(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get organization information for an audit
+   *
+   * @remarks
+   * Retrieves organization information for an audit.
+   *
+   * This endpoint returns a single record containing the organization's
+   * business information visible to auditors during an audit engagement.
+   *
+   * Sorting and pagination are not applicable.
+   *
+   * Rate limit: 10 requests / minute.
+   */
+  async getOrganizationInformation(
+    request: operations.GetOrganizationInformationRequest,
+    options?: RequestOptions,
+  ): Promise<components.AuditOrganizationInformation> {
+    return unwrapAsync(auditsGetOrganizationInformation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get organization notification settings for an audit
+   *
+   * @remarks
+   * Retrieves organization notification settings for an audit.
+   *
+   * This endpoint returns a single record containing the auditee
+   * organization's notification configuration — schedule, personnel
+   * reminder settings, and external notification subscriptions
+   * (Compliance, Vendors, Access Reviews, Trust Center).
+   *
+   * The response is a single aggregate object per domain. Sorting and
+   * pagination are not applicable. Under a controlled audit view
+   * (TRIMMED_DOWN), only CAV-approved fields are included.
+   *
+   * Rate limit: 10 requests / minute.
+   */
+  async getOrganizationNotifications(
+    request: operations.GetOrganizationNotificationsRequest,
+    options?: RequestOptions,
+  ): Promise<components.AuditOrganizationNotifications> {
+    return unwrapAsync(auditsGetOrganizationNotifications(
       this,
       request,
       options,

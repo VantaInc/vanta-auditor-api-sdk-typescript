@@ -172,10 +172,13 @@ run();
 * [listInformationRequestEvidence](docs/sdks/audits/README.md#listinformationrequestevidence) - List evidence for an information request
 * [getInformationRequestTestSnapshotEvidenceDetail](docs/sdks/audits/README.md#getinformationrequesttestsnapshotevidencedetail) - Get test snapshot detail for an evidence row
 * [flagInformationRequestEvidence](docs/sdks/audits/README.md#flaginformationrequestevidence) - Flag evidence for an information request
+* [listIntegrations](docs/sdks/audits/README.md#listintegrations) - List integrations for an audit
 * [listAuditIssues](docs/sdks/audits/README.md#listauditissues) - List snapshotted issues for an audit
 * [listAuditSnapshots](docs/sdks/audits/README.md#listauditsnapshots) - List snapshotted issues for an audit
 * [listVendors](docs/sdks/audits/README.md#listvendors) - List vendors for an audit
 * [~~listMonitoredComputersInAuditScope~~](docs/sdks/audits/README.md#listmonitoredcomputersinauditscope) - List monitored computers :warning: **Deprecated**
+* [getOrganizationInformation](docs/sdks/audits/README.md#getorganizationinformation) - Get organization information for an audit
+* [getOrganizationNotifications](docs/sdks/audits/README.md#getorganizationnotifications) - Get organization notification settings for an audit
 * [~~listPeopleInAuditScope~~](docs/sdks/audits/README.md#listpeopleinauditscope) - List of people who are in scope for this audit :warning: **Deprecated**
 * [listAccountAccessServices](docs/sdks/audits/README.md#listaccountaccessservices) - List account access services for an audit
 * [listPersonnelAccountAccess](docs/sdks/audits/README.md#listpersonnelaccountaccess) - List account access records for an audit
@@ -224,6 +227,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsGetFrameworkCodes`](docs/sdks/audits/README.md#getframeworkcodes) - Get framework codes for an audit
 - [`auditsGetInformationRequest`](docs/sdks/audits/README.md#getinformationrequest) - Get an information request by ID
 - [`auditsGetInformationRequestTestSnapshotEvidenceDetail`](docs/sdks/audits/README.md#getinformationrequesttestsnapshotevidencedetail) - Get test snapshot detail for an evidence row
+- [`auditsGetOrganizationInformation`](docs/sdks/audits/README.md#getorganizationinformation) - Get organization information for an audit
+- [`auditsGetOrganizationNotifications`](docs/sdks/audits/README.md#getorganizationnotifications) - Get organization notification settings for an audit
 - [`auditsList`](docs/sdks/audits/README.md#list) - List audits
 - [`auditsListAccountAccessServices`](docs/sdks/audits/README.md#listaccountaccessservices) - List account access services for an audit
 - [`auditsListAuditIssues`](docs/sdks/audits/README.md#listauditissues) - List snapshotted issues for an audit
@@ -239,6 +244,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsListInformationRequestEvidence`](docs/sdks/audits/README.md#listinformationrequestevidence) - List evidence for an information request
 - [`auditsListInformationRequests`](docs/sdks/audits/README.md#listinformationrequests) - List information requests for an audit
 - [`auditsListInformationRequestsForControl`](docs/sdks/audits/README.md#listinformationrequestsforcontrol) - List information requests linked to a control within an audit
+- [`auditsListIntegrations`](docs/sdks/audits/README.md#listintegrations) - List integrations for an audit
 - [`auditsListPersonnelAccountAccess`](docs/sdks/audits/README.md#listpersonnelaccountaccess) - List account access records for an audit
 - [`auditsListPersonnelGroups`](docs/sdks/audits/README.md#listpersonnelgroups) - List groups for an audit
 - [`auditsListPersonnelPeople`](docs/sdks/audits/README.md#listpersonnelpeople) - List people for an audit
