@@ -60,6 +60,7 @@ export type InformationRequestComment = {
    *
    * @remarks
    * This email uniquely identifies users between Vanta and external audit systems.
+   * Null when the comment author can't be matched to a Vanta user.
    */
   email: string | null;
   /**

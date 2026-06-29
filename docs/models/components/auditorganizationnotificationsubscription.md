@@ -1,0 +1,29 @@
+# AuditOrganizationNotificationSubscription
+
+A single external-notification subscription row returned by the auditor
+organization notifications API. Represents one mailing-list address +
+notification-category pairing.
+
+## Example Usage
+
+```typescript
+import { AuditOrganizationNotificationSubscription } from "vanta-auditor-api-sdk/models/components";
+
+let value: AuditOrganizationNotificationSubscription = {
+  id: "65fa1b2c3d4e5f6789012345",
+  address: "security-alerts@acme.example.com",
+  cadence: "WEEKLY",
+  unsubSettingsKey: "SUMMARY_EMPLOYEE",
+  toggleIsSubscribed: true,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                             | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *string*                                                                                                                                          | :heavy_check_mark:                                                                                                                                | Subscription record identifier.                                                                                                                   | 65fa1b2c3d4e5f6789012345                                                                                                                          |
+| `address`                                                                                                                                         | *string*                                                                                                                                          | :heavy_check_mark:                                                                                                                                | Email address that receives notifications for this category.                                                                                      | security-alerts@acme.example.com                                                                                                                  |
+| `cadence`                                                                                                                                         | *string*                                                                                                                                          | :heavy_check_mark:                                                                                                                                | Cadence of summary notifications for this subscription, or null for<br/>non-summary (immediate / reminder) subscriptions.                         | WEEKLY                                                                                                                                            |
+| `unsubSettingsKey`                                                                                                                                | *string*                                                                                                                                          | :heavy_check_mark:                                                                                                                                | Notification category the subscription belongs to (e.g.<br/>`SUMMARY_EMPLOYEE`, `NEW_VENDORS_DISCOVERED_EMAIL`,<br/>`TRUST_REPORT_ACCESS_REQUEST_EMAIL`). | SUMMARY_EMPLOYEE                                                                                                                                  |
+| `toggleIsSubscribed`                                                                                                                              | *boolean*                                                                                                                                         | :heavy_check_mark:                                                                                                                                | Whether the address is currently subscribed to receive this category's<br/>notifications.                                                         | true                                                                                                                                              |
