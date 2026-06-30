@@ -20,7 +20,7 @@ export * from "./auditevidenceupdateinput.js";
 export * from "./auditfocus.js";
 export * from "./auditintegration.js";
 export * from "./auditintegrationcategory.js";
-export * from "./auditintegrationservicecategory.js";
+export * from "./auditintegrationtag.js";
 export * from "./auditor.js";
 export * from "./auditorapivulnerability.js";
 export * from "./auditorcontrol.js";

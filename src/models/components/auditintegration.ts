@@ -25,11 +25,11 @@ export type AuditIntegration = {
    */
   name: string;
   /**
-   * Integration category display names describing what data this integration provides.
+   * Integration tag display names describing what data this integration provides.
    */
   tags?: Array<string> | undefined;
   /**
-   * Service category display names describing what the integration is used for.
+   * Category display names describing what the integration is used for.
    */
   categories?: Array<string> | undefined;
 };
