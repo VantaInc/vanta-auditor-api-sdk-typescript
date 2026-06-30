@@ -25,13 +25,11 @@ export type ListIntegrationsRequest = {
   /**
    * Filter integrations by tag values
    */
-  tagsMatchesAny?: Array<components.AuditIntegrationCategory> | undefined;
+  tagsMatchesAny?: Array<components.AuditIntegrationTag> | undefined;
   /**
    * Filter integrations by category values
    */
-  categoriesMatchesAny?:
-    | Array<components.AuditIntegrationServiceCategory>
-    | undefined;
+  categoriesMatchesAny?: Array<components.AuditIntegrationCategory> | undefined;
 };
 
 /** @internal */
@@ -54,10 +52,10 @@ export const ListIntegrationsRequest$outboundSchema: z.ZodType<
   pageSize: z.number().int().default(10),
   pageCursor: z.string().optional(),
   search: z.string().optional(),
-  tagsMatchesAny: z.array(components.AuditIntegrationCategory$outboundSchema)
+  tagsMatchesAny: z.array(components.AuditIntegrationTag$outboundSchema)
     .optional(),
   categoriesMatchesAny: z.array(
-    components.AuditIntegrationServiceCategory$outboundSchema,
+    components.AuditIntegrationCategory$outboundSchema,
   ).optional(),
 });
 
