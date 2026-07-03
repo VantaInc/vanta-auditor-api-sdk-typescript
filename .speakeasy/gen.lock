@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: e7f990d4dc7cf142946887c21879afc3
+  docChecksum: dbb7351506e63335ece567cc78d27cc0
   docVersion: 1.0.0
-  speakeasyVersion: 1.786.1
-  generationVersion: 2.913.3
-  releaseVersion: 0.9.7
-  configChecksum: 6b0c18d6308d0be5199b038e3045eda3
+  speakeasyVersion: 1.788.0
+  generationVersion: 2.915.0
+  releaseVersion: 0.9.8
+  configChecksum: 8c427f96026c1d011f505c77451a4ac7
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: 422bb7dd-1357-42ab-9bc6-1da76dab6b75
-  pristine_commit_hash: 21a598e60a016a3424d97a737dfe36689710bb84
-  pristine_tree_hash: ed3835c2ac407842a7c1e9c829ea71db0a66e99c
+  generation_id: 9854b7e8-f29c-40c9-84e9-5891d6b8dfcb
+  pristine_commit_hash: df4b4c41328d816b7a9b4b11ee7d55e757a67873
+  pristine_tree_hash: cdb71b8e551151e6bb023d726492de7fd918ca8d
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.31.2
+    core: 3.31.3
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -438,8 +438,8 @@ trackedFiles:
     pristine_git_object: 78237fe184dec7cf88976379f76271227fa63337
   docs/models/components/informationrequestactivitylog.md:
     id: 1b794d9df4be
-    last_write_checksum: sha1:04f42c61608b1260acd6aac13b1303cca2d8b9bb
-    pristine_git_object: 2696b4bcb485477fff11ed74d70cef94b6799009
+    last_write_checksum: sha1:84d92b56137954a6bbd24ba9629e662f4b982726
+    pristine_git_object: 90e22dd26b46c51bf55768f35ca03a5587c385ae
   docs/models/components/informationrequestactivitytype.md:
     id: f6e68bffdd4e
     last_write_checksum: sha1:3f7f9c5851d75ddaa51b728ae7485d127ff27fa6
@@ -1354,12 +1354,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:40dd3e129f2eddb58c414ec72141e03aa0bfea76
-    pristine_git_object: ac853005276c81317be51166eefdc5b8bf4839b7
+    last_write_checksum: sha1:67c8972ddd35a03c63cb13e9e004013563fd0a15
+    pristine_git_object: 91feb02c3e3dd4ac327406ed002bc9d6700ba588
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:9ae3cce281dcce5966ce728128ac049115b122c4
-    pristine_git_object: 3da61256f34f3dd6ac5a119229e660c9482efbda
+    last_write_checksum: sha1:ae22576388ca3ca025a25e660876b973b5e2740e
+    pristine_git_object: b96a2523b5201ae817743e67a6561d5282489afd
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1590,8 +1590,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:f13ba06d1ce2456c9c54efaa19ddc269578d7c61
-    pristine_git_object: b4d778897380c210b18d1f090b522ab63b5a8805
+    last_write_checksum: sha1:4c35eb92287fd6a758feb4f3d2afa13ddfbfaebb
+    pristine_git_object: 52d0c1a2972d9740bbdf1539ea5ba4ad32273320
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -1902,8 +1902,8 @@ trackedFiles:
     pristine_git_object: 6e1a30737d76b9c95eacff5f603aa598eca7c32d
   src/models/components/informationrequestactivitylog.ts:
     id: bc5d7aacae96
-    last_write_checksum: sha1:db7f7c3b2e3264487a0b922db29f2ea88db51670
-    pristine_git_object: ffca4469cc60d7a9cd7f9e6aa7f33ba8647291fb
+    last_write_checksum: sha1:4266d814c69df64eba53fc2c8659a3b9053b7069
+    pristine_git_object: 945b9dbd4d3f27a89388f6834df8adcbf8d1a266
   src/models/components/informationrequestactivitytype.ts:
     id: c0e4d43cef31
     last_write_checksum: sha1:d90a771224d5606aba972b04e99079a831780c75
@@ -2809,7 +2809,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "6650a7d13680f3b61a0cd3c1", "activityType": "CHANGE_STATUS", "timestamp": "2024-05-05T12:00:00.000Z", "userEmail": "user@example.com", "oldStatus": "NEEDS_EVIDENCE", "newStatus": "READY_FOR_AUDIT", "reason": "Status updated after review", "fillOutcome": null}], "pageInfo": {"endCursor": "NjY1MGE3ZDEzNjgwZjNiNjFhMGNkM2Mx", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "NjY1MGE3ZDEzNjgwZjNiNjFhMGNkM2Mx"}}}
+          application/json: {"results": {"data": [{"id": "6650a7d13680f3b61a0cd3c1", "activityType": "CHANGE_STATUS", "timestamp": "2024-05-05T12:00:00.000Z", "userEmail": "user@example.com", "oldStatus": "NEEDS_EVIDENCE", "newStatus": "READY_FOR_AUDIT", "reason": "Status updated after review", "fillOutcome": null, "sourceInformationRequestId": null, "sourceAuditId": null}], "pageInfo": {"endCursor": "NjY1MGE3ZDEzNjgwZjNiNjFhMGNkM2Mx", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "NjY1MGE3ZDEzNjgwZjNiNjFhMGNkM2Mx"}}}
   ListCommentsForInformationRequest:
     Example 1:
       parameters:
