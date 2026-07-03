@@ -136,6 +136,23 @@ export type InformationRequestActivityLog = {
    * Only populated for evidence fill activities. Null for all other activity types.
    */
   fillOutcome: FillOutcome | null;
+  /**
+   * Identifier of the information request this one was copied from when its
+   *
+   * @remarks
+   * audit was duplicated.
+   * Only populated for audit-duplication trail activities. Null for all other activity types.
+   * Format: ObjectId as a string.
+   */
+  sourceInformationRequestId: string | null;
+  /**
+   * Identifier of the audit this request's audit was duplicated from.
+   *
+   * @remarks
+   * Only populated for audit-duplication trail activities. Null for all other activity types.
+   * Format: ObjectId as a string.
+   */
+  sourceAuditId: string | null;
 };
 
 /** @internal */
@@ -164,6 +181,8 @@ export const InformationRequestActivityLog$inboundSchema: z.ZodType<
   newStatus: z.nullable(NewStatus$inboundSchema),
   reason: z.nullable(z.string()),
   fillOutcome: z.nullable(FillOutcome$inboundSchema),
+  sourceInformationRequestId: z.nullable(z.string()),
+  sourceAuditId: z.nullable(z.string()),
 });
 
 export function informationRequestActivityLogFromJSON(
