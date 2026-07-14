@@ -54,6 +54,7 @@ export * from "./customfield.js";
 export * from "./customtask.js";
 export * from "./deleteauditcontrolcommentinput.js";
 export * from "./deleteinformationrequestcommentinput.js";
+export * from "./duplicateauditrequest.js";
 export * from "./employmentstatus.js";
 export * from "./evidence.js";
 export * from "./evidencecontrol.js";

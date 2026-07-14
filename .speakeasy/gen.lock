@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: d82f2c8530b1c546ef7c41572d1e33f4
+  docChecksum: db7dd1c013b6fd9767b063e0661cfb9b
   docVersion: 1.0.0
-  speakeasyVersion: 1.790.0
-  generationVersion: 2.917.0
-  releaseVersion: 0.9.9
-  configChecksum: f5e7e3b03c0252e15f53592e51f3302b
+  speakeasyVersion: 1.790.1
+  generationVersion: 2.918.1
+  releaseVersion: 0.9.10
+  configChecksum: c86460ec747bb31eaf84f841a51ac6a8
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: 40907f23-5925-40c6-8f4a-e9d18861f6ef
-  pristine_commit_hash: 23b170c773c5a8e0cd11ceb97e794f4e44cd1394
-  pristine_tree_hash: f17d5224dc36ced4d3a3aa0e82884da402f6e84b
+  generation_id: 3721c617-2ead-4dcd-9f06-c9c1827db431
+  pristine_commit_hash: c59f2300c0ae4e0ea3e77be5061ce4a7dd8b019e
+  pristine_tree_hash: 23960693b805ad630419204774f92e3c7f6be164
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -368,6 +368,10 @@ trackedFiles:
     id: 50b947ee27e4
     last_write_checksum: sha1:7c1d69da6a0435070afbe8b60cb6e7ea797569b4
     pristine_git_object: bff141604549cc9185280c6d5689da3b93adb620
+  docs/models/components/duplicateauditrequest.md:
+    id: 26f74bef27f9
+    last_write_checksum: sha1:5aa05969a4c7ccb0137389471711529c5a51de55
+    pristine_git_object: a5493e2a026f689ed1d29df17cd746f015202d8f
   docs/models/components/employment.md:
     id: bebf66e5af0d
     last_write_checksum: sha1:0f968c2d0a97c687a08c763f2c44204cf4176a40
@@ -1330,8 +1334,8 @@ trackedFiles:
     pristine_git_object: 83a3020aad9d8f36aba3095a73b3652e57979cb7
   docs/sdks/audits/README.md:
     id: b976aa226e19
-    last_write_checksum: sha1:94258b935ce6bfcf9e27814eef5add108ca075a5
-    pristine_git_object: e93c94f8a0cfd3d65e16f9a025da76a70d627927
+    last_write_checksum: sha1:98ba90e85a48731a039083565e21dab3f74fced2
+    pristine_git_object: ee31f1e7f41572eb7252bd5cd7e5a901809bf376
   eslint.config.mjs:
     id: 461c8d07f6da
     last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
@@ -1354,12 +1358,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:070836a4c5b6d7c47c411a215b3af9875a2fd50d
-    pristine_git_object: d11594eade69703d4c5ba270973647e311a771c0
+    last_write_checksum: sha1:d8bc63632580874c2f33d3094866ee9f502fd566
+    pristine_git_object: 047262b256afca6277f5c63636e68bef29c7fd7d
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:9b6bb8243acfe0af1be6ceb1e10793042e78a8de
-    pristine_git_object: d5062eb85361f1a06012b4a1f410c80409c74d5d
+    last_write_checksum: sha1:8cdd710a14ebfc654986104b4698a90eab95ab63
+    pristine_git_object: 07e11aff7f475bedee4030767cd8f17954c48622
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1408,6 +1412,10 @@ trackedFiles:
     id: 393087ea430f
     last_write_checksum: sha1:cbdefcc6a76db883b212afb2b6758bb94c9383cb
     pristine_git_object: 56d03b8a4be8a983ce30c29844c0062587cfbe6c
+  src/funcs/auditsDuplicate.ts:
+    id: 83f3e8b57455
+    last_write_checksum: sha1:a4df49533dd5c45c94e730647823066afaddc41a
+    pristine_git_object: 40b712544da6da625e9c4a3b0f87b9770f898ab5
   src/funcs/auditsFlagInformationRequestEvidence.ts:
     id: 498032a4df38
     last_write_checksum: sha1:3ea3b21f85b6ca4bdac23182bb84d650ac9fa35f
@@ -1590,8 +1598,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:c0894bc78bdcaf0d182d798534946bc5ba007c09
-    pristine_git_object: bb410bdc26a930cdc2e89b7ec6d730b21bf1a501
+    last_write_checksum: sha1:6958ce2bc323b34271019d31f6344afe30b6f381
+    pristine_git_object: effed88f5b5c935acd5270abb5622812e8c7977a
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -1848,6 +1856,10 @@ trackedFiles:
     id: 0af5acee530d
     last_write_checksum: sha1:9b1d1ab1f4a1929bc71a5cf109ca6fbe04ba9734
     pristine_git_object: 7a23cb3c07997d7a98f4c090f55786448475b34b
+  src/models/components/duplicateauditrequest.ts:
+    id: 936719849aee
+    last_write_checksum: sha1:458276c89115fe6ef1c3391b88f7e4f99d930b52
+    pristine_git_object: 84faa5da0524846e61e47ccd270cf92451b7bc15
   src/models/components/employmentstatus.ts:
     id: 3b2f77c24119
     last_write_checksum: sha1:94c00ddaba321e71c4828de4ecc024af304c0b2e
@@ -1894,8 +1906,8 @@ trackedFiles:
     pristine_git_object: c6342322b6424cd48ecf99b4e67d4f89b4470156
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:eed7b07fffac389044abf4bcce92f69e9626c77a
-    pristine_git_object: 73e56af87fedca749f75666781d5b8d1ca4c02cb
+    last_write_checksum: sha1:6c9a1ab0784a7ddb45d76deb9c954608def73167
+    pristine_git_object: 45d35b885cdad7cca751a3c79be71cf0689a71a1
   src/models/components/informationrequest.ts:
     id: f3544499333e
     last_write_checksum: sha1:1aa35ed9b258b9114abbb7afe74dc2755a71b824
@@ -2562,8 +2574,8 @@ trackedFiles:
     pristine_git_object: 5f4ee0ebc3a0501c1f4a385ad6f95ee4d2b167d1
   src/sdk/audits.ts:
     id: ab43f5ff5412
-    last_write_checksum: sha1:b3d50092519c97d73f8b8d00f35de4e5f30ea4ea
-    pristine_git_object: 019096ab5bb060fbb99f818dbd814a3c5e84e760
+    last_write_checksum: sha1:2e22bbbf2de4739636cf8a2510968a26ea6ab818
+    pristine_git_object: 9a5b2285d67fbae1ae42a5a164d13ccc462afbbe
   src/sdk/index.ts:
     id: a857902a703f
     last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
@@ -3124,6 +3136,13 @@ examples:
       responses:
         "200":
           application/json: {"id": "5f2c939a52855e725c8d5824", "preferredTimeZone": "America/New_York", "employeeDigestFrequency": "WEEKLY", "subscribedChannelTypes": ["EMAIL"], "externalNotifications": [{"id": "65fa1b2c3d4e5f6789012345", "address": "hr-alerts@acme.example.com", "cadence": "WEEKLY", "unsubSettingsKey": "SUMMARY_EMPLOYEE", "toggleIsSubscribed": true}, {"id": "65fa1b2c3d4e5f6789012346", "address": "security@acme.example.com", "cadence": null, "unsubSettingsKey": "TRUST_REPORT_ACCESS_REQUEST_EMAIL", "toggleIsSubscribed": true}]}
+  Duplicate:
+    Example 1:
+      requestBody:
+        application/json: {"sourceAuditId": "<id>", "displayName": "Orpha.Schoen", "auditStartDate": "2024-01-02T08:34:53.150Z", "auditEndDate": "2024-10-06T07:06:05.931Z", "earlyAccessStartsAt": "2025-05-31T02:08:59.254Z", "allowAuditorEmails": ["<value 1>", "<value 2>", "<value 3>"]}
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "customerOrganizationName": "corporation.com", "customerDisplayName": "Corporation Company", "customerOrganizationId": "65fc81a3359c8508c9af880f", "auditStartDate": "2024-03-07T21:25:56.000Z", "auditEndDate": "2024-03-14T21:25:56.000Z", "earlyAccessStartsAt": "2024-03-07T21:25:56.000Z", "framework": "SOC 2 Type II", "displayName": "Q1 2024 SOC 2 Audit", "allowAuditorEmails": ["sam@auditor.com"], "allowAllAuditors": true, "deletionDate": "2024-03-07T21:25:56.000Z", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "completionDate": "2024-03-07T21:25:56.000Z", "auditFocus": "EXTERNAL", "auditorRequestListMetadata": {"requestsSharedWithCustomer": "2024-03-07T21:25:56.000Z"}}
 examplesVersion: 1.0.2
 generatedTests: {}
 generatedFiles:

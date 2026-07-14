@@ -142,6 +142,7 @@ run();
 ### [Audits](docs/sdks/audits/README.md)
 
 * [list](docs/sdks/audits/README.md#list) - List audits
+* [duplicate](docs/sdks/audits/README.md#duplicate) - Duplicate an IRL audit
 * [getAudit](docs/sdks/audits/README.md#getaudit) - Get audit by ID
 * [listCodeChanges](docs/sdks/audits/README.md#listcodechanges) - List code changes for an audit
 * [listComments](docs/sdks/audits/README.md#listcomments) - List audit comments
@@ -221,6 +222,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsDeleteCommentForControl`](docs/sdks/audits/README.md#deletecommentforcontrol) - Delete a comment for a control within an audit
 - [`auditsDeleteCommentForInformationRequest`](docs/sdks/audits/README.md#deletecommentforinformationrequest) - Delete a comment for an information request
 - [`auditsDeleteInformationRequest`](docs/sdks/audits/README.md#deleteinformationrequest) - Delete an information request for an audit
+- [`auditsDuplicate`](docs/sdks/audits/README.md#duplicate) - Duplicate an IRL audit
 - [`auditsFlagInformationRequestEvidence`](docs/sdks/audits/README.md#flaginformationrequestevidence) - Flag evidence for an information request
 - [`auditsGetAudit`](docs/sdks/audits/README.md#getaudit) - Get audit by ID
 - [`auditsGetEvidenceUrls`](docs/sdks/audits/README.md#getevidenceurls) - List audit evidence url

@@ -12,6 +12,7 @@ import { auditsCreateInformationRequest } from "../funcs/auditsCreateInformation
 import { auditsDeleteCommentForControl } from "../funcs/auditsDeleteCommentForControl.js";
 import { auditsDeleteCommentForInformationRequest } from "../funcs/auditsDeleteCommentForInformationRequest.js";
 import { auditsDeleteInformationRequest } from "../funcs/auditsDeleteInformationRequest.js";
+import { auditsDuplicate } from "../funcs/auditsDuplicate.js";
 import { auditsFlagInformationRequestEvidence } from "../funcs/auditsFlagInformationRequestEvidence.js";
 import { auditsGetAudit } from "../funcs/auditsGetAudit.js";
 import { auditsGetEvidenceUrls } from "../funcs/auditsGetEvidenceUrls.js";
@@ -75,6 +76,42 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.PaginatedResponseAudit> {
     return unwrapAsync(auditsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Duplicate an IRL audit
+   *
+   * @remarks
+   * Duplicates an existing IRL audit into a new audit engagement with the supplied
+   * displayName, audit dates, early access date, and auditor roster. Company, audit
+   * type, and framework are copied from the source audit and cannot be changed.
+   *
+   * Each email in `allowAuditorEmails` must match an active user in the
+   * authenticated audit firm's domain. Provision auditors via `POST /auditors`
+   * before referencing them here, or copy emails from `GET /audits/{sourceAuditId}`
+   * → `allowAuditorEmails` when duplicating with the same roster.
+   *
+   * Information requests are copied from the source audit. After duplication:
+   *
+   * - Requests with Vanta evidence will be pre-filled and marked as internal review.
+   *
+   *   Review them before sharing with your customer.
+   * - Requests where evidence was not available or was uploaded externally will need
+   *
+   *   evidence added manually.
+   * - Evidence capture dates and due dates can be modified after duplication.
+   *
+   * Rate limit: 10 requests / minute.
+   */
+  async duplicate(
+    request: components.DuplicateAuditRequest,
+    options?: RequestOptions,
+  ): Promise<components.Audit> {
+    return unwrapAsync(auditsDuplicate(
       this,
       request,
       options,

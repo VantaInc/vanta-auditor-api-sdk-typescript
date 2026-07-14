@@ -5,6 +5,7 @@
 ### Available Operations
 
 * [list](#list) - List audits
+* [duplicate](#duplicate) - Duplicate an IRL audit
 * [getAudit](#getaudit) - Get audit by ID
 * [listCodeChanges](#listcodechanges) - List code changes for an audit
 * [listComments](#listcomments) - List audit comments
@@ -123,6 +124,116 @@ run();
 ### Response
 
 **Promise\<[components.PaginatedResponseAudit](../../models/components/paginatedresponseaudit.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## duplicate
+
+Duplicates an existing IRL audit into a new audit engagement with the supplied
+displayName, audit dates, early access date, and auditor roster. Company, audit
+type, and framework are copied from the source audit and cannot be changed.
+
+Each email in `allowAuditorEmails` must match an active user in the
+authenticated audit firm's domain. Provision auditors via `POST /auditors`
+before referencing them here, or copy emails from `GET /audits/{sourceAuditId}`
+→ `allowAuditorEmails` when duplicating with the same roster.
+
+Information requests are copied from the source audit. After duplication:
+
+- Requests with Vanta evidence will be pre-filled and marked as internal review.
+
+  Review them before sharing with your customer.
+- Requests where evidence was not available or was uploaded externally will need
+
+  evidence added manually.
+- Evidence capture dates and due dates can be modified after duplication.
+
+Rate limit: 10 requests / minute.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="Duplicate" method="post" path="/audits/duplicate" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.duplicate({
+    sourceAuditId: "<id>",
+    displayName: "Orpha.Schoen",
+    auditStartDate: new Date("2024-01-02T08:34:53.150Z"),
+    auditEndDate: new Date("2024-10-06T07:06:05.931Z"),
+    earlyAccessStartsAt: new Date("2025-05-31T02:08:59.254Z"),
+    allowAuditorEmails: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsDuplicate } from "vanta-auditor-api-sdk/funcs/auditsDuplicate.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsDuplicate(vanta, {
+    sourceAuditId: "<id>",
+    displayName: "Orpha.Schoen",
+    auditStartDate: new Date("2024-01-02T08:34:53.150Z"),
+    auditEndDate: new Date("2024-10-06T07:06:05.931Z"),
+    earlyAccessStartsAt: new Date("2025-05-31T02:08:59.254Z"),
+    allowAuditorEmails: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsDuplicate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.DuplicateAuditRequest](../../models/components/duplicateauditrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.Audit](../../models/components/audit.md)\>**
 
 ### Errors
 
