@@ -46,6 +46,12 @@ let value: PaginatedResponseAuditorControl = {
             },
           },
         ],
+        assessments: [
+          {
+            assessmentState: "MAJOR_NON_CONFORMITY",
+            justification: "<value>",
+          },
+        ],
       },
     ],
     pageInfo: {

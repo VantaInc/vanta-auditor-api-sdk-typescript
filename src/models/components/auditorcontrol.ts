@@ -6,6 +6,10 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AuditControlAssessment,
+  AuditControlAssessment$inboundSchema,
+} from "./auditcontrolassessment.js";
 import { ControlSource, ControlSource$inboundSchema } from "./controlsource.js";
 import { CustomField, CustomField$inboundSchema } from "./customfield.js";
 import { Section, Section$inboundSchema } from "./section.js";
@@ -78,6 +82,15 @@ export type AuditorControl = {
    * Sections of a framework that this control satisfies
    */
   sections: Array<Section>;
+  /**
+   * The auditor's assessments of this control, one per audit segment the
+   *
+   * @remarks
+   * control is in scope for. Populated only for IRL audits when the assessment
+   * feature is enabled; empty otherwise. A segment with no recorded assessment
+   * still contributes an entry, coerced to `NOT_ASSESSED`.
+   */
+  assessments: Array<AuditControlAssessment>;
 };
 
 /** @internal */
@@ -121,6 +134,7 @@ export const AuditorControl$inboundSchema: z.ZodType<
   ),
   framework: z.string(),
   sections: z.array(Section$inboundSchema),
+  assessments: z.array(AuditControlAssessment$inboundSchema),
 });
 
 export function auditorControlFromJSON(
