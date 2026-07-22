@@ -13,6 +13,8 @@ export * from "./addcommentinput.js";
 export * from "./addinformationrequestcommentinput.js";
 export * from "./apicodechangesource.js";
 export * from "./audit.js";
+export * from "./auditcontrolassessment.js";
+export * from "./auditcontrolassessmentstate.js";
 export * from "./auditcontrolcomment.js";
 export * from "./auditevidencestate.js";
 export * from "./auditevidencetype.js";

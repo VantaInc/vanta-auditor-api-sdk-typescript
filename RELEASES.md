@@ -299,3 +299,13 @@ Based on:
 - [typescript v0.9.10] .
 ### Releases
 - [NPM v0.9.10] https://www.npmjs.com/package/vanta-auditor-api-sdk/v/0.9.10 - .
+
+## 2026-07-22 00:26:57
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.790.3 (2.918.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v0.9.11] .
+### Releases
+- [NPM v0.9.11] https://www.npmjs.com/package/vanta-auditor-api-sdk/v/0.9.11 - .
