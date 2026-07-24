@@ -27,6 +27,7 @@ export const FrameworkId = {
   Mvsp: "MVSP",
   Nis2D: "NIS_2D",
   Nist171: "NIST_171",
+  Nist171R3: "NIST_171_R3",
   Nist53: "NIST_53",
   NistAiRmf: "NIST_AI_RMF",
   NistCsf: "NIST_CSF",
