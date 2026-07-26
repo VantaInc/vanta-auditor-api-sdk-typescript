@@ -102,7 +102,7 @@ export type AuditRisk = {
    */
   impact?: number | null | undefined;
   /**
-   * Inherent risk score (likelihood * impact), or null if not calculable.
+   * Inherent risk score, or null if not scored. Defaults to the likelihood * impact product; when the organization scores risks by factors, this is the rolled-up factor score rounded to two decimals.
    */
   inherentRisk?: number | null | undefined;
   /**
