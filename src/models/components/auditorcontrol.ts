@@ -83,12 +83,12 @@ export type AuditorControl = {
    */
   sections: Array<Section>;
   /**
-   * The auditor's assessments of this control, one per audit segment the
+   * The auditor's assessments of this control, one per audit program segment
    *
    * @remarks
-   * control is in scope for. Populated only for IRL audits when the assessment
-   * feature is enabled; empty otherwise. A segment with no recorded assessment
-   * still contributes an entry, coerced to `NOT_ASSESSED`.
+   * (a multi-framework audit has more than one). Populated only for IRL audits
+   * when the assessment feature is enabled; empty otherwise. A segment with no
+   * recorded assessment still contributes an entry, coerced to `NOT_ASSESSED`.
    */
   assessments: Array<AuditControlAssessment>;
 };
