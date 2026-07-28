@@ -52,3 +52,4 @@ export * from "./updateauditevidence.js";
 export * from "./updatecommentforcontrol.js";
 export * from "./updatecommentforinformationrequest.js";
 export * from "./updateinformationrequest.js";
+export * from "./upsertassessmentforcontrol.js";
