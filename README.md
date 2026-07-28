@@ -148,6 +148,7 @@ run();
 * [listComments](docs/sdks/audits/README.md#listcomments) - List audit comments
 * [listControls](docs/sdks/audits/README.md#listcontrols) - List audit controls
 * [createCustomControl](docs/sdks/audits/README.md#createcustomcontrol) - Create a custom control for an audit
+* [upsertAssessmentForControl](docs/sdks/audits/README.md#upsertassessmentforcontrol) - Upsert a control's assessment within an audit
 * [listCommentsForControl](docs/sdks/audits/README.md#listcommentsforcontrol) - List comments for a control within an audit
 * [createCommentForControl](docs/sdks/audits/README.md#createcommentforcontrol) - Create a comment for a control within an audit
 * [updateCommentForControl](docs/sdks/audits/README.md#updatecommentforcontrol) - Update a comment for a control within an audit
@@ -257,6 +258,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsUpdateCommentForInformationRequest`](docs/sdks/audits/README.md#updatecommentforinformationrequest) - Update a comment for an information request
 - [`auditsUpdateEvidence`](docs/sdks/audits/README.md#updateevidence) - Update audit evidence
 - [`auditsUpdateInformationRequest`](docs/sdks/audits/README.md#updateinformationrequest) - Update an information request for an audit
+- [`auditsUpsertAssessmentForControl`](docs/sdks/audits/README.md#upsertassessmentforcontrol) - Upsert a control's assessment within an audit
 - ~~[`auditsGetVulnerableAssets`](docs/sdks/audits/README.md#getvulnerableassets)~~ - List assets associated with vulnerabilities :warning: **Deprecated**
 - ~~[`auditsListMonitoredComputersInAuditScope`](docs/sdks/audits/README.md#listmonitoredcomputersinauditscope)~~ - List monitored computers :warning: **Deprecated**
 - ~~[`auditsListPeopleInAuditScope`](docs/sdks/audits/README.md#listpeopleinauditscope)~~ - List of people who are in scope for this audit :warning: **Deprecated**

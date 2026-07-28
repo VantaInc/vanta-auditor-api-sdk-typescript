@@ -53,6 +53,7 @@ import { auditsUpdateCommentForControl } from "../funcs/auditsUpdateCommentForCo
 import { auditsUpdateCommentForInformationRequest } from "../funcs/auditsUpdateCommentForInformationRequest.js";
 import { auditsUpdateEvidence } from "../funcs/auditsUpdateEvidence.js";
 import { auditsUpdateInformationRequest } from "../funcs/auditsUpdateInformationRequest.js";
+import { auditsUpsertAssessmentForControl } from "../funcs/auditsUpsertAssessmentForControl.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -227,6 +228,36 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Control> {
     return unwrapAsync(auditsCreateCustomControl(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Upsert a control's assessment within an audit
+   *
+   * @remarks
+   * Records (upserts) an auditor's assessment state and justification for a
+   * control within an IRL audit — the API equivalent of assessing a control in
+   * the web app. Overwrites the single assessment for this control in the
+   * audit's program segment.
+   *
+   * The `assessmentState` must be valid for the audit's framework (the request
+   * is rejected otherwise). The acting auditor is identified by `auditorEmail`,
+   * which must belong to the audit firm making the request.
+   *
+   * Returns 404 when the control is not part of the audit or the auditor email
+   * does not resolve to a firm user. Applies to both Full and Controlled Audit
+   * View audits.
+   *
+   * Rate limit: 10 requests / minute.
+   */
+  async upsertAssessmentForControl(
+    request: operations.UpsertAssessmentForControlRequest,
+    options?: RequestOptions,
+  ): Promise<components.AuditorControlAssessment> {
+    return unwrapAsync(auditsUpsertAssessmentForControl(
       this,
       request,
       options,

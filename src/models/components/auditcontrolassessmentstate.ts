@@ -61,3 +61,7 @@ export type AuditControlAssessmentState = ClosedEnum<
 export const AuditControlAssessmentState$inboundSchema: z.ZodNativeEnum<
   typeof AuditControlAssessmentState
 > = z.nativeEnum(AuditControlAssessmentState);
+/** @internal */
+export const AuditControlAssessmentState$outboundSchema: z.ZodNativeEnum<
+  typeof AuditControlAssessmentState
+> = AuditControlAssessmentState$inboundSchema;

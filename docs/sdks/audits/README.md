@@ -11,6 +11,7 @@
 * [listComments](#listcomments) - List audit comments
 * [listControls](#listcontrols) - List audit controls
 * [createCustomControl](#createcustomcontrol) - Create a custom control for an audit
+* [upsertAssessmentForControl](#upsertassessmentforcontrol) - Upsert a control's assessment within an audit
 * [listCommentsForControl](#listcommentsforcontrol) - List comments for a control within an audit
 * [createCommentForControl](#createcommentforcontrol) - Create a comment for a control within an audit
 * [updateCommentForControl](#updatecommentforcontrol) - Update a comment for a control within an audit
@@ -643,6 +644,104 @@ run();
 ### Response
 
 **Promise\<[components.Control](../../models/components/control.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## upsertAssessmentForControl
+
+Records (upserts) an auditor's assessment state and justification for a
+control within an IRL audit — the API equivalent of assessing a control in
+the web app. Overwrites the single assessment for this control in the
+audit's program segment.
+
+The `assessmentState` must be valid for the audit's framework (the request
+is rejected otherwise). The acting auditor is identified by `auditorEmail`,
+which must belong to the audit firm making the request.
+
+Returns 404 when the control is not part of the audit or the auditor email
+does not resolve to a firm user. Applies to both Full and Controlled Audit
+View audits.
+
+Rate limit: 10 requests / minute.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="UpsertAssessmentForControl" method="put" path="/audits/{auditId}/controls/{controlId}/assessment" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.upsertAssessmentForControl({
+    auditId: "<id>",
+    controlId: "<id>",
+    upsertAuditControlAssessmentInput: {
+      assessmentState: "TRUE",
+      justification: "<value>",
+      auditorEmail: "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsUpsertAssessmentForControl } from "vanta-auditor-api-sdk/funcs/auditsUpsertAssessmentForControl.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsUpsertAssessmentForControl(vanta, {
+    auditId: "<id>",
+    controlId: "<id>",
+    upsertAuditControlAssessmentInput: {
+      assessmentState: "TRUE",
+      justification: "<value>",
+      auditorEmail: "<value>",
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsUpsertAssessmentForControl failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpsertAssessmentForControlRequest](../../models/operations/upsertassessmentforcontrolrequest.md)                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.AuditorControlAssessment](../../models/components/auditorcontrolassessment.md)\>**
 
 ### Errors
 
