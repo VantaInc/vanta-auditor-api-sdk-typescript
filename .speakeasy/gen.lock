@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 5512794566ab468830d0e07fea65a388
+  docChecksum: 9a9acd8a05dd1f1c5916fab0cd488979
   docVersion: 1.0.0
   speakeasyVersion: 1.791.0
   generationVersion: 2.924.0
-  releaseVersion: 0.9.14
-  configChecksum: a0adfc91961e38cb0e62170a5a7c5458
+  releaseVersion: 0.9.15
+  configChecksum: a55cd02e395a968cfcabde0b0a749c3d
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: 5b27a4fc-8334-4b37-b7b8-87d1f80c4722
-  pristine_commit_hash: dff9ec30c18e0a15add539df5548528a5c824362
-  pristine_tree_hash: 5a82fcf259666951a59f926006db5c5a54c005f3
+  generation_id: 45b157d6-4177-4d50-96d6-637e050e3667
+  pristine_commit_hash: 1f5243257a68524275a4e061b88ff194a562ab9d
+  pristine_tree_hash: 6babd175406ef0c4fa034116598071597ae5b2ed
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1354,8 +1354,8 @@ trackedFiles:
     pristine_git_object: 83a3020aad9d8f36aba3095a73b3652e57979cb7
   docs/sdks/audits/README.md:
     id: b976aa226e19
-    last_write_checksum: sha1:be4d2ea05ae3b31afd35de34ffc6403c440be7c5
-    pristine_git_object: fb3e82e4e4e25cdeb875ec38b1b73d4e7b654f0d
+    last_write_checksum: sha1:08322e266e0ecbb0352e1f7b507654de7ef8b4de
+    pristine_git_object: 085ba37732ee1ae1c6075bfadc96e9872e34236a
   eslint.config.mjs:
     id: 461c8d07f6da
     last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
@@ -1378,12 +1378,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:a4c161b89209b5a7044ac549c5f90e41e41f7656
-    pristine_git_object: ac3bfb9ce3947b7f814364f55cfb35f7dec7f6f9
+    last_write_checksum: sha1:c6c2b3a1b71785ddeedbfbe6eb2eea509ccf39a7
+    pristine_git_object: 087687933e3c8cd6f392d8bf5d7b7fe0de07b4de
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:9a9939ee8a89cada6c6a7fac7055ba895a7dbf56
-    pristine_git_object: c29af7e2a1f531e1c3507a4ecc22c9a2049e2c17
+    last_write_checksum: sha1:502c06a0588586f6870c70924de753be2ca944e5
+    pristine_git_object: 07e26fe5969c4ebf29329941854e2c20f56e7d97
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1598,8 +1598,8 @@ trackedFiles:
     pristine_git_object: 7d521c9643b750b561c6a82a10eedfa77c83c585
   src/funcs/auditsUpsertAssessmentForControl.ts:
     id: 28d7964a0a69
-    last_write_checksum: sha1:223a51beeb442425d6ac4ce02cb92c5a14951453
-    pristine_git_object: 3521be607f2bcb7252d384d06d703a23039c3f81
+    last_write_checksum: sha1:f71415cd8813c6389bd4287aa783d42e41c6934c
+    pristine_git_object: 91e74be13179ed93b69f97a19be72321f47d97d0
   src/hooks/hooks.ts:
     id: a2463fc6f69b
     last_write_checksum: sha1:9a569ea8f3177ddcdfe6cd903feaf5c2d2c36a9a
@@ -1622,8 +1622,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:014c4c24c0bf3ff9a4641a58c1dc4cfd5aa2c965
-    pristine_git_object: d5dc24561a9ddbc42e69d36d1a5107890d3d5141
+    last_write_checksum: sha1:2228cac627416fea925b6d81d8ff6b38bd349306
+    pristine_git_object: e33c131fe45e3eb82e1ec2cdea589cf0a0bae95d
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -2618,8 +2618,8 @@ trackedFiles:
     pristine_git_object: 5f4ee0ebc3a0501c1f4a385ad6f95ee4d2b167d1
   src/sdk/audits.ts:
     id: ab43f5ff5412
-    last_write_checksum: sha1:9e8c5521ab43dbf3938b74812e7fd2dd8874ce19
-    pristine_git_object: f17bf2a69c47f2053eaf4ce41d1cdba6f4fa7813
+    last_write_checksum: sha1:2eea738276a01f7f4ef861402791a408b992b19c
+    pristine_git_object: 677b20a176f3222967b75f532c7099faa1ba655d
   src/sdk/index.ts:
     id: a857902a703f
     last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
