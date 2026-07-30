@@ -35,7 +35,7 @@ import { Result } from "../types/fp.js";
  * the web app. Overwrites the single assessment for this control in the
  * audit's program segment.
  *
- * The `assessmentState` must be valid for the audit's framework (the request
+ * The `assessmentState` must be valid for the segment's framework (the request
  * is rejected otherwise). The acting auditor is identified by `auditorEmail`,
  * which must belong to the audit firm making the request.
  *
