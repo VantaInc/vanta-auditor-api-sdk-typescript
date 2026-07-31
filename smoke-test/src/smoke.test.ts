@@ -71,11 +71,22 @@ describe.sequential("Vanta SDK smoke", () => {
   });
 
   test.skipIf(shouldSkip)("listAudits finds fixture audit", async () => {
-    const res = await sdk.audits.list({});
-    const audits = res.results.data;
-    expect(audits).toBeDefined();
+    let pageCursor: string | undefined;
+    let found = false;
+    do {
+      const res = await sdk.audits.list({ pageCursor, pageSize: 100 });
+      const audits = res.results.data;
+      expect(audits).toBeDefined();
+      if (audits.some((a) => a.id === auditId)) {
+        found = true;
+        break;
+      }
+      const { hasNextPage, endCursor } = res.results.pageInfo;
+      pageCursor = hasNextPage && endCursor != null ? endCursor : undefined;
+    } while (pageCursor !== undefined);
+
     expect(
-      audits.some((a) => a.id === auditId),
+      found,
       `fixture audit ${auditId} not found in /audits results — was it deleted? `
         + `See SMOKE_TEST.md for recovery steps.`,
     ).toBe(true);
