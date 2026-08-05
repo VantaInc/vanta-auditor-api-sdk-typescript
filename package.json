@@ -1,6 +1,6 @@
 {
   "name": "vanta-auditor-api-sdk",
-  "version": "0.9.16",
+  "version": "0.9.17",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,

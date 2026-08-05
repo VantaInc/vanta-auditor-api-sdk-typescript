@@ -15,6 +15,7 @@ import { auditsDeleteInformationRequest } from "../funcs/auditsDeleteInformation
 import { auditsDuplicate } from "../funcs/auditsDuplicate.js";
 import { auditsFlagInformationRequestEvidence } from "../funcs/auditsFlagInformationRequestEvidence.js";
 import { auditsGetAudit } from "../funcs/auditsGetAudit.js";
+import { auditsGetAuditEvidenceComment } from "../funcs/auditsGetAuditEvidenceComment.js";
 import { auditsGetEvidenceUrls } from "../funcs/auditsGetEvidenceUrls.js";
 import { auditsGetFrameworkCodes } from "../funcs/auditsGetFrameworkCodes.js";
 import { auditsGetInformationRequest } from "../funcs/auditsGetInformationRequest.js";
@@ -476,6 +477,35 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Comment> {
     return unwrapAsync(auditsCreateCommentForEvidence(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an audit evidence comment by ID
+   *
+   * @remarks
+   * Retrieves a single comment on a classic audit evidence item by its ID.
+   *
+   * Soft-deleted comments (where `deletionDate !== null`) are included in the
+   * response. Clients should check `deletionDate` to determine whether the
+   * comment has been deleted. This matches
+   * `GET /audits/{auditId}/comments`, which supports `changedSinceDate` and
+   * returns soft-deleted comments for delta sync.
+   *
+   * Comments remain fetchable when the parent evidence item has been
+   * soft-deleted, so delayed webhook consumers can still resolve a comment ID
+   * after evidence deletion.
+   *
+   * Rate limit: 50 requests / minute.
+   */
+  async getAuditEvidenceComment(
+    request: operations.GetAuditEvidenceCommentRequest,
+    options?: RequestOptions,
+  ): Promise<components.Comment> {
+    return unwrapAsync(auditsGetAuditEvidenceComment(
       this,
       request,
       options,
