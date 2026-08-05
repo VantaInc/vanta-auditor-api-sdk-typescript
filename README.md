@@ -158,6 +158,7 @@ run();
 * [createCustomEvidenceRequest](docs/sdks/audits/README.md#createcustomevidencerequest) - Create a custom evidence request for an audit
 * [updateEvidence](docs/sdks/audits/README.md#updateevidence) - Update audit evidence
 * [createCommentForEvidence](docs/sdks/audits/README.md#createcommentforevidence) - Create a comment for audit evidence
+* [getAuditEvidenceComment](docs/sdks/audits/README.md#getauditevidencecomment) - Get an audit evidence comment by ID
 * [getEvidenceUrls](docs/sdks/audits/README.md#getevidenceurls) - List audit evidence url
 * [getFrameworkCodes](docs/sdks/audits/README.md#getframeworkcodes) - Get framework codes for an audit
 * [listInformationRequests](docs/sdks/audits/README.md#listinformationrequests) - List information requests for an audit
@@ -226,6 +227,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsDuplicate`](docs/sdks/audits/README.md#duplicate) - Duplicate an IRL audit
 - [`auditsFlagInformationRequestEvidence`](docs/sdks/audits/README.md#flaginformationrequestevidence) - Flag evidence for an information request
 - [`auditsGetAudit`](docs/sdks/audits/README.md#getaudit) - Get audit by ID
+- [`auditsGetAuditEvidenceComment`](docs/sdks/audits/README.md#getauditevidencecomment) - Get an audit evidence comment by ID
 - [`auditsGetEvidenceUrls`](docs/sdks/audits/README.md#getevidenceurls) - List audit evidence url
 - [`auditsGetFrameworkCodes`](docs/sdks/audits/README.md#getframeworkcodes) - Get framework codes for an audit
 - [`auditsGetInformationRequest`](docs/sdks/audits/README.md#getinformationrequest) - Get an information request by ID

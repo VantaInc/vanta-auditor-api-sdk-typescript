@@ -14,6 +14,7 @@ export * from "./deletecommentforinformationrequest.js";
 export * from "./deleteinformationrequest.js";
 export * from "./flaginformationrequestevidence.js";
 export * from "./getaudit.js";
+export * from "./getauditevidencecomment.js";
 export * from "./getframeworkcodes.js";
 export * from "./getinformationrequest.js";
 export * from "./getinformationrequesttestsnapshotevidencedetail.js";
