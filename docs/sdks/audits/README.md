@@ -20,6 +20,7 @@
 * [listEvidence](#listevidence) - List audit evidence
 * [createCustomEvidenceRequest](#createcustomevidencerequest) - Create a custom evidence request for an audit
 * [updateEvidence](#updateevidence) - Update audit evidence
+* [getAuditEvidence](#getauditevidence) - Get an audit evidence item by ID
 * [createCommentForEvidence](#createcommentforevidence) - Create a comment for audit evidence
 * [getAuditEvidenceComment](#getauditevidencecomment) - Get an audit evidence comment by ID
 * [getEvidenceUrls](#getevidenceurls) - List audit evidence url
@@ -33,6 +34,7 @@
 * [listInformationRequestActivity](#listinformationrequestactivity) - List information request activity
 * [listCommentsForInformationRequest](#listcommentsforinformationrequest) - List comments for an information request
 * [createCommentForInformationRequest](#createcommentforinformationrequest) - Create a comment for an information request
+* [getCommentForInformationRequest](#getcommentforinformationrequest) - Get an information request comment by ID
 * [updateCommentForInformationRequest](#updatecommentforinformationrequest) - Update a comment for an information request
 * [deleteCommentForInformationRequest](#deletecommentforinformationrequest) - Delete a comment for an information request
 * [listInformationRequestEvidence](#listinformationrequestevidence) - List evidence for an information request
@@ -1463,6 +1465,92 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
+## getAuditEvidence
+
+Retrieves a single classic audit evidence item by its ID, scoped to its
+audit. The response matches the entry `GET /audits/{auditId}/evidence`
+returns for the same item, so an evidence ID surfaced by a webhook can be
+resolved directly instead of paging the audit's full evidence list.
+
+Soft-deleted evidence (where `deletionDate !== null`) is included in the
+response. Clients should check `deletionDate` to determine whether the item
+has been deleted. This matches `GET /audits/{auditId}/evidence`, which
+supports `changedSinceDate` and returns soft-deleted evidence for delta
+sync. As on the list endpoint, `description` is null for deleted items.
+
+Rate limit: 250 requests / minute.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GetAuditEvidence" method="get" path="/audits/{auditId}/evidence/{auditEvidenceId}" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.getAuditEvidence({
+    auditId: "<id>",
+    auditEvidenceId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsGetAuditEvidence } from "vanta-auditor-api-sdk/funcs/auditsGetAuditEvidence.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsGetAuditEvidence(vanta, {
+    auditId: "<id>",
+    auditEvidenceId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsGetAuditEvidence failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetAuditEvidenceRequest](../../models/operations/getauditevidencerequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.Evidence](../../models/components/evidence.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
 ## createCommentForEvidence
 
 Create a comment in Vanta for a piece of evidence.
@@ -2610,6 +2698,95 @@ run();
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `request`                                                                                                                                                                      | [operations.CreateCommentForInformationRequestRequest](../../models/operations/createcommentforinformationrequestrequest.md)                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.InformationRequestComment](../../models/components/informationrequestcomment.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## getCommentForInformationRequest
+
+Retrieves a single comment on an information request by its ID.
+
+Soft-deleted comments (where `deletionDate !== null`) are included in the
+response. Clients should check `deletionDate` to determine whether the
+comment has been deleted. This matches
+`GET /audits/{auditId}/information-requests/{requestId}/comments`, which
+supports `changedSinceDate` and returns soft-deleted comments for delta sync.
+
+Comments remain fetchable when the parent information request has been
+soft-deleted, so delayed webhook consumers can still resolve a comment ID
+after the request is deleted.
+
+Rate limit: 50 requests / minute.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GetCommentForInformationRequest" method="get" path="/audits/{auditId}/information-requests/{requestId}/comments/{commentId}" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.getCommentForInformationRequest({
+    auditId: "<id>",
+    requestId: "<id>",
+    commentId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsGetCommentForInformationRequest } from "vanta-auditor-api-sdk/funcs/auditsGetCommentForInformationRequest.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsGetCommentForInformationRequest(vanta, {
+    auditId: "<id>",
+    requestId: "<id>",
+    commentId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsGetCommentForInformationRequest failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetCommentForInformationRequestRequest](../../models/operations/getcommentforinformationrequestrequest.md)                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

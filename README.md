@@ -157,6 +157,7 @@ run();
 * [listEvidence](docs/sdks/audits/README.md#listevidence) - List audit evidence
 * [createCustomEvidenceRequest](docs/sdks/audits/README.md#createcustomevidencerequest) - Create a custom evidence request for an audit
 * [updateEvidence](docs/sdks/audits/README.md#updateevidence) - Update audit evidence
+* [getAuditEvidence](docs/sdks/audits/README.md#getauditevidence) - Get an audit evidence item by ID
 * [createCommentForEvidence](docs/sdks/audits/README.md#createcommentforevidence) - Create a comment for audit evidence
 * [getAuditEvidenceComment](docs/sdks/audits/README.md#getauditevidencecomment) - Get an audit evidence comment by ID
 * [getEvidenceUrls](docs/sdks/audits/README.md#getevidenceurls) - List audit evidence url
@@ -170,6 +171,7 @@ run();
 * [listInformationRequestActivity](docs/sdks/audits/README.md#listinformationrequestactivity) - List information request activity
 * [listCommentsForInformationRequest](docs/sdks/audits/README.md#listcommentsforinformationrequest) - List comments for an information request
 * [createCommentForInformationRequest](docs/sdks/audits/README.md#createcommentforinformationrequest) - Create a comment for an information request
+* [getCommentForInformationRequest](docs/sdks/audits/README.md#getcommentforinformationrequest) - Get an information request comment by ID
 * [updateCommentForInformationRequest](docs/sdks/audits/README.md#updatecommentforinformationrequest) - Update a comment for an information request
 * [deleteCommentForInformationRequest](docs/sdks/audits/README.md#deletecommentforinformationrequest) - Delete a comment for an information request
 * [listInformationRequestEvidence](docs/sdks/audits/README.md#listinformationrequestevidence) - List evidence for an information request
@@ -227,7 +229,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsDuplicate`](docs/sdks/audits/README.md#duplicate) - Duplicate an IRL audit
 - [`auditsFlagInformationRequestEvidence`](docs/sdks/audits/README.md#flaginformationrequestevidence) - Flag evidence for an information request
 - [`auditsGetAudit`](docs/sdks/audits/README.md#getaudit) - Get audit by ID
+- [`auditsGetAuditEvidence`](docs/sdks/audits/README.md#getauditevidence) - Get an audit evidence item by ID
 - [`auditsGetAuditEvidenceComment`](docs/sdks/audits/README.md#getauditevidencecomment) - Get an audit evidence comment by ID
+- [`auditsGetCommentForInformationRequest`](docs/sdks/audits/README.md#getcommentforinformationrequest) - Get an information request comment by ID
 - [`auditsGetEvidenceUrls`](docs/sdks/audits/README.md#getevidenceurls) - List audit evidence url
 - [`auditsGetFrameworkCodes`](docs/sdks/audits/README.md#getframeworkcodes) - Get framework codes for an audit
 - [`auditsGetInformationRequest`](docs/sdks/audits/README.md#getinformationrequest) - Get an information request by ID
