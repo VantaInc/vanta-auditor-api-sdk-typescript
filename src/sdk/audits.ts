@@ -15,7 +15,9 @@ import { auditsDeleteInformationRequest } from "../funcs/auditsDeleteInformation
 import { auditsDuplicate } from "../funcs/auditsDuplicate.js";
 import { auditsFlagInformationRequestEvidence } from "../funcs/auditsFlagInformationRequestEvidence.js";
 import { auditsGetAudit } from "../funcs/auditsGetAudit.js";
+import { auditsGetAuditEvidence } from "../funcs/auditsGetAuditEvidence.js";
 import { auditsGetAuditEvidenceComment } from "../funcs/auditsGetAuditEvidenceComment.js";
+import { auditsGetCommentForInformationRequest } from "../funcs/auditsGetCommentForInformationRequest.js";
 import { auditsGetEvidenceUrls } from "../funcs/auditsGetEvidenceUrls.js";
 import { auditsGetFrameworkCodes } from "../funcs/auditsGetFrameworkCodes.js";
 import { auditsGetInformationRequest } from "../funcs/auditsGetInformationRequest.js";
@@ -465,6 +467,34 @@ export class Audits extends ClientSDK {
   }
 
   /**
+   * Get an audit evidence item by ID
+   *
+   * @remarks
+   * Retrieves a single classic audit evidence item by its ID, scoped to its
+   * audit. The response matches the entry `GET /audits/{auditId}/evidence`
+   * returns for the same item, so an evidence ID surfaced by a webhook can be
+   * resolved directly instead of paging the audit's full evidence list.
+   *
+   * Soft-deleted evidence (where `deletionDate !== null`) is included in the
+   * response. Clients should check `deletionDate` to determine whether the item
+   * has been deleted. This matches `GET /audits/{auditId}/evidence`, which
+   * supports `changedSinceDate` and returns soft-deleted evidence for delta
+   * sync. As on the list endpoint, `description` is null for deleted items.
+   *
+   * Rate limit: 250 requests / minute.
+   */
+  async getAuditEvidence(
+    request: operations.GetAuditEvidenceRequest,
+    options?: RequestOptions,
+  ): Promise<components.Evidence> {
+    return unwrapAsync(auditsGetAuditEvidence(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create a comment for audit evidence
    *
    * @remarks
@@ -829,6 +859,35 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.InformationRequestComment> {
     return unwrapAsync(auditsCreateCommentForInformationRequest(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get an information request comment by ID
+   *
+   * @remarks
+   * Retrieves a single comment on an information request by its ID.
+   *
+   * Soft-deleted comments (where `deletionDate !== null`) are included in the
+   * response. Clients should check `deletionDate` to determine whether the
+   * comment has been deleted. This matches
+   * `GET /audits/{auditId}/information-requests/{requestId}/comments`, which
+   * supports `changedSinceDate` and returns soft-deleted comments for delta sync.
+   *
+   * Comments remain fetchable when the parent information request has been
+   * soft-deleted, so delayed webhook consumers can still resolve a comment ID
+   * after the request is deleted.
+   *
+   * Rate limit: 50 requests / minute.
+   */
+  async getCommentForInformationRequest(
+    request: operations.GetCommentForInformationRequestRequest,
+    options?: RequestOptions,
+  ): Promise<components.InformationRequestComment> {
+    return unwrapAsync(auditsGetCommentForInformationRequest(
       this,
       request,
       options,

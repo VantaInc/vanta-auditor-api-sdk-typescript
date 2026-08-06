@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 880bdbebc16820295eeb38067c6f2dcd
+  docChecksum: 1098e277129b4fc5291f80651d9ac218
   docVersion: 1.0.0
-  speakeasyVersion: 1.791.3
-  generationVersion: 2.926.2
-  releaseVersion: 0.9.17
-  configChecksum: 2b404dccf15190d7182f0d08c36f9727
+  speakeasyVersion: 1.791.4
+  generationVersion: 2.926.8
+  releaseVersion: 0.9.18
+  configChecksum: 0422c244e940139b9222ffef798d4b70
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: b727571e-9bcb-4ac7-9a4c-0cd8278599af
-  pristine_commit_hash: 9ac0c19f831c17982d295a041406fc647e7c6eca
-  pristine_tree_hash: f6a2b4c847efe4b6f0d70cccec2ee59ebc13e714
+  generation_id: c1df3351-2011-4ba0-bcfc-a28ecc948614
+  pristine_commit_hash: 0ac3f900125a60a69d71b4513075a3332f0e060c
+  pristine_tree_hash: 854a6d0c7683eabd40dc34d73b338a0c9e528297
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1192,10 +1192,18 @@ trackedFiles:
     id: 2ce1043597dd
     last_write_checksum: sha1:3e69a6ddd52924dca0d7e9c4db16c4ba9f286d50
     pristine_git_object: a1e8d009965ee8a04150af620c02fba1d440a956
+  docs/models/operations/getauditevidencerequest.md:
+    id: c614c4867e0d
+    last_write_checksum: sha1:a6a2c68b94405f8fb0298c5a20d2c453c7bd55ef
+    pristine_git_object: 4fbd2b8d2bf805f89b5b9b51535fdb2fbf718ed5
   docs/models/operations/getauditrequest.md:
     id: 35a38f6a9549
     last_write_checksum: sha1:4781286a3295c6917a76822c5cb3394cff4b4806
     pristine_git_object: c1da420dfe80b725d58e2813e66545f8e6e12ff6
+  docs/models/operations/getcommentforinformationrequestrequest.md:
+    id: 90dad4c13f07
+    last_write_checksum: sha1:766089b3b73182acf17bdfdaf227c15f8b973da6
+    pristine_git_object: bc5d6e8b1a735d99b7bb0d6a621767cfe38d1675
   docs/models/operations/getframeworkcodesrequest.md:
     id: 07a66953e63a
     last_write_checksum: sha1:8b232de420bf7051017ca48adc3ad05d5ffa6a8c
@@ -1358,8 +1366,8 @@ trackedFiles:
     pristine_git_object: 83a3020aad9d8f36aba3095a73b3652e57979cb7
   docs/sdks/audits/README.md:
     id: b976aa226e19
-    last_write_checksum: sha1:f175f6c05536710487f5e38b54db9ad6a3b010f3
-    pristine_git_object: d8ab1d90b5f7d8ba6a4af104d587b12b0e1bedb2
+    last_write_checksum: sha1:01d8e4354313f1a8adae2ca1d1351fe01e54e1a7
+    pristine_git_object: 2aea168bd8d5eca94472278e7c529e09f45513f8
   eslint.config.mjs:
     id: 461c8d07f6da
     last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
@@ -1382,12 +1390,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:0e649a29f2fc7c937a609865b56c1c77c59dbd14
-    pristine_git_object: c22b2b66df24219b173e2bc8b9bf5b96f604fbc7
+    last_write_checksum: sha1:7b2e1d3bd24d1ad0b545ffde41c4a8f63ce23b5e
+    pristine_git_object: 14ee769ff3e809f64f5b0f8af425faa16fbbe7a7
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:20049a30ef1cfa70ed36126feebcc0162092ec4f
-    pristine_git_object: e3cf85e98cb503f2280e4f9c16a706c7da3235ed
+    last_write_checksum: sha1:24a667ab7a0479380331d07d0ace5d49d7408f26
+    pristine_git_object: e90e2587cb5c34338deadec2469f46f55733f883
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1448,10 +1456,18 @@ trackedFiles:
     id: 1c0477a74a46
     last_write_checksum: sha1:6aa70b67a4818bed6dbb036e4335886f388f819b
     pristine_git_object: 63285a14a6491087f3020fcd113925351192fe64
+  src/funcs/auditsGetAuditEvidence.ts:
+    id: 3d1f4b34a333
+    last_write_checksum: sha1:d038357592b6de80bb09219fefd5b0919ed28e53
+    pristine_git_object: 369e6470a9223349cd67ac4e76a040b06234c250
   src/funcs/auditsGetAuditEvidenceComment.ts:
     id: a29a1965ee23
     last_write_checksum: sha1:e82b22b6bd8babce469bfa2692ee5604a670ab54
     pristine_git_object: 7c2805204a556736a30e5bb2b0679e802a6999c5
+  src/funcs/auditsGetCommentForInformationRequest.ts:
+    id: 3a58adef9a7e
+    last_write_checksum: sha1:bf639b2aba45291f1de7c89939ffb5e5febed34b
+    pristine_git_object: d46c73e02ca1703eff9e601057c5fbbb4107dfe7
   src/funcs/auditsGetEvidenceUrls.ts:
     id: ee9954db2993
     last_write_checksum: sha1:3f6d29906e3a198d590eeb6fbc2588404e69783e
@@ -1630,8 +1646,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:1cb8cfada28da655dcf60f141abebe3d1a0b30ab
-    pristine_git_object: 278913c5649c512d47bd95e73ee6c12d58ad43ff
+    last_write_checksum: sha1:ef800a7bbb42e26c3bcc8bd33e1558fef8c0668c
+    pristine_git_object: 5265b8427416ac4c6128d99588a8f63c2852a29a
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:50d9b187dcfc3cca8d3bbd9fe074f865d715d2b0
@@ -2460,10 +2476,18 @@ trackedFiles:
     id: fc2dffc1e364
     last_write_checksum: sha1:a14b321f75446d1f780298e933ee13ca0bc44f60
     pristine_git_object: 597e3413e7ca5b6e468e9ff1896467ef6ec135b6
+  src/models/operations/getauditevidence.ts:
+    id: d503a97fb429
+    last_write_checksum: sha1:c4c43ad39f7eb49bf6a07dee31bf396075119594
+    pristine_git_object: b803cd849444b51e5ed6bcab7eeb46db6c2f8660
   src/models/operations/getauditevidencecomment.ts:
     id: dbb3957c9355
     last_write_checksum: sha1:d51bc10959dc6185f781e45e64650dffbe2fe040
     pristine_git_object: d4ae1b18df6839639c1a5feed0c9c7d4b107a7fc
+  src/models/operations/getcommentforinformationrequest.ts:
+    id: db7ce6793450
+    last_write_checksum: sha1:4da2c6e6a2e4b12c075e910dbf72d1e6ae9344d1
+    pristine_git_object: 32775e96eabfdb218af256b43a1b65672ae370aa
   src/models/operations/getframeworkcodes.ts:
     id: 2a6242b1abe5
     last_write_checksum: sha1:8fa51094e255720e4de04aa495219b6cf31af782
@@ -2490,8 +2514,8 @@ trackedFiles:
     pristine_git_object: dc9bc4a399a53485a8e19cd0a274fc396d6cb50b
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:38a61f8637fc27655d88bede0c3347115d2dc0b7
-    pristine_git_object: 37ce9a26603955235efad6872e4b712f9daaa3ff
+    last_write_checksum: sha1:6826d6d7db245f11f67fdecee75a04bf8907fd25
+    pristine_git_object: a941c61711a0b84039b8d59a30438a22ace29393
   src/models/operations/listaccountaccessservices.ts:
     id: 1c4dce2678e4
     last_write_checksum: sha1:07ce113b2525dd59c8b9c6d88861f44531953999
@@ -2630,8 +2654,8 @@ trackedFiles:
     pristine_git_object: 5f4ee0ebc3a0501c1f4a385ad6f95ee4d2b167d1
   src/sdk/audits.ts:
     id: ab43f5ff5412
-    last_write_checksum: sha1:926ebab3b4cd4f41c42b0c75a424ba98674409e3
-    pristine_git_object: 0bcde6b7acb874f8bde47f041759504811dbed11
+    last_write_checksum: sha1:1a48e52c99611d3a273c497c4c00ed38e04a1bf5
+    pristine_git_object: 44c7dcce286d0eb2b663781bf660cfa5edb24ae1
   src/sdk/index.ts:
     id: a857902a703f
     last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
@@ -2713,7 +2737,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "externalId": "cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=", "status": "Ready for audit", "name": "Access Control Policy", "deletionDate": "2024-03-07T21:25:56.000Z", "creationDate": "2024-03-07T21:25:56.000Z", "statusUpdatedDate": "2024-03-07T21:25:56.000Z", "testStatus": "The test was passing during this period", "evidenceType": "Policy", "evidenceId": "access-control-policy", "relatedControls": [{"name": "CRY-104", "sectionNames": ["Article 13"]}], "description": "example description of test"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
+          application/json: {"results": {"data": [{"id": "65fc81a3359c8508c9af880f", "externalId": "cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=", "status": "Ready for audit", "name": "Access Control Policy", "deletionDate": null, "creationDate": "2024-03-07T21:25:56.000Z", "statusUpdatedDate": "2024-03-07T21:25:56.000Z", "testStatus": null, "evidenceType": "Policy", "evidenceId": "access-control-policy", "relatedControls": [{"name": "CRY-104", "sectionNames": ["Article 13"]}], "description": "Access control policy accepted by all personnel"}], "pageInfo": {"endCursor": "YXJyYXljb25uZWN0aW9uOjE=", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "YXJyYXljb25uZWN0aW9uOjA="}}}
   ListAuditComments:
     Example 1:
       parameters:
@@ -2755,7 +2779,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "65fc81a3359c8508c9af880f", "externalId": "cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=", "status": "Ready for audit", "name": "Access Control Policy", "deletionDate": "2024-03-07T21:25:56.000Z", "creationDate": "2024-03-07T21:25:56.000Z", "statusUpdatedDate": "2024-03-07T21:25:56.000Z", "testStatus": "The test was passing during this period", "evidenceType": "Policy", "evidenceId": "access-control-policy", "relatedControls": [{"name": "CRY-104", "sectionNames": ["Article 13"]}], "description": "example description of test"}
+          application/json: {"id": "65fc81a3359c8508c9af880f", "externalId": "cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=", "status": "Ready for audit", "name": "Access Control Policy", "deletionDate": null, "creationDate": "2024-03-07T21:25:56.000Z", "statusUpdatedDate": "2024-03-07T21:25:56.000Z", "testStatus": null, "evidenceType": "Policy", "evidenceId": "access-control-policy", "relatedControls": [{"name": "CRY-104", "sectionNames": ["Article 13"]}], "description": "Access control policy accepted by all personnel"}
   CreateCustomEvidenceRequest:
     Example 1:
       parameters:
@@ -3220,6 +3244,25 @@ examples:
       responses:
         "200":
           application/json: {"id": "65fc81a3359c8508c9af880f", "auditEvidenceId": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "deletionDate": "2024-03-07T21:25:56.000Z", "email": "vlad@vantaroo.com", "authorName": "Vlad Vantaroo"}
+  GetAuditEvidence:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          auditEvidenceId: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "externalId": "cG9saWN5OmFjY2Vzcy1jb250cm9sLXBvbGljeQo=", "status": "Ready for audit", "name": "Access Control Policy", "deletionDate": null, "creationDate": "2024-03-07T21:25:56.000Z", "statusUpdatedDate": "2024-03-07T21:25:56.000Z", "testStatus": null, "evidenceType": "Policy", "evidenceId": "access-control-policy", "relatedControls": [{"name": "CRY-104", "sectionNames": ["Article 13"]}], "description": "Access control policy accepted by all personnel"}
+  GetCommentForInformationRequest:
+    Example 1:
+      parameters:
+        path:
+          auditId: "<id>"
+          requestId: "<id>"
+          commentId: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "65fc81a3359c8508c9af880f", "text": "Some comment", "creationDate": "2024-03-07T21:25:56.000Z", "modificationDate": "2024-03-07T21:25:56.000Z", "deletionDate": "2024-03-07T21:25:56.000Z", "email": "vlad@vantaroo.com", "authorName": "Vlad Vantaroo"}
 examplesVersion: 1.0.2
 generatedTests: {}
 generatedFiles:
