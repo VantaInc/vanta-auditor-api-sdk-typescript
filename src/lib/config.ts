@@ -66,7 +66,7 @@ export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "1.0.0",
   sdkVersion: "0.9.18",
-  genVersion: "2.926.8",
+  genVersion: "2.882.0",
   userAgent:
-    "speakeasy-sdk/typescript 0.9.18 2.926.8 1.0.0 vanta-auditor-api-sdk",
+    "speakeasy-sdk/typescript 0.9.18 2.882.0 1.0.0 vanta-auditor-api-sdk",
 } as const;

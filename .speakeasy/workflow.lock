@@ -1,4 +1,4 @@
-speakeasyVersion: 1.791.4
+speakeasyVersion: 1.762.0
 sources:
     Conduct an audit:
         sourceNamespace: conduct-an-audit
@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:adad4ba553cd958ad79c549fcfba0b149e90fd4d77dbeba5126fadc805c01442
         sourceBlobDigest: sha256:4c532f2cc4dcd8008eb37f902e216323f7920e3759b7218f7b278e777fa751d2
         codeSamplesNamespace: conduct-an-audit-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:17b72f92ed6fcfdfe9e3e1b72f1e3a20d77bc87e84a9d5bc83ea748de50f0433
+        codeSamplesRevisionDigest: sha256:d844a6bd8246832b9920f53ad6a1ee17a1220790291dd8fa0af0c873dc6c32fa
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

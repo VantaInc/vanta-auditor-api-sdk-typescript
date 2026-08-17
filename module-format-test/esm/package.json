@@ -1,0 +1,12 @@
+{
+  "name": "vanta-auditor-api-sdk-module-format-esm",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node test.mjs"
+  },
+  "dependencies": {
+    "vanta-auditor-api-sdk": "file:../.."
+  }
+}

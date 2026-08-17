@@ -68,6 +68,9 @@ bun add vanta-auditor-api-sdk
 ```bash
 yarn add vanta-auditor-api-sdk
 ```
+
+> [!NOTE]
+> This package is published with CommonJS and ES Modules (ESM) support.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->

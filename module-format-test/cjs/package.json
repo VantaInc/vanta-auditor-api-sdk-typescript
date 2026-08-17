@@ -1,0 +1,11 @@
+{
+  "name": "vanta-auditor-api-sdk-module-format-cjs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node test.cjs"
+  },
+  "dependencies": {
+    "vanta-auditor-api-sdk": "file:../.."
+  }
+}
