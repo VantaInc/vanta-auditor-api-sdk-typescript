@@ -32,7 +32,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.9.18
+  version: 0.9.19
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -78,7 +78,7 @@ typescript:
   maxMethodParams: 0
   methodArguments: require-security-and-request
   modelPropertyCasing: camel
-  moduleFormat: commonjs
+  moduleFormat: dual
   multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: vanta-auditor-api-sdk

@@ -5,7 +5,9 @@
   "type": "module",
   "description": "Live smoke test against a real Vanta API tenant. See ../SMOKE_TEST.md.",
   "scripts": {
-    "test": "vitest run --reporter=default --reporter=junit --outputFile.junit=test-report.xml"
+    "test:module-format": "node module-format-esm.mjs && node module-format-cjs.cjs",
+    "test:live": "vitest run --reporter=default --reporter=junit --outputFile.junit=test-report.xml",
+    "test": "npm run test:module-format && npm run test:live"
   },
   "dependencies": {
     "vanta-auditor-api-sdk": "file:.."
