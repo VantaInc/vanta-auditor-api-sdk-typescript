@@ -78,7 +78,7 @@ typescript:
   maxMethodParams: 0
   methodArguments: require-security-and-request
   modelPropertyCasing: camel
-  moduleFormat: commonjs
+  moduleFormat: dual
   multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: vanta-auditor-api-sdk
