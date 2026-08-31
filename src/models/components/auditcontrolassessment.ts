@@ -22,6 +22,10 @@ import {
  */
 export type AuditControlAssessment = {
   /**
+   * The audit program segment this assessment belongs to.
+   */
+  segmentId: string;
+  /**
    * An auditor's assessment of a control within an audit. This is the full flat
    *
    * @remarks
@@ -51,6 +55,7 @@ export const AuditControlAssessment$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  segmentId: z.string(),
   assessmentState: AuditControlAssessmentState$inboundSchema,
   justification: z.nullable(z.string()),
 });

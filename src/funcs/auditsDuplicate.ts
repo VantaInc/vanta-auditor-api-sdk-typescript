@@ -48,6 +48,9 @@ import { Result } from "../types/fp.js";
  *   evidence added manually.
  * - Evidence capture dates and due dates can be modified after duplication.
  *
+ * Audits with generated information requests can be duplicated only after their information
+ * requests have been created successfully.
+ *
  * Rate limit: 10 requests / minute.
  */
 export function auditsDuplicate(

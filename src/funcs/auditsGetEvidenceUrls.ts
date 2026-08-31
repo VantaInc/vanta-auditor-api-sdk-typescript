@@ -35,6 +35,9 @@ import { Result } from "../types/fp.js";
  *
  * Evidence must be in one of the following states to retrieve URLs: "Ready for audit", "Accepted", "Flagged", or "NA".
  *
+ * Returns 422 when the audit does not have exactly one program segment
+ * (multi-framework audits are not supported on this endpoint).
+ *
  * Rate limit: 600 requests / minute.
  */
 export function auditsGetEvidenceUrls(

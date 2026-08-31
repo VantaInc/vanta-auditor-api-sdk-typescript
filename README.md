@@ -178,6 +178,7 @@ run();
 * [updateCommentForInformationRequest](docs/sdks/audits/README.md#updatecommentforinformationrequest) - Update a comment for an information request
 * [deleteCommentForInformationRequest](docs/sdks/audits/README.md#deletecommentforinformationrequest) - Delete a comment for an information request
 * [listInformationRequestEvidence](docs/sdks/audits/README.md#listinformationrequestevidence) - List evidence for an information request
+* [getInformationRequestEvidence](docs/sdks/audits/README.md#getinformationrequestevidence) - Get information request evidence by ID
 * [getInformationRequestTestSnapshotEvidenceDetail](docs/sdks/audits/README.md#getinformationrequesttestsnapshotevidencedetail) - Get test snapshot detail for an evidence row
 * [flagInformationRequestEvidence](docs/sdks/audits/README.md#flaginformationrequestevidence) - Flag evidence for an information request
 * [listIntegrations](docs/sdks/audits/README.md#listintegrations) - List integrations for an audit
@@ -238,6 +239,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsGetEvidenceUrls`](docs/sdks/audits/README.md#getevidenceurls) - List audit evidence url
 - [`auditsGetFrameworkCodes`](docs/sdks/audits/README.md#getframeworkcodes) - Get framework codes for an audit
 - [`auditsGetInformationRequest`](docs/sdks/audits/README.md#getinformationrequest) - Get an information request by ID
+- [`auditsGetInformationRequestEvidence`](docs/sdks/audits/README.md#getinformationrequestevidence) - Get information request evidence by ID
 - [`auditsGetInformationRequestTestSnapshotEvidenceDetail`](docs/sdks/audits/README.md#getinformationrequesttestsnapshotevidencedetail) - Get test snapshot detail for an evidence row
 - [`auditsGetOrganizationInformation`](docs/sdks/audits/README.md#getorganizationinformation) - Get organization information for an audit
 - [`auditsGetOrganizationNotifications`](docs/sdks/audits/README.md#getorganizationnotifications) - Get organization notification settings for an audit

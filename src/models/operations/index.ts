@@ -19,6 +19,7 @@ export * from "./getauditevidencecomment.js";
 export * from "./getcommentforinformationrequest.js";
 export * from "./getframeworkcodes.js";
 export * from "./getinformationrequest.js";
+export * from "./getinformationrequestevidence.js";
 export * from "./getinformationrequesttestsnapshotevidencedetail.js";
 export * from "./getorganizationinformation.js";
 export * from "./getorganizationnotifications.js";

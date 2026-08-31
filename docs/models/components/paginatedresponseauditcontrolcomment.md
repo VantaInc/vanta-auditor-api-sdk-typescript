@@ -20,8 +20,8 @@ let value: PaginatedResponseAuditControlComment = {
     ],
     pageInfo: {
       endCursor: "<value>",
-      hasNextPage: false,
-      hasPreviousPage: true,
+      hasNextPage: true,
+      hasPreviousPage: false,
       startCursor: "<value>",
     },
   },

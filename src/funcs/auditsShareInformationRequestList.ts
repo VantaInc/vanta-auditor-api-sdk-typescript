@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  * making it visible in their portal. This action allows the customer to see all information
  * requests that have been created for their audit. Only IRL audits are supported.
  *
- * Rate limit: 10 requests / minute.
+ * Rate limit: 50 requests / minute.
  */
 export function auditsShareInformationRequestList(
   client: VantaCore,

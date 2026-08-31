@@ -40,8 +40,9 @@ import { Result } from "../types/fp.js";
  * which must belong to the audit firm making the request.
  *
  * Returns 404 when the control is not part of the audit or the auditor email
- * does not resolve to a firm user. Applies to both Full and Controlled Audit
- * View audits.
+ * does not resolve to a firm user. Returns 422 when the audit does not have
+ * exactly one program segment (multi-framework audits are not supported on
+ * this endpoint). Applies to both Full and Controlled Audit View audits.
  *
  * Rate limit: 10 requests / minute.
  */

@@ -9,8 +9,8 @@ let value: PaginatedResponseInformationRequestActivityLogResults = {
   data: [],
   pageInfo: {
     endCursor: "<value>",
-    hasNextPage: false,
-    hasPreviousPage: true,
+    hasNextPage: true,
+    hasPreviousPage: false,
     startCursor: "<value>",
   },
 };

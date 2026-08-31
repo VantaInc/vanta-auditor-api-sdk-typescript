@@ -34,7 +34,7 @@ import { Result } from "../types/fp.js";
  * of the comment can update it. The author is identified by their email address,
  * which must match the email of the user who created the comment.
  *
- * Rate limit: 10 requests / minute.
+ * Rate limit: 25 requests / minute.
  */
 export function auditsUpdateCommentForInformationRequest(
   client: VantaCore,

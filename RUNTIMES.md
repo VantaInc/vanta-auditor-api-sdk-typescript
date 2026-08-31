@@ -21,25 +21,6 @@ Runtime environments that are explicitly supported are:
 
 [deno-file-streaming]: https://github.com/denoland/deno/issues/11018
 
-## Module format
-
-The npm package ships as **dual ESM + CommonJS**. Supported entry points include
-the package root and documented subpaths such as `models/components`,
-`models/errors`, `models/operations`, and `lib/http`. Undocumented deep file
-imports are not part of the public API.
-
-```typescript
-// ESM
-import { Vanta } from "vanta-auditor-api-sdk";
-import { HTTPClient } from "vanta-auditor-api-sdk/lib/http";
-```
-
-```javascript
-// CommonJS
-const { Vanta } = require("vanta-auditor-api-sdk");
-const { HTTPClient } = require("vanta-auditor-api-sdk/lib/http");
-```
-
 ## Recommended TypeScript compiler options
 
 The following `tsconfig.json` options are recommended for projects using this

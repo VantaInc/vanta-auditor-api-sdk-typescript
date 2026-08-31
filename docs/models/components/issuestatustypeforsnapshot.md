@@ -11,5 +11,5 @@ let value: IssueStatusTypeForSnapshot = "IN_PROGRESS";
 ## Values
 
 ```typescript
-"IN_PROGRESS" | "NOT_STARTED" | "CLOSED"
+"IN_PROGRESS" | "NOT_STARTED" | "PENDING_REVIEW" | "CLOSED"
 ```

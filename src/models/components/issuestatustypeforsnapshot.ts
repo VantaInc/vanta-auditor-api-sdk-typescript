@@ -8,6 +8,7 @@ import { ClosedEnum } from "../../types/enums.js";
 export const IssueStatusTypeForSnapshot = {
   InProgress: "IN_PROGRESS",
   NotStarted: "NOT_STARTED",
+  PendingReview: "PENDING_REVIEW",
   Closed: "CLOSED",
 } as const;
 export type IssueStatusTypeForSnapshot = ClosedEnum<
