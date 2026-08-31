@@ -16,6 +16,10 @@ let value: PaginatedIssueSnapshotItemsResponseResults = {
       issueId: "5f2c939a52855e725c8d5825",
       snapshotId: "5f2c939a52855e725c8d5823",
       dueDate: new Date("2023-12-31T23:59:59.000Z"),
+      approvalProgress: {
+        approvedCount: 1,
+        totalApprovers: 2,
+      },
       lastModifiedAt: new Date("2024-06-15T10:30:00.000Z"),
       createdAt: new Date("2024-06-01T09:00:00.000Z"),
       detectedAt: new Date("2024-05-30T14:45:00.000Z"),
@@ -23,8 +27,8 @@ let value: PaginatedIssueSnapshotItemsResponseResults = {
   ],
   pageInfo: {
     endCursor: "<value>",
-    hasNextPage: false,
-    hasPreviousPage: true,
+    hasNextPage: true,
+    hasPreviousPage: false,
     startCursor: "<value>",
   },
 };

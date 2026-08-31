@@ -7,6 +7,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AuditFocus, AuditFocus$inboundSchema } from "./auditfocus.js";
+import { AuditSegment, AuditSegment$inboundSchema } from "./auditsegment.js";
 
 /**
  * Metadata about the auditor request list. This field is only present for IRL (Information
@@ -52,7 +53,12 @@ export type Audit = {
    */
   earlyAccessStartsAt: Date | null;
   /**
-   * The name of the framework for the audit
+   * Legacy singular framework display name from the audit type. Incomplete for
+   *
+   * @remarks
+   * a multi-framework audit — use `segments` for framework identity.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   framework: string;
   /**
@@ -95,6 +101,16 @@ export type Audit = {
    * of this field to differentiate between IRL and non-IRL audits.
    */
   auditorRequestListMetadata?: AuditorRequestListMetadata | undefined;
+  /**
+   * The audit's scope as a list of segments. Always present. A live
+   *
+   * @remarks
+   * single-framework audit has one entry; a multi-framework audit has one
+   * entry per in-scope framework (and business unit or system, when applicable).
+   * Soft-deleted audits return an empty list. Prefer this over the deprecated
+   * top-level `framework` field.
+   */
+  segments: Array<AuditSegment>;
 };
 
 /** @internal */
@@ -154,6 +170,7 @@ export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
     auditorRequestListMetadata: z.lazy(() =>
       AuditorRequestListMetadata$inboundSchema
     ).optional(),
+    segments: z.array(AuditSegment$inboundSchema),
   });
 
 export function auditFromJSON(

@@ -21,8 +21,8 @@ let value: PaginatedResponseAccountAccessResults = {
   ],
   pageInfo: {
     endCursor: "<value>",
-    hasNextPage: false,
-    hasPreviousPage: true,
+    hasNextPage: true,
+    hasPreviousPage: false,
     startCursor: "<value>",
   },
 };

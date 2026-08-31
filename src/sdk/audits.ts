@@ -21,6 +21,7 @@ import { auditsGetCommentForInformationRequest } from "../funcs/auditsGetComment
 import { auditsGetEvidenceUrls } from "../funcs/auditsGetEvidenceUrls.js";
 import { auditsGetFrameworkCodes } from "../funcs/auditsGetFrameworkCodes.js";
 import { auditsGetInformationRequest } from "../funcs/auditsGetInformationRequest.js";
+import { auditsGetInformationRequestEvidence } from "../funcs/auditsGetInformationRequestEvidence.js";
 import { auditsGetInformationRequestTestSnapshotEvidenceDetail } from "../funcs/auditsGetInformationRequestTestSnapshotEvidenceDetail.js";
 import { auditsGetOrganizationInformation } from "../funcs/auditsGetOrganizationInformation.js";
 import { auditsGetOrganizationNotifications } from "../funcs/auditsGetOrganizationNotifications.js";
@@ -73,6 +74,12 @@ export class Audits extends ClientSDK {
    * `auditorRequestListMetadata` field. This field is only present for IRL-based audits
    * and will be `undefined` for standard audits.
    *
+   * Each audit includes `segments`, the audit's scope. A live single-framework
+   * audit has one entry; a live multi-framework audit has one entry per
+   * in-scope framework (and business unit or system, when applicable).
+   * Soft-deleted audits return an empty list. The top-level `framework` field
+   * is deprecated; use `segments` for framework identity.
+   *
    * Rate limit: 250 requests / minute.
    */
   async list(
@@ -109,6 +116,9 @@ export class Audits extends ClientSDK {
    *   evidence added manually.
    * - Evidence capture dates and due dates can be modified after duplication.
    *
+   * Audits with generated information requests can be duplicated only after their information
+   * requests have been created successfully.
+   *
    * Rate limit: 10 requests / minute.
    */
   async duplicate(
@@ -131,6 +141,12 @@ export class Audits extends ClientSDK {
    * To identify IRL (Information Request List) audits, check for the presence of the
    * `auditorRequestListMetadata` field. This field is only present for IRL-based audits
    * and will be `undefined` for standard audits.
+   *
+   * The response includes `segments`, the audit's scope. A live single-framework
+   * audit has one entry; a live multi-framework audit has one entry per
+   * in-scope framework (and business unit or system, when applicable).
+   * Soft-deleted audits return an empty list. The top-level `framework` field
+   * is deprecated; use `segments` for framework identity.
    *
    * Rate limit: 250 requests / minute.
    */
@@ -166,6 +182,9 @@ export class Audits extends ClientSDK {
    *
    * Results are sorted by closed date (newest first). This sort order is
    * fixed and cannot be customized via query parameters.
+   *
+   * Returns 422 when the audit does not have exactly one program segment
+   * (multi-framework audits are not supported on this endpoint).
    *
    * Rate limit: 10 requests / minute.
    */
@@ -224,6 +243,9 @@ export class Audits extends ClientSDK {
    * @remarks
    * Create a custom control for an audit.
    *
+   * This endpoint supports classic audits only. Audits that use information request
+   * lists (IRL) are not supported and return a 422 error.
+   *
    * Rate limit: 10 requests / minute.
    */
   async createCustomControl(
@@ -251,8 +273,9 @@ export class Audits extends ClientSDK {
    * which must belong to the audit firm making the request.
    *
    * Returns 404 when the control is not part of the audit or the auditor email
-   * does not resolve to a firm user. Applies to both Full and Controlled Audit
-   * View audits.
+   * does not resolve to a firm user. Returns 422 when the audit does not have
+   * exactly one program segment (multi-framework audits are not supported on
+   * this endpoint). Applies to both Full and Controlled Audit View audits.
    *
    * Rate limit: 10 requests / minute.
    */
@@ -453,7 +476,7 @@ export class Audits extends ClientSDK {
    * @remarks
    * Update audit evidence.
    *
-   * Rate limit: 10 requests / minute.
+   * Rate limit: 50 requests / minute.
    */
   async updateEvidence(
     request: operations.UpdateAuditEvidenceRequest,
@@ -500,7 +523,7 @@ export class Audits extends ClientSDK {
    * @remarks
    * Create a comment in Vanta for a piece of evidence.
    *
-   * Rate limit: 10 requests / minute.
+   * Rate limit: 25 requests / minute.
    */
   async createCommentForEvidence(
     request: operations.CreateCommentForAuditEvidenceRequest,
@@ -551,6 +574,9 @@ export class Audits extends ClientSDK {
    *
    * Evidence must be in one of the following states to retrieve URLs: "Ready for audit", "Accepted", "Flagged", or "NA".
    *
+   * Returns 422 when the audit does not have exactly one program segment
+   * (multi-framework audits are not supported on this endpoint).
+   *
    * Rate limit: 600 requests / minute.
    */
   async getEvidenceUrls(
@@ -575,7 +601,7 @@ export class Audits extends ClientSDK {
    * - Validate framework codes against the audit's framework
    * - Get context about what framework codes are available for the audit type
    *
-   * Rate limit: 10 requests / minute.
+   * Rate limit: 50 requests / minute.
    */
   async getFrameworkCodes(
     request: operations.GetFrameworkCodesRequest,
@@ -723,7 +749,7 @@ export class Audits extends ClientSDK {
    * - The request will not appear in normal list responses (without `changedSinceDate`)
    * - The request's `deletionDate` field will be populated
    *
-   * Rate limit: 10 requests / minute.
+   * Rate limit: 50 requests / minute.
    */
   async deleteInformationRequest(
     request: operations.DeleteInformationRequestRequest,
@@ -902,7 +928,7 @@ export class Audits extends ClientSDK {
    * of the comment can update it. The author is identified by their email address,
    * which must match the email of the user who created the comment.
    *
-   * Rate limit: 10 requests / minute.
+   * Rate limit: 25 requests / minute.
    */
   async updateCommentForInformationRequest(
     request: operations.UpdateCommentForInformationRequestRequest,
@@ -923,7 +949,7 @@ export class Audits extends ClientSDK {
    * of the comment can delete it. The author is identified by their email address,
    * which must match the email of the user who created the comment.
    *
-   * Rate limit: 10 requests / minute.
+   * Rate limit: 25 requests / minute.
    */
   async deleteCommentForInformationRequest(
     request: operations.DeleteCommentForInformationRequestRequest,
@@ -970,6 +996,38 @@ export class Audits extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.PaginatedResponseInformationRequestEvidence> {
     return unwrapAsync(auditsListInformationRequestEvidence(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get information request evidence by ID
+   *
+   * @remarks
+   * Retrieves a single evidence item attached to an information request by its ID.
+   *
+   * This endpoint always includes soft-deleted evidence (where `deletionDate !== null`),
+   * so an evidence ID surfaced by a `changedSinceDate` delta sync stays fetchable after
+   * the evidence is deleted. Clients should check the `deletionDate` field to identify
+   * and handle deleted records appropriately in their systems.
+   *
+   * Evidence is only resolvable while its information request exists. Once the
+   * request itself is deleted, this endpoint reports the request as not found —
+   * matching `GET /audits/{auditId}/information-requests/{requestId}/evidence`.
+   * Clients reconciling a deleted request should treat its evidence as gone with it.
+   *
+   * Evidence that the customer has not shared with the auditor is reported as not
+   * found, rather than distinguishing it from an ID that does not exist.
+   *
+   * Rate limit: 250 requests / minute.
+   */
+  async getInformationRequestEvidence(
+    request: operations.GetInformationRequestEvidenceRequest,
+    options?: RequestOptions,
+  ): Promise<components.InformationRequestEvidence> {
+    return unwrapAsync(auditsGetInformationRequestEvidence(
       this,
       request,
       options,
@@ -1203,6 +1261,9 @@ export class Audits extends ClientSDK {
    * controlled audit view. It remains available for existing classic audits but will be removed once
    * classic audits are fully phased out, so do not build new integrations on it.
    *
+   * Returns 422 when the audit does not have exactly one program segment
+   * (multi-framework audits are not supported on this endpoint).
+   *
    * Rate limit: 10 requests / minute.
    *
    * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -1316,6 +1377,9 @@ export class Audits extends ClientSDK {
    * Results are returned in connection order. Sort order is not guaranteed
    * and cannot be customized via query parameters.
    *
+   * Returns 422 when the audit does not have exactly one program segment
+   * (multi-framework audits are not supported on this endpoint).
+   *
    * Rate limit: 10 requests / minute.
    */
   async listAccountAccessServices(
@@ -1374,6 +1438,9 @@ export class Audits extends ClientSDK {
    * - Third-party application services (e.g. GitHub, Jira): sorted by account name, ascending
    *
    * Sort order cannot be customized via query parameters.
+   *
+   * Returns 422 when the audit does not have exactly one program segment
+   * (multi-framework audits are not supported on this endpoint).
    *
    * Rate limit: 10 requests / minute.
    */
@@ -1544,7 +1611,7 @@ export class Audits extends ClientSDK {
    * making it visible in their portal. This action allows the customer to see all information
    * requests that have been created for their audit. Only IRL audits are supported.
    *
-   * Rate limit: 10 requests / minute.
+   * Rate limit: 50 requests / minute.
    */
   async shareInformationRequestList(
     request: operations.ShareInformationRequestListRequest,
@@ -1616,6 +1683,9 @@ export class Audits extends ClientSDK {
    * End of life — this endpoint works for classic audits only; it does not support
    * controlled audit view. It remains available for existing classic audits but will be removed once
    * classic audits are fully phased out, so do not build new integrations on it.
+   *
+   * Returns 422 when the audit does not have exactly one program segment
+   * (multi-framework audits are not supported on this endpoint).
    *
    * Rate limit: 10 requests / minute.
    *

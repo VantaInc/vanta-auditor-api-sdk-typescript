@@ -76,12 +76,25 @@ export type AuditorControl = {
   modificationDate: Date | null;
   /**
    * The report standard framework fulfilled by the control.
+   *
+   * @remarks
+   * Incomplete once a control is in scope for more than one framework.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   framework: string;
   /**
    * Sections of a framework that this control satisfies
    */
   sections: Array<Section>;
+  /**
+   * Audit segments this control is in scope for. Empty when the control is
+   *
+   * @remarks
+   * attached only by a direct link and has no catalog mapping on a
+   * multi-program audit.
+   */
+  inScopeSegmentIds: Array<string>;
   /**
    * The auditor's assessments of this control, one per audit program segment the
    *
@@ -136,6 +149,7 @@ export const AuditorControl$inboundSchema: z.ZodType<
   ),
   framework: z.string(),
   sections: z.array(Section$inboundSchema),
+  inScopeSegmentIds: z.array(z.string()),
   assessments: z.array(AuditControlAssessment$inboundSchema),
 });
 

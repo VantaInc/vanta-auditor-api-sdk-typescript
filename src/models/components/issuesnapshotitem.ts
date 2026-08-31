@@ -11,6 +11,23 @@ import {
   IssueStatusTypeForSnapshot$inboundSchema,
 } from "./issuestatustypeforsnapshot.js";
 
+/**
+ * The issue's approval progress at the time the snapshot was captured,
+ *
+ * @remarks
+ * or null if no approval was in progress or issue approvals are not enabled.
+ */
+export type ApprovalProgress = {
+  /**
+   * The number of approvers who have approved the issue.
+   */
+  approvedCount: number;
+  /**
+   * The total number of approvers in the issue's approval chain.
+   */
+  totalApprovers: number;
+};
+
 export type IssueSnapshotItem = {
   /**
    * The unique identifier for the snapshot of an issue.
@@ -56,6 +73,13 @@ export type IssueSnapshotItem = {
   dueDate?: Date | null | undefined;
   status?: IssueStatusTypeForSnapshot | undefined;
   /**
+   * The issue's approval progress at the time the snapshot was captured,
+   *
+   * @remarks
+   * or null if no approval was in progress or issue approvals are not enabled.
+   */
+  approvalProgress?: ApprovalProgress | null | undefined;
+  /**
    * The date and time when the issue was last modified.
    */
   lastModifiedAt?: Date | undefined;
@@ -68,6 +92,26 @@ export type IssueSnapshotItem = {
    */
   detectedAt?: Date | undefined;
 };
+
+/** @internal */
+export const ApprovalProgress$inboundSchema: z.ZodType<
+  ApprovalProgress,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  approvedCount: z.number(),
+  totalApprovers: z.number(),
+});
+
+export function approvalProgressFromJSON(
+  jsonString: string,
+): SafeParseResult<ApprovalProgress, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApprovalProgress$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApprovalProgress' from JSON`,
+  );
+}
 
 /** @internal */
 export const IssueSnapshotItem$inboundSchema: z.ZodType<
@@ -85,6 +129,8 @@ export const IssueSnapshotItem$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   status: IssueStatusTypeForSnapshot$inboundSchema.optional(),
+  approvalProgress: z.nullable(z.lazy(() => ApprovalProgress$inboundSchema))
+    .optional(),
   lastModifiedAt: z.string().datetime({ offset: true }).transform(v =>
     new Date(v)
   ).optional(),

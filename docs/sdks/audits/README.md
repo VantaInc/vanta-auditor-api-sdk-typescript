@@ -38,6 +38,7 @@
 * [updateCommentForInformationRequest](#updatecommentforinformationrequest) - Update a comment for an information request
 * [deleteCommentForInformationRequest](#deletecommentforinformationrequest) - Delete a comment for an information request
 * [listInformationRequestEvidence](#listinformationrequestevidence) - List evidence for an information request
+* [getInformationRequestEvidence](#getinformationrequestevidence) - Get information request evidence by ID
 * [getInformationRequestTestSnapshotEvidenceDetail](#getinformationrequesttestsnapshotevidencedetail) - Get test snapshot detail for an evidence row
 * [flagInformationRequestEvidence](#flaginformationrequestevidence) - Flag evidence for an information request
 * [listIntegrations](#listintegrations) - List integrations for an audit
@@ -67,6 +68,12 @@ Returns a paginated list of audits scoped to the audit firm.
 To identify IRL (Information Request List) audits, check for the presence of the
 `auditorRequestListMetadata` field. This field is only present for IRL-based audits
 and will be `undefined` for standard audits.
+
+Each audit includes `segments`, the audit's scope. A live single-framework
+audit has one entry; a live multi-framework audit has one entry per
+in-scope framework (and business unit or system, when applicable).
+Soft-deleted audits return an empty list. The top-level `framework` field
+is deprecated; use `segments` for framework identity.
 
 Rate limit: 250 requests / minute.
 
@@ -155,6 +162,9 @@ Information requests are copied from the source audit. After duplication:
 
   evidence added manually.
 - Evidence capture dates and due dates can be modified after duplication.
+
+Audits with generated information requests can be duplicated only after their information
+requests have been created successfully.
 
 Rate limit: 10 requests / minute.
 
@@ -253,6 +263,12 @@ To identify IRL (Information Request List) audits, check for the presence of the
 `auditorRequestListMetadata` field. This field is only present for IRL-based audits
 and will be `undefined` for standard audits.
 
+The response includes `segments`, the audit's scope. A live single-framework
+audit has one entry; a live multi-framework audit has one entry per
+in-scope framework (and business unit or system, when applicable).
+Soft-deleted audits return an empty list. The top-level `framework` field
+is deprecated; use `segments` for framework identity.
+
 Rate limit: 250 requests / minute.
 
 ### Example Usage
@@ -343,6 +359,9 @@ Uses cursor-based pagination. To paginate:
 
 Results are sorted by closed date (newest first). This sort order is
 fixed and cannot be customized via query parameters.
+
+Returns 422 when the audit does not have exactly one program segment
+(multi-framework audits are not supported on this endpoint).
 
 Rate limit: 10 requests / minute.
 
@@ -569,6 +588,9 @@ run();
 
 Create a custom control for an audit.
 
+This endpoint supports classic audits only. Audits that use information request
+lists (IRL) are not supported and return a 422 error.
+
 Rate limit: 10 requests / minute.
 
 ### Example Usage
@@ -666,8 +688,9 @@ is rejected otherwise). The acting auditor is identified by `auditorEmail`,
 which must belong to the audit firm making the request.
 
 Returns 404 when the control is not part of the audit or the auditor email
-does not resolve to a firm user. Applies to both Full and Controlled Audit
-View audits.
+does not resolve to a firm user. Returns 422 when the audit does not have
+exactly one program segment (multi-framework audits are not supported on
+this endpoint). Applies to both Full and Controlled Audit View audits.
 
 Rate limit: 10 requests / minute.
 
@@ -1390,7 +1413,7 @@ run();
 
 Update audit evidence.
 
-Rate limit: 10 requests / minute.
+Rate limit: 50 requests / minute.
 
 ### Example Usage
 
@@ -1555,7 +1578,7 @@ run();
 
 Create a comment in Vanta for a piece of evidence.
 
-Rate limit: 10 requests / minute.
+Rate limit: 25 requests / minute.
 
 ### Example Usage
 
@@ -1734,6 +1757,9 @@ evidence is created or has a statusUpdatedAt field that is more recent than the 
 
 Evidence must be in one of the following states to retrieve URLs: "Ready for audit", "Accepted", "Flagged", or "NA".
 
+Returns 422 when the audit does not have exactly one program segment
+(multi-framework audits are not supported on this endpoint).
+
 Rate limit: 600 requests / minute.
 
 ### Example Usage
@@ -1816,7 +1842,7 @@ Use this endpoint to:
 - Validate framework codes against the audit's framework
 - Get context about what framework codes are available for the audit type
 
-Rate limit: 10 requests / minute.
+Rate limit: 50 requests / minute.
 
 ### Example Usage
 
@@ -2262,7 +2288,7 @@ After deletion:
 - The request will not appear in normal list responses (without `changedSinceDate`)
 - The request's `deletionDate` field will be populated
 
-Rate limit: 10 requests / minute.
+Rate limit: 50 requests / minute.
 
 ### Example Usage
 
@@ -2807,7 +2833,7 @@ Updates an existing comment for an information request. Only the original author
 of the comment can update it. The author is identified by their email address,
 which must match the email of the user who created the comment.
 
-Rate limit: 10 requests / minute.
+Rate limit: 25 requests / minute.
 
 ### Example Usage
 
@@ -2896,7 +2922,7 @@ Deletes an existing comment for an information request. Only the original author
 of the comment can delete it. The author is identified by their email address,
 which must match the email of the user who created the comment.
 
-Rate limit: 10 requests / minute.
+Rate limit: 25 requests / minute.
 
 ### Example Usage
 
@@ -3068,6 +3094,98 @@ run();
 ### Response
 
 **Promise\<[components.PaginatedResponseInformationRequestEvidence](../../models/components/paginatedresponseinformationrequestevidence.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## getInformationRequestEvidence
+
+Retrieves a single evidence item attached to an information request by its ID.
+
+This endpoint always includes soft-deleted evidence (where `deletionDate !== null`),
+so an evidence ID surfaced by a `changedSinceDate` delta sync stays fetchable after
+the evidence is deleted. Clients should check the `deletionDate` field to identify
+and handle deleted records appropriately in their systems.
+
+Evidence is only resolvable while its information request exists. Once the
+request itself is deleted, this endpoint reports the request as not found —
+matching `GET /audits/{auditId}/information-requests/{requestId}/evidence`.
+Clients reconciling a deleted request should treat its evidence as gone with it.
+
+Evidence that the customer has not shared with the auditor is reported as not
+found, rather than distinguishing it from an ID that does not exist.
+
+Rate limit: 250 requests / minute.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GetInformationRequestEvidence" method="get" path="/audits/{auditId}/information-requests/{requestId}/evidence/{evidenceId}" example="Example 1" -->
+```typescript
+import { Vanta } from "vanta-auditor-api-sdk";
+
+const vanta = new Vanta({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await vanta.audits.getInformationRequestEvidence({
+    auditId: "<id>",
+    requestId: "<id>",
+    evidenceId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { VantaCore } from "vanta-auditor-api-sdk/core.js";
+import { auditsGetInformationRequestEvidence } from "vanta-auditor-api-sdk/funcs/auditsGetInformationRequestEvidence.js";
+
+// Use `VantaCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const vanta = new VantaCore({
+  bearerAuth: process.env["VANTA_BEARER_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await auditsGetInformationRequestEvidence(vanta, {
+    auditId: "<id>",
+    requestId: "<id>",
+    evidenceId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("auditsGetInformationRequestEvidence failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetInformationRequestEvidenceRequest](../../models/operations/getinformationrequestevidencerequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[components.InformationRequestEvidence](../../models/components/informationrequestevidence.md)\>**
 
 ### Errors
 
@@ -3650,6 +3768,9 @@ End of life — this endpoint works for classic audits only; it does not support
 controlled audit view. It remains available for existing classic audits but will be removed once
 classic audits are fully phased out, so do not build new integrations on it.
 
+Returns 422 when the audit does not have exactly one program segment
+(multi-framework audits are not supported on this endpoint).
+
 Rate limit: 10 requests / minute.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -3987,6 +4108,9 @@ Uses cursor-based pagination. To paginate:
 Results are returned in connection order. Sort order is not guaranteed
 and cannot be customized via query parameters.
 
+Returns 422 when the audit does not have exactly one program segment
+(multi-framework audits are not supported on this endpoint).
+
 Rate limit: 10 requests / minute.
 
 ### Example Usage
@@ -4102,6 +4226,9 @@ The default sort order depends on the service type:
 - Third-party application services (e.g. GitHub, Jira): sorted by account name, ascending
 
 Sort order cannot be customized via query parameters.
+
+Returns 422 when the audit does not have exactly one program segment
+(multi-framework audits are not supported on this endpoint).
 
 Rate limit: 10 requests / minute.
 
@@ -4556,7 +4683,7 @@ Shares the current information request list for an audit with the customer organ
 making it visible in their portal. This action allows the customer to see all information
 requests that have been created for their audit. Only IRL audits are supported.
 
-Rate limit: 10 requests / minute.
+Rate limit: 50 requests / minute.
 
 ### Example Usage
 
@@ -4796,6 +4923,9 @@ List all vulnerability remediations based on selected filters that are in scope 
 End of life — this endpoint works for classic audits only; it does not support
 controlled audit view. It remains available for existing classic audits but will be removed once
 classic audits are fully phased out, so do not build new integrations on it.
+
+Returns 422 when the audit does not have exactly one program segment
+(multi-framework audits are not supported on this endpoint).
 
 Rate limit: 10 requests / minute.
 

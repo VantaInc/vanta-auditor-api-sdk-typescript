@@ -32,6 +32,9 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Create a custom control for an audit.
  *
+ * This endpoint supports classic audits only. Audits that use information request
+ * lists (IRL) are not supported and return a 422 error.
+ *
  * Rate limit: 10 requests / minute.
  */
 export function auditsCreateCustomControl(

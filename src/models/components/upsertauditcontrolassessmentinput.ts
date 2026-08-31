@@ -12,9 +12,17 @@ import {
  * Input for upserting a control's auditor assessment within an audit. Overwrites
  *
  * @remarks
- * the single assessment for this control in the audit's program segment.
+ * the assessment for this control in the chosen program segment.
  */
 export type UpsertAuditControlAssessmentInput = {
+  /**
+   * The program segment to assess. Required when the audit has more than one
+   *
+   * @remarks
+   * program segment. Optional on a single-program audit (the only program is
+   * used). Must be a program segment on the audit; system segments are rejected.
+   */
+  segmentId?: string | undefined;
   /**
    * An auditor's assessment of a control within an audit. This is the full flat
    *
@@ -48,6 +56,7 @@ export type UpsertAuditControlAssessmentInput = {
 
 /** @internal */
 export type UpsertAuditControlAssessmentInput$Outbound = {
+  segmentId?: string | undefined;
   assessmentState: string;
   justification: string;
   auditorEmail: string;
@@ -59,6 +68,7 @@ export const UpsertAuditControlAssessmentInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpsertAuditControlAssessmentInput
 > = z.object({
+  segmentId: z.string().optional(),
   assessmentState: AuditControlAssessmentState$outboundSchema,
   justification: z.string(),
   auditorEmail: z.string(),

@@ -36,6 +36,12 @@ import { Result } from "../types/fp.js";
  * `auditorRequestListMetadata` field. This field is only present for IRL-based audits
  * and will be `undefined` for standard audits.
  *
+ * Each audit includes `segments`, the audit's scope. A live single-framework
+ * audit has one entry; a live multi-framework audit has one entry per
+ * in-scope framework (and business unit or system, when applicable).
+ * Soft-deleted audits return an empty list. The top-level `framework` field
+ * is deprecated; use `segments` for framework identity.
+ *
  * Rate limit: 250 requests / minute.
  */
 export function auditsList(

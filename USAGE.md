@@ -15,10 +15,4 @@ async function run() {
 run();
 
 ```
-
-CommonJS consumers can use the same package entry:
-
-```javascript
-const { Vanta } = require("vanta-auditor-api-sdk");
-```
 <!-- End SDK Example Usage [usage] -->

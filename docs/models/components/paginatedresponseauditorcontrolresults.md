@@ -45,9 +45,14 @@ let value: PaginatedResponseAuditorControlResults = {
           },
         },
       ],
+      inScopeSegmentIds: [
+        "<value 1>",
+        "<value 2>",
+      ],
       assessments: [
         {
-          assessmentState: "MAJOR_NON_CONFORMITY",
+          segmentId: "<id>",
+          assessmentState: "MINOR_NON_CONFORMITY",
           justification: "<value>",
         },
       ],
@@ -55,8 +60,8 @@ let value: PaginatedResponseAuditorControlResults = {
   ],
   pageInfo: {
     endCursor: "<value>",
-    hasNextPage: false,
-    hasPreviousPage: true,
+    hasNextPage: true,
+    hasPreviousPage: false,
     startCursor: "<value>",
   },
 };
