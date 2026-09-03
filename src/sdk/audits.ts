@@ -265,17 +265,20 @@ export class Audits extends ClientSDK {
    * @remarks
    * Records (upserts) an auditor's assessment state and justification for a
    * control within an IRL audit — the API equivalent of assessing a control in
-   * the web app. Overwrites the single assessment for this control in the
-   * audit's program segment.
+   * the web app. Overwrites the assessment for this control in the chosen
+   * program segment.
    *
-   * The `assessmentState` must be valid for the segment's framework (the request
-   * is rejected otherwise). The acting auditor is identified by `auditorEmail`,
-   * which must belong to the audit firm making the request.
+   * `segmentId` is required when the audit has more than one program segment.
+   * On a single-program audit it may be omitted. The `assessmentState` must be
+   * valid for that segment's framework (the request is rejected otherwise). The
+   * acting auditor is identified by `auditorEmail`, which must belong to the
+   * audit firm making the request.
    *
    * Returns 404 when the control is not part of the audit or the auditor email
-   * does not resolve to a firm user. Returns 422 when the audit does not have
-   * exactly one program segment (multi-framework audits are not supported on
-   * this endpoint). Applies to both Full and Controlled Audit View audits.
+   * does not resolve to a firm user. Returns 422 when `segmentId` is missing on
+   * a multi-program audit, is not a program segment on the audit, or the
+   * control is not assessment-eligible in that segment. Applies to both Full
+   * and Controlled Audit View audits.
    *
    * Rate limit: 10 requests / minute.
    */
