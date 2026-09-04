@@ -88,7 +88,7 @@ export type AuditSegment = {
    */
   displayName: string;
   /**
-   * The framework reached through a segment.
+   * The framework this segment is in.
    */
   framework: AuditSegmentFramework;
   /**

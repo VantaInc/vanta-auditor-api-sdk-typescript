@@ -40,7 +40,7 @@ import { Result } from "../types/fp.js";
  * audit has one entry; a live multi-framework audit has one entry per
  * in-scope framework (and business unit or system, when applicable).
  * Soft-deleted audits return an empty list. The top-level `framework` field
- * is deprecated; use `segments` for framework identity.
+ * is deprecated; use `segments` for in-scope frameworks.
  *
  * Rate limit: 250 requests / minute.
  */

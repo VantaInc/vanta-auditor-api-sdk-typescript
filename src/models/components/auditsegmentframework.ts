@@ -8,21 +8,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The framework reached through a segment.
+ * The framework this segment is in.
  */
 export type AuditSegmentFramework = {
   /**
-   * The stable identifier of the framework (for example `soc2`).
-   */
-  id: string;
-  /**
-   * The human-readable framework name.
+   * Display name of the framework.
    */
   displayName: string;
-  /**
-   * The short framework name used in compact UI.
-   */
-  shortName: string;
 };
 
 /** @internal */
@@ -31,9 +23,7 @@ export const AuditSegmentFramework$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string(),
   displayName: z.string(),
-  shortName: z.string(),
 });
 
 export function auditSegmentFrameworkFromJSON(

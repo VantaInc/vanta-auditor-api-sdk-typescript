@@ -34,9 +34,7 @@ let value: PaginatedResponseAudit = {
             kind: "SYSTEM",
             displayName: "Dovie_Kerluke3",
             framework: {
-              id: "<id>",
               displayName: "Clyde57",
-              shortName: "<value>",
             },
             businessUnit: {
               id: "<id>",
