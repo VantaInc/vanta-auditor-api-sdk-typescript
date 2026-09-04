@@ -33,9 +33,7 @@ let value: Results = {
           kind: "SYSTEM",
           displayName: "Dovie_Kerluke3",
           framework: {
-            id: "<id>",
             displayName: "Clyde57",
-            shortName: "<value>",
           },
           businessUnit: {
             id: "<id>",

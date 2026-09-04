@@ -107,13 +107,28 @@ export type InformationRequest = {
    */
   cadence: Cadence | null;
   /**
-   * The framework codes this request addresses.
+   * Always empty on read. To find requests for a control, use
    *
    * @remarks
-   * Links the request to specific compliance requirements. Can be an empty array
-   * if no framework codes are associated. These codes correspond to standards like SOC 2, ISO 27001, etc.
+   * `GET /audits/{auditId}/controls/{controlId}/information-requests`.
+   * For request assignment, use `segmentIds`.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   frameworkCodes: Array<string>;
+  /**
+   * Audit segments this request is assigned to. Empty means unassigned.
+   *
+   * @remarks
+   * Resolved against the current audit scope — stale IDs are dropped.
+   *
+   * This field is a current-scope projection, not a stored watermark. An
+   * audit-scope change that drops or adds IDs here does not update
+   * creationDate, modificationDate, or deletionDate, so it does not appear in
+   * `changedSinceDate` delta sync on its own. Re-fetch the list without that
+   * parameter, or GET the request by id, to see the current projection.
+   */
+  segmentIds: Array<string>;
   /**
    * Detailed description explaining what evidence is needed and why.
    *
@@ -260,6 +275,7 @@ export const InformationRequest$inboundSchema: z.ZodType<
   approvalStatus: InformationRequestApprovalStatus$inboundSchema,
   cadence: z.nullable(Cadence$inboundSchema),
   frameworkCodes: z.array(z.string()),
+  segmentIds: z.array(z.string()),
   description: z.nullable(z.string()),
   dueDate: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),

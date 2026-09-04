@@ -6,18 +6,29 @@ import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  FrameworkCodesByFramework,
+  FrameworkCodesByFramework$inboundSchema,
+} from "./frameworkcodesbyframework.js";
 
 /**
  * Framework codes response resource
  */
 export type FrameworkCodes = {
   /**
-   * Array of valid framework codes for the audit's framework (e.g., "CC6.1", "CC6.2").
+   * Valid framework codes for this audit.
    *
-   * @remarks
-   * These represent the different framework sections available for creating information requests.
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   frameworkCodes: Array<string>;
+  /**
+   * Valid codes grouped by each distinct in-scope framework. A code that exists
+   *
+   * @remarks
+   * on two frameworks appears in both groups. Two segments that share a
+   * framework contribute one group. `framework` is the display name.
+   */
+  codesByFramework: Array<FrameworkCodesByFramework>;
 };
 
 /** @internal */
@@ -27,6 +38,7 @@ export const FrameworkCodes$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   frameworkCodes: z.array(z.string()),
+  codesByFramework: z.array(FrameworkCodesByFramework$inboundSchema),
 });
 
 export function frameworkCodesFromJSON(

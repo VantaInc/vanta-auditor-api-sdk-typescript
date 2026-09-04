@@ -71,6 +71,7 @@ export * from "./externalfindingseverity.js";
 export * from "./externalfindingseveritytype.js";
 export * from "./flaginformationrequestevidenceinput.js";
 export * from "./frameworkcodes.js";
+export * from "./frameworkcodesbyframework.js";
 export * from "./frameworkid.js";
 export * from "./frameworksection.js";
 export * from "./grouporderby.js";

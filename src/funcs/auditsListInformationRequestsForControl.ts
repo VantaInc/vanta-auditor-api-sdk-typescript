@@ -32,8 +32,9 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Returns a paginated list of active information requests linked to a specific
  * control within an IRL audit. An information request is linked to a control
- * either via its framework codes (`criteriaIds`) or via a direct association
- * (`additionalControlIds`).
+ * via its framework codes (`criteriaIds`), a direct association
+ * (`additionalControlIds`), or an owned AuditControl row attached in Vanta
+ * (`additionalAuditControlIds`).
  *
  * Soft-deleted information requests are not included in the response. To
  * synchronize deletions, use `GET /audits/{auditId}/information-requests`,

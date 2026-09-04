@@ -73,7 +73,7 @@ Each audit includes `segments`, the audit's scope. A live single-framework
 audit has one entry; a live multi-framework audit has one entry per
 in-scope framework (and business unit or system, when applicable).
 Soft-deleted audits return an empty list. The top-level `framework` field
-is deprecated; use `segments` for framework identity.
+is deprecated; use `segments` for in-scope frameworks.
 
 Rate limit: 250 requests / minute.
 
@@ -267,7 +267,7 @@ The response includes `segments`, the audit's scope. A live single-framework
 audit has one entry; a live multi-framework audit has one entry per
 in-scope framework (and business unit or system, when applicable).
 Soft-deleted audits return an empty list. The top-level `framework` field
-is deprecated; use `segments` for framework identity.
+is deprecated; use `segments` for in-scope frameworks.
 
 Rate limit: 250 requests / minute.
 
@@ -1149,8 +1149,9 @@ run();
 
 Returns a paginated list of active information requests linked to a specific
 control within an IRL audit. An information request is linked to a control
-either via its framework codes (`criteriaIds`) or via a direct association
-(`additionalControlIds`).
+via its framework codes (`criteriaIds`), a direct association
+(`additionalControlIds`), or an owned AuditControl row attached in Vanta
+(`additionalAuditControlIds`).
 
 Soft-deleted information requests are not included in the response. To
 synchronize deletions, use `GET /audits/{auditId}/information-requests`,
@@ -1841,9 +1842,9 @@ run();
 Retrieves all valid framework codes for the specified audit. This endpoint helps users discover which framework codes are available for creating and updating information requests for this audit.
 
 Use this endpoint to:
-- Discover available framework codes before creating information requests
-- Validate framework codes against the audit's framework
-- Get context about what framework codes are available for the audit type
+- Discover available framework codes (`frameworkCodes`, the original flat list)
+- Validate framework codes against the audit's frameworks
+- See which codes belong to which in-scope framework (`codesByFramework`)
 
 Rate limit: 50 requests / minute.
 
@@ -1940,6 +1941,11 @@ Delta sync usage:
 3. Only requests created, modified, or deleted since that timestamp are returned
 4. Process updates and soft-deletes by checking the `deletionDate` field
 5. Update your last sync timestamp to the current time
+
+`segmentIds` on each returned request is resolved against the audit's
+current scope. A scope-only change (a segment leaving or joining the audit
+without the request row being written) is not a delta-sync event. Re-fetch
+without `changedSinceDate`, or GET by id, to see the current projection.
 
 Rate limit: 50 requests / minute.
 

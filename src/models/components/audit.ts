@@ -56,7 +56,7 @@ export type Audit = {
    * Legacy singular framework display name from the audit type. Incomplete for
    *
    * @remarks
-   * a multi-framework audit — use `segments` for framework identity.
+   * a multi-framework audit — use `segments` instead.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
