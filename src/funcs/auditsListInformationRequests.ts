@@ -53,6 +53,11 @@ import { Result } from "../types/fp.js";
  * 4. Process updates and soft-deletes by checking the `deletionDate` field
  * 5. Update your last sync timestamp to the current time
  *
+ * `segmentIds` on each returned request is resolved against the audit's
+ * current scope. A scope-only change (a segment leaving or joining the audit
+ * without the request row being written) is not a delta-sync event. Re-fetch
+ * without `changedSinceDate`, or GET by id, to see the current projection.
+ *
  * Rate limit: 50 requests / minute.
  */
 export function auditsListInformationRequests(
@@ -123,6 +128,7 @@ async function $do(
     "changedSinceDate": payload.changedSinceDate,
     "pageCursor": payload.pageCursor,
     "pageSize": payload.pageSize,
+    "segmentIdsMatchesAny": payload.segmentIdsMatchesAny,
   });
 
   const headers = new Headers(compactMap({

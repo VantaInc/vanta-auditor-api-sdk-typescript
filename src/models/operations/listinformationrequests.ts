@@ -19,8 +19,18 @@ export type ListInformationRequestsRequest = {
    *
    * @remarks
    * Considers creationDate, modificationDate, and deletionDate timestamps when determining changes.
+   * Does not include requests whose only change is the derived `segmentIds`
+   * projection after an audit-scope change.
    */
   changedSinceDate?: Date | undefined;
+  /**
+   * Return requests whose stored segment assignment includes any of these
+   *
+   * @remarks
+   * IDs (OR). Omit to return all. A match can still come back with
+   * `segmentIds: []` if the stored ID is no longer in the audit's scope.
+   */
+  segmentIdsMatchesAny?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -29,6 +39,7 @@ export type ListInformationRequestsRequest$Outbound = {
   pageSize: number;
   pageCursor?: string | undefined;
   changedSinceDate?: string | undefined;
+  segmentIdsMatchesAny?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -41,6 +52,7 @@ export const ListInformationRequestsRequest$outboundSchema: z.ZodType<
   pageSize: z.number().int().default(10),
   pageCursor: z.string().optional(),
   changedSinceDate: z.date().transform(v => v.toISOString()).optional(),
+  segmentIdsMatchesAny: z.array(z.string()).optional(),
 });
 
 export function listInformationRequestsRequestToJSON(

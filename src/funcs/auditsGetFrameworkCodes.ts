@@ -33,9 +33,9 @@ import { Result } from "../types/fp.js";
  * Retrieves all valid framework codes for the specified audit. This endpoint helps users discover which framework codes are available for creating and updating information requests for this audit.
  *
  * Use this endpoint to:
- * - Discover available framework codes before creating information requests
- * - Validate framework codes against the audit's framework
- * - Get context about what framework codes are available for the audit type
+ * - Discover available framework codes (`frameworkCodes`, the original flat list)
+ * - Validate framework codes against the audit's frameworks
+ * - See which codes belong to which in-scope framework (`codesByFramework`)
  *
  * Rate limit: 50 requests / minute.
  */
