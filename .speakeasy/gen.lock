@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: a71f193427ce5ebd547b01bd07eb3b57
+  docChecksum: 3ffe1ba1e79ec7100f67703f50f33d93
   docVersion: 1.0.0
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
-  releaseVersion: 0.9.22
-  configChecksum: 4fb6d1397314b1eeb4fe0662ce439709
+  releaseVersion: 0.9.23
+  configChecksum: 398734e6034fd3742ef3cf239c32f480
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: ae7da617-9d3d-4840-95c2-1cec9cdb0ac9
-  pristine_commit_hash: 8bd251ffd4232ef0ec16ace640827ee085976e25
-  pristine_tree_hash: 8db166b9534d2aa587fbea2b9bc8de6a7aee60cc
+  generation_id: 85331f77-efce-48c9-8011-11465ede00d4
+  pristine_commit_hash: 830b29dacd59cb868bcb092d4e47b912252d77d9
+  pristine_tree_hash: 614ae87da749549dcab87da76fe7913b2f15e118
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1410,8 +1410,8 @@ trackedFiles:
     pristine_git_object: 83a3020aad9d8f36aba3095a73b3652e57979cb7
   docs/sdks/audits/README.md:
     id: b976aa226e19
-    last_write_checksum: sha1:f2792939f7209093ddde7d8f3455fcbb449437d7
-    pristine_git_object: 3fd0fdcaf602b80182fe3237b46f59d7699ef4a3
+    last_write_checksum: sha1:172b07e568a9f7741101500f630f45d7c1f7efd9
+    pristine_git_object: e50e39edcc544e1753e26022e39f24c19ef032e1
   eslint.config.mjs:
     id: 461c8d07f6da
     last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
@@ -1434,12 +1434,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:5b2d03ccee73b4cfafebdd85b2270632b2a29643
-    pristine_git_object: a670c52eb458ce19f9f22385293aefede9097ea3
+    last_write_checksum: sha1:fa89a41db2e89a195dedf006c57dcec041f70472
+    pristine_git_object: c5a5559fca1e36fa63bb67f67f8675b57a4470a2
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b0176de09b038324e0eb6ca719e017290e3e716b
-    pristine_git_object: f8ce272710ee4f53e832734f7ae440c29e4cb39b
+    last_write_checksum: sha1:8d40e27d454b66ba160ea03a11b25baf124d0a7d
+    pristine_git_object: 6c98ed1d268c1e2054bcbb1313936d3715972830
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1602,8 +1602,8 @@ trackedFiles:
     pristine_git_object: 4396d1f708a08d211c8e8746a5d8fc2ac8fb7874
   src/funcs/auditsListInformationRequestsForControl.ts:
     id: ae674bea661c
-    last_write_checksum: sha1:0cfbaaf3a1e60999cbb14f260fce4ba06d26e133
-    pristine_git_object: cbecda61c1d3b1d53351bad5d8b37161ec042c0f
+    last_write_checksum: sha1:f8ae2be2f50e5e460006b1a1868a985c88fac013
+    pristine_git_object: 1dfd012e0c6baf1350f6cfed73e673b3145b9052
   src/funcs/auditsListIntegrations.ts:
     id: 681d602db06c
     last_write_checksum: sha1:eb35c65f45644be338f250eb4e05ae00871ada50
@@ -1694,8 +1694,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:ea0c5a3b1372175182a920fc56e60d1385a4133f
-    pristine_git_object: f1e5daa55cbb319dd058b9b814abb8d433567735
+    last_write_checksum: sha1:591906e9ed66ca1869730d235cd8b0ddabe353b3
+    pristine_git_object: 5fe642c780aa6d1c0258429ff57834eb6bb4162d
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2730,8 +2730,8 @@ trackedFiles:
     pristine_git_object: 5f4ee0ebc3a0501c1f4a385ad6f95ee4d2b167d1
   src/sdk/audits.ts:
     id: ab43f5ff5412
-    last_write_checksum: sha1:1b1c119a90d27a30698fd8dde086fb39629df51e
-    pristine_git_object: 4068f5dde9bde2e450b5bf643b3aa0e306bde281
+    last_write_checksum: sha1:38ab36f4c8a63a54afac1ee859c5e4c6eb214362
+    pristine_git_object: 25efdc5f1433cd9efeb2829c029a0d5d01737bf9
   src/sdk/index.ts:
     id: a857902a703f
     last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
