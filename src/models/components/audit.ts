@@ -102,13 +102,13 @@ export type Audit = {
    */
   auditorRequestListMetadata?: AuditorRequestListMetadata | undefined;
   /**
-   * The audit's scope as a list of segments. Always present. A live
+   * The audit's scope as a list of segments. Always present. A live audit
    *
    * @remarks
-   * single-framework audit has one entry; a multi-framework audit has one
-   * entry per in-scope framework (and business unit or system, when applicable).
-   * Soft-deleted audits return an empty list. Prefer this over the deprecated
-   * top-level `framework` field.
+   * returns every in-scope program and system segment; more than one segment
+   * does not by itself imply more than one framework. Soft-deleted audits
+   * return an empty list. Prefer this over the deprecated top-level `framework`
+   * field.
    */
   segments: Array<AuditSegment>;
 };

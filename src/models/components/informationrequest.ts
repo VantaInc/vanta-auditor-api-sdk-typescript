@@ -83,11 +83,15 @@ export type InformationRequest = {
    */
   uniqueId: string;
   /**
-   * Additional control IDs beyond those automatically mapped from framework codes.
+   * Deprecated control-linkage field retained for response compatibility. It
    *
    * @remarks
-   * Allows manual association with specific controls when automatic mapping
-   * is insufficient. Each ID should reference a valid control in your audit framework.
+   * may contain control IDs supplied directly to the request, but it is not a
+   * complete or guaranteed-current list of controls linked to the request. To
+   * list information requests linked to a particular control, use
+   * `GET /audits/{auditId}/controls/{controlId}/information-requests`.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   additionalControlIds: Array<string>;
   /**

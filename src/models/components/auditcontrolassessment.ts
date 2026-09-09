@@ -12,13 +12,13 @@ import {
 } from "./auditcontrolassessmentstate.js";
 
 /**
- * An auditor's assessment of a control within one segment of an audit.
+ * An auditor's assessment of a control within one program segment of an audit.
  *
  * @remarks
- * Assessments are keyed per segment, so a control in scope for more than one
- * segment (a multi-framework audit) can carry a distinct assessment per
- * segment. A segment with no recorded assessment coerces to `NOT_ASSESSED` with
- * a `null` justification.
+ * A control in scope for more than one program segment can carry a distinct
+ * assessment per segment; more than one assessment does not by itself imply
+ * more than one framework. A segment with no recorded assessment coerces to
+ * `NOT_ASSESSED` with a `null` justification.
  */
 export type AuditControlAssessment = {
   /**

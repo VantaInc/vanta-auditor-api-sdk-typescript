@@ -66,12 +66,12 @@ export type Soc2Deliverable = {
 };
 
 /**
- * One segment of an audit's scope. A live single-framework audit has exactly
+ * One segment of an audit's scope. A live audit returns every in-scope program
  *
  * @remarks
- * one entry; a live multi-framework audit has one per in-scope framework
- * (and business unit or system, when applicable). Soft-deleted audits return
- * an empty list. `displayName` is the segment label owned by audit scope
+ * and system segment; more than one segment does not by itself imply more than
+ * one framework. Soft-deleted audits return an empty list. `displayName` is the
+ * segment label owned by audit scope
  * (for example "{Framework}" or "{Framework} — {Business Unit}").
  * `soc2Deliverable` is the per-segment SOC 2 config, or null. `businessUnit`
  * is set for program segments that are BU-scoped and null otherwise. `system`
