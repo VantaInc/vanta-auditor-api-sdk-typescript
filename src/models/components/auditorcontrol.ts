@@ -88,22 +88,22 @@ export type AuditorControl = {
    */
   sections: Array<Section>;
   /**
-   * Audit segments this control is in scope for. Empty when the control is
+   * Audit segments in which this control is in scope. The array can be empty
    *
    * @remarks
-   * attached only by a direct link and has no catalog mapping on a
-   * multi-program audit.
+   * when a control is linked directly to the audit but has no framework-section
+   * mapping.
    */
   inScopeSegmentIds: Array<string>;
   /**
-   * The auditor's assessments of this control, one per audit program segment the
+   * The auditor's assessments of this control, with one entry for each program
    *
    * @remarks
-   * control is in scope for (a multi-framework audit can have more than one).
-   * Populated only for IRL audits when the assessment feature is enabled; empty
-   * otherwise. Within an in-scope segment a control with no recorded assessment
-   * coerces to `NOT_ASSESSED`; a segment the control is not in scope for
-   * contributes no entry.
+   * segment in which the control is in scope. More than one entry does not by
+   * itself imply more than one framework. Populated only for IRL audits when
+   * the assessment feature is enabled; empty otherwise. Within an in-scope
+   * segment a control with no recorded assessment coerces to `NOT_ASSESSED`; a
+   * segment the control is not in scope for contributes no entry.
    */
   assessments: Array<AuditControlAssessment>;
 };

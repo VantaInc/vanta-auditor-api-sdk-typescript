@@ -1,10 +1,10 @@
 # AuditControlAssessment
 
-An auditor's assessment of a control within one segment of an audit.
-Assessments are keyed per segment, so a control in scope for more than one
-segment (a multi-framework audit) can carry a distinct assessment per
-segment. A segment with no recorded assessment coerces to `NOT_ASSESSED` with
-a `null` justification.
+An auditor's assessment of a control within one program segment of an audit.
+A control in scope for more than one program segment can carry a distinct
+assessment per segment; more than one assessment does not by itself imply
+more than one framework. A segment with no recorded assessment coerces to
+`NOT_ASSESSED` with a `null` justification.
 
 ## Example Usage
 
