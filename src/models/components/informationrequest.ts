@@ -88,8 +88,10 @@ export type InformationRequest = {
    * @remarks
    * may contain control IDs supplied directly to the request, but it is not a
    * complete or guaranteed-current list of controls linked to the request. To
-   * list information requests linked to a particular control, use
-   * `GET /audits/{auditId}/controls/{controlId}/information-requests`.
+   * list information requests linked to a particular control, use the
+   * `GET /audits/{auditId}/controls/{controlId}/information-requests` endpoint.
+   * A request may be absent from that endpoint when its link appears only in
+   * this deprecated field.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */

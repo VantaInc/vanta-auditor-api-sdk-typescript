@@ -21,10 +21,13 @@ import {
  */
 export type PartialUpdateInformationRequest = {
   /**
-   * The framework codes this request addresses.
+   * Framework codes are assigned only at creation; on update this field is a
    *
    * @remarks
-   * An empty array if no framework codes are associated.
+   * silent no-op — a value sent here is accepted for backwards compatibility
+   * but ignored, leaving the request's framework codes unchanged.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   frameworkCodes?: Array<string> | undefined;
   /**
@@ -64,16 +67,24 @@ export type PartialUpdateInformationRequest = {
    */
   cadence?: InformationRequestCadence | undefined;
   /**
-   * Control IDs to link directly to this request, beyond those automatically
+   * This legacy field is accepted for backwards compatibility but ignored.
    *
    * @remarks
-   * mapped from framework codes. Replaces the existing set: pass the complete
-   * desired list, an empty array to clear all direct control links, or omit to
-   * leave them unchanged. Each must be the `id` of an existing control in the
-   * customer's organization (the identifier returned by the controls endpoints).
-   * The request is rejected if any ID does not match a control.
+   * Use `linkedControlIds` to replace the complete set of linked controls.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   additionalControlIds?: Array<string> | undefined;
+  /**
+   * The complete desired set of control IDs linked to this request. Send the
+   *
+   * @remarks
+   * full list to replace the set, an empty array to clear it, or omit the
+   * property to leave links unchanged. Each ID must identify an existing control
+   * in the customer's organization and is returned by the audit controls
+   * endpoint. The request is rejected if any ID does not match a control.
+   */
+  linkedControlIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -86,6 +97,7 @@ export type PartialUpdateInformationRequest$Outbound = {
   title?: string | undefined;
   cadence?: string | undefined;
   additionalControlIds?: Array<string> | undefined;
+  linkedControlIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -103,6 +115,7 @@ export const PartialUpdateInformationRequest$outboundSchema: z.ZodType<
   title: z.string().optional(),
   cadence: InformationRequestCadence$outboundSchema.optional(),
   additionalControlIds: z.array(z.string()).optional(),
+  linkedControlIds: z.array(z.string()).optional(),
 });
 
 export function partialUpdateInformationRequestToJSON(
