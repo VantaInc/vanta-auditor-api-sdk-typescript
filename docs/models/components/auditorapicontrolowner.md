@@ -1,16 +1,16 @@
-# ControlOwner
+# AuditorApiControlOwner
 
 The control's owner.
 
 ## Example Usage
 
 ```typescript
-import { ControlOwner } from "vanta-auditor-api-sdk/models/components";
+import { AuditorApiControlOwner } from "vanta-auditor-api-sdk/models/components";
 
-let value: ControlOwner = {
+let value: AuditorApiControlOwner = {
   id: "<id>",
-  displayName: "Lucio.Gerlach",
-  emailAddress: "Mandy.Donnelly40@hotmail.com",
+  displayName: "Patricia_Schumm",
+  emailAddress: "Dustin.Marquardt@yahoo.com",
 };
 ```
 

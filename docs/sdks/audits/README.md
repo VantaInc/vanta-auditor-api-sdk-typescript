@@ -668,7 +668,7 @@ run();
 
 ### Response
 
-**Promise\<[components.Control](../../models/components/control.md)\>**
+**Promise\<[components.AuditorApiControl](../../models/components/auditorapicontrol.md)\>**
 
 ### Errors
 

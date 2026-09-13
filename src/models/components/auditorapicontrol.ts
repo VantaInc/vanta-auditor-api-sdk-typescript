@@ -12,7 +12,7 @@ import { CustomField, CustomField$inboundSchema } from "./customfield.js";
 /**
  * The control's owner.
  */
-export type ControlOwner = {
+export type AuditorApiControlOwner = {
   /**
    * Unique identifier for the person.
    */
@@ -27,7 +27,7 @@ export type ControlOwner = {
   emailAddress: string;
 };
 
-export type Control = {
+export type AuditorApiControl = {
   /**
    * The control's unique ID.
    */
@@ -52,7 +52,7 @@ export type Control = {
   /**
    * The control's owner.
    */
-  owner: ControlOwner | null;
+  owner: AuditorApiControlOwner | null;
   /**
    * The control's GDPR role, if the control is a GDPR control.
    */
@@ -72,8 +72,8 @@ export type Control = {
 };
 
 /** @internal */
-export const ControlOwner$inboundSchema: z.ZodType<
-  ControlOwner,
+export const AuditorApiControlOwner$inboundSchema: z.ZodType<
+  AuditorApiControlOwner,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -82,42 +82,45 @@ export const ControlOwner$inboundSchema: z.ZodType<
   emailAddress: z.string(),
 });
 
-export function controlOwnerFromJSON(
+export function auditorApiControlOwnerFromJSON(
   jsonString: string,
-): SafeParseResult<ControlOwner, SDKValidationError> {
+): SafeParseResult<AuditorApiControlOwner, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ControlOwner$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ControlOwner' from JSON`,
+    (x) => AuditorApiControlOwner$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AuditorApiControlOwner' from JSON`,
   );
 }
 
 /** @internal */
-export const Control$inboundSchema: z.ZodType<Control, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    externalId: z.nullable(z.string()),
-    name: z.string(),
-    description: z.string(),
-    source: ControlSource$inboundSchema,
-    domains: z.array(z.string()),
-    owner: z.nullable(z.lazy(() => ControlOwner$inboundSchema)),
-    role: z.nullable(z.string()).optional(),
-    customFields: z.array(CustomField$inboundSchema),
-    creationDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    modificationDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-  });
+export const AuditorApiControl$inboundSchema: z.ZodType<
+  AuditorApiControl,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  externalId: z.nullable(z.string()),
+  name: z.string(),
+  description: z.string(),
+  source: ControlSource$inboundSchema,
+  domains: z.array(z.string()),
+  owner: z.nullable(z.lazy(() => AuditorApiControlOwner$inboundSchema)),
+  role: z.nullable(z.string()).optional(),
+  customFields: z.array(CustomField$inboundSchema),
+  creationDate: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ),
+  modificationDate: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ),
+});
 
-export function controlFromJSON(
+export function auditorApiControlFromJSON(
   jsonString: string,
-): SafeParseResult<Control, SDKValidationError> {
+): SafeParseResult<AuditorApiControl, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Control$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Control' from JSON`,
+    (x) => AuditorApiControl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AuditorApiControl' from JSON`,
   );
 }

@@ -251,7 +251,7 @@ export class Audits extends ClientSDK {
   async createCustomControl(
     request: operations.CreateCustomControlRequest,
     options?: RequestOptions,
-  ): Promise<components.Control> {
+  ): Promise<components.AuditorApiControl> {
     return unwrapAsync(auditsCreateCustomControl(
       this,
       request,
