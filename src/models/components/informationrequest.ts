@@ -87,15 +87,20 @@ export type InformationRequest = {
    *
    * @remarks
    * may contain control IDs supplied directly to the request, but it is not a
-   * complete or guaranteed-current list of controls linked to the request. To
-   * list information requests linked to a particular control, use the
-   * `GET /audits/{auditId}/controls/{controlId}/information-requests` endpoint.
-   * A request may be absent from that endpoint when its link appears only in
-   * this deprecated field.
+   * complete or guaranteed-current list of controls linked to the request. Use
+   * `linkedControlIds` for the complete current list.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   additionalControlIds: Array<string>;
+  /**
+   * The complete current set of control IDs linked to this request, including
+   *
+   * @remarks
+   * controls linked through framework codes and controls added directly. Each
+   * ID is returned by the audit controls endpoint.
+   */
+  linkedControlIds: Array<string>;
   /**
    * Current approval status of the information request, tracking its lifecycle through the audit process.
    *
@@ -113,11 +118,10 @@ export type InformationRequest = {
    */
   cadence: Cadence | null;
   /**
-   * Always empty on read. To find requests for a control, use
+   * Always empty on read. Use `linkedControlIds` for control linkage and
    *
    * @remarks
-   * `GET /audits/{auditId}/controls/{controlId}/information-requests`.
-   * For request assignment, use `segmentIds`.
+   * `segmentIds` for request assignment.
    *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
@@ -278,6 +282,7 @@ export const InformationRequest$inboundSchema: z.ZodType<
   id: z.string(),
   uniqueId: z.string(),
   additionalControlIds: z.array(z.string()),
+  linkedControlIds: z.array(z.string()),
   approvalStatus: InformationRequestApprovalStatus$inboundSchema,
   cadence: z.nullable(Cadence$inboundSchema),
   frameworkCodes: z.array(z.string()),
