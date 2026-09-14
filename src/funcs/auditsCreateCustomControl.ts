@@ -43,7 +43,7 @@ export function auditsCreateCustomControl(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.Control,
+    components.AuditorApiControl,
     | VantaError
     | ResponseValidationError
     | ConnectionError
@@ -68,7 +68,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.Control,
+      components.AuditorApiControl,
       | VantaError
       | ResponseValidationError
       | ConnectionError
@@ -157,7 +157,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.Control,
+    components.AuditorApiControl,
     | VantaError
     | ResponseValidationError
     | ConnectionError
@@ -167,7 +167,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(201, components.Control$inboundSchema),
+    M.json(201, components.AuditorApiControl$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
