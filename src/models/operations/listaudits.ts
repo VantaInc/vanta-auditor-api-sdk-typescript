@@ -8,7 +8,10 @@ export type ListAuditsRequest = {
   pageSize?: number | undefined;
   pageCursor?: string | undefined;
   /**
-   * Includes all audits that have changed since changedSinceDate.
+   * Includes all audits that have changed since changedSinceDate, including
+   *
+   * @remarks
+   * soft-deleted audits whose deletionDate is on or after that timestamp.
    */
   changedSinceDate?: Date | undefined;
   /**
