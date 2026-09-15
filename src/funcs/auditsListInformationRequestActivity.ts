@@ -31,7 +31,14 @@ import { Result } from "../types/fp.js";
  *
  * @remarks
  * Retrieves a paginated list of activity logs for an information request, providing
- * a complete audit trail of all changes and actions.
+ * an audit trail of the changes and actions taken on it.
+ *
+ * Activity recording Vanta's automated preparation of a request is never returned by
+ * this endpoint, so `fillOutcome` is always null here. Some internal status transitions
+ * are also withheld, and those are removed after a page is selected, so a page can
+ * contain fewer entries than `pageSize` — or none at all — while more pages remain.
+ * Follow `results.pageInfo.hasNextPage` rather than treating a short or empty page as
+ * the end of the list.
  *
  * This endpoint supports delta synchronization via the `changedSinceDate` parameter,
  * allowing efficient polling for changes without retrieving the entire dataset.

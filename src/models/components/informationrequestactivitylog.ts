@@ -55,10 +55,13 @@ export const NewStatus = {
 export type NewStatus = ClosedEnum<typeof NewStatus>;
 
 /**
- * Result of an automated evidence fill.
+ * Result of an automated evidence fill. Always null: only evidence fill activities
  *
  * @remarks
- * Only populated for evidence fill activities. Null for all other activity types.
+ * could populate it, and those are never returned, so nothing can set it. Do not
+ * branch on it.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export const FillOutcome = {
   Success: "SUCCESS",
@@ -66,10 +69,13 @@ export const FillOutcome = {
   Failed: "FAILED",
 } as const;
 /**
- * Result of an automated evidence fill.
+ * Result of an automated evidence fill. Always null: only evidence fill activities
  *
  * @remarks
- * Only populated for evidence fill activities. Null for all other activity types.
+ * could populate it, and those are never returned, so nothing can set it. Do not
+ * branch on it.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type FillOutcome = ClosedEnum<typeof FillOutcome>;
 
@@ -78,10 +84,11 @@ export type FillOutcome = ClosedEnum<typeof FillOutcome>;
  *
  * @remarks
  *
- * The activity log provides a complete audit trail of all operations performed
- * on an information request, including status changes, evidence uploads, edits,
+ * The activity log provides an audit trail of operations performed on an
+ * information request, including status changes, evidence uploads, edits,
  * and evidence sharing. This enables tracking compliance activities and understanding
- * the request's history.
+ * the request's history. Which entries are visible depends on the endpoint returning
+ * them; see the endpoint's own description.
  */
 export type InformationRequestActivityLog = {
   /**
@@ -130,10 +137,13 @@ export type InformationRequestActivityLog = {
    */
   reason: string | null;
   /**
-   * Result of an automated evidence fill.
+   * Result of an automated evidence fill. Always null: only evidence fill activities
    *
    * @remarks
-   * Only populated for evidence fill activities. Null for all other activity types.
+   * could populate it, and those are never returned, so nothing can set it. Do not
+   * branch on it.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   fillOutcome: FillOutcome | null;
   /**

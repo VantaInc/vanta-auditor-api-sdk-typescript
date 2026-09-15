@@ -1,7 +1,10 @@
-# FillOutcome
+# ~~FillOutcome~~
 
-Result of an automated evidence fill.
-Only populated for evidence fill activities. Null for all other activity types.
+Result of an automated evidence fill. Always null: only evidence fill activities
+could populate it, and those are never returned, so nothing can set it. Do not
+branch on it.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ## Example Usage
 

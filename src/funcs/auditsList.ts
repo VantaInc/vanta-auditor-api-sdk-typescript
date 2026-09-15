@@ -38,9 +38,12 @@ import { Result } from "../types/fp.js";
  *
  * Each audit includes `segments`, the audit's scope. A live audit returns
  * every in-scope program and system segment; more than one segment does not
- * by itself imply more than one framework. Soft-deleted audits return an
- * empty list. The top-level `framework` field is deprecated; use `segments`
- * for in-scope frameworks.
+ * by itself imply more than one framework. The top-level `framework` field is
+ * deprecated; use `segments` for in-scope frameworks.
+ *
+ * This list may include soft-deleted audits so clients can reconcile
+ * deletions. Check `deletionDate`; a deleted audit has an empty `segments`
+ * list.
  *
  * Rate limit: 250 requests / minute.
  */

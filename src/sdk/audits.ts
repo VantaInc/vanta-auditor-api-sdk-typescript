@@ -76,9 +76,12 @@ export class Audits extends ClientSDK {
    *
    * Each audit includes `segments`, the audit's scope. A live audit returns
    * every in-scope program and system segment; more than one segment does not
-   * by itself imply more than one framework. Soft-deleted audits return an
-   * empty list. The top-level `framework` field is deprecated; use `segments`
-   * for in-scope frameworks.
+   * by itself imply more than one framework. The top-level `framework` field is
+   * deprecated; use `segments` for in-scope frameworks.
+   *
+   * This list may include soft-deleted audits so clients can reconcile
+   * deletions. Check `deletionDate`; a deleted audit has an empty `segments`
+   * list.
    *
    * Rate limit: 250 requests / minute.
    */
@@ -142,11 +145,12 @@ export class Audits extends ClientSDK {
    * `auditorRequestListMetadata` field. This field is only present for IRL-based audits
    * and will be `undefined` for standard audits.
    *
-   * The response includes `segments`, the audit's scope. A live audit returns
-   * every in-scope program and system segment; more than one segment does not
-   * by itself imply more than one framework. Soft-deleted audits return an
-   * empty list. The top-level `framework` field is deprecated; use `segments`
-   * for in-scope frameworks.
+   * The response includes `segments`, the audit's scope. It returns every
+   * in-scope program and system segment; more than one segment does not by
+   * itself imply more than one framework. The top-level `framework` field is
+   * deprecated; use `segments` for in-scope frameworks.
+   *
+   * This endpoint returns 404 for a soft-deleted audit.
    *
    * Rate limit: 250 requests / minute.
    */
@@ -806,7 +810,14 @@ export class Audits extends ClientSDK {
    *
    * @remarks
    * Retrieves a paginated list of activity logs for an information request, providing
-   * a complete audit trail of all changes and actions.
+   * an audit trail of the changes and actions taken on it.
+   *
+   * Activity recording Vanta's automated preparation of a request is never returned by
+   * this endpoint, so `fillOutcome` is always null here. Some internal status transitions
+   * are also withheld, and those are removed after a page is selected, so a page can
+   * contain fewer entries than `pageSize` — or none at all — while more pages remain.
+   * Follow `results.pageInfo.hasNextPage` rather than treating a short or empty page as
+   * the end of the list.
    *
    * This endpoint supports delta synchronization via the `changedSinceDate` parameter,
    * allowing efficient polling for changes without retrieving the entire dataset.
