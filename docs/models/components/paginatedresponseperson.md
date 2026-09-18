@@ -135,7 +135,7 @@ let value: PaginatedResponsePerson = {
       endCursor: "<value>",
       hasNextPage: true,
       hasPreviousPage: false,
-      startCursor: "<value>",
+      startCursor: null,
     },
   },
 };

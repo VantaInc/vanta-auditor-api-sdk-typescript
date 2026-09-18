@@ -12,7 +12,7 @@ let value: PaginatedResponsePersonnelGroup = {
       endCursor: "<value>",
       hasNextPage: true,
       hasPreviousPage: false,
-      startCursor: "<value>",
+      startCursor: null,
     },
   },
 };

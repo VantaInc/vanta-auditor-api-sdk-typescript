@@ -68,7 +68,7 @@ let value: PaginatedResponsePersonnelPersonResults = {
     endCursor: "<value>",
     hasNextPage: true,
     hasPreviousPage: false,
-    startCursor: "<value>",
+    startCursor: null,
   },
 };
 ```

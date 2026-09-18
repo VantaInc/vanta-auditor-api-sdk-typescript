@@ -4,10 +4,33 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AuditFocus, AuditFocus$inboundSchema } from "./auditfocus.js";
 import { AuditSegment, AuditSegment$inboundSchema } from "./auditsegment.js";
+
+/**
+ * Generation status of this audit's Vanta-generated information request list
+ *
+ * @remarks
+ * (IRL). `PENDING`/`RUNNING` defer initial sync, `READY` permits a full sync,
+ * and `FAILED` is terminal. Null means the audit has no generated IRL.
+ */
+export const IrlGenerationStatus = {
+  Pending: "PENDING",
+  Running: "RUNNING",
+  Ready: "READY",
+  Failed: "FAILED",
+} as const;
+/**
+ * Generation status of this audit's Vanta-generated information request list
+ *
+ * @remarks
+ * (IRL). `PENDING`/`RUNNING` defer initial sync, `READY` permits a full sync,
+ * and `FAILED` is terminal. Null means the audit has no generated IRL.
+ */
+export type IrlGenerationStatus = ClosedEnum<typeof IrlGenerationStatus>;
 
 /**
  * Metadata about the auditor request list. This field is only present for IRL (Information
@@ -94,6 +117,14 @@ export type Audit = {
   completionDate: Date | null;
   auditFocus: AuditFocus;
   /**
+   * Generation status of this audit's Vanta-generated information request list
+   *
+   * @remarks
+   * (IRL). `PENDING`/`RUNNING` defer initial sync, `READY` permits a full sync,
+   * and `FAILED` is terminal. Null means the audit has no generated IRL.
+   */
+  irlGenerationStatus: IrlGenerationStatus | null;
+  /**
    * Metadata about the auditor request list. This field is only present for IRL (Information
    *
    * @remarks
@@ -112,6 +143,11 @@ export type Audit = {
    */
   segments: Array<AuditSegment>;
 };
+
+/** @internal */
+export const IrlGenerationStatus$inboundSchema: z.ZodNativeEnum<
+  typeof IrlGenerationStatus
+> = z.nativeEnum(IrlGenerationStatus);
 
 /** @internal */
 export const AuditorRequestListMetadata$inboundSchema: z.ZodType<
@@ -167,6 +203,7 @@ export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
     auditFocus: AuditFocus$inboundSchema,
+    irlGenerationStatus: z.nullable(IrlGenerationStatus$inboundSchema),
     auditorRequestListMetadata: z.lazy(() =>
       AuditorRequestListMetadata$inboundSchema
     ).optional(),

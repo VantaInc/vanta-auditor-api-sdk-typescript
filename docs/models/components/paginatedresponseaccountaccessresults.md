@@ -23,7 +23,7 @@ let value: PaginatedResponseAccountAccessResults = {
     endCursor: "<value>",
     hasNextPage: true,
     hasPreviousPage: false,
-    startCursor: "<value>",
+    startCursor: null,
   },
 };
 ```

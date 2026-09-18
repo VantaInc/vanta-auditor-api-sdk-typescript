@@ -27,37 +27,15 @@ let value: Results = {
       modificationDate: new Date("2026-05-16T23:19:37.460Z"),
       completionDate: new Date("2024-01-21T00:38:09.443Z"),
       auditFocus: "EXTERNAL",
-      segments: [
-        {
-          id: "<id>",
-          kind: "SYSTEM",
-          displayName: "Dovie_Kerluke3",
-          framework: {
-            displayName: "Clyde57",
-          },
-          businessUnit: {
-            id: "<id>",
-            displayName: "Stacy90",
-          },
-          system: {
-            id: "<id>",
-            displayName: "Miller72",
-          },
-          soc2Deliverable: {
-            reportType: "soc2type2",
-            tscs: [
-              "AVAILABILITY",
-            ],
-          },
-        },
-      ],
+      irlGenerationStatus: "READY",
+      segments: [],
     },
   ],
   pageInfo: {
     endCursor: "<value>",
     hasNextPage: true,
     hasPreviousPage: false,
-    startCursor: "<value>",
+    startCursor: null,
   },
 };
 ```

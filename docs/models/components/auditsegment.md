@@ -19,21 +19,19 @@ let value: AuditSegment = {
   kind: "SYSTEM",
   displayName: "Carmelo1",
   framework: {
-    displayName: "Clyde57",
+    displayName: "Kory_Monahan",
   },
   businessUnit: {
     id: "<id>",
-    displayName: "Stacy90",
+    displayName: "Chelsea.Connelly",
   },
   system: {
     id: "<id>",
-    displayName: "Miller72",
+    displayName: "Brandi_Heidenreich63",
   },
   soc2Deliverable: {
     reportType: "soc2type2",
-    tscs: [
-      "AVAILABILITY",
-    ],
+    tscs: [],
   },
 };
 ```
