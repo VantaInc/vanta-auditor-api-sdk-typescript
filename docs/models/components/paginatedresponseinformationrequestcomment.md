@@ -22,7 +22,7 @@ let value: PaginatedResponseInformationRequestComment = {
       endCursor: "<value>",
       hasNextPage: true,
       hasPreviousPage: false,
-      startCursor: "<value>",
+      startCursor: null,
     },
   },
 };

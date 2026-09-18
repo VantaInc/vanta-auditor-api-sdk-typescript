@@ -22,30 +22,8 @@ let value: Audit = {
   modificationDate: new Date("2026-09-29T09:48:33.778Z"),
   completionDate: new Date("2025-12-12T11:36:52.607Z"),
   auditFocus: "EXTERNAL",
-  segments: [
-    {
-      id: "<id>",
-      kind: "SYSTEM",
-      displayName: "Dovie_Kerluke3",
-      framework: {
-        displayName: "Clyde57",
-      },
-      businessUnit: {
-        id: "<id>",
-        displayName: "Stacy90",
-      },
-      system: {
-        id: "<id>",
-        displayName: "Miller72",
-      },
-      soc2Deliverable: {
-        reportType: "soc2type2",
-        tscs: [
-          "AVAILABILITY",
-        ],
-      },
-    },
-  ],
+  irlGenerationStatus: "READY",
+  segments: [],
 };
 ```
 
@@ -69,5 +47,6 @@ let value: Audit = {
 | `modificationDate`                                                                                                                                                                                                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                                      | Timestamp when the audit was updated                                                                                                                                                                                                                                                                    |
 | `completionDate`                                                                                                                                                                                                                                                                                        | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                                                      | Timestamp when the audit was marked completed, and report was uploaded                                                                                                                                                                                                                                  |
 | `auditFocus`                                                                                                                                                                                                                                                                                            | [components.AuditFocus](../../models/components/auditfocus.md)                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                                                      | N/A                                                                                                                                                                                                                                                                                                     |
+| `irlGenerationStatus`                                                                                                                                                                                                                                                                                   | [components.IrlGenerationStatus](../../models/components/irlgenerationstatus.md)                                                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                                                                                                                                      | Generation status of this audit's Vanta-generated information request list<br/>(IRL). `PENDING`/`RUNNING` defer initial sync, `READY` permits a full sync,<br/>and `FAILED` is terminal. Null means the audit has no generated IRL.                                                                     |
 | `auditorRequestListMetadata`                                                                                                                                                                                                                                                                            | [components.AuditorRequestListMetadata](../../models/components/auditorrequestlistmetadata.md)                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                      | Metadata about the auditor request list. This field is only present for IRL (Information<br/>Request List) based audits and will be undefined for standard audits. Use the presence<br/>of this field to differentiate between IRL and non-IRL audits.                                                  |
 | `segments`                                                                                                                                                                                                                                                                                              | [components.AuditSegment](../../models/components/auditsegment.md)[]                                                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                                                                      | The audit's scope as a list of segments. Always present. A live audit<br/>returns every in-scope program and system segment; more than one segment<br/>does not by itself imply more than one framework. Soft-deleted audits<br/>return an empty list. Prefer this over the deprecated top-level `framework`<br/>field. |

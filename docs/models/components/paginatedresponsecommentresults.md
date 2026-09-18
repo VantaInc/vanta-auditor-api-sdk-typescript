@@ -11,7 +11,7 @@ let value: PaginatedResponseCommentResults = {
     endCursor: "<value>",
     hasNextPage: true,
     hasPreviousPage: false,
-    startCursor: "<value>",
+    startCursor: null,
   },
 };
 ```

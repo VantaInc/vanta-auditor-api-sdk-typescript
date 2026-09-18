@@ -47,7 +47,7 @@ let value: PaginatedResponseInformationRequestResults = {
     endCursor: "<value>",
     hasNextPage: true,
     hasPreviousPage: false,
-    startCursor: "<value>",
+    startCursor: null,
   },
 };
 ```
