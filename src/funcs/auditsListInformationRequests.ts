@@ -37,6 +37,14 @@ import { Result } from "../types/fp.js";
  * Clients should check the `deletionDate` field to identify and handle deleted records
  * appropriately in their systems.
  *
+ * This is the only endpoint that returns a deleted information request. No
+ * webhook fires when a request is deleted. Endpoints under
+ * `/audits/{auditId}/information-requests/{requestId}` return a 4xx HTTP error
+ * for a deleted request. To confirm deletion, check the request's `deletionDate`
+ * in this list. Deleting a request does not set `deletionDate` on its comments
+ * or evidence or send delete events for them. Once this list confirms the
+ * request was deleted, treat its comments and evidence as deleted too.
+ *
  * This endpoint supports delta synchronization via the `changedSinceDate` parameter,
  * allowing efficient polling for changes without retrieving the entire dataset.
  *

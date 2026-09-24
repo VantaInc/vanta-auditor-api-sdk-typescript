@@ -38,9 +38,10 @@ import { Result } from "../types/fp.js";
  * and handle deleted records appropriately in their systems.
  *
  * Evidence is only resolvable while its information request exists. Once the
- * request itself is deleted, this endpoint reports the request as not found —
- * matching `GET /audits/{auditId}/information-requests/{requestId}/evidence`.
- * Clients reconciling a deleted request should treat its evidence as gone with it.
+ * request itself is deleted, this endpoint returns a 4xx HTTP error instead
+ * of the evidence. Check the request's `deletionDate` using
+ * `GET /audits/{auditId}/information-requests` before treating its evidence
+ * as deleted too.
  *
  * Evidence that the customer has not shared with the auditor is reported as not
  * found, rather than distinguishing it from an ID that does not exist.

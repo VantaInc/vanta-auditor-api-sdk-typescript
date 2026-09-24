@@ -40,6 +40,9 @@ import { Result } from "../types/fp.js";
  * Follow `results.pageInfo.hasNextPage` rather than treating a short or empty page as
  * the end of the list.
  *
+ * If the information request has been deleted, this endpoint returns a 4xx
+ * HTTP error instead of its activity.
+ *
  * This endpoint supports delta synchronization via the `changedSinceDate` parameter,
  * allowing efficient polling for changes without retrieving the entire dataset.
  *
