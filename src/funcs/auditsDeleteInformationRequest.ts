@@ -39,8 +39,9 @@ import { Result } from "../types/fp.js";
  * - Retrieving deleted requests via `changedSinceDate` for synchronization
  *
  * After deletion:
- * - The request will not appear in normal list responses (without `changedSinceDate`)
- * - The request's `deletionDate` field will be populated
+ * - The request remains in list responses with `deletionDate` set, even when
+ *
+ *   `changedSinceDate` is omitted
  *
  * Rate limit: 50 requests / minute.
  */

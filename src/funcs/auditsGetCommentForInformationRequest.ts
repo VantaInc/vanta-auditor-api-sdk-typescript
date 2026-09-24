@@ -38,9 +38,11 @@ import { Result } from "../types/fp.js";
  * `GET /audits/{auditId}/information-requests/{requestId}/comments`, which
  * supports `changedSinceDate` and returns soft-deleted comments for delta sync.
  *
- * Comments remain fetchable when the parent information request has been
- * soft-deleted, so delayed webhook consumers can still resolve a comment ID
- * after the request is deleted.
+ * Comments are only resolvable while their information request exists. Once
+ * the request itself is deleted, this endpoint returns a 4xx HTTP error
+ * instead of the comment. Check the request's `deletionDate` using
+ * `GET /audits/{auditId}/information-requests` before treating its comments
+ * as deleted too.
  *
  * Rate limit: 50 requests / minute.
  */

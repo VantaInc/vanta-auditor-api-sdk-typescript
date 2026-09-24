@@ -34,8 +34,11 @@ import { Result } from "../types/fp.js";
  * audit management systems to fetch the latest state of a specific request without
  * paginating through the full list.
  *
- * Soft-deleted records (where `deletionDate !== null`) are included in the response.
- * Clients should check `deletionDate` to determine whether the request has been deleted.
+ * This endpoint returns a 4xx HTTP error for a soft-deleted information
+ * request. To confirm deletion, use
+ * `GET /audits/{auditId}/information-requests`, which supports
+ * `changedSinceDate` and includes soft-deleted requests with `deletionDate`
+ * set.
  *
  * Rate limit: 50 requests / minute.
  */

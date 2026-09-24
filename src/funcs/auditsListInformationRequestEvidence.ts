@@ -37,6 +37,9 @@ import { Result } from "../types/fp.js";
  * Clients should check the `deletionDate` field to identify and handle deleted records
  * appropriately in their systems.
  *
+ * If the information request itself has been deleted, this endpoint returns a
+ * 4xx HTTP error instead of its evidence.
+ *
  * This endpoint supports delta synchronization via the `changedSinceDate` parameter,
  * allowing efficient polling for changes without retrieving the entire dataset.
  *
