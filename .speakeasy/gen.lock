@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 2dd2cf0233920f20148f56b1e9f80210
+  docChecksum: 4661a3888331ae9c689b6ae38a1e475c
   docVersion: 1.0.0
-  speakeasyVersion: 1.798.0
-  generationVersion: 2.938.0
-  releaseVersion: 0.9.29
-  configChecksum: 5b90296472ddb37e34f01a8f34a05e87
+  speakeasyVersion: 1.799.0
+  generationVersion: 2.941.0
+  releaseVersion: 0.9.30
+  configChecksum: e89684f9e311ec8f68d2a39f3dc3b51e
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: 101f6722-7fb9-4fd3-9c3b-7a05aaca0675
-  pristine_commit_hash: bf239a25f830eb516f5936d2827a7995a8729c94
-  pristine_tree_hash: 93797528c7d4fb6ae1bc88c150c6343333abdc15
+  generation_id: 12cad0f5-fea9-4352-8eb9-bac5e375d563
+  pristine_commit_hash: c5466322c10398d9cd037ba258fd397eb6e4abfb
+  pristine_tree_hash: 0de22a015d51f9e8041e56fe58e763ca417c8233
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -1414,8 +1414,8 @@ trackedFiles:
     pristine_git_object: 83a3020aad9d8f36aba3095a73b3652e57979cb7
   docs/sdks/audits/README.md:
     id: b976aa226e19
-    last_write_checksum: sha1:c4b6a9de75e14f21ffd251b70fbd49df205c615a
-    pristine_git_object: 7ece3f958a9f7fe0c779ae89a5fabceb17b7ab29
+    last_write_checksum: sha1:0f02cbb3dd98e94715017a26bea83e0a7fa550dd
+    pristine_git_object: 55979b5dedd65b01c949ef71a8f5e2ba57a8717a
   eslint.config.mjs:
     id: 461c8d07f6da
     last_write_checksum: sha1:9398f326377fe47f67af2df6eb6370750c0790b4
@@ -1438,12 +1438,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:8b17ed0e56335360a14400e8ec957f8b392c29e6
-    pristine_git_object: 0c6e56b43a46fef4db85970e641e887134dcf4fe
+    last_write_checksum: sha1:dd4c6d73ddbf58cc8048d98adc405886bfff9a57
+    pristine_git_object: bee8a4d78539c2fff4291d30dbd4e2cec6905956
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:12ab793ca3f564780b0842e71a582adad9c4c311
-    pristine_git_object: 8483f3e9d8284300e14e27ed24dbd1802a6404e3
+    last_write_checksum: sha1:9c60975504d288927550b23f2f921d79401357ca
+    pristine_git_object: ecd260d19c37429970235ec665b43898403e83b7
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1674,8 +1674,8 @@ trackedFiles:
     pristine_git_object: 7d521c9643b750b561c6a82a10eedfa77c83c585
   src/funcs/auditsUpsertAssessmentForControl.ts:
     id: 28d7964a0a69
-    last_write_checksum: sha1:bdcafb517add7b283198bd6760f38021b16f48d1
-    pristine_git_object: fed1226b211451ea06b85217fe6bb7aa12a13111
+    last_write_checksum: sha1:f8c5e92b010028e656cc21a3b673d8dc58d54215
+    pristine_git_object: c752e7a4d9c064bee6ebee5023ae8f13e8bfd1e1
   src/hooks/hooks.ts:
     id: a2463fc6f69b
     last_write_checksum: sha1:9a569ea8f3177ddcdfe6cd903feaf5c2d2c36a9a
@@ -1698,8 +1698,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:1f19b43384fb6dd1e1c0d8516b4f23b33eb17336
-    pristine_git_object: b0cd10204350040e26dc68dbd201254a72d06e80
+    last_write_checksum: sha1:bed681409d0dfd6f937ffd9f64c21bd0444197be
+    pristine_git_object: 60aa8854dadaac0836937740eb46e289cede37a2
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2734,8 +2734,8 @@ trackedFiles:
     pristine_git_object: 5f4ee0ebc3a0501c1f4a385ad6f95ee4d2b167d1
   src/sdk/audits.ts:
     id: ab43f5ff5412
-    last_write_checksum: sha1:e43e5636e077f1a6c6a8ac11a2b937505bf73ef5
-    pristine_git_object: 87c8205f4fabc21ac3e77ff5b678aabf629d48e5
+    last_write_checksum: sha1:ce9f2326168c84605f3688f6c18f6fc39f5f1927
+    pristine_git_object: 331a117a254985d6b0a7799976adc9229ae24841
   src/sdk/index.ts:
     id: a857902a703f
     last_write_checksum: sha1:ed6d64f2a6135349aa8498b8d8cff9ba85c7fb8f
