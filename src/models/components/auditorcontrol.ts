@@ -84,15 +84,17 @@ export type AuditorControl = {
    */
   framework: string;
   /**
-   * Sections of a framework that this control satisfies
+   * Current framework sections this control satisfies within the audit
+   *
+   * @remarks
+   * segments in which it is in scope.
    */
   sections: Array<Section>;
   /**
-   * Audit segments in which this control is in scope. The array can be empty
+   * Audit segments in which this control is in scope. This can differ from
    *
    * @remarks
-   * when a control is linked directly to the audit but has no framework-section
-   * mapping.
+   * current framework mappings, and the array can be empty.
    */
   inScopeSegmentIds: Array<string>;
   /**
@@ -101,7 +103,7 @@ export type AuditorControl = {
    * @remarks
    * segment in which the control is in scope. More than one entry does not by
    * itself imply more than one framework. Populated only for IRL audits when
-   * the assessment feature is enabled; empty otherwise. Within an in-scope
+   * assessment access is allowed; empty otherwise. Within an in-scope
    * segment a control with no recorded assessment coerces to `NOT_ASSESSED`; a
    * segment the control is not in scope for contributes no entry.
    */
