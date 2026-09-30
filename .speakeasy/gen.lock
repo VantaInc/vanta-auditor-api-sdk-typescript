@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 4661a3888331ae9c689b6ae38a1e475c
+  docChecksum: ced10344824ce4d63508c22ce5e982b4
   docVersion: 1.0.0
   speakeasyVersion: 1.799.0
   generationVersion: 2.941.0
-  releaseVersion: 0.9.30
-  configChecksum: e89684f9e311ec8f68d2a39f3dc3b51e
+  releaseVersion: 0.9.31
+  configChecksum: 6f7aeabc5264ce3272a52e057f2b6661
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: 12cad0f5-fea9-4352-8eb9-bac5e375d563
-  pristine_commit_hash: c5466322c10398d9cd037ba258fd397eb6e4abfb
-  pristine_tree_hash: 0de22a015d51f9e8041e56fe58e763ca417c8233
+  generation_id: ecfb57c1-090d-450e-bfdd-21ddf915b034
+  pristine_commit_hash: c334edc9a0eea0363df3b38a7f3869b1cb3cb2bc
+  pristine_tree_hash: 91eac175d31a17cc56a13ed10e06058299897539
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -190,8 +190,8 @@ trackedFiles:
     pristine_git_object: 508b7a4dfd3d784d7281e9e2eba3bd93fa492bb1
   docs/models/components/auditorcontrol.md:
     id: 141c18464643
-    last_write_checksum: sha1:41a65eba0d82b228c6ba5d9f658dc8c1c3b55da6
-    pristine_git_object: fc162ec5eb8670bbc19274260c967ed7802ecf83
+    last_write_checksum: sha1:706fabfaab753c790add675d10826f8e6bcbef61
+    pristine_git_object: c5529f5abe0ee713e57375da01343f27a6eb12b6
   docs/models/components/auditorcontrolassessment.md:
     id: 8c1bd2fcea2f
     last_write_checksum: sha1:4622b3ace472d24dacea28f77fb576e4aa732fc9
@@ -1438,12 +1438,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:dd4c6d73ddbf58cc8048d98adc405886bfff9a57
-    pristine_git_object: bee8a4d78539c2fff4291d30dbd4e2cec6905956
+    last_write_checksum: sha1:8119afc51a5abe5d0c6f266566de1517fb9c3296
+    pristine_git_object: ee7c21995e73b7b0692a6ca00c5fa0df2d8514e4
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:9c60975504d288927550b23f2f921d79401357ca
-    pristine_git_object: ecd260d19c37429970235ec665b43898403e83b7
+    last_write_checksum: sha1:230ffdce4d0e1fc1b2e6ee464ab3f89c6cec8853
+    pristine_git_object: 42b5251d76b0645f4cba11fe2745b45405af721d
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1698,8 +1698,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:bed681409d0dfd6f937ffd9f64c21bd0444197be
-    pristine_git_object: 60aa8854dadaac0836937740eb46e289cede37a2
+    last_write_checksum: sha1:91c53fc5b4e8a15f93b6fe68ccdc8ddfb0d8fac8
+    pristine_git_object: 8904715b3c214e47326c7176f7f9ce495db72a6c
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -1846,8 +1846,8 @@ trackedFiles:
     pristine_git_object: 963667752d2577d475a5cde06b6ee0b75f19f491
   src/models/components/auditorcontrol.ts:
     id: 3b1b1a0a43ca
-    last_write_checksum: sha1:e90259c4a5cd971fe06a8b57666f04dd39c3d868
-    pristine_git_object: 9732aa5bdacd18d454d0c3f65a6813b0eb240e4b
+    last_write_checksum: sha1:caebdaf96d32723e124ae8951b20f746227d2e25
+    pristine_git_object: 2e291555c93df7f4699f39ba7108f06f48730529
   src/models/components/auditorcontrolassessment.ts:
     id: 5c6b92e429f7
     last_write_checksum: sha1:e12be8628b660eb70a2b29fccd8dea147adea497
