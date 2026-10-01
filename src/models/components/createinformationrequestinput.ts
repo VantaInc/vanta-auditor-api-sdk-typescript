@@ -95,7 +95,7 @@ export type CreateInformationRequestInput = {
    * @remarks
    * mapped from framework codes. Each must be the `id` of an existing control in
    * the customer's organization (the identifier returned by the controls endpoints).
-   * The request is rejected if any ID does not match a control.
+   * Unknown IDs and controls without an active mapping to a framework in the audit are skipped.
    * Omit or pass an empty array for no direct control links.
    */
   additionalControlIds?: Array<string> | undefined;

@@ -1,6 +1,6 @@
 {
   "name": "vanta-auditor-api-sdk",
-  "version": "0.9.31",
+  "version": "0.9.32",
   "author": "Speakeasy",
   "type": "module",
   "tshy": {
