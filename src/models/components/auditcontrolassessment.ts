@@ -12,26 +12,26 @@ import {
 } from "./auditcontrolassessmentstate.js";
 
 /**
- * An auditor's assessment of a control within one program segment of an audit.
+ * An auditor's assessment of a control within one audit segment. Assessments
  *
  * @remarks
- * A control in scope for more than one program segment can carry a distinct
- * assessment per segment; more than one assessment does not by itself imply
- * more than one framework. A segment with no recorded assessment coerces to
- * `NOT_ASSESSED` with a `null` justification.
+ * use `PROGRAM` segments when the audit has any, otherwise `SYSTEM` segments. A
+ * control can carry a distinct assessment per segment.
+ * A segment with no recorded assessment returns `NOT_ASSESSED` with a `null`
+ * justification.
  */
 export type AuditControlAssessment = {
   /**
-   * The audit program segment this assessment belongs to.
+   * The audit segment this assessment belongs to.
    */
   segmentId: string;
   /**
    * An auditor's assessment of a control within an audit. This is the full flat
    *
    * @remarks
-   * union of every framework's assessment states (the superset); a given audit's
-   * framework only uses its own subset. `NOT_ASSESSED` is shared by all
-   * frameworks and is the default for a control that has not yet been assessed.
+   * union of every framework's assessment states (the superset); the selected
+   * segment's framework determines which subset applies. `NOT_ASSESSED` is shared
+   * by all frameworks and is the default for a control that has not yet been assessed.
    *
    * Which states apply to which framework:
    * - Most frameworks (e.g. SOC 2): `IN_PLACE`, `NOT_IN_PLACE`, `PARTIAL`, `NOT_ASSESSED`

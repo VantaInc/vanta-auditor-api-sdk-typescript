@@ -98,14 +98,15 @@ export type AuditorControl = {
    */
   inScopeSegmentIds: Array<string>;
   /**
-   * The auditor's assessments of this control, with one entry for each program
+   * The auditor's assessments of this control, with one entry for each segment
    *
    * @remarks
-   * segment in which the control is in scope. More than one entry does not by
-   * itself imply more than one framework. Populated only for IRL audits when
-   * assessment access is allowed; empty otherwise. Within an in-scope
-   * segment a control with no recorded assessment coerces to `NOT_ASSESSED`; a
-   * segment the control is not in scope for contributes no entry.
+   * in `inScopeSegmentIds` that accepts assessments: the `PROGRAM` segments when
+   * the audit has any, otherwise its `SYSTEM` segments. On an audit with both,
+   * `SYSTEM` segments can appear in `inScopeSegmentIds` without an assessment
+   * entry. Populated only for IRL audits when assessment access is allowed;
+   * empty otherwise. A segment with no recorded assessment returns
+   * `NOT_ASSESSED`.
    */
   assessments: Array<AuditControlAssessment>;
 };

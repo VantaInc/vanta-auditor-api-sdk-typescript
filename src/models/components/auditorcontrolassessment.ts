@@ -12,10 +12,7 @@ import {
 } from "./auditcontrolassessmentstate.js";
 
 /**
- * A control's auditor assessment, as persisted. Returned by the assessment
- *
- * @remarks
- * write endpoint so the caller sees exactly what was recorded.
+ * A control's auditor assessment returned by the assessment write endpoint.
  */
 export type AuditorControlAssessment = {
   /**
@@ -23,16 +20,16 @@ export type AuditorControlAssessment = {
    */
   controlId: string;
   /**
-   * The program segment this assessment was written to.
+   * The audit segment this assessment was written to.
    */
   segmentId: string;
   /**
    * An auditor's assessment of a control within an audit. This is the full flat
    *
    * @remarks
-   * union of every framework's assessment states (the superset); a given audit's
-   * framework only uses its own subset. `NOT_ASSESSED` is shared by all
-   * frameworks and is the default for a control that has not yet been assessed.
+   * union of every framework's assessment states (the superset); the selected
+   * segment's framework determines which subset applies. `NOT_ASSESSED` is shared
+   * by all frameworks and is the default for a control that has not yet been assessed.
    *
    * Which states apply to which framework:
    * - Most frameworks (e.g. SOC 2): `IN_PLACE`, `NOT_IN_PLACE`, `PARTIAL`, `NOT_ASSESSED`
