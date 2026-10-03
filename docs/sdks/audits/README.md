@@ -687,22 +687,18 @@ control within an IRL audit — the API equivalent of assessing a control in
 the web app. Overwrites the assessment for this control in the chosen
 audit segment.
 
-Which segments accept assessments depends on the audit's segments (see
-`segments[].kind` on the audit). If the audit has any `PROGRAM` segments,
-`segmentId` must be one of them; `SYSTEM` segment IDs are rejected, even on
-an audit that also has system segments. If the audit has only `SYSTEM`
-segments, `segmentId` must be one of those. `segmentId` may be omitted only
-when exactly one segment accepts assessments. The `assessmentState` must be
-valid for that segment's framework (the request is rejected otherwise). The
-acting auditor is identified by `auditorEmail`, which must belong to the
-audit firm making the request.
+`segmentId` may be any segment on the audit, `PROGRAM` or `SYSTEM` (see
+`segments` on the audit). It may be omitted only when the audit has
+exactly one segment. The `assessmentState` must be valid for that
+segment's framework (the request is rejected otherwise). The acting
+auditor is identified by `auditorEmail`, which must belong to the audit
+firm making the request.
 
 Returns 404 when the control is not part of the audit or the auditor email
 does not resolve to a firm user. Returns 422 when `segmentId` is omitted
-but more than one segment accepts assessments, when `segmentId` is not a
-segment on this audit that accepts assessments, or when the control is not
-assigned to that segment for this audit. Applies to both Full and
-Controlled Audit View audits.
+on an audit with more than one segment, when `segmentId` is not a segment
+on this audit, or when the control is not assigned to that segment for
+this audit. Applies to both Full and Controlled Audit View audits.
 
 Rate limit: 10 requests / minute.
 
