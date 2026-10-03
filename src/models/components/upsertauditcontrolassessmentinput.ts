@@ -16,12 +16,11 @@ import {
  */
 export type UpsertAuditControlAssessmentInput = {
   /**
-   * The segment to assess. If the audit has any `PROGRAM` segments, this must be
+   * The segment to assess: any segment on the audit, `PROGRAM` or `SYSTEM`.
    *
    * @remarks
-   * one of them; `SYSTEM` segment IDs are rejected. If the audit has only
-   * `SYSTEM` segments, this must be one of those. May be omitted only when
-   * exactly one segment accepts assessments; required otherwise.
+   * May be omitted only when the audit has exactly one segment; required
+   * otherwise.
    */
   segmentId?: string | undefined;
   /**
