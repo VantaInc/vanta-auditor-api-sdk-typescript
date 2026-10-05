@@ -15,7 +15,7 @@ import {
  * An auditor's assessment of a control within one audit segment. Assessments
  *
  * @remarks
- * use `PROGRAM` segments when the audit has any, otherwise `SYSTEM` segments. A
+ * can be recorded for any segment on the audit, `PROGRAM` or `SYSTEM`, and a
  * control can carry a distinct assessment per segment.
  * A segment with no recorded assessment returns `NOT_ASSESSED` with a `null`
  * justification.

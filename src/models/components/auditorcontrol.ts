@@ -101,10 +101,8 @@ export type AuditorControl = {
    * The auditor's assessments of this control, with one entry for each segment
    *
    * @remarks
-   * in `inScopeSegmentIds` that accepts assessments: the `PROGRAM` segments when
-   * the audit has any, otherwise its `SYSTEM` segments. On an audit with both,
-   * `SYSTEM` segments can appear in `inScopeSegmentIds` without an assessment
-   * entry. Populated only for IRL audits when assessment access is allowed;
+   * in `inScopeSegmentIds`, which can be any segment on the audit, `PROGRAM` or
+   * `SYSTEM`. Populated only for IRL audits when assessment access is allowed;
    * empty otherwise. A segment with no recorded assessment returns
    * `NOT_ASSESSED`.
    */
