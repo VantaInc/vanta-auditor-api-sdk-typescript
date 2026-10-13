@@ -30,6 +30,13 @@ export type PersonnelGroup = {
    */
   name: string;
   /**
+   * IDs of the audit segments this group is in scope for.
+   *
+   * @remarks
+   * Omitted when segment scoping is disabled.
+   */
+  segmentIds?: Array<string> | undefined;
+  /**
    * Number of people in this group within the audit scope.
    */
   members?: number | undefined;
@@ -66,6 +73,7 @@ export const PersonnelGroup$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
+  segmentIds: z.array(z.string()).optional(),
   members: z.number().optional(),
   source: z.string().optional(),
   tasks: z.array(PersonnelGroupTask$inboundSchema).optional(),

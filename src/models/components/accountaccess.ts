@@ -37,6 +37,13 @@ export type AccountAccess = {
    */
   accountName: string;
   /**
+   * IDs of the audit segments this account is in scope for.
+   *
+   * @remarks
+   * Omitted when segment attribution is unavailable or scoping is disabled.
+   */
+  segmentIds?: Array<string> | undefined;
+  /**
    * Display name of the account owner, or null when the column is visible but unknown.
    */
   owner?: string | null | undefined;
@@ -76,6 +83,7 @@ export const AccountAccess$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   accountName: z.string(),
+  segmentIds: z.array(z.string()).optional(),
   owner: z.nullable(z.string()).optional(),
   role: z.array(z.string()).optional(),
   status: AccountAccessStatus$inboundSchema.optional(),

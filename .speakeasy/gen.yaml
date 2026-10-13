@@ -32,7 +32,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.9.34
+  version: 0.9.35
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -80,6 +80,7 @@ typescript:
   modelPropertyCasing: camel
   moduleFormat: dual
   multipartArrayFormat: legacy
+  numericEnumMemberNames: legacy
   outputModelSuffix: output
   packageName: vanta-auditor-api-sdk
   preApplyUnionDiscriminators: true

@@ -237,6 +237,13 @@ export type PersonnelPerson = {
    */
   email: string;
   /**
+   * IDs of the audit segments this person is in scope for.
+   *
+   * @remarks
+   * Omitted when segment scoping is disabled.
+   */
+  segmentIds?: Array<string> | undefined;
+  /**
    * Job title from HR system, or null if not available.
    */
   jobTitle?: string | null | undefined;
@@ -525,6 +532,7 @@ export const PersonnelPerson$inboundSchema: z.ZodType<
   id: z.string(),
   name: z.string(),
   email: z.string(),
+  segmentIds: z.array(z.string()).optional(),
   jobTitle: z.nullable(z.string()).optional(),
   employmentStatus: z.nullable(PersonnelPersonEmploymentStatus$inboundSchema)
     .optional(),

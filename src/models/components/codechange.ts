@@ -26,6 +26,13 @@ export type CodeChange = {
    */
   codeChange: string;
   /**
+   * IDs of the audit segments this code change is in scope for.
+   *
+   * @remarks
+   * Omitted when segment scoping is disabled.
+   */
+  segmentIds?: Array<string> | undefined;
+  /**
    * Code change identifier (e.g. PR number).
    */
   identifier?: string | undefined;
@@ -59,6 +66,7 @@ export const CodeChange$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   codeChange: z.string(),
+  segmentIds: z.array(z.string()).optional(),
   identifier: z.string().optional(),
   service: z.string().optional(),
   repository: z.string().optional(),

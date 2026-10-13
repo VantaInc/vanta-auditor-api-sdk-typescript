@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 3fd178c9a29d0ccd893dafa26107eb9d
+  docChecksum: befab777416e3a6b21f5087511416f42
   docVersion: 1.0.0
-  speakeasyVersion: 1.800.1
-  generationVersion: 2.943.0
-  releaseVersion: 0.9.34
-  configChecksum: 19ec5a5954fe0389afb85d4c598003f6
+  speakeasyVersion: 1.802.0
+  generationVersion: 2.948.4
+  releaseVersion: 0.9.35
+  configChecksum: e38006afbdf83d787bf3fda3754e5566
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: 0fda2843-7576-47fd-875f-e9be430de5b0
-  pristine_commit_hash: 10ff9691697749420c2287d82e54d9b5ea2f6696
-  pristine_tree_hash: 3db1793771cbd8bf2497a4c12ef185281b5cc5fc
+  generation_id: 61ab150b-5ebc-475c-88e1-0b233577ad65
+  pristine_commit_hash: 128c49f3bffc71a2e11d6e539388a751a35ad4c2
+  pristine_tree_hash: 96ff0d3efb513330d9f3544b95a776ed337fec7d
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -34,7 +34,7 @@ features:
     responseFormat: 0.3.0
     retries: 2.83.2
     sdkHooks: 0.4.0
-    unions: 2.86.7
+    unions: 2.86.8
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
@@ -90,8 +90,8 @@ trackedFiles:
     pristine_git_object: 90390059dd3f99e9ab42df99da7a44d6234e16cb
   docs/models/components/accountaccess.md:
     id: 66dbe73e329e
-    last_write_checksum: sha1:aa99cc6bd1cf5c4ddd641cc323d20e5ee5024277
-    pristine_git_object: c9ddac4f2b9864125e73f70a37e97ff7d4778c07
+    last_write_checksum: sha1:6554c506c65872600b5ccaa157cfb5de4beaf814
+    pristine_git_object: 8061437ec6a82f7e42d8d05253c22939bda39fce
   docs/models/components/accountaccessservice.md:
     id: 44ba647d883b
     last_write_checksum: sha1:81e099bf37170ed93b228488bde7990d7d6d643f
@@ -130,8 +130,8 @@ trackedFiles:
     pristine_git_object: ae635f0213a044dcd6b027f770a363a4c6303c94
   docs/models/components/audit.md:
     id: 17474a4db2bb
-    last_write_checksum: sha1:c4d1114bdcd14d3510f0689b48abc270f7d3c9a2
-    pristine_git_object: 2581fe79245bdbe1ddea66fb0e04ccca81276598
+    last_write_checksum: sha1:f8dc8ec19b25c2bb8fce80f56110dab383ac1c07
+    pristine_git_object: c04303d6171775a4998eb898e0a03d2be47ec882
   docs/models/components/auditcontrolassessment.md:
     id: c6a0c5895ceb
     last_write_checksum: sha1:ee4a698ac06bf7a1573698a1af8dd650177dd262
@@ -162,8 +162,8 @@ trackedFiles:
     pristine_git_object: b3caff0b17c7b3e477e6dabf00f6eeeedeec551f
   docs/models/components/auditintegration.md:
     id: 2cd177e893e5
-    last_write_checksum: sha1:ffb445005ab312f915e9072a971206199dcef0fc
-    pristine_git_object: 0c884429ab9fcf2e14f779402d45071955d9dac7
+    last_write_checksum: sha1:d35c83a7993de60608a2de6a678640d5bad8e69a
+    pristine_git_object: be9237fb2bd64fb676018e472e5487f171fb6f43
   docs/models/components/auditintegrationcategory.md:
     id: d8c3fe55af8d
     last_write_checksum: sha1:abeb1a423a7263f5da39ed77796e7bca68425a90
@@ -190,8 +190,8 @@ trackedFiles:
     pristine_git_object: 508b7a4dfd3d784d7281e9e2eba3bd93fa492bb1
   docs/models/components/auditorcontrol.md:
     id: 141c18464643
-    last_write_checksum: sha1:023c375aa066290bebe685fda61d369392a4032a
-    pristine_git_object: f75c3c778d0ea72e44bc0e75324520541071420b
+    last_write_checksum: sha1:c1935d03d1561eec72a354a25c5cd8f12f45ecee
+    pristine_git_object: 59dbc6670cace7c490e17f8ed0def256e4f21ce6
   docs/models/components/auditorcontrolassessment.md:
     id: 8c1bd2fcea2f
     last_write_checksum: sha1:0e267392d0681636e136cc93a4230d18f8b06341
@@ -250,8 +250,8 @@ trackedFiles:
     pristine_git_object: fc6967aa0e1a3f6e347998edaf9e553b6eb4df51
   docs/models/components/auditvendor.md:
     id: 32161c695c6c
-    last_write_checksum: sha1:49eb7b4124d32a6a7e73904cec5ed29256b31bae
-    pristine_git_object: 7019e7ca81d438c16333a33a4f538869d412041f
+    last_write_checksum: sha1:e86414dc08aa9a7b625be2dab08259d86579566e
+    pristine_git_object: 680923c6d62524fe0b7946d82789a9cbdcf9a010
   docs/models/components/auditvendorrisklevel.md:
     id: 4f210e26eb8b
     last_write_checksum: sha1:800682da2f8bbb37fbcb66aac11783017cd09c89
@@ -282,8 +282,8 @@ trackedFiles:
     pristine_git_object: a0443995f03d740c127c7105922449662a7dd1da
   docs/models/components/codechange.md:
     id: 2d684675c69e
-    last_write_checksum: sha1:6aac2b4ee75f6c80d643fcd21c50d0d32b8f94f4
-    pristine_git_object: 7e16b253064cab579d43c515dcfeb5663f696f3b
+    last_write_checksum: sha1:9673f95d1cda2dd935ad3b37d157cd8b82c70350
+    pristine_git_object: fa8fc78edf9ac797c2a55eead800fbc74c3315f8
   docs/models/components/comment.md:
     id: bf8c05d705cb
     last_write_checksum: sha1:4a9d3d7f502d4953c8a163a797da05a96c51e71f
@@ -454,8 +454,8 @@ trackedFiles:
     pristine_git_object: d72552dcfb03eed88beef85deefb0a3035b88901
   docs/models/components/frameworkcodes.md:
     id: f0e39fd66736
-    last_write_checksum: sha1:bf40d023bcd9dd00a3a81a1cc1a1474b79434a01
-    pristine_git_object: 1c5491e6f7f2e35f395db183a9d883b9e0e6186b
+    last_write_checksum: sha1:f91e6bf202e7b83289dd8154d4026357c5cfc2da
+    pristine_git_object: e69f6b5e6797b07658013c527410fef68652f17e
   docs/models/components/frameworkcodesbyframework.md:
     id: 46eeebc176ec
     last_write_checksum: sha1:d27d4de1e5ca691a80765ee745ee6d0e3ec17755
@@ -482,12 +482,12 @@ trackedFiles:
     pristine_git_object: 1fdbf1ec241045a5799cddacf70c47ca2210776c
   docs/models/components/informationrequest.md:
     id: 6fded8bb02ba
-    last_write_checksum: sha1:d93f3d56053081ef05af4a7d2c2a0361cc5f99a9
-    pristine_git_object: 27a749b5e96bed087fef2a2198b8dbd9693e7344
+    last_write_checksum: sha1:959aaf0fb63a10ce74716c83c8b1e315b1b65ccc
+    pristine_git_object: 761b969878196c144685d2a90cc62755c75898b9
   docs/models/components/informationrequestactivitylog.md:
     id: 1b794d9df4be
-    last_write_checksum: sha1:7c95a4ab869db60e4b9df7f090a07f7549e5142a
-    pristine_git_object: 27aaf0d3475b5e2651aba7641d9199036b815e6c
+    last_write_checksum: sha1:056f7a891e45299a97b2a7c69c13e89b574c8da7
+    pristine_git_object: cd05791d13a6934c6641cd2c18cd6e8a187ead15
   docs/models/components/informationrequestactivitytype.md:
     id: f6e68bffdd4e
     last_write_checksum: sha1:3f7f9c5851d75ddaa51b728ae7485d127ff27fa6
@@ -850,8 +850,8 @@ trackedFiles:
     pristine_git_object: e28125bbe606047b9f7ecb4167f5b041bdc9b129
   docs/models/components/partialupdateinformationrequest.md:
     id: e85bd491f6b2
-    last_write_checksum: sha1:a4e1895b6ddfe19c638c740be02b5fbff4b0f97e
-    pristine_git_object: 80c79f0390ab9ddddb0885384ca6b0a6b1cd133a
+    last_write_checksum: sha1:1416096a61810c7765319794d0d7b5662198925f
+    pristine_git_object: 176fc0ab9e3f9f3e7c9c50f14cbbff9450b83729
   docs/models/components/peopleemploymentstatus.md:
     id: 0619a5f8c88a
     last_write_checksum: sha1:73f882272ccb7b06981a68ebe7b72c367a4c3d1a
@@ -882,16 +882,16 @@ trackedFiles:
     pristine_git_object: 5fd87826bbbda1817bb651db760af375f3a6a0a0
   docs/models/components/personnelgroup.md:
     id: 5c7ef8963e48
-    last_write_checksum: sha1:328304b6d748e0d9a03135b2dd24a5fb32c3e628
-    pristine_git_object: 66dc89a745b1d404edc7fdb60f59b1e729d08170
+    last_write_checksum: sha1:1415f5cd66e4583d569cffb73781119f2d914819
+    pristine_git_object: a347295b06855eaa96b09e57429e803de69e8e3c
   docs/models/components/personnelgrouptask.md:
     id: 670d792b3fa5
     last_write_checksum: sha1:b56cd67c86ee41ce81383ad7b3d1cc7e863afd88
     pristine_git_object: fcdd036f5d22df2254bc75ff7378cfaf0203f58f
   docs/models/components/personnelperson.md:
     id: 17930cc34b08
-    last_write_checksum: sha1:bb33ad45dcdb561c7a00edd4f0f5c1771ce3ba09
-    pristine_git_object: 8e85b06f52ad7696b957c091c4fa9da51302e293
+    last_write_checksum: sha1:4dbd29cbee3db979c63499f4bd3e24d01248e073
+    pristine_git_object: b26562f9ccead38f61450500541984b248b0e679
   docs/models/components/personnelpersonemploymentstatus.md:
     id: f8624882f4f2
     last_write_checksum: sha1:a9f50b10c0312ef1714d4c04ecabc069cbc91503
@@ -1438,12 +1438,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:8569234ba50b274ee1a40941e4bcd39d55119c00
-    pristine_git_object: fe6116cc2ca73ec0af3acedf6389b738b39d0953
+    last_write_checksum: sha1:77ace87c88ce0763880f1c4336ac7550d253dc5d
+    pristine_git_object: 6261e8a8f5abdb1e18776121bebe9c1754863815
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:5804c163ea80e226e69a03d61d01381826b836ed
-    pristine_git_object: ff7ae36bbb750fe2f4310bedd5b1ca38f68e5c58
+    last_write_checksum: sha1:f16d4ee7e829c1e97175aa27f354741e37d70934
+    pristine_git_object: 3840e9d8821b1fa44de59734dfa936aaf4829f89
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1698,8 +1698,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:4979fb39767cfd17ecadc21a6c6569666daf4059
-    pristine_git_object: 51cfa09653090afed82f40e1651d9e15882e2e30
+    last_write_checksum: sha1:9116d97843926bfcc61a096e2b151c577b4c6ef6
+    pristine_git_object: bb78bbc85d14c5eeae33f546e7df8bb248b127b4
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -1758,8 +1758,8 @@ trackedFiles:
     pristine_git_object: 9a9e30682009e6c089ffd1e84d24f8c5a4dd07bc
   src/models/components/accountaccess.ts:
     id: a91cf7f07c8a
-    last_write_checksum: sha1:b8c5385e3f420179aba979463a5ca4f6300db538
-    pristine_git_object: 1c41865dc7d3f933a511f6470ab70ef5496b5670
+    last_write_checksum: sha1:3e74608ccfc510b30be89bfedc6faee13329e1a6
+    pristine_git_object: 783d3537f554360d17b1ebe9baa6b1c65d192f1a
   src/models/components/accountaccessservice.ts:
     id: 262d23adbcc6
     last_write_checksum: sha1:e2a9a2273df6aa69d9f7b7e20d11be7b17024ed7
@@ -1822,8 +1822,8 @@ trackedFiles:
     pristine_git_object: c411ff2338843e95b74f47640b841590fd249153
   src/models/components/auditintegration.ts:
     id: d7d1c8254717
-    last_write_checksum: sha1:0e9eb2b2780863ec00acf5387eb6072051d85373
-    pristine_git_object: 24125f5cb25a427da9213cf24bd2dd7ee09cddad
+    last_write_checksum: sha1:102a8a47317276d75becde77ceae4882738c9f1f
+    pristine_git_object: f67cbcbe86e11c8b62d282ed5f2155eb0912c661
   src/models/components/auditintegrationcategory.ts:
     id: 64f3c99b2312
     last_write_checksum: sha1:cd530f0b6b667f4dbd99a192468ba1239afc002a
@@ -1898,8 +1898,8 @@ trackedFiles:
     pristine_git_object: 76ad0c302fca529e4a9123ce5a3a60ddf2487e7b
   src/models/components/auditvendor.ts:
     id: b4c6bfe2b6fd
-    last_write_checksum: sha1:c27e46e663044b1d71df7919c71a2f204713ba59
-    pristine_git_object: b8572a900b2e6f523bdeeda1ddbe19a84b841b11
+    last_write_checksum: sha1:5c0f7481cc6d0eb1d117a54dbd4f1afdeafe4103
+    pristine_git_object: 96558d06cfcae810b41fd33808853188f752ab18
   src/models/components/auditvendorrisklevel.ts:
     id: f3046765eb92
     last_write_checksum: sha1:1f211205c7b9debc0173ea2a93778d4f7a928160
@@ -1910,8 +1910,8 @@ trackedFiles:
     pristine_git_object: ed464a807448801c0acc72e447b14d4742f59f7f
   src/models/components/codechange.ts:
     id: 83f2f678af2b
-    last_write_checksum: sha1:3f4dfbce3ff4dc240161fe45037af0978e3d6192
-    pristine_git_object: 8a42834c587ae5175d3db0acb35eb504f3263239
+    last_write_checksum: sha1:5158269c169b42838a5d3113b2c87bdb63a5a530
+    pristine_git_object: d4a8da9858c4b41eb927e560b7ede86a1f6bddd5
   src/models/components/comment.ts:
     id: 007fc6319a32
     last_write_checksum: sha1:acdb9920c11eff2348ec1a94041a746c6abd573c
@@ -2278,16 +2278,16 @@ trackedFiles:
     pristine_git_object: 0a58a582c0b57ed4d3612a051d85346fdfa868bc
   src/models/components/personnelgroup.ts:
     id: a61907a22713
-    last_write_checksum: sha1:c5f880f18a7278c8d4b773a9b9741d434f4f3dcd
-    pristine_git_object: a4ef285c2ba8f7700eaaf0ae012d1445d4a25e62
+    last_write_checksum: sha1:d29f6eb786f0a21ace919003355ca7a1596de0a5
+    pristine_git_object: f338da56ee4b7b2f497e3394985b1baa5f4bdca1
   src/models/components/personnelgrouptask.ts:
     id: 11304a37744c
     last_write_checksum: sha1:c7c66fd4effc2c0b794bde2a7b76b251b7626ff3
     pristine_git_object: 53a3895f53db1beecb5e7dc9106b5de1650b503c
   src/models/components/personnelperson.ts:
     id: b9aa485185c3
-    last_write_checksum: sha1:010cbef06a7c6c932f319d17074be5ca80375af1
-    pristine_git_object: 14bf51d2fee9468f24aa2420c0d8f3622c93b22d
+    last_write_checksum: sha1:366bd05abb699a1cfc2e1a5299c789e5bb60fa05
+    pristine_git_object: c73c4742d50b205789ba6e5edff0b1ce18d2c5fa
   src/models/components/recurrenceduration.ts:
     id: 1e8fb32549c8
     last_write_checksum: sha1:2fe005acd667483f7c31bca60bd2e31498275d59
@@ -3094,7 +3094,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "code_change_12345", "codeChange": "fix-auth-bug", "identifier": "101", "service": "github", "repository": "vanta/obsidian", "openedAt": "2025-01-25T14:30:00.000Z", "closedAt": "2025-03-25T14:30:00.000Z"}], "pageInfo": {"endCursor": "code_change_12345", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "code_change_12345"}}}
+          application/json: {"results": {"data": [{"id": "code_change_12345", "codeChange": "fix-auth-bug", "segmentIds": ["5f2c939a52855e725c8d5825"], "identifier": "101", "service": "github", "repository": "vanta/obsidian", "openedAt": "2025-01-25T14:30:00.000Z", "closedAt": "2025-03-25T14:30:00.000Z"}], "pageInfo": {"endCursor": "code_change_12345", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "code_change_12345"}}}
   ListVendors:
     Example 1:
       parameters:
@@ -3104,7 +3104,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5824", "name": "Acme Corp", "inherentRisk": "HIGH", "status": "ACTIVE", "findings": 3, "lastReviewedCompleted": "2025-01-15T10:00:00.000Z", "nextSecurityReviewDueDate": "2025-07-15T10:00:00.000Z", "vendorCategory": "SaaS", "residualRisk": "HIGH", "dataAgreements": {"total": 2, "complete": 1}}], "pageInfo": {"endCursor": "5f2c939a52855e725c8d5824", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "5f2c939a52855e725c8d5824"}}}
+          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5824", "name": "Acme Corp", "segmentIds": ["5f2c939a52855e725c8d5825"], "inherentRisk": "HIGH", "status": "ACTIVE", "findings": 3, "lastReviewedCompleted": "2025-01-15T10:00:00.000Z", "nextSecurityReviewDueDate": "2025-07-15T10:00:00.000Z", "vendorCategory": "SaaS", "residualRisk": "HIGH", "dataAgreements": {"total": 2, "complete": 1}}], "pageInfo": {"endCursor": "5f2c939a52855e725c8d5824", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "5f2c939a52855e725c8d5824"}}}
   ListAccountAccessServices:
     Example 1:
       parameters:
@@ -3125,7 +3125,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5824", "accountName": "john.doe@example.com", "owner": "John Doe", "role": ["Admin"], "status": "ACTIVE", "mfa": true, "createdDate": "2024-01-15T10:30:00.000Z", "deactivatedDate": null}], "pageInfo": {"endCursor": null, "hasNextPage": false, "hasPreviousPage": false, "startCursor": null}}}
+          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5824", "accountName": "john.doe@example.com", "segmentIds": ["5f2c939a52855e725c8d5825"], "owner": "John Doe", "role": ["Admin"], "status": "ACTIVE", "mfa": true, "createdDate": "2024-01-15T10:30:00.000Z", "deactivatedDate": null}], "pageInfo": {"endCursor": null, "hasNextPage": false, "hasPreviousPage": false, "startCursor": null}}}
   ListPersonnelGroups:
     Example 1:
       parameters:
@@ -3135,7 +3135,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5824", "name": "Engineering", "members": 42, "source": "Okta", "tasks": [{"name": "Security Training"}, {"name": "Policy Acceptance"}], "tasksLastUpdated": "2024-06-15T10:30:00.000Z", "pointOfContact": "Jane Doe"}], "pageInfo": {"endCursor": "5f2c939a52855e725c8d5824", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "5f2c939a52855e725c8d5824"}}}
+          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5824", "name": "Engineering", "segmentIds": ["5f2c939a52855e725c8d5825"], "members": 42, "source": "Okta", "tasks": [{"name": "Security Training"}, {"name": "Policy Acceptance"}], "tasksLastUpdated": "2024-06-15T10:30:00.000Z", "pointOfContact": "Jane Doe"}], "pageInfo": {"endCursor": "5f2c939a52855e725c8d5824", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "5f2c939a52855e725c8d5824"}}}
   ListPersonnelPeople:
     Example 1:
       parameters:
@@ -3145,7 +3145,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "person_12345", "name": "John Doe", "email": "john.doe@example.com", "jobTitle": "Software Engineer", "employmentStatus": "CURRENTLY_EMPLOYED", "startDate": "2021-01-15", "endDate": null, "groups": [{"name": "Engineering"}, {"name": "Admin"}], "source": {"mainSource": "Okta", "supplementarySource": "Google Workspace"}, "taskStatus": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20", "numTasksCompleted": null, "numTasksOverdue": null, "numTasksDueSoon": null}, "lastReminded": "2024-01-15", "policies": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "trainings": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "backgroundChecks": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "deviceMonitoring": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "customOnboarding": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "customOffboarding": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}}], "pageInfo": {"endCursor": "person_12345", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "person_12345"}}}
+          application/json: {"results": {"data": [{"id": "person_12345", "name": "John Doe", "email": "john.doe@example.com", "segmentIds": ["5f2c939a52855e725c8d5825"], "jobTitle": "Software Engineer", "employmentStatus": "CURRENTLY_EMPLOYED", "startDate": "2021-01-15", "endDate": null, "groups": [{"name": "Engineering"}, {"name": "Admin"}], "source": {"mainSource": "Okta", "supplementarySource": "Google Workspace"}, "taskStatus": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20", "numTasksCompleted": null, "numTasksOverdue": null, "numTasksDueSoon": null}, "lastReminded": "2024-01-15", "policies": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "trainings": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "backgroundChecks": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "deviceMonitoring": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "customOnboarding": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}, "customOffboarding": {"status": "SECURITY_TASKS_COMPLETE", "dueDate": "2024-03-15", "completionDate": "2024-01-20"}}], "pageInfo": {"endCursor": "person_12345", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "person_12345"}}}
   ListRiskSnapshots:
     Example 1:
       parameters:
@@ -3279,7 +3279,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "github", "name": "GitHub", "tags": ["Vulnerabilities", "Code changes"], "categories": ["Version control systems"]}], "pageInfo": {"endCursor": "github", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "github"}}}
+          application/json: {"results": {"data": [{"id": "github", "name": "GitHub", "segmentIds": ["5f2c939a52855e725c8d5825"], "tags": ["Vulnerabilities", "Code changes"], "categories": ["Version control systems"]}], "pageInfo": {"endCursor": "github", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "github"}}}
   GetOrganizationInformation:
     Example 1:
       parameters:

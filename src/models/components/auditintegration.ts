@@ -25,6 +25,13 @@ export type AuditIntegration = {
    */
   name: string;
   /**
+   * IDs of the audit segments this integration is in scope for.
+   *
+   * @remarks
+   * Omitted when segment scoping is disabled.
+   */
+  segmentIds?: Array<string> | undefined;
+  /**
    * Integration tag display names describing what data this integration provides.
    */
   tags?: Array<string> | undefined;
@@ -42,6 +49,7 @@ export const AuditIntegration$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
+  segmentIds: z.array(z.string()).optional(),
   tags: z.array(z.string()).optional(),
   categories: z.array(z.string()).optional(),
 });
