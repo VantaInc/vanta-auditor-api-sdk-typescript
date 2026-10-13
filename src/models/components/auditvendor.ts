@@ -66,6 +66,13 @@ export type AuditVendor = {
    * Vendor name.
    */
   name: string;
+  /**
+   * IDs of the audit segments this vendor is in scope for.
+   *
+   * @remarks
+   * Omitted when segment scoping is disabled.
+   */
+  segmentIds?: Array<string> | undefined;
   inherentRisk?: AuditVendorRiskLevel | undefined;
   status?: AuditVendorStatus | undefined;
   /**
@@ -132,6 +139,7 @@ export const AuditVendor$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
+  segmentIds: z.array(z.string()).optional(),
   inherentRisk: AuditVendorRiskLevel$inboundSchema.optional(),
   status: AuditVendorStatus$inboundSchema.optional(),
   findings: z.number().optional(),
