@@ -72,8 +72,10 @@ import { Result } from "../types/fp.js";
  *
  * Sort order cannot be customized via query parameters.
  *
- * Returns 422 when the audit does not have exactly one program segment
- * (multi-framework audits are not supported on this endpoint).
+ * Returns 404 when `serviceId` is not listed by the
+ * `/personnel/account-access/services` endpoint for this audit.
+ *
+ * Audits with system segments are not supported by this endpoint.
  *
  * Rate limit: 10 requests / minute.
  */
