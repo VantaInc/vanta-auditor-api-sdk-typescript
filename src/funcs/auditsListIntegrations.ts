@@ -49,6 +49,9 @@ import { Result } from "../types/fp.js";
  * Results are sorted by integration display name (ascending). This sort order
  * is fixed and cannot be customized via query parameters.
  *
+ * Supports audits with one or more program segments.
+ * Audits with system segments are not supported by this endpoint.
+ *
  * Rate limit: 10 requests / minute.
  */
 export function auditsListIntegrations(

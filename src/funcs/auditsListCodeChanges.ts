@@ -48,8 +48,10 @@ import { Result } from "../types/fp.js";
  * Results are sorted by closed date (newest first). This sort order is
  * fixed and cannot be customized via query parameters.
  *
- * Returns 422 when the audit does not have exactly one program segment
- * (multi-framework audits are not supported on this endpoint).
+ * On an audit that covers more than one framework, each code change in
+ * scope for any of the audit's frameworks is returned once.
+ *
+ * Audits with system segments are not supported by this endpoint.
  *
  * Rate limit: 10 requests / minute.
  */

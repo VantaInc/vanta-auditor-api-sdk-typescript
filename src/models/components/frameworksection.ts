@@ -5,9 +5,15 @@
 import * as z from "zod/v3";
 import { FrameworkId, FrameworkId$outboundSchema } from "./frameworkid.js";
 
+/**
+ * The framework's id, such as `soc2` or the id of a custom framework. The `FrameworkId` enum values are deprecated aliases that are still accepted.
+ */
 export type FrameworkSectionFrameworkId = FrameworkId | string;
 
 export type FrameworkSection = {
+  /**
+   * The framework's id, such as `soc2` or the id of a custom framework. The `FrameworkId` enum values are deprecated aliases that are still accepted.
+   */
   frameworkId: FrameworkId | string;
   sectionId: string;
 };

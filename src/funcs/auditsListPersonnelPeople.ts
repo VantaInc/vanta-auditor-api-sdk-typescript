@@ -50,6 +50,9 @@ import { Result } from "../types/fp.js";
  * 2. Check `results.pageInfo.hasNextPage`
  * 3. Use `results.pageInfo.endCursor` as `pageCursor` for next request
  *
+ * Supports audits with one or more program segments.
+ * Audits with system segments are not supported by this endpoint.
+ *
  * Rate limit: 10 requests / minute.
  */
 export function auditsListPersonnelPeople(

@@ -47,8 +47,10 @@ import { Result } from "../types/fp.js";
  * Results are returned in connection order. Sort order is not guaranteed
  * and cannot be customized via query parameters.
  *
- * Returns 422 when the audit does not have exactly one program segment
- * (multi-framework audits are not supported on this endpoint).
+ * On an audit that covers more than one framework, each service in scope
+ * for any of the audit's frameworks is listed once.
+ *
+ * Audits with system segments are not supported by this endpoint.
  *
  * Rate limit: 10 requests / minute.
  */
