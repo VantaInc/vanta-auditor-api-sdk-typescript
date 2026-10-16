@@ -19,15 +19,15 @@ let value: AuditSegment = {
   kind: "SYSTEM",
   displayName: "Carmelo1",
   framework: {
-    displayName: "Kory_Monahan",
+    displayName: "Cindy_Jerde20",
   },
   businessUnit: {
     id: "<id>",
-    displayName: "Chelsea.Connelly",
+    displayName: "Ruthe.Reichert31",
   },
   system: {
     id: "<id>",
-    displayName: "Brandi_Heidenreich63",
+    displayName: "Jayde_Boyle",
   },
   soc2Deliverable: {
     reportType: "soc2type2",

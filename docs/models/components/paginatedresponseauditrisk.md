@@ -40,9 +40,9 @@ let value: PaginatedResponseAuditRisk = {
     ],
     pageInfo: {
       endCursor: "<value>",
-      hasNextPage: true,
-      hasPreviousPage: false,
-      startCursor: null,
+      hasNextPage: false,
+      hasPreviousPage: true,
+      startCursor: "<value>",
     },
   },
 };

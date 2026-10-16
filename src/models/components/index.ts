@@ -42,6 +42,7 @@ export * from "./auditsoc2tsc.js";
 export * from "./auditvendor.js";
 export * from "./auditvendorrisklevel.js";
 export * from "./auditvendorstatus.js";
+export * from "./auditview.js";
 export * from "./codechange.js";
 export * from "./comment.js";
 export * from "./completebackgroundcheckstasksummary.js";

@@ -37,6 +37,10 @@ import { Result } from "../types/fp.js";
  *
  * Sorting and pagination are not applicable.
  *
+ * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+ * audits are rejected with 403. Returns 403 if the customer has not made
+ * this population page visible to auditors.
+ *
  * Rate limit: 10 requests / minute.
  */
 export function auditsGetOrganizationInformation(
