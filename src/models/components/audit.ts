@@ -9,6 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AuditFocus, AuditFocus$inboundSchema } from "./auditfocus.js";
 import { AuditSegment, AuditSegment$inboundSchema } from "./auditsegment.js";
+import { AuditView, AuditView$inboundSchema } from "./auditview.js";
 
 /**
  * Generation status of this audit's Vanta-generated information request list
@@ -116,6 +117,7 @@ export type Audit = {
    */
   completionDate: Date | null;
   auditFocus: AuditFocus;
+  auditView: AuditView;
   /**
    * Generation status of this audit's Vanta-generated information request list
    *
@@ -203,6 +205,7 @@ export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
     auditFocus: AuditFocus$inboundSchema,
+    auditView: AuditView$inboundSchema,
     irlGenerationStatus: z.nullable(IrlGenerationStatus$inboundSchema),
     auditorRequestListMetadata: z.lazy(() =>
       AuditorRequestListMetadata$inboundSchema

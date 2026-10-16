@@ -38,8 +38,11 @@ import { Result } from "../types/fp.js";
  * (Compliance, Vendors, Access Reviews, Trust Center).
  *
  * The response is a single aggregate object per domain. Sorting and
- * pagination are not applicable. Under a controlled audit view
- * (TRIMMED_DOWN), only CAV-approved fields are included.
+ * pagination are not applicable. Only CAV-approved fields are included.
+ *
+ * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+ * audits are rejected with 403. Returns 403 if the customer has not made
+ * this population page visible to auditors.
  *
  * Rate limit: 10 requests / minute.
  */

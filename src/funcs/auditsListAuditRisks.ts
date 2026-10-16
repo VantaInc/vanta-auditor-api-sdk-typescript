@@ -36,9 +36,6 @@ import { Result } from "../types/fp.js";
  * during an audit engagement. Risk data is scoped to a specific risk
  * assessment snapshot identified by the `snapshotId` parameter.
  *
- * Only Controlled Audit View (CAV) audits are supported. Full Audit
- * View audits are rejected with 403.
- *
  * Supports filtering by:
  * - `search`: Searches risk scenario descriptions (case-insensitive)
  *
@@ -53,6 +50,13 @@ import { Result } from "../types/fp.js";
  *
  * Supports audits with one or more program segments.
  * Audits with system segments are not supported by this endpoint.
+ *
+ * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+ * audits are rejected with 403. Returns 403 if the customer has not made
+ * this population page visible to auditors. Also returns 403 if the
+ * snapshot is not shared with auditors, and 404 if the snapshot does not
+ * exist. Use snapshot IDs from `GET /audits/{auditId}/risks/snapshots`,
+ * which lists only snapshots shared with auditors.
  *
  * Rate limit: 10 requests / minute.
  */

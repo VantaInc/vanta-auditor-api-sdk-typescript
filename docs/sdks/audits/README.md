@@ -369,6 +369,10 @@ scope for any of the audit's frameworks is returned once.
 
 Audits with system segments are not supported by this endpoint.
 
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
+
 Rate limit: 10 requests / minute.
 
 ### Example Usage
@@ -3461,6 +3465,10 @@ is fixed and cannot be customized via query parameters.
 Supports audits with one or more program segments.
 Audits with system segments are not supported by this endpoint.
 
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
+
 Rate limit: 10 requests / minute.
 
 ### Example Usage
@@ -3738,6 +3746,10 @@ Uses cursor-based pagination. To paginate:
 Supports audits with one or more program segments.
 Audits with system segments are not supported by this endpoint.
 
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
+
 Rate limit: 10 requests / minute.
 
 ### Example Usage
@@ -3904,6 +3916,10 @@ business information visible to auditors during an audit engagement.
 
 Sorting and pagination are not applicable.
 
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
+
 Rate limit: 10 requests / minute.
 
 ### Example Usage
@@ -3985,8 +4001,11 @@ reminder settings, and external notification subscriptions
 (Compliance, Vendors, Access Reviews, Trust Center).
 
 The response is a single aggregate object per domain. Sorting and
-pagination are not applicable. Under a controlled audit view
-(TRIMMED_DOWN), only CAV-approved fields are included.
+pagination are not applicable. Only CAV-approved fields are included.
+
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
 
 Rate limit: 10 requests / minute.
 
@@ -4164,6 +4183,10 @@ for any of the audit's frameworks is listed once.
 
 Audits with system segments are not supported by this endpoint.
 
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
+
 Rate limit: 10 requests / minute.
 
 ### Example Usage
@@ -4285,6 +4308,10 @@ Returns 404 when `serviceId` is not listed by the
 
 Audits with system segments are not supported by this endpoint.
 
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
+
 Rate limit: 10 requests / minute.
 
 ### Example Usage
@@ -4367,9 +4394,6 @@ during an audit engagement. Groups represent organizational units that
 contain people, either imported from an identity provider (IDP) or
 created manually in Vanta.
 
-Only Controlled Audit View (CAV) audits are supported. Full Audit
-View audits are rejected with 403.
-
 Supports filtering by:
 - `search`: Searches group names (case-insensitive)
 - `sourcesMatchesAny`: Filters by IDP source service names
@@ -4385,6 +4409,10 @@ Uses cursor-based pagination. To paginate:
 
 Supports audits with one or more program segments.
 Audits with system segments are not supported by this endpoint.
+
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
 
 Rate limit: 10 requests / minute.
 
@@ -4462,8 +4490,7 @@ run();
 Retrieves people population data for an audit.
 
 This endpoint provides access to the people records visible to auditors
-during an audit engagement. Only Controlled Audit View (CAV) audits
-are supported. Full Audit View audits are rejected with 403.
+during an audit engagement.
 
 Supports filtering by:
 - `search`: Searches names and email addresses
@@ -4481,6 +4508,10 @@ Uses cursor-based pagination. To paginate:
 
 Supports audits with one or more program segments.
 Audits with system segments are not supported by this endpoint.
+
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
 
 Rate limit: 10 requests / minute.
 
@@ -4574,6 +4605,10 @@ Uses cursor-based pagination. To paginate:
 Supports audits with one or more program segments.
 Audits with system segments are not supported by this endpoint.
 
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors.
+
 Rate limit: 10 requests / minute.
 
 ### Example Usage
@@ -4653,9 +4688,6 @@ This endpoint provides access to the risk records visible to auditors
 during an audit engagement. Risk data is scoped to a specific risk
 assessment snapshot identified by the `snapshotId` parameter.
 
-Only Controlled Audit View (CAV) audits are supported. Full Audit
-View audits are rejected with 403.
-
 Supports filtering by:
 - `search`: Searches risk scenario descriptions (case-insensitive)
 
@@ -4670,6 +4702,13 @@ Uses cursor-based pagination. To paginate:
 
 Supports audits with one or more program segments.
 Audits with system segments are not supported by this endpoint.
+
+Only Controlled Audit View (CAV) audits are supported. Full Audit View
+audits are rejected with 403. Returns 403 if the customer has not made
+this population page visible to auditors. Also returns 403 if the
+snapshot is not shared with auditors, and 404 if the snapshot does not
+exist. Use snapshot IDs from `GET /audits/{auditId}/risks/snapshots`,
+which lists only snapshots shared with auditors.
 
 Rate limit: 10 requests / minute.
 

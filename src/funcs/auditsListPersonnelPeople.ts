@@ -33,8 +33,7 @@ import { Result } from "../types/fp.js";
  * Retrieves people population data for an audit.
  *
  * This endpoint provides access to the people records visible to auditors
- * during an audit engagement. Only Controlled Audit View (CAV) audits
- * are supported. Full Audit View audits are rejected with 403.
+ * during an audit engagement.
  *
  * Supports filtering by:
  * - `search`: Searches names and email addresses
@@ -52,6 +51,10 @@ import { Result } from "../types/fp.js";
  *
  * Supports audits with one or more program segments.
  * Audits with system segments are not supported by this endpoint.
+ *
+ * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+ * audits are rejected with 403. Returns 403 if the customer has not made
+ * this population page visible to auditors.
  *
  * Rate limit: 10 requests / minute.
  */

@@ -192,6 +192,10 @@ export class Audits extends ClientSDK {
    *
    * Audits with system segments are not supported by this endpoint.
    *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
+   *
    * Rate limit: 10 requests / minute.
    */
   async listCodeChanges(
@@ -1178,6 +1182,10 @@ export class Audits extends ClientSDK {
    * Supports audits with one or more program segments.
    * Audits with system segments are not supported by this endpoint.
    *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
+   *
    * Rate limit: 10 requests / minute.
    */
   async listIntegrations(
@@ -1287,6 +1295,10 @@ export class Audits extends ClientSDK {
    * Supports audits with one or more program segments.
    * Audits with system segments are not supported by this endpoint.
    *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
+   *
    * Rate limit: 10 requests / minute.
    */
   async listVendors(
@@ -1341,6 +1353,10 @@ export class Audits extends ClientSDK {
    *
    * Sorting and pagination are not applicable.
    *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
+   *
    * Rate limit: 10 requests / minute.
    */
   async getOrganizationInformation(
@@ -1366,8 +1382,11 @@ export class Audits extends ClientSDK {
    * (Compliance, Vendors, Access Reviews, Trust Center).
    *
    * The response is a single aggregate object per domain. Sorting and
-   * pagination are not applicable. Under a controlled audit view
-   * (TRIMMED_DOWN), only CAV-approved fields are included.
+   * pagination are not applicable. Only CAV-approved fields are included.
+   *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
    *
    * Rate limit: 10 requests / minute.
    */
@@ -1433,6 +1452,10 @@ export class Audits extends ClientSDK {
    *
    * Audits with system segments are not supported by this endpoint.
    *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
+   *
    * Rate limit: 10 requests / minute.
    */
   async listAccountAccessServices(
@@ -1497,6 +1520,10 @@ export class Audits extends ClientSDK {
    *
    * Audits with system segments are not supported by this endpoint.
    *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
+   *
    * Rate limit: 10 requests / minute.
    */
   async listPersonnelAccountAccess(
@@ -1521,9 +1548,6 @@ export class Audits extends ClientSDK {
    * contain people, either imported from an identity provider (IDP) or
    * created manually in Vanta.
    *
-   * Only Controlled Audit View (CAV) audits are supported. Full Audit
-   * View audits are rejected with 403.
-   *
    * Supports filtering by:
    * - `search`: Searches group names (case-insensitive)
    * - `sourcesMatchesAny`: Filters by IDP source service names
@@ -1539,6 +1563,10 @@ export class Audits extends ClientSDK {
    *
    * Supports audits with one or more program segments.
    * Audits with system segments are not supported by this endpoint.
+   *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
    *
    * Rate limit: 10 requests / minute.
    */
@@ -1560,8 +1588,7 @@ export class Audits extends ClientSDK {
    * Retrieves people population data for an audit.
    *
    * This endpoint provides access to the people records visible to auditors
-   * during an audit engagement. Only Controlled Audit View (CAV) audits
-   * are supported. Full Audit View audits are rejected with 403.
+   * during an audit engagement.
    *
    * Supports filtering by:
    * - `search`: Searches names and email addresses
@@ -1579,6 +1606,10 @@ export class Audits extends ClientSDK {
    *
    * Supports audits with one or more program segments.
    * Audits with system segments are not supported by this endpoint.
+   *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
    *
    * Rate limit: 10 requests / minute.
    */
@@ -1616,6 +1647,10 @@ export class Audits extends ClientSDK {
    * Supports audits with one or more program segments.
    * Audits with system segments are not supported by this endpoint.
    *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors.
+   *
    * Rate limit: 10 requests / minute.
    */
   async listRiskSnapshots(
@@ -1639,9 +1674,6 @@ export class Audits extends ClientSDK {
    * during an audit engagement. Risk data is scoped to a specific risk
    * assessment snapshot identified by the `snapshotId` parameter.
    *
-   * Only Controlled Audit View (CAV) audits are supported. Full Audit
-   * View audits are rejected with 403.
-   *
    * Supports filtering by:
    * - `search`: Searches risk scenario descriptions (case-insensitive)
    *
@@ -1656,6 +1688,13 @@ export class Audits extends ClientSDK {
    *
    * Supports audits with one or more program segments.
    * Audits with system segments are not supported by this endpoint.
+   *
+   * Only Controlled Audit View (CAV) audits are supported. Full Audit View
+   * audits are rejected with 403. Returns 403 if the customer has not made
+   * this population page visible to auditors. Also returns 403 if the
+   * snapshot is not shared with auditors, and 404 if the snapshot does not
+   * exist. Use snapshot IDs from `GET /audits/{auditId}/risks/snapshots`,
+   * which lists only snapshots shared with auditors.
    *
    * Rate limit: 10 requests / minute.
    */
