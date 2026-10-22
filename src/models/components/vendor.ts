@@ -14,6 +14,10 @@ import {
   VendorDecisionStatus$inboundSchema,
 } from "./vendordecisionstatus.js";
 import {
+  VendorRelationshipSummary,
+  VendorRelationshipSummary$inboundSchema,
+} from "./vendorrelationshipsummary.js";
+import {
   VendorRiskLevel,
   VendorRiskLevel$inboundSchema,
 } from "./vendorrisklevel.js";
@@ -364,6 +368,33 @@ export type LinkedTaskTrackerTaskProcurementRequest = {
   service: string;
 };
 
+/**
+ * The parent vendor of this engagement, or null when there is no accessible parent.
+ */
+export type ParentVendor = {
+  /**
+   * The vendor's unique ID.
+   */
+  id: string;
+  /**
+   * The vendor's display name.
+   */
+  name: string;
+  /**
+   * The current state of a vendor:
+   *
+   * @remarks
+   * - MANAGED: The vendor is actively managed.
+   * - ARCHIVED: The vendor has been archived
+   * - IN_PROCUREMENT: The vendor is in the procurement process
+   */
+  status: VendorStatus;
+  /**
+   * The vendor's website URL, or null when none is set.
+   */
+  websiteUrl: string | null;
+};
+
 export type Vendor = {
   /**
    * The vendor's unique ID.
@@ -494,6 +525,18 @@ export type Vendor = {
   linkedTaskTrackerTaskProcurementRequest:
     | LinkedTaskTrackerTaskProcurementRequest
     | null;
+  /**
+   * Child vendors managed as engagements of this vendor, sorted by name.
+   *
+   * @remarks
+   * Includes accessible managed, in-procurement, and archived engagements.
+   * Empty when there are none.
+   */
+  engagements?: Array<VendorRelationshipSummary> | undefined;
+  /**
+   * The parent vendor of this engagement, or null when there is no accessible parent.
+   */
+  parentVendor?: ParentVendor | null | undefined;
 };
 
 /** @internal */
@@ -616,6 +659,28 @@ export function linkedTaskTrackerTaskProcurementRequestFromJSON(
 }
 
 /** @internal */
+export const ParentVendor$inboundSchema: z.ZodType<
+  ParentVendor,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  name: z.string(),
+  status: VendorStatus$inboundSchema,
+  websiteUrl: z.nullable(z.string()),
+});
+
+export function parentVendorFromJSON(
+  jsonString: string,
+): SafeParseResult<ParentVendor, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ParentVendor$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ParentVendor' from JSON`,
+  );
+}
+
+/** @internal */
 export const Vendor$inboundSchema: z.ZodType<Vendor, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string(),
@@ -657,6 +722,9 @@ export const Vendor$inboundSchema: z.ZodType<Vendor, z.ZodTypeDef, unknown> = z
     linkedTaskTrackerTaskProcurementRequest: z.nullable(
       z.lazy(() => LinkedTaskTrackerTaskProcurementRequest$inboundSchema),
     ),
+    engagements: z.array(VendorRelationshipSummary$inboundSchema).optional(),
+    parentVendor: z.nullable(z.lazy(() => ParentVendor$inboundSchema))
+      .optional(),
   });
 
 export function vendorFromJSON(
