@@ -178,6 +178,7 @@ export * from "./vantatestsnapshotrawtestdatarow.js";
 export * from "./vendor.js";
 export * from "./vendordecisionstatus.js";
 export * from "./vendororderby.js";
+export * from "./vendorrelationshipsummary.js";
 export * from "./vendorrisklevel.js";
 export * from "./vendorstatus.js";
 export * from "./vulnerabilityremediation.js";
