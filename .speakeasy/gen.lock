@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 2c78ca39784c39ddb8ddce26d142355a
+  docChecksum: 42e58e79052f6906fb9dac9eafd265e5
   docVersion: 1.0.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.9.38
-  configChecksum: 286fe8ef6d1a985295288a6a9067ab3d
+  releaseVersion: 0.9.39
+  configChecksum: c15655602eb37bdf7c2a5f0d010be142
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: b2a629e6-6aad-414f-9647-8750d93f4248
-  pristine_commit_hash: bad4cfb084be3537aa78cf2691d2290fa46386ae
-  pristine_tree_hash: 1302070e1c7afce50bc8aa322d3dd6ae314ce9c2
+  generation_id: b30de644-4229-4239-9214-5458d23ea98c
+  pristine_commit_hash: 21fb5c2e51f30c6da68bb0ec45a7e03497098833
+  pristine_tree_hash: fed89978bf5d22fce4642e53e965ad03460f86cf
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -250,8 +250,8 @@ trackedFiles:
     pristine_git_object: fc6967aa0e1a3f6e347998edaf9e553b6eb4df51
   docs/models/components/auditvendor.md:
     id: 32161c695c6c
-    last_write_checksum: sha1:e86414dc08aa9a7b625be2dab08259d86579566e
-    pristine_git_object: 680923c6d62524fe0b7946d82789a9cbdcf9a010
+    last_write_checksum: sha1:1b42b12a83b2702cd586c980b69f2cc13c6b221c
+    pristine_git_object: 907861dad238da3ac839a569ea50ec278b9f3fe5
   docs/models/components/auditvendorrisklevel.md:
     id: 4f210e26eb8b
     last_write_checksum: sha1:800682da2f8bbb37fbcb66aac11783017cd09c89
@@ -1154,8 +1154,8 @@ trackedFiles:
     pristine_git_object: f01b24445874b1813034ba98086b8067a6e3323a
   docs/models/components/vendor.md:
     id: ddb3daa8815d
-    last_write_checksum: sha1:c5b5cfc684fdfadb5c5ed425a13fe0d92260cc07
-    pristine_git_object: db1d20b7b0a805a635246a673301710cf246de9a
+    last_write_checksum: sha1:4148b7fc9d167512e05c7227ebf26a2a89d4d0bc
+    pristine_git_object: c1d3d69243ce316d46524d409e04b78571bfd498
   docs/models/components/vendordecisionstatus.md:
     id: 503e61604834
     last_write_checksum: sha1:8a6baf2a36fd2c0fa5d30542f04c31a297bb3322
@@ -1450,12 +1450,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:c1287e5dba67b65a807d2c235991c25e86e009d2
-    pristine_git_object: 6baf028a17e7784bbac7f1945e0c3acf21d9c154
+    last_write_checksum: sha1:7fc85561c6048bfcfecb5e95ea4bacd02192cef3
+    pristine_git_object: 48b9d8479dbba1502114c3349b701e37f2ee76fa
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:b358582caff1ba25fd1ea39f99b059db293ca34c
-    pristine_git_object: 78e9122afac6599369ceae782fe39633ff6d63f9
+    last_write_checksum: sha1:70eb9a0e6835d6918fa3329815f4e9c93afbb37a
+    pristine_git_object: d906dd00bc221ffea33185e96923bf8e0b5ba9ea
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1710,8 +1710,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:3c14e622ee7bc3296b32bc38090ff3bb076c72a8
-    pristine_git_object: d7d4a11c6838fb3b5e05b085a59982b342bdc5e5
+    last_write_checksum: sha1:02119c57cca993e87b5a7775a60f67a286a4617a
+    pristine_git_object: 965e6a608db7a59387df570f88ffa6aeea16c605
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -1910,8 +1910,8 @@ trackedFiles:
     pristine_git_object: 76ad0c302fca529e4a9123ce5a3a60ddf2487e7b
   src/models/components/auditvendor.ts:
     id: b4c6bfe2b6fd
-    last_write_checksum: sha1:5c0f7481cc6d0eb1d117a54dbd4f1afdeafe4103
-    pristine_git_object: 96558d06cfcae810b41fd33808853188f752ab18
+    last_write_checksum: sha1:24e59c161bec584da6f6d43d2fc6f5ca44e85b77
+    pristine_git_object: b10eb9abd086e7af33747e5871647537cc5b2fd6
   src/models/components/auditvendorrisklevel.ts:
     id: f3046765eb92
     last_write_checksum: sha1:1f211205c7b9debc0173ea2a93778d4f7a928160
@@ -2458,8 +2458,8 @@ trackedFiles:
     pristine_git_object: 42da401cd25ce0b72668c7b398d675f07b6f1864
   src/models/components/vendor.ts:
     id: deb92b583dca
-    last_write_checksum: sha1:e02566a2f49618fee426f336656449a3dede119d
-    pristine_git_object: f7190a9e104690d34974c93d7175e63659340fde
+    last_write_checksum: sha1:06c6ceec2b359bde183d835423382c903f7fc0c8
+    pristine_git_object: 5def3279708335d7b80e4ce75f784c187ea4ffbb
   src/models/components/vendordecisionstatus.ts:
     id: 85eb73e95985
     last_write_checksum: sha1:1066314d707e27813eacc35fc3581aabf63a4957
@@ -3124,7 +3124,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5824", "name": "Acme Corp", "segmentIds": ["5f2c939a52855e725c8d5825"], "inherentRisk": "HIGH", "status": "ACTIVE", "findings": 3, "lastReviewedCompleted": "2025-01-15T10:00:00.000Z", "nextSecurityReviewDueDate": "2025-07-15T10:00:00.000Z", "vendorCategory": "SaaS", "residualRisk": "HIGH", "dataAgreements": {"total": 2, "complete": 1}}], "pageInfo": {"endCursor": "5f2c939a52855e725c8d5824", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "5f2c939a52855e725c8d5824"}}}
+          application/json: {"results": {"data": [{"id": "5f2c939a52855e725c8d5824", "name": "Acme Corp", "segmentIds": ["5f2c939a52855e725c8d5825"], "inherentRisk": "HIGH", "status": "ACTIVE", "findings": 3, "lastReviewedCompleted": "2025-01-15T10:00:00.000Z", "nextSecurityReviewDueDate": "2025-07-15T10:00:00.000Z", "vendorCategory": "SaaS", "vendorCategoryId": "5f2c939a52855e725c8d5826", "residualRisk": "HIGH", "dataAgreements": {"total": 2, "complete": 1}}], "pageInfo": {"endCursor": "5f2c939a52855e725c8d5824", "hasNextPage": true, "hasPreviousPage": false, "startCursor": "5f2c939a52855e725c8d5824"}}}
   ListAccountAccessServices:
     Example 1:
       parameters:

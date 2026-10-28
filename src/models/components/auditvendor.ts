@@ -89,8 +89,14 @@ export type AuditVendor = {
   nextSecurityReviewDueDate?: Date | null | undefined;
   /**
    * Vendor category (e.g. cloud provider, SaaS).
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   vendorCategory?: string | null | undefined;
+  /**
+   * ID of the vendor's category.
+   */
+  vendorCategoryId?: string | null | undefined;
   /**
    * Residual risk level of the vendor.
    *
@@ -150,6 +156,7 @@ export const AuditVendor$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   vendorCategory: z.nullable(z.string()).optional(),
+  vendorCategoryId: z.nullable(z.string()).optional(),
   residualRisk: z.nullable(ResidualRisk$inboundSchema).optional(),
   dataAgreements: z.nullable(z.lazy(() => DataAgreements$inboundSchema))
     .optional(),
