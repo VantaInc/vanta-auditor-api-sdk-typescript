@@ -526,10 +526,11 @@ export type Vendor = {
     | LinkedTaskTrackerTaskProcurementRequest
     | null;
   /**
-   * Child vendors managed as engagements of this vendor, sorted by name.
+   * A product, service, or subsidiary you use from a vendor. Each engagement
    *
    * @remarks
-   * Includes accessible managed, in-procurement, and archived engagements.
+   * belongs to one parent vendor, has its own risk score and assessments, and
+   * cannot have engagements of its own. Returned engagements are sorted by name.
    * Empty when there are none.
    */
   engagements?: Array<VendorRelationshipSummary> | undefined;
