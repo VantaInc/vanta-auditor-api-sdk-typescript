@@ -43,6 +43,8 @@ export type VantaTestEvidenceFile = {
  * Vanta Tests are automated compliance tests with metadata like test status,
  * execution time, and file type. Tests generate evidence files that can be
  * workpapers, raw data, or API request logs.
+ * Each file in a snapshot is returned as a separate evidence item. These
+ * items share `testId` and `snapshotId` and differ by `fileType`.
  */
 export type VantaTestEvidence = {
   /**

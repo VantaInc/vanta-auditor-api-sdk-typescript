@@ -25,6 +25,8 @@ import { VendorStatus, VendorStatus$inboundSchema } from "./vendorstatus.js";
 
 /**
  * The vendor's category.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type Category = {
   displayName: string;
@@ -465,7 +467,13 @@ export type Vendor = {
    */
   riskAttributeIds: Array<string>;
   /**
+   * The ID of the vendor's category.
+   */
+  categoryId: string | null;
+  /**
    * The vendor's category.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   category: Category | null;
   /**
@@ -711,6 +719,7 @@ export const Vendor$inboundSchema: z.ZodType<Vendor, z.ZodTypeDef, unknown> = z
     isVisibleToAuditors: z.nullable(z.boolean()),
     isRiskAutoScored: z.nullable(z.boolean()),
     riskAttributeIds: z.array(z.string()),
+    categoryId: z.nullable(z.string()),
     category: z.nullable(z.lazy(() => Category$inboundSchema)),
     authDetails: z.lazy(() => AuthDetails$inboundSchema),
     status: VendorStatus$inboundSchema,
