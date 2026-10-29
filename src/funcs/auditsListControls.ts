@@ -101,6 +101,7 @@ async function $do(
     "externalIdMatchesAny": payload.externalIdMatchesAny,
     "pageCursor": payload.pageCursor,
     "pageSize": payload.pageSize,
+    "segmentIdsMatchesAny": payload.segmentIdsMatchesAny,
   });
 
   const headers = new Headers(compactMap({

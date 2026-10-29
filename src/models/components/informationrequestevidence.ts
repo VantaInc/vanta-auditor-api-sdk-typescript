@@ -20,6 +20,10 @@ export type InformationRequestEvidence = {
    * The unique identifier for the evidence within Vanta's system.
    *
    * @remarks
+   * Use it as the key when you sync evidence of any type.
+   * Each evidence item has at most one file. A file attached to two
+   * information requests appears as two evidence items with
+   * different IDs.
    * Format: ObjectId as a string (e.g., "6890e473dce1da5d8406f5e7").
    */
   id: string;

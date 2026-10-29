@@ -12,6 +12,16 @@ export type ListAuditControlsRequest = {
    * Filter controls whose externalId matches any of the provided values (exact, case-sensitive match).
    */
   externalIdMatchesAny?: Array<string> | undefined;
+  /**
+   * Return only controls whose `inScopeSegmentIds` include at least one of
+   *
+   * @remarks
+   * these segment IDs from the audit's `segments[].id` (exact,
+   * case-sensitive). IDs that aren't segments on this audit match nothing.
+   * Repeat the parameter for several IDs, and send the same filters with
+   * every `pageCursor`.
+   */
+  segmentIdsMatchesAny?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -20,6 +30,7 @@ export type ListAuditControlsRequest$Outbound = {
   pageSize: number;
   pageCursor?: string | undefined;
   externalIdMatchesAny?: Array<string> | undefined;
+  segmentIdsMatchesAny?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -32,6 +43,7 @@ export const ListAuditControlsRequest$outboundSchema: z.ZodType<
   pageSize: z.number().int().default(10),
   pageCursor: z.string().optional(),
   externalIdMatchesAny: z.array(z.string()).optional(),
+  segmentIdsMatchesAny: z.array(z.string()).optional(),
 });
 
 export function listAuditControlsRequestToJSON(

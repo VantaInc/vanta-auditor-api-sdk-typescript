@@ -1037,6 +1037,17 @@ export class Audits extends ClientSDK {
    * 4. Process updates, including soft-deletes (deletionDate !== null)
    * 5. Update your last sync timestamp to the current time
    *
+   * Identifying evidence and files:
+   * - Use `id` as the key for each evidence item, whatever its type.
+   * - To recognize the same file across information requests, use the
+   *
+   *   file key for the evidence type. UPLOADED_DOCUMENT uses `evidence.id`.
+   *   VANTA_DOCUMENT and VANTA_POLICY use `evidence.file.id`, which
+   *   identifies the source document or policy file. VANTA_TEST uses
+   *   `evidence.snapshotId` plus `evidence.fileType`. LINK, OBSERVATION,
+   *   and VANTA_TEST_SNAPSHOT evidence has no file.
+   * - Do not use `file.url` as a key. It is a temporary download link.
+   *
    * Rate limit: 50 requests / minute.
    */
   async listInformationRequestEvidence(
