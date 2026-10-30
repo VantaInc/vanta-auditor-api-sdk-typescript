@@ -16,9 +16,9 @@ let value: VantaPolicyEvidence = {
   policyVersionId: "<id>",
   policyVersionFileId: "<id>",
   file: {
-    effectiveOrCreationDate: new Date("2024-02-19T17:41:10.303Z"),
-    locale: "it",
-    url: "https://private-rim.biz",
+    effectiveOrCreationDate: new Date("2024-03-07T04:28:48.688Z"),
+    locale: "zh",
+    url: "https://exotic-ferret.com/",
     mimeType: "<value>",
     id: "<id>",
   },

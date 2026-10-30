@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: 7e0d0ca49a5208d4513d3b2107ee1018
+  docChecksum: 2186245c5293613240dd91e3dee2e3c9
   docVersion: 1.0.0
   speakeasyVersion: 1.803.1
   generationVersion: 2.950.2
-  releaseVersion: 0.9.40
-  configChecksum: e7716b87c57327f1f41b0082d0daaed5
+  releaseVersion: 0.9.41
+  configChecksum: bde6d7bef51503ba15fe5e808a79c04c
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: 8bca7fd6-a30c-4d4a-8d96-26080e3b82e3
-  pristine_commit_hash: b115b980d82df4027ef75caa2ee634351c4fd19f
-  pristine_tree_hash: 5a94fa5e4e6e78b431c07e7439a68ae90427ff55
+  generation_id: 6344473e-b2f3-41ec-ae7f-e5139851d43a
+  pristine_commit_hash: 694114754840702d51a3bf1ac7d729c5b86eee3b
+  pristine_tree_hash: a2f0a03da5e71defbabdc2693892e150fa42d3cf
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -510,12 +510,12 @@ trackedFiles:
     pristine_git_object: 67b6abfb7d10a8106d4a4284073658628e201cde
   docs/models/components/informationrequestevidence.md:
     id: d28a923841d8
-    last_write_checksum: sha1:b69d80d3547f345469d710dc350015bc7375fdd4
-    pristine_git_object: 43324c29fdd7a0592e87ae5fca141413d273a202
+    last_write_checksum: sha1:c6a553db485abffae8d64fa3733f78526a62bf3a
+    pristine_git_object: e68c353631caac3163c82d49f10651e0033adc24
   docs/models/components/informationrequestevidenceunion.md:
     id: 3e922499a66f
-    last_write_checksum: sha1:e87da59aa6a240998577b069e9c219edbf9dc1de
-    pristine_git_object: 050bfa92117c792139bc7a06c9de3e54a28c9037
+    last_write_checksum: sha1:e4ba966a0e9c9ea83235f8d8dbb139fa2726c8d2
+    pristine_git_object: 2d0e79821144a30692ba6e116fc7516f09b49742
   docs/models/components/informationrequestsupportedevidencetype.md:
     id: 560e8115a47b
     last_write_checksum: sha1:a3f83c0092511fa9af3bcb65f4c5156f6ce47937
@@ -778,8 +778,8 @@ trackedFiles:
     pristine_git_object: 86278b0dacff27c4ca7204f26d03daaecc10a9fb
   docs/models/components/paginatedresponseinformationrequestevidence.md:
     id: 9167d147e99d
-    last_write_checksum: sha1:a477840bec7905294218b9ecf01ab2abffb80958
-    pristine_git_object: 6fdeedfba06ac242d94e52a25d9ebc3607e68607
+    last_write_checksum: sha1:0f0503ff40d931e68f47f619685a8fca7d9974e9
+    pristine_git_object: 170e44a679caaf74ee5e27e5b09af03cbcf8e6fe
   docs/models/components/paginatedresponseinformationrequestevidenceresults.md:
     id: a1b3163fe671
     last_write_checksum: sha1:ff1363312a8941265f62f3fa76a5a8f620a1648c
@@ -1094,16 +1094,16 @@ trackedFiles:
     pristine_git_object: d6a902e8277cb338adb0bb5e2b5676533b8635e4
   docs/models/components/vantapolicyevidence.md:
     id: 8acf4119ffc2
-    last_write_checksum: sha1:b69d499bd6f6834cf2e58c45d666f41835389852
-    pristine_git_object: f52b7149c2d4712c2e8bb67002b0268d6a1a94b2
+    last_write_checksum: sha1:9d28dd4b353dc7057a4890402c802cd0dc51800f
+    pristine_git_object: ebd6b968fbfbff2113868f57f5c9d8572d451a52
   docs/models/components/vantapolicyevidencefile.md:
     id: 356a7e7b0a56
     last_write_checksum: sha1:9285b2ccf1432f38a4594001f0330a94e3fac00b
     pristine_git_object: 824a31b346dfc3c787e65e5ded838782bcffa4da
   docs/models/components/vantatestevidence.md:
     id: 8477b3e28f26
-    last_write_checksum: sha1:102bb1b1698bab78e82a9ce13ca4bf215daa2fe8
-    pristine_git_object: 0a8bb8459b79ac72cd467fa848ea6e285868a5f3
+    last_write_checksum: sha1:91afa2bbc3e94b6479d7bfa2ff80247ed4703491
+    pristine_git_object: 050789bebdc7c365d82dfd1c49c4ac89b3c4c26b
   docs/models/components/vantatestevidencefile.md:
     id: 448b8a610eaf
     last_write_checksum: sha1:61a11a50fdfe84223b9d9457b642d32838070ae0
@@ -1450,12 +1450,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:b20836fda568df92e2220fb2511991ea79a88c66
-    pristine_git_object: 569f2fe9e8b71398892375302ca009b62ac994a1
+    last_write_checksum: sha1:6d23b4d81e1bcd0ac138a3f0d93a98465f1f25a3
+    pristine_git_object: a0ea5a1ee41f7147bff7711b77c97bf28b742c53
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:42f870ed11731faabb9e185abfaf83634dd8ac3c
-    pristine_git_object: c455b080e29786024cd930d6ec93a87f3ae16340
+    last_write_checksum: sha1:d3579627f2dda197df2c7750fd68ef3e745c5fed
+    pristine_git_object: b806849ec3f78592dc666e450e1c2f2fc425b1ac
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1710,8 +1710,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:3a23e24f30b9ab41d7682c6d92be7e11b0a4f5fe
-    pristine_git_object: 86c015fdb455d9113a28fa8df6338ef7a83405d4
+    last_write_checksum: sha1:4c9f9768dfbab76308dea236cd7c213ec5077027
+    pristine_git_object: 0e1989d30f9511dee262bd9c00d0bab71ecb8140
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -2086,8 +2086,8 @@ trackedFiles:
     pristine_git_object: ed238673cfbe29ce4f20a1ecd1060768d8313881
   src/models/components/informationrequestevidence.ts:
     id: e501cb79ab2f
-    last_write_checksum: sha1:31516d26babf3e02dbff8531c7578cad24a30750
-    pristine_git_object: 0258287f5b772a3fdd25cc53de53b077c4dbb607
+    last_write_checksum: sha1:163e457d5e6fdaaf929bed1464f0623398d256e9
+    pristine_git_object: 3dbd3c42d7dfcfac79b69644bd92345e089d6abf
   src/models/components/informationrequestevidenceunion.ts:
     id: 68af9d83060b
     last_write_checksum: sha1:2b744b523a9d6948fe90f775c662097290ae1929
@@ -3055,7 +3055,7 @@ examples:
           pageSize: 10
       responses:
         "200":
-          application/json: {"results": {"data": [{"id": "6890e473dce1da5d8406f5e8", "evidenceType": "UPLOADED_DOCUMENT", "visibleToAuditorDate": "2025-10-16T12:00:00.000Z", "creationDate": "2025-10-15T10:30:00.000Z", "modificationDate": "2025-10-16T12:00:00.000Z", "deletionDate": null, "evidence": {"id": "6890e473dce1da5d8406f5ea", "filename": "security-policy.pdf", "mimeType": "application/pdf", "url": "https://example.com/presigned-url"}}], "pageInfo": {"endCursor": "Njg5MGU0NzNkY2UxZGE1ZDg0MDZmNWU4", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "Njg5MGU0NzNkY2UxZGE1ZDg0MDZmNWU4"}}}
+          application/json: {"results": {"data": [{"id": "6890e473dce1da5d8406f5e8", "evidenceType": "VANTA_DOCUMENT", "visibleToAuditorDate": "2025-10-16T12:00:00.000Z", "creationDate": "2025-10-15T10:30:00.000Z", "modificationDate": "2025-10-16T12:00:00.000Z", "deletionDate": null, "capturedSegmentIds": ["6890e473dce1da5d8406f5ec"], "evidence": {"title": "System boundary diagram", "documentVersionId": "6890e473dce1da5d8406f5ee", "file": {"type": "uploaded", "id": "6890e473dce1da5d8406f5ef", "filename": "system-boundary.pdf", "mimeType": "application/pdf", "url": "https://example.com/presigned-url"}}}], "pageInfo": {"endCursor": "Njg5MGU0NzNkY2UxZGE1ZDg0MDZmNWU4", "hasNextPage": false, "hasPreviousPage": false, "startCursor": "Njg5MGU0NzNkY2UxZGE1ZDg0MDZmNWU4"}}}
   GetInformationRequestTestSnapshotEvidenceDetail:
     Example 1:
       parameters:
@@ -3372,7 +3372,7 @@ examples:
           evidenceId: "<id>"
       responses:
         "200":
-          application/json: {"id": "6890e473dce1da5d8406f5e8", "evidenceType": "UPLOADED_DOCUMENT", "visibleToAuditorDate": "2025-10-16T12:00:00.000Z", "creationDate": "2025-10-15T10:30:00.000Z", "modificationDate": "2025-10-16T12:00:00.000Z", "deletionDate": null, "evidence": {"id": "6890e473dce1da5d8406f5ea", "filename": "security-policy.pdf", "mimeType": "application/pdf", "url": "https://example.com/presigned-url"}}
+          application/json: {"id": "6890e473dce1da5d8406f5e8", "evidenceType": "VANTA_DOCUMENT", "visibleToAuditorDate": "2025-10-16T12:00:00.000Z", "creationDate": "2025-10-15T10:30:00.000Z", "modificationDate": "2025-10-16T12:00:00.000Z", "deletionDate": null, "capturedSegmentIds": ["6890e473dce1da5d8406f5ec"], "evidence": {"title": "System boundary diagram", "documentVersionId": "6890e473dce1da5d8406f5ee", "file": {"type": "uploaded", "id": "6890e473dce1da5d8406f5ef", "filename": "system-boundary.pdf", "mimeType": "application/pdf", "url": "https://example.com/presigned-url"}}}
 examplesVersion: 1.0.2
 generatedTests: {}
 generatedFiles:

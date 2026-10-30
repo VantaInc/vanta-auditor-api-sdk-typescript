@@ -13,17 +13,14 @@ let value: PaginatedResponseInformationRequestEvidence = {
         evidenceType: "OBSERVATION",
         creationDate: new Date("2026-02-18T14:25:41.049Z"),
         modificationDate: new Date("2025-11-07T01:45:08.928Z"),
+        capturedSegmentIds: [
+          "<value 1>",
+          "<value 2>",
+          "<value 3>",
+        ],
         evidence: {
           title: "<value>",
-          testId: "<id>",
-          snapshotId: "<id>",
-          testRunStatus: "IN_PROGRESS",
-          executedAt: new Date("2026-07-18T18:34:49.347Z"),
-          fileType: "TEST_RAW_DATA",
-          file: {
-            mimeType: "<value>",
-            url: "https://rowdy-minor.name/",
-          },
+          url: "https://glittering-carboxyl.net",
         },
       },
     ],

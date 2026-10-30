@@ -21,7 +21,7 @@ let value: VantaTestEvidence = {
   fileType: "API_REQUESTS",
   file: {
     mimeType: "<value>",
-    url: "https://rowdy-minor.name/",
+    url: "https://yearly-flood.name",
   },
 };
 ```
