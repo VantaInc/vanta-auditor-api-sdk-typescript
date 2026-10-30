@@ -62,6 +62,13 @@ export type InformationRequestEvidence = {
    */
   deletionDate?: Date | null | undefined;
   /**
+   * IDs of the audit segments this evidence was relevant to when captured.
+   *
+   * @remarks
+   * Empty for uploaded, link and observation evidence, and for evidence captured before attribution was recorded.
+   */
+  capturedSegmentIds: Array<string>;
+  /**
    * Union type representing the different forms of evidence content.
    *
    * @remarks
@@ -90,6 +97,7 @@ export const InformationRequestEvidence$inboundSchema: z.ZodType<
   deletionDate: z.nullable(
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
+  capturedSegmentIds: z.array(z.string()),
   evidence: InformationRequestEvidenceUnion$inboundSchema,
 });
 
