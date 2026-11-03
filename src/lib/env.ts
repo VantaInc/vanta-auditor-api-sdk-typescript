@@ -13,16 +13,7 @@ export interface Env {
 export const envSchema: z.ZodType<Env, z.ZodTypeDef, unknown> = z.object({
   VANTA_BEARER_AUTH: z.string().optional(),
 
-  // Parse strictly: only explicit truthy values enable debug logging, so
-  // "false", "0", "off" and "no" (or anything unrecognized) stay disabled.
-  VANTA_DEBUG: z
-    .union([z.boolean(), z.string()])
-    .transform((v) =>
-      typeof v === "boolean"
-        ? v
-        : ["true", "1", "yes", "on"].includes(v.trim().toLowerCase())
-    )
-    .optional(),
+  VANTA_DEBUG: z.coerce.boolean().optional(),
 });
 
 /**
