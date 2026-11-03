@@ -1,0 +1,19 @@
+.speakeasy/patches/src/lib/env.ts.patch
+  s_af9338020376c0::t_449e000fa5981f 1-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cace8b3c3b41071248b68873d11a52d147949e69",
+  "prompts": {},
+  "sessions": {
+    "s_af9338020376c0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "78a45859-647d-4c2b-ab18-c7efbfdbc61c",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
