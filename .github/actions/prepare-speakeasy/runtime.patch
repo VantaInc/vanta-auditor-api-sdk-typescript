@@ -1,0 +1,615 @@
+diff --git a/Dockerfile b/Dockerfile
+index ceb1a4c..293ad9c 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -35,0 +36,3 @@ RUN apk add --update --no-cache python3 py3-pip python3-dev pipx
++COPY internal/cli/pinned-cli.json internal/cli/install-pinned-cli.py /opt/speakeasy-cli/
++RUN python3 /opt/speakeasy-cli/install-pinned-cli.py
++
+diff --git a/action.yml b/action.yml
+index 431a201..a406288 100644
+--- a/action.yml
++++ b/action.yml
+@@ -6,2 +6,2 @@ inputs:
+-    description: The version of the Speakeasy CLI to use or "latest"
+-    default: latest
++    description: Must be "pinned"; this fork installs the checksum-verified CLI 1.805.0
++    default: pinned
+@@ -137,0 +138,2 @@ outputs:
++  resolved_speakeasy_version:
++    description: The verified Speakeasy CLI version used for generation
+diff --git a/internal/actions/init.go b/internal/actions/init.go
+index 11b729f..03c02a7 100644
+--- a/internal/actions/init.go
++++ b/internal/actions/init.go
+@@ -5,0 +6 @@ import (
++	"github.com/speakeasy-api/sdk-generation-action/internal/cli"
+@@ -10,0 +12,3 @@ func initAction() (*git.Git, error) {
++	if err := cli.VerifyPinnedCLI(); err != nil {
++		return nil, err
++	}
+diff --git a/internal/actions/init_test.go b/internal/actions/init_test.go
+new file mode 100644
+index 0000000..ad3ba1c
+--- /dev/null
++++ b/internal/actions/init_test.go
+@@ -0,0 +1,60 @@
++package actions
++
++import (
++	"net/http"
++	"net/http/httptest"
++	"os"
++	"os/exec"
++	"path/filepath"
++	"strings"
++	"sync/atomic"
++	"testing"
++)
++
++func TestUntrustedCLIFailsBeforeReleaseWrites(t *testing.T) {
++	for _, scenario := range []string{"missing", "modified"} {
++		t.Run(scenario, func(t *testing.T) {
++			var requests atomic.Int32
++			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
++				requests.Add(1)
++				w.WriteHeader(http.StatusNotFound)
++			}))
++			defer server.Close()
++			root := t.TempDir()
++			if scenario == "modified" {
++				if err := os.MkdirAll(filepath.Join(root, "bin"), 0o755); err != nil {
++					t.Fatal(err)
++				}
++				if err := os.WriteFile(filepath.Join(root, "bin", "speakeasy"), []byte("#!/bin/sh\nexit 0\n"), 0o755); err != nil {
++					t.Fatal(err)
++				}
++			}
++			cmd := exec.Command(os.Args[0], "-test.run=^TestReleaseIntegrityProcess$")
++			cmd.Dir = root
++			cmd.Env = []string{
++				"PATH=/usr/bin:/bin", "HOME=" + root, "SPEAKEASY_ENVIRONMENT=local",
++				"RELEASE_INTEGRITY_TEST=true", "INPUT_GITHUB_ACCESS_TOKEN=local-dummy",
++				"INPUT_SPEAKEASY_VERSION=pinned", "INPUT_TARGET=vanta",
++				"SPEAKEASY_API_KEY=local-dummy", "GITHUB_SERVER_URL=" + server.URL,
++				"GITHUB_REPOSITORY=proof/repo", "GITHUB_REF=refs/heads/main",
++				"GITHUB_WORKSPACE=" + filepath.Join(root, "workspace"),
++			}
++			if output, err := cmd.CombinedOutput(); err != nil {
++				t.Fatalf("release guard failed: %v\n%s", err, output)
++			}
++			if requests.Load() != 0 {
++				t.Fatalf("release contacted GitHub before validating CLI: %d requests", requests.Load())
++			}
++		})
++	}
++}
++
++func TestReleaseIntegrityProcess(t *testing.T) {
++	if os.Getenv("RELEASE_INTEGRITY_TEST") == "" {
++		t.Skip("isolated subprocess helper")
++	}
++	err := Release()
++	if err == nil || (!strings.Contains(err.Error(), "pinned Speakeasy CLI") && !strings.Contains(err.Error(), "checksum mismatch")) {
++		t.Fatalf("expected early CLI integrity error, got %v", err)
++	}
++}
+diff --git a/internal/actions/runWorkflow.go b/internal/actions/runWorkflow.go
+index 4050aa4..a73a6d7 100644
+--- a/internal/actions/runWorkflow.go
++++ b/internal/actions/runWorkflow.go
+@@ -39 +38,0 @@ func RunWorkflow() error {
+-	// The top-level CLI can always use latest. The CLI itself manages pinned versions.
+@@ -45,10 +43,0 @@ func RunWorkflow() error {
+-	// This flag is generally deprecated, it will not be provided on new action instances
+-	pinnedVersion := cli.GetVersion(environment.GetPinnedSpeakeasyVersion())
+-	if pinnedVersion != "latest" {
+-		resolvedVersion = pinnedVersion
+-		// This environment variable is read by the CLI to determine which version should be used to execute `run`
+-		if err := environment.SetCLIVersionToUse(pinnedVersion); err != nil {
+-			return fmt.Errorf("failed to set pinned speakeasy version: %w", err)
+-		}
+-	}
+-
+diff --git a/internal/cli/install-pinned-cli.py b/internal/cli/install-pinned-cli.py
+new file mode 100644
+index 0000000..fba4477
+--- /dev/null
++++ b/internal/cli/install-pinned-cli.py
+@@ -0,0 +1,26 @@
++import hashlib
++import io
++import json
++from pathlib import Path
++import platform
++import urllib.request
++import zipfile
++
++
++def install(archive, pin, destination):
++    if hashlib.sha256(archive).hexdigest() != pin["archive_sha256"]:
++        raise ValueError("Speakeasy CLI archive checksum mismatch")
++    with zipfile.ZipFile(io.BytesIO(archive)) as package:
++        binary = package.read("speakeasy")
++    if hashlib.sha256(binary).hexdigest() != pin["binary_sha256"]:
++        raise ValueError("Speakeasy CLI executable checksum mismatch")
++    destination.write_bytes(binary)
++    destination.chmod(0o755)
++
++
++if __name__ == "__main__":
++    pin = json.loads(Path(__file__).with_name("pinned-cli.json").read_text())
++    if platform.system() != "Linux" or platform.machine() != "x86_64" or pin["platform"] != "linux_amd64":
++        raise ValueError("The pinned Speakeasy CLI requires Linux amd64")
++    with urllib.request.urlopen(pin["artifact_url"], timeout=60) as response:
++        install(response.read(), pin, Path("/bin/speakeasy"))
+diff --git a/internal/cli/pinned-cli.json b/internal/cli/pinned-cli.json
+new file mode 100644
+index 0000000..0312473
+--- /dev/null
++++ b/internal/cli/pinned-cli.json
+@@ -0,0 +1,7 @@
++{
++  "version": "1.805.0",
++  "platform": "linux_amd64",
++  "artifact_url": "https://github.com/speakeasy-api/speakeasy/releases/download/v1.805.0/speakeasy_linux_amd64.zip",
++  "archive_sha256": "0be209b31e3bcc5a29ce9ae3f4d76bc8c7e4760c9247f823b64cfe09a50838d5",
++  "binary_sha256": "eeafd27bac2bafe4cd90e0a9eaf43935b6ee91f88033a6a6513622caa2ec73c7"
++}
+diff --git a/internal/cli/prdescription.go b/internal/cli/prdescription.go
+index 7e8f2e7..4c7f360 100644
+--- a/internal/cli/prdescription.go
++++ b/internal/cli/prdescription.go
+@@ -9 +8,0 @@ import (
+-	"path/filepath"
+@@ -53,0 +53,4 @@ func SupportsPRDescriptionCommand() bool {
++	cmdPath, _, err := verifiedCLI()
++	if err != nil {
++		return false
++	}
+@@ -58,3 +60,0 @@ func SupportsPRDescriptionCommand() bool {
+-	baseDir := environment.GetBaseDir()
+-	cmdPath := filepath.Join(baseDir, "bin", "speakeasy")
+-
+@@ -62 +62 @@ func SupportsPRDescriptionCommand() bool {
+-	err := cmd.Run()
++	err = cmd.Run()
+@@ -78,0 +79,4 @@ func GeneratePRDescription(input PRDescriptionInput) (*PRDescriptionOutput, erro
++	cmdPath, _, err := verifiedCLI()
++	if err != nil {
++		return nil, err
++	}
+@@ -89,3 +92,0 @@ func GeneratePRDescription(input PRDescriptionInput) (*PRDescriptionOutput, erro
+-	baseDir := environment.GetBaseDir()
+-	cmdPath := filepath.Join(baseDir, "bin", "speakeasy")
+-
+diff --git a/internal/cli/speakeasy.go b/internal/cli/speakeasy.go
+index 58cff4d..4012b32 100644
+--- a/internal/cli/speakeasy.go
++++ b/internal/cli/speakeasy.go
+@@ -7,0 +8,2 @@ import (
++	"crypto/sha256"
++	_ "embed"
+@@ -15,0 +18 @@ import (
++	"runtime"
+@@ -18 +20,0 @@ import (
+-	"github.com/speakeasy-api/sdk-generation-action/internal/download"
+@@ -27,0 +30,49 @@ type Git interface {
++//go:embed pinned-cli.json
++var pinnedCLIJSON []byte
++
++type cliPin struct {
++	Version      string `json:"version"`
++	Platform     string `json:"platform"`
++	BinarySHA256 string `json:"binary_sha256"`
++}
++
++func verifiedCLI() (string, string, error) {
++	var pin cliPin
++	if err := json.Unmarshal(pinnedCLIJSON, &pin); err != nil {
++		return "", "", fmt.Errorf("invalid Speakeasy CLI pin: %w", err)
++	}
++	if pin.Version == "" || pin.Platform != runtime.GOOS+"_"+runtime.GOARCH {
++		return "", "", fmt.Errorf("Speakeasy CLI pin requires %s", pin.Platform)
++	}
++	if value := environment.GetPinnedSpeakeasyVersion(); value != "" && value != "pinned" {
++		return "", "", fmt.Errorf("speakeasy_version must be pinned; this action installs CLI %s", pin.Version)
++	}
++	if value := os.Getenv("PINNED_VERSION"); value != "" && value != "pinned" {
++		return "", "", fmt.Errorf("PINNED_VERSION must be pinned")
++	}
++	for _, value := range environment.SpeakeasyEnvVars() {
++		if key, value, ok := strings.Cut(value, "="); ok && key == "PINNED_VERSION" && value != "pinned" {
++			return "", "", fmt.Errorf("CLI environment PINNED_VERSION must be pinned")
++		}
++	}
++	cmdPath := filepath.Join(environment.GetBaseDir(), "bin", "speakeasy")
++	binary, err := os.Open(cmdPath)
++	if err != nil {
++		return "", "", fmt.Errorf("required pinned Speakeasy CLI: %w", err)
++	}
++	defer binary.Close()
++	digest := sha256.New()
++	if _, err := io.Copy(digest, binary); err != nil {
++		return "", "", fmt.Errorf("hash pinned Speakeasy CLI: %w", err)
++	}
++	if fmt.Sprintf("%x", digest.Sum(nil)) != pin.BinarySHA256 {
++		return "", "", fmt.Errorf("Speakeasy CLI %s executable checksum mismatch", pin.Version)
++	}
++	return cmdPath, pin.Version, nil
++}
++
++func VerifyPinnedCLI() error {
++	_, _, err := verifiedCLI()
++	return err
++}
++
+@@ -44,33 +95,3 @@ func GetVersion(pinnedVersion string) string {
+-func Download(pinnedVersion string, g Git) (string, error) {
+-	version := GetVersion(pinnedVersion)
+-
+-	link, version, err := g.GetDownloadLink(version)
+-	if err != nil {
+-		return version, err
+-	}
+-
+-	if _, err := os.Stat(filepath.Join(environment.GetBaseDir(), "bin", "speakeasy")); err == nil {
+-		return version, nil
+-	}
+-
+-	fmt.Println("Downloading speakeasy cli version: ", version)
+-
+-	downloadPath := filepath.Join(os.TempDir(), "speakeasy"+path.Ext(link))
+-	if err := download.DownloadFile(link, downloadPath, "", ""); err != nil {
+-		return version, fmt.Errorf("failed to download speakeasy cli: %w", err)
+-	}
+-	defer os.Remove(downloadPath)
+-
+-	baseDir := environment.GetBaseDir()
+-
+-	if err := extract(downloadPath, filepath.Join(baseDir, "bin")); err != nil {
+-		return version, fmt.Errorf("failed to extract speakeasy cli: %w", err)
+-	}
+-
+-	if err := os.Chmod(filepath.Join(baseDir, "bin", "speakeasy"), 0o755); err != nil {
+-		return version, fmt.Errorf("failed to set permissions on speakeasy cli: %w", err)
+-	}
+-
+-	fmt.Println("Extracted speakeasy cli to: ", filepath.Join(baseDir, "bin"))
+-
+-	return version, nil
++func Download(_ string, _ Git) (string, error) {
++	_, version, err := verifiedCLI()
++	return version, err
+@@ -80 +101,4 @@ func runSpeakeasyCommand(args ...string) (string, error) {
+-	baseDir := environment.GetBaseDir()
++	cmdPath, _, err := verifiedCLI()
++	if err != nil {
++		return "", err
++	}
+@@ -82 +105,0 @@ func runSpeakeasyCommand(args ...string) (string, error) {
+-	cmdPath := filepath.Join(baseDir, "bin", "speakeasy")
+@@ -91,0 +115 @@ func runSpeakeasyCommand(args ...string) (string, error) {
++	cmd.Env = append(cmd.Env, "PINNED_VERSION=pinned", "SPEAKEASY_FAIL_ON_VERSION_MISMATCH=true")
+@@ -99 +123 @@ func runSpeakeasyCommand(args ...string) (string, error) {
+-	err := cmd.Run()
++	err = cmd.Run()
+diff --git a/internal/cli/speakeasy_test.go b/internal/cli/speakeasy_test.go
+new file mode 100644
+index 0000000..ce0999d
+--- /dev/null
++++ b/internal/cli/speakeasy_test.go
+@@ -0,0 +1,137 @@
++package cli
++
++import (
++	"crypto/sha256"
++	"encoding/json"
++	"fmt"
++	"os"
++	"os/exec"
++	"path/filepath"
++	"runtime"
++	"strings"
++	"testing"
++
++	"github.com/speakeasy-api/sdk-generation-action/internal/environment"
++)
++
++type noCLIDownload struct{}
++
++func (noCLIDownload) GetLatestTag() (string, error) {
++	panic("runtime release lookup is forbidden")
++}
++
++func (noCLIDownload) GetDownloadLink(string) (string, string, error) {
++	panic("runtime CLI download is forbidden")
++}
++
++func runPinnedCLIProcess(t *testing.T, scenario string) {
++	t.Helper()
++	root := t.TempDir()
++	cmd := exec.Command(os.Args[0], "-test.run=^TestPinnedCLIProcess$")
++	cmd.Dir = root
++	cmd.Env = []string{
++		"PATH=/usr/bin:/bin", "HOME=" + root, "SPEAKEASY_ENVIRONMENT=local",
++		"PINNED_CLI_TEST_CASE=" + scenario, "PINNED_CLI_MARKER=" + filepath.Join(root, "executed"),
++		"GITHUB_WORKSPACE=" + filepath.Join(root, "workspace"), "INPUT_SPEAKEASY_VERSION=pinned",
++	}
++	if output, err := cmd.CombinedOutput(); err != nil {
++		t.Fatalf("%s: %v\n%s", scenario, err, output)
++	}
++}
++
++func TestRequiredCLIRejectsUntrustedBinary(t *testing.T) {
++	for _, scenario := range []string{"missing", "modified", "wrong-version"} {
++		t.Run(scenario, func(t *testing.T) { runPinnedCLIProcess(t, scenario) })
++	}
++}
++
++func TestRequiredCLIUsesReviewedBinaryWithoutNetwork(t *testing.T) {
++	runPinnedCLIProcess(t, "verified")
++}
++
++func TestAllCLIEntryPointsRejectUntrustedBinary(t *testing.T) {
++	runPinnedCLIProcess(t, "modified")
++}
++
++func TestPinnedCLIRejectsVersionOverrides(t *testing.T) {
++	for _, scenario := range []string{"action-version", "environment-version", "extra-environment-version"} {
++		t.Run(scenario, func(t *testing.T) { runPinnedCLIProcess(t, scenario) })
++	}
++}
++
++func TestPinnedCLIProcess(t *testing.T) {
++	scenario := os.Getenv("PINNED_CLI_TEST_CASE")
++	if scenario == "" {
++		t.Skip("isolated subprocess helper")
++	}
++	root := environment.GetBaseDir()
++	if err := os.MkdirAll(filepath.Join(root, "bin"), 0o755); err != nil {
++		t.Fatal(err)
++	}
++	if err := os.MkdirAll(environment.GetRepoPath(), 0o755); err != nil {
++		t.Fatal(err)
++	}
++	script := []byte("#!/bin/sh\nprintf '%s\\n' \"$*\" >> \"$PINNED_CLI_MARKER\"\ncase \"$*\" in\n'ci pr-description --input -') cat >/dev/null; printf '%s\\n' '{\"title\":\"Reviewed CLI\",\"body\":\"Verified\"}' ;;\n*) printf '%s\\n' 'speakeasy version 1.805.0' ;;\nesac\n")
++	hash := sha256.Sum256(script)
++	pin := cliPin{
++		Version: "1.805.0", Platform: runtime.GOOS + "_" + runtime.GOARCH,
++		BinarySHA256: fmt.Sprintf("%x", hash),
++	}
++	var err error
++	pinnedCLIJSON, err = json.Marshal(pin)
++	if err != nil {
++		t.Fatal(err)
++	}
++	content := script
++	switch scenario {
++	case "modified":
++		content = append(append([]byte{}, script...), []byte("# changed\n")...)
++	case "wrong-version":
++		content = []byte("#!/bin/sh\ntouch \"$PINNED_CLI_MARKER\"\necho 'speakeasy version 1.803.1'\n")
++	case "action-version":
++		t.Setenv("INPUT_SPEAKEASY_VERSION", "1.805.0")
++	case "environment-version":
++		t.Setenv("PINNED_VERSION", "latest")
++	case "extra-environment-version":
++		t.Setenv("INPUT_CLI_ENVIRONMENT_VARIABLES", "PINNED_VERSION=1.803.1")
++	}
++	if scenario != "missing" {
++		if err := os.WriteFile(filepath.Join(root, "bin", "speakeasy"), content, 0o755); err != nil {
++			t.Fatal(err)
++		}
++	}
++	version, err := Download("latest", noCLIDownload{})
++	if scenario == "verified" {
++		if err != nil || version != "1.805.0" {
++			t.Fatalf("expected reviewed version, got %q, %v", version, err)
++		}
++		if output, err := runSpeakeasyCommand("--version"); err != nil || !strings.Contains(output, "1.805.0") {
++			t.Fatalf("verified CLI failed: %q, %v", output, err)
++		}
++		result, err := GeneratePRDescription(PRDescriptionInput{})
++		if err != nil || result == nil || result.Title != "Reviewed CLI" {
++			t.Fatalf("verified PR helper failed: %#v, %v", result, err)
++		}
++		return
++	}
++	if err == nil {
++		t.Fatal("untrusted acquisition succeeded")
++	}
++	if err := VerifyPinnedCLI(); err == nil {
++		t.Fatal("untrusted binary passed verification")
++	}
++	if _, err := runSpeakeasyCommand("--version"); err == nil {
++		t.Fatal("common runner executed untrusted binary")
++	}
++	cached := true
++	supportsPRDescriptionCommand = &cached
++	if SupportsPRDescriptionCommand() {
++		t.Fatal("capability probe accepted untrusted binary")
++	}
++	if _, err := GeneratePRDescription(PRDescriptionInput{}); err == nil {
++		t.Fatal("PR description accepted untrusted binary")
++	}
++	if _, err := os.Stat(os.Getenv("PINNED_CLI_MARKER")); !os.IsNotExist(err) {
++		t.Fatal("untrusted executable was started")
++	}
++}
+diff --git a/internal/configuration/configuration.go b/internal/configuration/configuration.go
+index d300909..f2452c7 100644
+--- a/internal/configuration/configuration.go
++++ b/internal/configuration/configuration.go
+@@ -38,0 +39,3 @@ func getWorkflow() (*workflow.Workflow, error) {
++	if wf.SpeakeasyVersion.String() != "pinned" {
++		return nil, fmt.Errorf("workflow speakeasyVersion must be pinned to use the verified CLI")
++	}
+diff --git a/internal/configuration/configuration_test.go b/internal/configuration/configuration_test.go
+new file mode 100644
+index 0000000..38021b1
+--- /dev/null
++++ b/internal/configuration/configuration_test.go
+@@ -0,0 +1,50 @@
++package configuration
++
++import (
++	"os"
++	"path/filepath"
++	"testing"
++)
++
++func TestPinnedModeRejectsVersionOverrides(t *testing.T) {
++	for _, scenario := range []struct {
++		name, version, local string
++		valid                bool
++	}{
++		{name: "pinned", version: "pinned", valid: true},
++		{name: "numeric", version: "1.805.0"},
++		{name: "latest", version: "latest"},
++		{name: "missing"},
++		{name: "local override", version: "pinned", local: "1.803.1"},
++	} {
++		t.Run(scenario.name, func(t *testing.T) {
++			root := t.TempDir()
++			dir := filepath.Join(root, "repo", ".speakeasy")
++			if err := os.MkdirAll(dir, 0o755); err != nil {
++				t.Fatal(err)
++			}
++			t.Setenv("GITHUB_WORKSPACE", root)
++			t.Setenv("INPUT_WORKING_DIRECTORY", "")
++			data := "workflowVersion: 1.0.0\nsources: {}\ntargets: {}\n"
++			if scenario.version != "" {
++				data += "speakeasyVersion: " + scenario.version + "\n"
++			}
++			if err := os.WriteFile(filepath.Join(dir, "workflow.yaml"), []byte(data), 0o644); err != nil {
++				t.Fatal(err)
++			}
++			if scenario.local != "" {
++				if err := os.WriteFile(filepath.Join(dir, "workflow.local.yaml"), []byte("speakeasyVersion: "+scenario.local+"\n"), 0o644); err != nil {
++					t.Fatal(err)
++				}
++			}
++			wf, err := GetWorkflowAndValidateLanguages(false)
++			if scenario.valid {
++				if err != nil || wf.SpeakeasyVersion.String() != "pinned" {
++					t.Fatalf("valid pinned workflow rejected: %v", err)
++				}
++			} else if err == nil {
++				t.Fatal("workflow can select an unchecked second CLI")
++			}
++		})
++	}
++}
+diff --git a/main.go b/main.go
+index 7322b0c..4ca64a6 100644
+--- a/main.go
++++ b/main.go
+@@ -12,0 +13 @@ import (
++	"github.com/speakeasy-api/sdk-generation-action/internal/cli"
+@@ -17,0 +19,4 @@ func main() {
++	if err := cli.VerifyPinnedCLI(); err != nil {
++		fmt.Printf("::error title=failed::%v\n", err)
++		os.Exit(1)
++	}
+diff --git a/main_test.go b/main_test.go
+new file mode 100644
+index 0000000..7aeeed9
+--- /dev/null
++++ b/main_test.go
+@@ -0,0 +1,43 @@
++package main
++
++import (
++	"os"
++	"os/exec"
++	"path/filepath"
++	"strings"
++	"testing"
++)
++
++func TestStartupRejectsUntrustedCLIBeforeAuthentication(t *testing.T) {
++	for _, scenario := range []string{"missing", "modified"} {
++		t.Run(scenario, func(t *testing.T) {
++			root := t.TempDir()
++			if scenario == "modified" {
++				if err := os.MkdirAll(filepath.Join(root, "bin"), 0o755); err != nil {
++					t.Fatal(err)
++				}
++				if err := os.WriteFile(filepath.Join(root, "bin", "speakeasy"), []byte("not the pinned executable"), 0o755); err != nil {
++					t.Fatal(err)
++				}
++			}
++			cmd := exec.Command(os.Args[0], "-test.run=^TestStartupIntegrityProcess$")
++			cmd.Dir = root
++			cmd.Env = []string{
++				"PATH=/usr/bin:/bin", "HOME=" + root, "SPEAKEASY_ENVIRONMENT=local",
++				"STARTUP_INTEGRITY_TEST=true", "INPUT_ACTION=release", "INPUT_SPEAKEASY_VERSION=pinned",
++			}
++			output, err := cmd.CombinedOutput()
++			if err == nil || (!strings.Contains(string(output), "pinned Speakeasy CLI") && !strings.Contains(string(output), "checksum mismatch")) {
++				t.Fatalf("expected integrity failure before missing authentication/run metadata: %v\n%s", err, output)
++			}
++		})
++	}
++}
++
++func TestStartupIntegrityProcess(t *testing.T) {
++	if os.Getenv("STARTUP_INTEGRITY_TEST") == "" {
++		t.Skip("isolated subprocess helper")
++	}
++	main()
++	t.Fatal("startup accepted an untrusted CLI")
++}
+diff --git a/testing/verified-cli-install_test.sh b/testing/verified-cli-install_test.sh
+new file mode 100644
+index 0000000..c987eb8
+--- /dev/null
++++ b/testing/verified-cli-install_test.sh
+@@ -0,0 +1,46 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")/.."
++python3 -B - <<'PY'
++import hashlib
++import importlib.util
++import io
++from pathlib import Path
++import tempfile
++from unittest.mock import patch
++import zipfile
++
++spec = importlib.util.spec_from_file_location("installer", "internal/cli/install-pinned-cli.py")
++installer = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(installer)
++archive = io.BytesIO()
++with zipfile.ZipFile(archive, "w") as package:
++    package.writestr("speakeasy", b"extraction sentinel")
++payload = archive.getvalue()
++with tempfile.TemporaryDirectory() as tmp:
++    destination = Path(tmp) / "speakeasy"
++    pin = {"archive_sha256": "0" * 64, "binary_sha256": "0" * 64}
++    with patch.object(installer.zipfile, "ZipFile") as extract:
++        try:
++            installer.install(payload, pin, destination)
++        except ValueError:
++            pass
++        else:
++            raise AssertionError("corrupted archive accepted")
++        extract.assert_not_called()
++    assert not destination.exists(), "archive was extracted before verification"
++    print("rejects_digest_mismatch_before_extraction")
++    pin["archive_sha256"] = hashlib.sha256(payload).hexdigest()
++    try:
++        installer.install(payload, pin, destination)
++    except ValueError:
++        pass
++    else:
++        raise AssertionError("untrusted executable accepted")
++    assert not destination.exists()
++    pin["binary_sha256"] = hashlib.sha256(b"extraction sentinel").hexdigest()
++    installer.install(payload, pin, destination)
++    assert destination.read_bytes() == b"extraction sentinel"
++    assert destination.stat().st_mode & 0o111
++    print("verifies_executable_before_install")
++PY

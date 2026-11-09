@@ -13,11 +13,92 @@ permissions:
       - .speakeasy/gen.lock
   workflow_dispatch: {}
 jobs:
-  publish:
-    uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@6f65a2131d82e6f2f7064d026c431865b4e0b5f4
-    with:
-      target: vanta
-    secrets:
-      github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      npm_token: ${{ secrets.NPM_TOKEN }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+  release:
+    runs-on: ubuntu-22.04
+    outputs:
+      typescript_regenerated: ${{ steps.release.outputs.typescript_regenerated }}
+      publish_typescript: ${{ steps.release.outputs.publish_typescript }}
+      typescript_directory: ${{ steps.release.outputs.typescript_directory }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - id: prepare
+        uses: ./.github/actions/prepare-speakeasy
+      - id: release
+        uses: ./.speakeasy/temp/action
+        with:
+          action: release
+          target: vanta
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+          enable_sdk_changelog: "true"
+      - name: Log Release Result
+        if: always() && steps.prepare.outcome == 'success'
+        uses: ./.speakeasy/temp/action
+        with:
+          action: log-result
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+        env:
+          GH_ACTION_RESULT: ${{ job.status }}
+          GH_ACTION_VERSION: ${{ github.sha }}
+          GH_ACTION_STEP: ${{ github.job }}
+          TARGET_TYPE: sdk
+  publish-npm:
+    if: needs.release.outputs.typescript_regenerated == 'true' && needs.release.outputs.publish_typescript == 'true'
+    runs-on: ubuntu-22.04
+    needs: release
+    defaults:
+      run:
+        working-directory: ${{ needs.release.outputs.typescript_directory }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - id: prepare
+        uses: ./.github/actions/prepare-speakeasy
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24.x"
+          registry-url: https://registry.npmjs.org
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+      - name: Install bun
+        run: npm rebuild bun
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          VERSION=$(npm pkg get version | tr -d '"')
+          echo "Detected version: $VERSION"
+          if [[ "$VERSION" == *"-"* ]]; then
+            PRERELEASE=${VERSION#*-}
+            TAG=${PRERELEASE%%.*}
+            echo "Prerelease detected; publishing under dist-tag: $TAG"
+            npm publish --tag "$TAG" --access public
+          else
+            echo "Official release detected; publishing under 'latest'"
+            npm publish --access public
+          fi
+      - name: Record Publish Event
+        if: always() && steps.prepare.outcome == 'success'
+        uses: ./.speakeasy/temp/action
+        with:
+          action: publish-event
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+          target_directory: ${{ needs.release.outputs.typescript_directory }}
+          registry_name: npm
+        env:
+          GH_ACTION_RESULT: ${{ job.status }}
+          GH_ACTION_VERSION: ${{ github.sha }}
+      - name: Log Publish Result
+        if: always() && steps.prepare.outcome == 'success'
+        uses: ./.speakeasy/temp/action
+        with:
+          action: log-result
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+        env:
+          GH_ACTION_RESULT: ${{ job.status }}
+          GH_ACTION_VERSION: ${{ github.sha }}
+          GH_ACTION_STEP: ${{ github.job }}
+          TARGET_TYPE: sdk

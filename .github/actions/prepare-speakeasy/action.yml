@@ -1,0 +1,13 @@
+name: Prepare verified Speakeasy action
+description: Patch the exact action revision with verified CLI 1.805.0 support
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      with:
+        repository: speakeasy-api/sdk-generation-action
+        ref: 6eb2c860da69d3f4cefaa5b8293098a1820c2437
+        path: .speakeasy/temp/action
+        persist-credentials: false
+    - shell: bash
+      run: bash "$GITHUB_ACTION_PATH/prepare.sh"
