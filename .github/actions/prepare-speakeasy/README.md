@@ -2,6 +2,15 @@
 
 Generate and Publish use a small patch against the exact reviewed upstream action. The upstream action otherwise downloads an unchecked bootstrap CLI even when SDK configuration names a generator version. This repository owns the patch; it is maintained separately from generated SDK code.
 
+The entry workflows keep their triggers, inputs and secret mappings, and call local reusable implementations from the same SDK commit:
+
+| Entry workflow | Implementation |
+| --- | --- |
+| `.github/workflows/sdk_generation.yaml` | `.github/workflows/speakeasy_generate.yaml` |
+| `.github/workflows/sdk_publish.yaml` | `.github/workflows/speakeasy_publish.yaml` |
+
+The implementations contain the TypeScript jobs extracted from the pinned upstream wrappers. Each job prepares its own action checkout; the npm token is passed only by Publish and used only in its publishing step.
+
 `action.yml` selects the upstream source SHA; `prepare.sh` checks the same SHA and a clean tree. `runtime.patch` contains the runtime changes and tests, including `internal/cli/pinned-cli.json`: the CLI version, platform, artifact URL, archive SHA-256 and executable SHA-256 shared by installation and runtime verification.
 
 Keep `.speakeasy/workflow.yaml` in `speakeasyVersion: pinned` mode. Startup must reject an invalid CLI before authentication or release dispatch, and every CLI launch must verify the executable. Preparation failure removes the generated checkout; Publish callbacks must also require successful preparation. npm credentials belong only in the Publish step. Callback telemetry reports the SDK commit that owns the applied patch.

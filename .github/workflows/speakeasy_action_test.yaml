@@ -5,6 +5,8 @@ on:
       - .github/actions/prepare-speakeasy/**
       - .github/workflows/sdk_generation.yaml
       - .github/workflows/sdk_publish.yaml
+      - .github/workflows/speakeasy_generate.yaml
+      - .github/workflows/speakeasy_publish.yaml
       - .github/workflows/speakeasy_action_test.yaml
       - .speakeasy/workflow.yaml
 permissions:
