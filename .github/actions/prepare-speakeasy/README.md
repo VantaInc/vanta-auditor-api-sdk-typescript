@@ -29,6 +29,10 @@ For an upstream source upgrade, first commit the applied patch in that disposabl
 
 ## Validate
 
+`.github/workflows/speakeasy_action_test.yaml` tests the maintained Go action and Python installer: patch application/cleanup, rejection of missing or modified binaries, pinned-mode enforcement and checksum failures. It runs only for changes to the preparation action or related workflows/configuration, with read-only repository permissions and no secrets.
+
+The SDK smoke workflow exercises the generated TypeScript SDK. Keeping the action tests in their own workflow makes them independent of the `skip-smoke` bypass and avoids setting up Go for unrelated SDK changes. If the workflows are consolidated later, preserve that independence from `skip-smoke`.
+
 Start from a fresh SDK checkout with no `.speakeasy/temp/action` directory. This generated directory is ignored by Git; changes there persist only after regenerating `runtime.patch`. Preparation requires clean upstream source and cannot be reapplied to an already patched tree.
 
 ```sh
@@ -44,6 +48,6 @@ docker build --platform linux/amd64 -t speakeasy-verified .speakeasy/temp/action
 docker run --rm --network none --entrypoint /bin/speakeasy speakeasy-verified --version
 ```
 
-The PR workflow runs preparation, startup/launch/configuration guards and installer tests. Also check the actual image rejects missing/modified executables before authentication with networking disabled. Run SDK build/lint and inspect `npm pack --dry-run`: the existing package whitelist excludes this action tree, but recheck packaging when upgrading upstream source.
+Check the actual image rejects missing/modified executables before authentication with networking disabled. Run SDK build/lint and inspect `npm pack --dry-run`: the existing package whitelist excludes this action tree, but recheck packaging when upgrading upstream source.
 
 Complete a normal licensed generation before adopting a new CLI; unit tests and source-only probes do not prove full SDK generation or publication. If artifact/digest checks fail, investigate or restore a previously reviewed pin/patch while keeping verification and pinned mode. Do not bypass licensing or force a registry release as an integrity test.
