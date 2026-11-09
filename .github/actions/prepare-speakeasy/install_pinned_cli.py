@@ -8,6 +8,8 @@ import zipfile
 
 
 def download(url):
+    # URLs come only from the reviewed pin or exact-version release builder, never request input.
+    # nosemgrep: python.lang.security.audit.dynamic-urllib-use-detected.dynamic-urllib-use-detected
     with urllib.request.urlopen(url, timeout=60) as response:
         return response.read()
 
