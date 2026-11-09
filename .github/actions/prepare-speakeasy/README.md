@@ -23,7 +23,7 @@ Choose an explicit X.Y.Z [Speakeasy release](https://github.com/speakeasy-api/sp
 python3 -B .github/actions/prepare-speakeasy/update_cli.py 1.806.0
 ```
 
-The command verifies the archive against that release's published `checksums.txt` before opening it, hashes the executable without running it, and writes only `pinned-cli.json`. Review the one-file diff and checksum provenance. Routine CLI bumps do not change the upstream action SHA, runtime patch or workflows. Version strings in tests are fixtures, not production pins.
+The command verifies the archive against that release's published `checksums.txt` before opening it, hashes the executable without running it, and writes only `pinned-cli.json`. Review the one-file diff and checksum provenance. Routine CLI bumps do not change the upstream action SHA, runtime patch or workflows. The Go tests use synthetic versions `2.3.4` and `2.3.3`; keep these fixtures fixed during CLI upgrades.
 
 CI checks the real archive/executable against the committed pin with `update_cli.py --check`; it never replaces expected hashes with fresh upstream values.
 

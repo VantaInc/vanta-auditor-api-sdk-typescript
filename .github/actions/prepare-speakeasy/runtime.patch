@@ -175,10 +175,10 @@ index 58cff4d..4012b32 100644
 +	err = cmd.Run()
 diff --git a/internal/cli/speakeasy_test.go b/internal/cli/speakeasy_test.go
 new file mode 100644
-index 0000000..1508441
+index 0000000..a0474c9
 --- /dev/null
 +++ b/internal/cli/speakeasy_test.go
-@@ -0,0 +1,133 @@
+@@ -0,0 +1,135 @@
 +package cli
 +
 +import (
@@ -241,6 +241,8 @@ index 0000000..1508441
 +	if scenario == "" {
 +		t.Skip("isolated subprocess helper")
 +	}
++	// Synthetic fixture; CLI upgrades change pinned-cli.json, not this version.
++	const fixtureCLIVersion = "2.3.4"
 +	root := environment.GetBaseDir()
 +	if err := os.MkdirAll(filepath.Join(root, "bin"), 0o755); err != nil {
 +		t.Fatal(err)
@@ -248,10 +250,10 @@ index 0000000..1508441
 +	if err := os.MkdirAll(environment.GetRepoPath(), 0o755); err != nil {
 +		t.Fatal(err)
 +	}
-+	script := []byte("#!/bin/sh\nprintf '%s\\n' \"$*\" >> \"$PINNED_CLI_MARKER\"\ncase \"$*\" in\n'ci pr-description --input -') cat >/dev/null; printf '%s\\n' '{\"title\":\"Reviewed CLI\",\"body\":\"Verified\"}' ;;\n*) printf '%s\\n' 'speakeasy version 1.805.0' ;;\nesac\n")
++	script := []byte("#!/bin/sh\nprintf '%s\\n' \"$*\" >> \"$PINNED_CLI_MARKER\"\ncase \"$*\" in\n'ci pr-description --input -') cat >/dev/null; printf '%s\\n' '{\"title\":\"Reviewed CLI\",\"body\":\"Verified\"}' ;;\n*) printf '%s\\n' 'speakeasy version " + fixtureCLIVersion + "' ;;\nesac\n")
 +	hash := sha256.Sum256(script)
 +	pin := cliPin{
-+		Version: "1.805.0", Platform: runtime.GOOS + "_" + runtime.GOARCH,
++		Version: fixtureCLIVersion, Platform: runtime.GOOS + "_" + runtime.GOARCH,
 +		BinarySHA256: fmt.Sprintf("%x", hash),
 +	}
 +	var err error
@@ -264,13 +266,13 @@ index 0000000..1508441
 +	case "modified":
 +		content = append(append([]byte{}, script...), []byte("# changed\n")...)
 +	case "wrong-version":
-+		content = []byte("#!/bin/sh\ntouch \"$PINNED_CLI_MARKER\"\necho 'speakeasy version 1.803.1'\n")
++		content = []byte("#!/bin/sh\ntouch \"$PINNED_CLI_MARKER\"\necho 'speakeasy version 2.3.3'\n")
 +	case "action-version":
-+		t.Setenv("INPUT_SPEAKEASY_VERSION", "1.805.0")
++		t.Setenv("INPUT_SPEAKEASY_VERSION", fixtureCLIVersion)
 +	case "environment-version":
 +		t.Setenv("PINNED_VERSION", "latest")
 +	case "extra-environment-version":
-+		t.Setenv("INPUT_CLI_ENVIRONMENT_VARIABLES", "PINNED_VERSION=1.803.1")
++		t.Setenv("INPUT_CLI_ENVIRONMENT_VARIABLES", "PINNED_VERSION=2.3.3")
 +	}
 +	if scenario != "missing" {
 +		if err := os.WriteFile(filepath.Join(root, "bin", "speakeasy"), content, 0o755); err != nil {
@@ -279,10 +281,10 @@ index 0000000..1508441
 +	}
 +	version, err := Download("latest", noCLIDownload{})
 +	if scenario == "verified" {
-+		if err != nil || version != "1.805.0" {
++		if err != nil || version != fixtureCLIVersion {
 +			t.Fatalf("expected reviewed version, got %q, %v", version, err)
 +		}
-+		if output, err := runSpeakeasyCommand("--version"); err != nil || !strings.Contains(output, "1.805.0") {
++		if output, err := runSpeakeasyCommand("--version"); err != nil || !strings.Contains(output, fixtureCLIVersion) {
 +			t.Fatalf("verified CLI failed: %q, %v", output, err)
 +		}
 +		result, err := GeneratePRDescription(PRDescriptionInput{})
@@ -322,10 +324,10 @@ index d300909..f2452c7 100644
 +	}
 diff --git a/internal/configuration/configuration_test.go b/internal/configuration/configuration_test.go
 new file mode 100644
-index 0000000..38021b1
+index 0000000..4a03d65
 --- /dev/null
 +++ b/internal/configuration/configuration_test.go
-@@ -0,0 +1,50 @@
+@@ -0,0 +1,51 @@
 +package configuration
 +
 +import (
@@ -335,15 +337,16 @@ index 0000000..38021b1
 +)
 +
 +func TestPinnedModeRejectsVersionOverrides(t *testing.T) {
++	// Numeric versions are synthetic fixtures, independent of pinned-cli.json.
 +	for _, scenario := range []struct {
 +		name, version, local string
 +		valid                bool
 +	}{
 +		{name: "pinned", version: "pinned", valid: true},
-+		{name: "numeric", version: "1.805.0"},
++		{name: "numeric", version: "2.3.4"},
 +		{name: "latest", version: "latest"},
 +		{name: "missing"},
-+		{name: "local override", version: "pinned", local: "1.803.1"},
++		{name: "local override", version: "pinned", local: "2.3.3"},
 +	} {
 +		t.Run(scenario.name, func(t *testing.T) {
 +			root := t.TempDir()
