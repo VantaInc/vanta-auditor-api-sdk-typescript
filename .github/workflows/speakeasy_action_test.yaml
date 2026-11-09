@@ -22,11 +22,13 @@ jobs:
       - uses: ./.github/actions/prepare-speakeasy
       - name: Test preparation failure cleanup
         run: bash "$GITHUB_WORKSPACE/.github/actions/prepare-speakeasy/test.sh"
+      - name: Test pin updates and installer verification
+        run: python3 -B -m unittest discover -s "$GITHUB_WORKSPACE/.github/actions/prepare-speakeasy" -p 'test_*.py'
+      - name: Verify pinned release artifact
+        run: python3 -B "$GITHUB_WORKSPACE/.github/actions/prepare-speakeasy/update_cli.py" --check
       - uses: actions/setup-go@3041bf56c941b39c61721a86cd11f3bb1338122a # v5.2.0
         with:
           go-version-file: .speakeasy/temp/action/go.mod
           cache-dependency-path: .speakeasy/temp/action/go.sum
       - name: Test CLI integrity and early failure
         run: go test . ./internal/cli ./internal/configuration
-      - name: Test verified installer
-        run: bash testing/verified-cli-install_test.sh

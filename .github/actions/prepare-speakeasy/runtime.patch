@@ -1,19 +1,19 @@
 diff --git a/Dockerfile b/Dockerfile
-index ceb1a4c..293ad9c 100644
+index ceb1a4c..83b1f0f 100644
 --- a/Dockerfile
 +++ b/Dockerfile
 @@ -35,0 +36,3 @@ RUN apk add --update --no-cache python3 py3-pip python3-dev pipx
-+COPY internal/cli/pinned-cli.json internal/cli/install-pinned-cli.py /opt/speakeasy-cli/
-+RUN python3 /opt/speakeasy-cli/install-pinned-cli.py
++COPY internal/cli/pinned-cli.json internal/cli/install_pinned_cli.py /opt/speakeasy-cli/
++RUN python3 /opt/speakeasy-cli/install_pinned_cli.py
 +
 diff --git a/action.yml b/action.yml
-index 431a201..a406288 100644
+index 431a201..2f4cc11 100644
 --- a/action.yml
 +++ b/action.yml
 @@ -6,2 +6,2 @@ inputs:
 -    description: The version of the Speakeasy CLI to use or "latest"
 -    default: latest
-+    description: Must be "pinned"; this fork installs the checksum-verified CLI 1.805.0
++    description: Must be "pinned"; this fork requires the checksum-verified CLI pin
 +    default: pinned
 @@ -137,0 +138,2 @@ outputs:
 +  resolved_speakeasy_version:
@@ -35,51 +35,6 @@ index 4050aa4..a73a6d7 100644
 -		}
 -	}
 -
-diff --git a/internal/cli/install-pinned-cli.py b/internal/cli/install-pinned-cli.py
-new file mode 100644
-index 0000000..fba4477
---- /dev/null
-+++ b/internal/cli/install-pinned-cli.py
-@@ -0,0 +1,26 @@
-+import hashlib
-+import io
-+import json
-+from pathlib import Path
-+import platform
-+import urllib.request
-+import zipfile
-+
-+
-+def install(archive, pin, destination):
-+    if hashlib.sha256(archive).hexdigest() != pin["archive_sha256"]:
-+        raise ValueError("Speakeasy CLI archive checksum mismatch")
-+    with zipfile.ZipFile(io.BytesIO(archive)) as package:
-+        binary = package.read("speakeasy")
-+    if hashlib.sha256(binary).hexdigest() != pin["binary_sha256"]:
-+        raise ValueError("Speakeasy CLI executable checksum mismatch")
-+    destination.write_bytes(binary)
-+    destination.chmod(0o755)
-+
-+
-+if __name__ == "__main__":
-+    pin = json.loads(Path(__file__).with_name("pinned-cli.json").read_text())
-+    if platform.system() != "Linux" or platform.machine() != "x86_64" or pin["platform"] != "linux_amd64":
-+        raise ValueError("The pinned Speakeasy CLI requires Linux amd64")
-+    with urllib.request.urlopen(pin["artifact_url"], timeout=60) as response:
-+        install(response.read(), pin, Path("/bin/speakeasy"))
-diff --git a/internal/cli/pinned-cli.json b/internal/cli/pinned-cli.json
-new file mode 100644
-index 0000000..0312473
---- /dev/null
-+++ b/internal/cli/pinned-cli.json
-@@ -0,0 +1,7 @@
-+{
-+  "version": "1.805.0",
-+  "platform": "linux_amd64",
-+  "artifact_url": "https://github.com/speakeasy-api/speakeasy/releases/download/v1.805.0/speakeasy_linux_amd64.zip",
-+  "archive_sha256": "0be209b31e3bcc5a29ce9ae3f4d76bc8c7e4760c9247f823b64cfe09a50838d5",
-+  "binary_sha256": "eeafd27bac2bafe4cd90e0a9eaf43935b6ee91f88033a6a6513622caa2ec73c7"
-+}
 diff --git a/internal/cli/prdescription.go b/internal/cli/prdescription.go
 index 7e8f2e7..4c7f360 100644
 --- a/internal/cli/prdescription.go
@@ -481,55 +436,3 @@ index 0000000..7aeeed9
 +	main()
 +	t.Fatal("startup accepted an untrusted CLI")
 +}
-diff --git a/testing/verified-cli-install_test.sh b/testing/verified-cli-install_test.sh
-new file mode 100644
-index 0000000..c987eb8
---- /dev/null
-+++ b/testing/verified-cli-install_test.sh
-@@ -0,0 +1,46 @@
-+#!/usr/bin/env bash
-+set -euo pipefail
-+cd "$(dirname "$0")/.."
-+python3 -B - <<'PY'
-+import hashlib
-+import importlib.util
-+import io
-+from pathlib import Path
-+import tempfile
-+from unittest.mock import patch
-+import zipfile
-+
-+spec = importlib.util.spec_from_file_location("installer", "internal/cli/install-pinned-cli.py")
-+installer = importlib.util.module_from_spec(spec)
-+spec.loader.exec_module(installer)
-+archive = io.BytesIO()
-+with zipfile.ZipFile(archive, "w") as package:
-+    package.writestr("speakeasy", b"extraction sentinel")
-+payload = archive.getvalue()
-+with tempfile.TemporaryDirectory() as tmp:
-+    destination = Path(tmp) / "speakeasy"
-+    pin = {"archive_sha256": "0" * 64, "binary_sha256": "0" * 64}
-+    with patch.object(installer.zipfile, "ZipFile") as extract:
-+        try:
-+            installer.install(payload, pin, destination)
-+        except ValueError:
-+            pass
-+        else:
-+            raise AssertionError("corrupted archive accepted")
-+        extract.assert_not_called()
-+    assert not destination.exists(), "archive was extracted before verification"
-+    print("rejects_digest_mismatch_before_extraction")
-+    pin["archive_sha256"] = hashlib.sha256(payload).hexdigest()
-+    try:
-+        installer.install(payload, pin, destination)
-+    except ValueError:
-+        pass
-+    else:
-+        raise AssertionError("untrusted executable accepted")
-+    assert not destination.exists()
-+    pin["binary_sha256"] = hashlib.sha256(b"extraction sentinel").hexdigest()
-+    installer.install(payload, pin, destination)
-+    assert destination.read_bytes() == b"extraction sentinel"
-+    assert destination.stat().st_mode & 0o111
-+    print("verifies_executable_before_install")
-+PY

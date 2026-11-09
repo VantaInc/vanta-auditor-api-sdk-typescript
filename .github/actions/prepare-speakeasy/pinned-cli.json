@@ -1,0 +1,7 @@
+{
+  "version": "1.805.0",
+  "platform": "linux_amd64",
+  "artifact_url": "https://github.com/speakeasy-api/speakeasy/releases/download/v1.805.0/speakeasy_linux_amd64.zip",
+  "archive_sha256": "0be209b31e3bcc5a29ce9ae3f4d76bc8c7e4760c9247f823b64cfe09a50838d5",
+  "binary_sha256": "eeafd27bac2bafe4cd90e0a9eaf43935b6ee91f88033a6a6513622caa2ec73c7"
+}
