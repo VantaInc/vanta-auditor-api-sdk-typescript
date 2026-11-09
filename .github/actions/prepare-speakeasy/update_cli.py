@@ -3,7 +3,10 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import sys
 import tempfile
+
+sys.dont_write_bytecode = True
 
 from install_pinned_cli import download, install, verified_executable
 

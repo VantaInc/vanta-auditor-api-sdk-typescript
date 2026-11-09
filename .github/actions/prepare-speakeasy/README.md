@@ -25,7 +25,7 @@ python3 -B .github/actions/prepare-speakeasy/update_cli.py 1.806.0
 
 The command verifies the archive against that release's published `checksums.txt` before opening it, hashes the executable without running it, and writes only `pinned-cli.json`. Review the one-file diff and checksum provenance. Routine CLI bumps do not change the upstream action SHA, runtime patch or workflows. Version strings in tests are fixtures, not production pins.
 
-CI checks the real archive/executable against the committed pin with `update_cli.py --check`; it never replaces expected hashes with fresh upstream values. Complete normal licensed generation before adopting a new CLI.
+CI checks the real archive/executable against the committed pin with `update_cli.py --check`; it never replaces expected hashes with fresh upstream values.
 
 ## Edit the runtime patch or upstream source
 
@@ -39,7 +39,8 @@ action_worktree="$(mktemp -d)"
 git clone https://github.com/speakeasy-api/sdk-generation-action.git "$action_worktree"
 git -C "$action_worktree" checkout --detach "$action_ref"
 git -C "$action_worktree" apply --unidiff-zero "$patch_dir/runtime.patch"
-# Edit runtime source in action_worktree, then include new files except copied inputs:
+# Edit runtime source in action_worktree; keep build output outside the checkout.
+# Include new files except copied inputs:
 git -C "$action_worktree" add -A -- . ':!internal/cli/pinned-cli.json' ':!internal/cli/install_pinned_cli.py' ':!.dockerignore'
 git -C "$action_worktree" diff --cached --unified=0 > "$patch_dir/runtime.patch"
 ```
