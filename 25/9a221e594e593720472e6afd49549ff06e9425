@@ -1,0 +1,125 @@
+.github/actions/speakeasy/main.go
+  s_c393ed1c8a0ea4::t_84e24cf746501a 1-69
+.github/actions/speakeasy/Dockerfile
+  s_c393ed1c8a0ea4::t_41ecd7655fbefb 1-80
+.github/actions/speakeasy/LICENSE
+  s_c393ed1c8a0ea4::t_49486afff3797f 1-201
+.github/actions/speakeasy/README.md
+  s_c393ed1c8a0ea4::t_d301b876da9daf 1-58
+.github/actions/speakeasy/action.yml
+  s_c393ed1c8a0ea4::t_2b5d4e8d7b8983 1-267
+.github/actions/speakeasy/go.mod
+  s_c393ed1c8a0ea4::t_b21860dc9db1cd 1-67
+.github/actions/speakeasy/go.sum
+  s_c393ed1c8a0ea4::t_6dbb3e249a767e 1-302
+.github/actions/speakeasy/internal/actions/finalize-suggestion.go
+  s_c393ed1c8a0ea4::t_cf084604ac12e9 1-67
+.github/actions/speakeasy/internal/actions/init.go
+  s_c393ed1c8a0ea4::t_aa828473af82c3 1-22
+.github/actions/speakeasy/internal/actions/log.go
+  s_c393ed1c8a0ea4::t_d6253ae2ab08c6 1-131
+.github/actions/speakeasy/internal/actions/outputs.go
+  s_c393ed1c8a0ea4::t_dc465750ed2dc0 1-65
+.github/actions/speakeasy/internal/actions/publishEvent.go
+  s_c393ed1c8a0ea4::t_53ace53eed4bee 1-27
+.github/actions/speakeasy/internal/actions/release.go
+  s_c393ed1c8a0ea4::t_083bfbe39a582c 1-259
+.github/actions/speakeasy/internal/actions/release_test.go
+  s_c393ed1c8a0ea4::t_2dfcb0a83a1d12 1-142
+.github/actions/speakeasy/internal/actions/runWorkflow.go
+  s_c393ed1c8a0ea4::t_1eaa4af95f6587 1-432
+.github/actions/speakeasy/internal/actions/setup_environment.go
+  s_c393ed1c8a0ea4::t_0ba6d1285fdb24 1-70
+.github/actions/speakeasy/internal/actions/suggest.go
+  s_c393ed1c8a0ea4::t_b15c1d8b4dca40 1-76
+.github/actions/speakeasy/internal/actions/tag.go
+  s_c393ed1c8a0ea4::t_41001733ed84dd 1-40
+.github/actions/speakeasy/internal/actions/test.go
+  s_c393ed1c8a0ea4::t_a79b36357a5c7a 1-224
+.github/actions/speakeasy/internal/actions/utils.go
+  s_c393ed1c8a0ea4::t_22384d84989cd2 1-46
+.github/actions/speakeasy/internal/cli/cli.go
+  s_c393ed1c8a0ea4::t_8da262a6c9e19c 1-210
+.github/actions/speakeasy/internal/cli/prdescription.go
+  s_c393ed1c8a0ea4::t_7eeb9face01015 1-117
+.github/actions/speakeasy/internal/cli/run.go
+  s_c393ed1c8a0ea4::t_9b3a81b42f54a0 1-139
+.github/actions/speakeasy/internal/cli/run_test.go
+  s_c393ed1c8a0ea4::t_7e269364e36d1a 1-101
+.github/actions/speakeasy/internal/cli/speakeasy.go
+  s_c393ed1c8a0ea4::t_fc1825e62b9654 1-331
+.github/actions/speakeasy/internal/configuration/configuration.go
+  s_c393ed1c8a0ea4::t_e8bd66acd09b80 1-52
+.github/actions/speakeasy/internal/document/document.go
+  s_c393ed1c8a0ea4::t_962fbe3c28df8c 1-214
+.github/actions/speakeasy/internal/download/download.go
+  s_c393ed1c8a0ea4::t_23fd2ef29d5ae7 1-53
+.github/actions/speakeasy/internal/environment/environment.go
+  s_c393ed1c8a0ea4::t_a3dd01fa8c38d0 1-426
+.github/actions/speakeasy/internal/environment/environment_test.go
+  s_c393ed1c8a0ea4::t_e11bf66ea3cada 1-371
+.github/actions/speakeasy/internal/git/diff.go
+  s_c393ed1c8a0ea4::t_6d4f3c562d83d2 1-38
+.github/actions/speakeasy/internal/git/diff_test.go
+  s_c393ed1c8a0ea4::t_e539d17f853f1d 1-275
+.github/actions/speakeasy/internal/git/fixtures/README.md
+  s_c393ed1c8a0ea4::t_e47f7ab6fe224a 1
+.github/actions/speakeasy/internal/git/fixtures/nested/names.txt
+  s_c393ed1c8a0ea4::t_1bcf02feb32edc 1-3
+.github/actions/speakeasy/internal/git/fixtures/sample.txt
+  s_c393ed1c8a0ea4::t_2c02ccb0d2f388 1
+.github/actions/speakeasy/internal/git/git.go
+  s_c393ed1c8a0ea4::t_be3cb2ce864ff7 1-1677
+.github/actions/speakeasy/internal/git/git_test.go
+  s_c393ed1c8a0ea4::t_bee74b4d342b5f 1-1746
+.github/actions/speakeasy/internal/git/goreleaser.yml
+  s_c393ed1c8a0ea4::t_f84d411e05e110 1-60
+.github/actions/speakeasy/internal/git/labels.go
+  s_c393ed1c8a0ea4::t_5270fc068c6795 1-148
+.github/actions/speakeasy/internal/git/releases.go
+  s_c393ed1c8a0ea4::t_99c655becb002b 1-191
+.github/actions/speakeasy/internal/git/signed_commits.go
+  s_c393ed1c8a0ea4::t_03c215f65dc992 1-474
+.github/actions/speakeasy/internal/logging/logging.go
+  s_c393ed1c8a0ea4::t_cd2add4b221abf 1-21
+.github/actions/speakeasy/internal/registry/tags.go
+  s_c393ed1c8a0ea4::t_fd8ebecfe6dc8a 1-30
+.github/actions/speakeasy/internal/run/run.go
+  s_c393ed1c8a0ea4::t_9a031c27f9e9b5 1-418
+.github/actions/speakeasy/internal/run/run_test.go
+  s_c393ed1c8a0ea4::t_4ab6ffdf693489 1-386
+.github/actions/speakeasy/internal/suggestions/suggestion.go
+  s_c393ed1c8a0ea4::t_f15f1218e13e45 1-158
+.github/actions/speakeasy/internal/telemetry/publishing.go
+  s_c393ed1c8a0ea4::t_bd4413f6f28ca8 1-306
+.github/actions/speakeasy/internal/telemetry/telemetry.go
+  s_c393ed1c8a0ea4::t_1e6338c3cab914 1-238
+.github/actions/speakeasy/internal/utils/outputs.go
+  s_c393ed1c8a0ea4::t_1edc3b6b5bedbe 1-49
+.github/actions/speakeasy/internal/utils/package.go
+  s_c393ed1c8a0ea4::t_f32c89cdcb97ab 1-44
+.github/actions/speakeasy/internal/utils/package_test.go
+  s_c393ed1c8a0ea4::t_2b8a06db4bc00d 1-41
+.github/actions/speakeasy/internal/versionbumps/versionBumps.go
+  s_c393ed1c8a0ea4::t_0dd4b1608c4825 1-120
+.github/actions/speakeasy/pkg/releases/releases.go
+  s_c393ed1c8a0ea4::t_e27ec7309d2304 1-523
+.github/actions/speakeasy/pkg/releases/releases_test.go
+  s_c393ed1c8a0ea4::t_fe32740c5e537a 1-559
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "259a221e594e593720472e6afd49549ff06e9425",
+  "prompts": {},
+  "sessions": {
+    "s_c393ed1c8a0ea4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c153-0cc8-7271-b05d-a5cf700c5df3",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
