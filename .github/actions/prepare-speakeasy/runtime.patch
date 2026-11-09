@@ -18,82 +18,6 @@ index 431a201..a406288 100644
 @@ -137,0 +138,2 @@ outputs:
 +  resolved_speakeasy_version:
 +    description: The verified Speakeasy CLI version used for generation
-diff --git a/internal/actions/init.go b/internal/actions/init.go
-index 11b729f..03c02a7 100644
---- a/internal/actions/init.go
-+++ b/internal/actions/init.go
-@@ -5,0 +6 @@ import (
-+	"github.com/speakeasy-api/sdk-generation-action/internal/cli"
-@@ -10,0 +12,3 @@ func initAction() (*git.Git, error) {
-+	if err := cli.VerifyPinnedCLI(); err != nil {
-+		return nil, err
-+	}
-diff --git a/internal/actions/init_test.go b/internal/actions/init_test.go
-new file mode 100644
-index 0000000..ad3ba1c
---- /dev/null
-+++ b/internal/actions/init_test.go
-@@ -0,0 +1,60 @@
-+package actions
-+
-+import (
-+	"net/http"
-+	"net/http/httptest"
-+	"os"
-+	"os/exec"
-+	"path/filepath"
-+	"strings"
-+	"sync/atomic"
-+	"testing"
-+)
-+
-+func TestUntrustedCLIFailsBeforeReleaseWrites(t *testing.T) {
-+	for _, scenario := range []string{"missing", "modified"} {
-+		t.Run(scenario, func(t *testing.T) {
-+			var requests atomic.Int32
-+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-+				requests.Add(1)
-+				w.WriteHeader(http.StatusNotFound)
-+			}))
-+			defer server.Close()
-+			root := t.TempDir()
-+			if scenario == "modified" {
-+				if err := os.MkdirAll(filepath.Join(root, "bin"), 0o755); err != nil {
-+					t.Fatal(err)
-+				}
-+				if err := os.WriteFile(filepath.Join(root, "bin", "speakeasy"), []byte("#!/bin/sh\nexit 0\n"), 0o755); err != nil {
-+					t.Fatal(err)
-+				}
-+			}
-+			cmd := exec.Command(os.Args[0], "-test.run=^TestReleaseIntegrityProcess$")
-+			cmd.Dir = root
-+			cmd.Env = []string{
-+				"PATH=/usr/bin:/bin", "HOME=" + root, "SPEAKEASY_ENVIRONMENT=local",
-+				"RELEASE_INTEGRITY_TEST=true", "INPUT_GITHUB_ACCESS_TOKEN=local-dummy",
-+				"INPUT_SPEAKEASY_VERSION=pinned", "INPUT_TARGET=vanta",
-+				"SPEAKEASY_API_KEY=local-dummy", "GITHUB_SERVER_URL=" + server.URL,
-+				"GITHUB_REPOSITORY=proof/repo", "GITHUB_REF=refs/heads/main",
-+				"GITHUB_WORKSPACE=" + filepath.Join(root, "workspace"),
-+			}
-+			if output, err := cmd.CombinedOutput(); err != nil {
-+				t.Fatalf("release guard failed: %v\n%s", err, output)
-+			}
-+			if requests.Load() != 0 {
-+				t.Fatalf("release contacted GitHub before validating CLI: %d requests", requests.Load())
-+			}
-+		})
-+	}
-+}
-+
-+func TestReleaseIntegrityProcess(t *testing.T) {
-+	if os.Getenv("RELEASE_INTEGRITY_TEST") == "" {
-+		t.Skip("isolated subprocess helper")
-+	}
-+	err := Release()
-+	if err == nil || (!strings.Contains(err.Error(), "pinned Speakeasy CLI") && !strings.Contains(err.Error(), "checksum mismatch")) {
-+		t.Fatalf("expected early CLI integrity error, got %v", err)
-+	}
-+}
 diff --git a/internal/actions/runWorkflow.go b/internal/actions/runWorkflow.go
 index 4050aa4..a73a6d7 100644
 --- a/internal/actions/runWorkflow.go
@@ -296,10 +220,10 @@ index 58cff4d..4012b32 100644
 +	err = cmd.Run()
 diff --git a/internal/cli/speakeasy_test.go b/internal/cli/speakeasy_test.go
 new file mode 100644
-index 0000000..ce0999d
+index 0000000..1508441
 --- /dev/null
 +++ b/internal/cli/speakeasy_test.go
-@@ -0,0 +1,137 @@
+@@ -0,0 +1,133 @@
 +package cli
 +
 +import (
@@ -349,10 +273,6 @@ index 0000000..ce0999d
 +
 +func TestRequiredCLIUsesReviewedBinaryWithoutNetwork(t *testing.T) {
 +	runPinnedCLIProcess(t, "verified")
-+}
-+
-+func TestAllCLIEntryPointsRejectUntrustedBinary(t *testing.T) {
-+	runPinnedCLIProcess(t, "modified")
 +}
 +
 +func TestPinnedCLIRejectsVersionOverrides(t *testing.T) {

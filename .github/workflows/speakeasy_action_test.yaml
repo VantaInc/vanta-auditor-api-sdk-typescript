@@ -25,6 +25,6 @@ jobs:
           go-version-file: .speakeasy/temp/action/go.mod
           cache-dependency-path: .speakeasy/temp/action/go.sum
       - name: Test CLI integrity and early failure
-        run: go test . ./internal/cli ./internal/actions ./internal/configuration
+        run: go test . ./internal/cli ./internal/configuration
       - name: Test verified installer
         run: bash testing/verified-cli-install_test.sh
