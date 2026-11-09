@@ -1,0 +1,19 @@
+.github/actions/prepare-speakeasy/README.md
+  s_c393ed1c8a0ea4::t_f033af4c0fa69c 26,66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6fdc362927951702a6f552bca10df73ba063fed1",
+  "prompts": {},
+  "sessions": {
+    "s_c393ed1c8a0ea4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c153-0cc8-7271-b05d-a5cf700c5df3",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
