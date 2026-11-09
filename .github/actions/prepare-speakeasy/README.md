@@ -23,7 +23,7 @@ Choose an explicit X.Y.Z [Speakeasy release](https://github.com/speakeasy-api/sp
 python3 -B .github/actions/prepare-speakeasy/update_cli.py 1.806.0
 ```
 
-The command verifies the archive against that release's published `checksums.txt` before opening it, hashes the executable without running it, and writes only `pinned-cli.json`. Review the one-file diff and checksum provenance. Routine CLI bumps do not change the upstream action SHA, runtime patch or workflows. The Go tests use synthetic versions `2.3.4` and `2.3.3`; keep these fixtures fixed during CLI upgrades.
+The command verifies the archive against that release's published `checksums.txt` before opening it, hashes the executable without running it, and writes only `pinned-cli.json`. Review the one-file diff and checksum provenance. Routine CLI bumps do not change the upstream action SHA, runtime patch or workflows. The tests use synthetic versions `2.3.4` and `2.3.3`; keep these fixtures fixed during CLI upgrades.
 
 CI checks the real archive/executable against the committed pin with `update_cli.py --check`; it never replaces expected hashes with fresh upstream values.
 
@@ -63,7 +63,7 @@ action_ref="$(awk '$1 == "ref:" { print $2 }' "$patch_dir/action.yml")"
 git clone https://github.com/speakeasy-api/sdk-generation-action.git .speakeasy/temp/action
 git -C .speakeasy/temp/action checkout --detach "$action_ref"
 GITHUB_WORKSPACE="$PWD" GITHUB_ACTION_PATH="$patch_dir" bash "$patch_dir/prepare.sh"
-bash "$patch_dir/test.sh"
+GITHUB_WORKSPACE="$PWD" bash "$patch_dir/test.sh"
 python3 -B -m unittest discover -s "$patch_dir" -p 'test_*.py'
 python3 -B "$patch_dir/update_cli.py" --check
 (cd .speakeasy/temp/action && go test . ./internal/cli ./internal/configuration)
