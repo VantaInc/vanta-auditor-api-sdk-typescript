@@ -1,0 +1,21 @@
+.github/actions/prepare-speakeasy/README.md
+  s_c393ed1c8a0ea4::t_38b889ae64fb6e 26
+.github/actions/prepare-speakeasy/runtime.patch
+  s_c393ed1c8a0ea4::t_669feabf52d9bd 178,181,244-245,253,256,269,271,275,284,287,327,330,340,346,349
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f57b1b0c323e3233ef945731d39d39cb37634800",
+  "prompts": {},
+  "sessions": {
+    "s_c393ed1c8a0ea4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c153-0cc8-7271-b05d-a5cf700c5df3",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
