@@ -1,0 +1,49 @@
+name: Speakeasy Generate
+on:
+  workflow_call:
+    inputs:
+      mode:
+        type: string
+        required: true
+      force:
+        type: string
+        default: "false"
+      set_version:
+        type: string
+    secrets:
+      github_access_token:
+        required: true
+      speakeasy_api_key:
+        required: true
+jobs:
+  generate:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.github_access_token }}
+      - id: prepare
+        uses: ./.github/actions/prepare-speakeasy
+      - id: run-workflow
+        name: Run Generation Workflow
+        uses: ./.speakeasy/temp/action
+        with:
+          github_access_token: ${{ secrets.github_access_token }}
+          speakeasy_api_key: ${{ secrets.speakeasy_api_key }}
+          mode: ${{ inputs.mode }}
+          force: ${{ inputs.force }}
+          set_version: ${{ inputs.set_version }}
+          poetry_version: "2.2.1"
+          enable_sdk_changelog: "true"
+      - name: Log Generation Output
+        uses: ./.speakeasy/temp/action
+        with:
+          action: log-result
+          github_access_token: ${{ secrets.github_access_token }}
+          speakeasy_api_key: ${{ secrets.speakeasy_api_key }}
+        env:
+          GH_ACTION_RESULT: ${{ job.status }}
+          RESOLVED_SPEAKEASY_VERSION: ${{ steps.run-workflow.outputs.resolved_speakeasy_version }}
+          GH_ACTION_VERSION: ${{ github.sha }}
+          GH_ACTION_STEP: ${{ github.job }}

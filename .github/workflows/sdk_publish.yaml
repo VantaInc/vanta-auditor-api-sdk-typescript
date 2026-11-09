@@ -14,7 +14,7 @@ permissions:
   workflow_dispatch: {}
 jobs:
   publish:
-    uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@6f65a2131d82e6f2f7064d026c431865b4e0b5f4
+    uses: ./.github/workflows/speakeasy_publish.yaml
     with:
       target: vanta
     secrets:
