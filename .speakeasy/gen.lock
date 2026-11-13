@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: 48344567-ff5d-4d9e-92eb-dfe908f362f2
 management:
-  docChecksum: f875510ef45c574f6220f914d6b6172a
+  docChecksum: 59db8b331852f6dbaa7b424083465bf9
   docVersion: 1.0.0
-  speakeasyVersion: 1.803.1
-  generationVersion: 2.950.2
-  releaseVersion: 0.9.42
-  configChecksum: 63f2b734c876f35e2361e4b4bbf09ecc
+  speakeasyVersion: 1.805.0
+  generationVersion: 2.954.8
+  releaseVersion: 0.9.43
+  configChecksum: 7822c5a22afcccc69810ca7a46723c14
   repoURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript.git
   installationURL: https://github.com/VantaInc/vanta-auditor-api-sdk-typescript
   published: true
 persistentEdits:
-  generation_id: f499e3b8-b06c-468e-9ca3-394e52e26a2c
-  pristine_commit_hash: faec6063714911055480008375a663364fe69913
-  pristine_tree_hash: fe28bf70774b73f2c6fb156ec4c0b411b9d4f6c4
+  generation_id: 99b67874-20df-468a-961c-33b0df920b3f
+  pristine_commit_hash: 1991593c028315a308c63525f82cdf4f2140f5b9
+  pristine_tree_hash: 1d7a205dd18f6b78d698761ba8630b577f41d9da
 features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.31.6
+    core: 3.31.8
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     devContainers: 2.90.1
@@ -1450,12 +1450,12 @@ trackedFiles:
     pristine_git_object: afae5d425062f3b5de046d12b6709654e41dbae3
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:d2e38789a51c771256e0b67270d29dd8abf9a747
-    pristine_git_object: 1b3b007b902b53ec1a737c59d366e01f7afb0dc6
+    last_write_checksum: sha1:f56722bf7825ad710e9f45c8f427c66a90468c83
+    pristine_git_object: 1cc7d6db16525e28d5045366c7a33e9b3ffcb4d9
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:6c9a8cd00270729d6196080e60fff61fd172f296
-    pristine_git_object: 44b9a9ba7b8234c4047be443a4327039662a7951
+    last_write_checksum: sha1:2be07112dbbf29bdd675796c9fd233641bf672e2
+    pristine_git_object: 9b0f7e0767a729e11dfc5cdfa49e57638b877d6e
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:521323ac1d7e603f18c4573512436070c83a84b5
@@ -1710,8 +1710,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:aa023cb22450e8cae265788bac6029bb6bea592f
-    pristine_git_object: 524f28b1b682389a036ba9a8f1681396465839f3
+    last_write_checksum: sha1:a2e6caa02f98463a8c1df6aa3bcec7332accd3d1
+    pristine_git_object: 22f46fab7469861ddd0bd794b52001acbde25617
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
