@@ -94,7 +94,8 @@ check_generation() {
   fi
   while IFS= read -r file; do
     case "$file" in
-      src/auditor-files.ts|docs/auditor-files.md|examples/README.md) exit 1 ;;
+      src/auditor-files.ts|docs/auditor-files.md|examples/README.md)
+        echo "Generation changed maintained content: $file" >&2; exit 1 ;;
       README.md|docs/sdks/audits/README.md|package.json|package-lock.json|jsr.json) ;;
       .speakeasy/gen.lock|.speakeasy/gen.yaml|.speakeasy/workflow.yaml|.speakeasy/workflow.lock) ;;
       src/lib/config.ts|src/sdk/audits.ts|src/models/components/index.ts|src/models/errors/index.ts|src/models/operations/index.ts) ;;

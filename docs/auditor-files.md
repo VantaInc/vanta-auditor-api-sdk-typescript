@@ -28,7 +28,7 @@ The [Node example](../examples/uploadInformationRequestAuditorFile.example.mts) 
 
 ## Architecture
 
-The `auditor-files` subpath owns orchestration. It uses generated initiation and finalization functions and types. The existing wildcard package export supports ESM and CommonJS without changing the generated root index.
+The `auditor-files` subpath owns orchestration. It uses generated initiation and finalization functions and types. The existing wildcard package export supports ESM and CommonJS without changing the generated root index. A scoped patch under `.speakeasy/patches/examples/` preserves the upload guide link in the generated examples README.
 
 The helper copies every signed form field unchanged and appends the file last. Native `fetch` sets the multipart boundary. Storage requests omit credentials and reject redirects. They use a separate transport, so SDK authentication, hooks, custom headers and proxy configuration are not inherited. No automatic initiation or transfer retry occurs. A failed transfer never triggers finalization.
 
@@ -70,6 +70,6 @@ SPEAKEASY_CLI=/path/to/speakeasy bash scripts/check-staged-upload-regeneration.s
 SPEAKEASY_CLI=/path/to/speakeasy bash scripts/check-staged-upload-regeneration.sh
 ```
 
-The script uses a disposable clone of committed HEAD. It compares existing schema contracts, regenerates normally and after adding a model property, checks helper preservation, reruns build/lint/tests, and executes packed ESM/CommonJS consumers. It does not publish a package or upload a registry spec.
+The script uses a disposable clone of committed HEAD. Candidate mode requires the reviewed public-source hash and verifies that the overlay preserves its existing paths and schemas. Both modes reject generated changes outside the reviewed upload inventory, regenerate normally and after adding a model property, check helper preservation, rerun build/lint/tests, and execute packed ESM/CommonJS consumers. It does not publish a package or upload a registry spec.
 
-Real Vanta/S3 acceptance remains a release prerequisite: a dedicated writable staging fixture must pass a small upload/list/download/checksum/delete journey, the actual 52,428,800-byte boundary and one-byte-over storage rejection, lost-finalization recovery, real expiry/interruption and memory profiling. Reserve unfinished-session headroom, serialize and pace requests to the owner-confirmed quotas, and delete attached fixtures. Unfinished sessions need real expiry or an owner-approved termination mechanism. The existing production read-only smoke and mocked tests do not supply this evidence. Writable tests must use explicit dedicated configuration and stay outside default test discovery.
+The writable staging harness and real Vanta/S3 acceptance remain follow-up work and release prerequisites. A dedicated fixture must pass a small upload/list/download/checksum/delete journey, the actual 52,428,800-byte boundary and one-byte-over storage rejection, lost-finalization recovery, real expiry/interruption and memory profiling. Reserve unfinished-session headroom, serialize and pace requests to the owner-confirmed quotas, and delete attached fixtures. Unfinished sessions need real expiry or an owner-approved termination mechanism. The existing production read-only smoke and mocked tests do not supply this evidence. Writable tests must use explicit dedicated configuration and stay outside default test discovery.
