@@ -21,22 +21,26 @@ if (createHash('sha256').update(readFileSync(cli)).digest('hex') !== pin.binary_
 JS
 
 scratch="$(mktemp -d)"
-trap 'rm -rf -- "$scratch"' EXIT
+trap 'if [[ "${KEEP_REGEN_CHECK:-0}" == 1 ]]; then echo "Retained check: $scratch"; else rm -rf -- "$scratch"; fi' EXIT
 git clone --quiet --no-hardlinks "$repo" "$scratch/sdk"
 cd "$scratch/sdk"
 echo "Checking committed SDK $(git rev-parse HEAD); candidate overlay: $candidate"
 mkdir -p .speakeasy/temp/upload-check
 schema="$PWD/.speakeasy/temp/upload-check/input.json"
-node --input-type=module - "$schema" <<'JS'
+node --input-type=module - "$schema" "$candidate" <<'JS'
 import { writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 const response = await fetch('https://vanta.mintlify.app/reference/auditor-api.json');
 if (!response.ok) throw new Error(`Public schema fetch failed: ${response.status}`);
 const source = await response.text();
 JSON.parse(source);
+const hash = createHash('sha256').update(source).digest('hex');
+if (process.argv[3] === 'true' && hash !== '1411f0e0421bb75d777e7d4979d54da9f4bf4eb118ca3f321a4e13e637aef8b6') {
+  throw new Error('The reviewed candidate baseline changed. Review the public source before updating this pin.');
+}
 writeFileSync(process.argv[2], source);
 writeFileSync(`${process.argv[2]}.baseline`, source);
-console.log(`Public schema SHA-256: ${createHash('sha256').update(source).digest('hex')}`);
+console.log(`Public schema SHA-256: ${hash}`);
 JS
 if $candidate; then
   "$cli_path" overlay apply --schema "$schema.baseline" \
@@ -79,7 +83,11 @@ JS
 helper_hash="$(sha256sum src/auditor-files.ts)"
 check_generation() {
   "$cli_path" run --auto-yes --output console --skip-versioning --skip-upload-spec --skip-compile --skip-testing
-  test "$helper_hash" = "$(sha256sum src/auditor-files.ts)"
+  if [[ "$helper_hash" != "$(sha256sum src/auditor-files.ts)" ]]; then
+    git diff -- src/auditor-files.ts >&2
+    echo 'Generation changed the helper source.' >&2
+    exit 1
+  fi
   if [[ -n "$(git diff --name-only --diff-filter=D)" ]]; then
     echo 'Generation deleted tracked files.' >&2
     exit 1
@@ -87,10 +95,17 @@ check_generation() {
   while IFS= read -r file; do
     case "$file" in
       src/auditor-files.ts|docs/auditor-files.md|examples/README.md) exit 1 ;;
-      src/*|docs/models/*|docs/sdks/*|README.md|USAGE.md|FUNCTIONS.md|package.json|package-lock.json|jsr.json|.speakeasy/gen.*|.speakeasy/workflow.yaml|.speakeasy/workflow.lock|examples/audits*.example.ts) ;;
+      README.md|docs/sdks/audits/README.md|package.json|package-lock.json|jsr.json) ;;
+      .speakeasy/gen.lock|.speakeasy/gen.yaml|.speakeasy/workflow.yaml|.speakeasy/workflow.lock) ;;
+      src/lib/config.ts|src/sdk/audits.ts|src/models/components/index.ts|src/models/errors/index.ts|src/models/operations/index.ts) ;;
+      src/funcs/auditsInitiateInformationRequestAuditorFileUpload.ts|src/funcs/auditsFinalizeInformationRequestAuditorFileUpload.ts) ;;
+      src/models/operations/initiateinformationrequestauditorfileupload.ts|src/models/operations/finalizeinformationrequestauditorfileupload.ts) ;;
+      src/models/components/auditorfileuploadgrant.ts|src/models/components/initiateauditorfileuploadinput.ts|src/models/components/finalizeauditorfileuploadinput.ts|src/models/components/uploadedauditorfile.ts|src/models/errors/outbounderror.ts) ;;
+      docs/models/operations/initiateinformationrequestauditorfileuploadrequest.md|docs/models/operations/finalizeinformationrequestauditorfileuploadrequest.md) ;;
+      docs/models/components/auditorfileuploadgrant.md|docs/models/components/initiateauditorfileuploadinput.md|docs/models/components/finalizeauditorfileuploadinput.md|docs/models/components/uploadedauditorfile.md|docs/models/errors/outbounderror.md) ;;
       *) echo "Unexpected regeneration change: $file" >&2; exit 1 ;;
     esac
-  done < <(git diff --name-only)
+  done < <({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u)
   npm run build
   npm run lint
   npm --prefix smoke-test run check:auditor-files-example
