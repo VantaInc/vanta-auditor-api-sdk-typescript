@@ -25,8 +25,7 @@ trap 'if [[ "${KEEP_REGEN_CHECK:-0}" == 1 ]]; then echo "Retained check: $scratc
 git clone --quiet --no-hardlinks "$repo" "$scratch/sdk"
 cd "$scratch/sdk"
 echo "Checking committed SDK $(git rev-parse HEAD); candidate overlay: $candidate"
-mkdir -p .speakeasy/temp/upload-check
-schema="$PWD/.speakeasy/temp/upload-check/input.json"
+schema="$scratch/input.json"
 node --input-type=module - "$schema" "$candidate" <<'JS'
 import { writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
