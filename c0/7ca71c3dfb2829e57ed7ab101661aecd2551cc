@@ -1,0 +1,117 @@
+README.md
+  s_a2a2b753bda23a::t_a722d107e76e2d 105-110
+  s_a2a2b753bda23a::t_866f45c33eda1c 430
+  s_a2a2b753bda23a::t_fc054e3a630317 209-210,242,255,361-368,381-390,394,400-404,417,434-435
+jsr.json
+  s_a2a2b753bda23a::t_866f45c33eda1c 5
+src/auditor-files.ts
+  s_a2a2b753bda23a::t_db0fb8e7ea81a6 101,139
+  s_a2a2b753bda23a::t_e5d33046131443 1-100,102-104,111-138,140-211
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 105-110
+examples/uploadInformationRequestAuditorFile.example.mts
+  s_a2a2b753bda23a::t_7245c77e99970b 1-29
+smoke-test/tsconfig.auditor-files.json
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 1-8,10-11
+  s_a2a2b753bda23a::t_7245c77e99970b 9
+src/lib/config.ts
+  s_a2a2b753bda23a::t_866f45c33eda1c 68,71
+smoke-test/module-format-auditor-files.mjs
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 1-43
+.speakeasy/auditor-files-candidate-overlay.yaml
+  s_a2a2b753bda23a::t_dc9b46bab64eb6 1-241
+smoke-test/package.json
+  s_a2a2b753bda23a::t_dc9b46bab64eb6 8,10-12
+docs/models/components/finalizeauditorfileuploadinput.md
+  s_a2a2b753bda23a::t_866f45c33eda1c 15-17
+  s_a2a2b753bda23a::t_daeb9c496b1aa1 1-14
+smoke-test/vitest.config.ts
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 6
+.github/workflows/smoke_test.yaml
+  s_a2a2b753bda23a::t_a9d02190f5512e 16-36
+AGENTS.md
+  s_a2a2b753bda23a::t_a9179ce8011cfc 1-7
+docs/auditor-files.md
+  s_a2a2b753bda23a::t_a9179ce8011cfc 1-26,28-75
+  s_a2a2b753bda23a::t_7245c77e99970b 27
+smoke-test/src/auditor-files-example.test.ts
+  s_a2a2b753bda23a::t_7245c77e99970b 7
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 1-6,8-58
+docs/models/components/auditorfileuploadgrant.md
+  s_a2a2b753bda23a::t_866f45c33eda1c 20-27
+  s_a2a2b753bda23a::t_af88654b67de64 1-19
+smoke-test/src/auditor-files.test.ts
+  s_a2a2b753bda23a::t_89b4e4d7dc2581 1-108,112-113,131-178,185-247,261,263-264,279-296,298-321,345-360,363-369
+  s_a2a2b753bda23a::t_a9d02190f5512e 297
+  s_a2a2b753bda23a::t_db0fb8e7ea81a6 109-111,114-130,179-184,248-260,262,265-278,322-344,361-362
+examples/README.md
+  s_a2a2b753bda23a::t_7245c77e99970b 5
+  s_a2a2b753bda23a::t_a9179ce8011cfc 6
+src/models/components/initiateauditorfileuploadinput.ts
+  s_a2a2b753bda23a::t_866f45c33eda1c 9-31
+  s_a2a2b753bda23a::t_0462e575b3a0d2 1-8,32-62
+docs/models/components/uploadedauditorfile.md
+  s_a2a2b753bda23a::t_866f45c33eda1c 15-17
+  s_a2a2b753bda23a::t_68fff941b8b0d2 1-14
+scripts/check-staged-upload-regeneration.sh
+  s_a2a2b753bda23a::t_67ba33f59ba4ea 1-117
+src/models/components/auditorfileuploadgrant.ts
+  s_a2a2b753bda23a::t_866f45c33eda1c 13-33
+  s_a2a2b753bda23a::t_e7be15b5ef327e 1-12,34-64
+docs/models/components/initiateauditorfileuploadinput.md
+  s_a2a2b753bda23a::t_866f45c33eda1c 17-21
+  s_a2a2b753bda23a::t_829f0824640d4c 1-16
+package.json
+  s_a2a2b753bda23a::t_866f45c33eda1c 3
+.speakeasy/gen.yaml
+  s_a2a2b753bda23a::t_866f45c33eda1c 36
+.speakeasy/gen.lock
+  s_a2a2b753bda23a::t_cc04cccaa8418b 4,8-9,14-16,203-206,459-462,535-538,1079-1082,1219-1222,1263-1266,1315-1318,1457-1458,1481-1482,1485-1486,1539-1542,1595-1598,1749-1750,1907-1910,2075-2078,2105-2106,2147-2150,2431-2434,2565-2570,2623-2626,2677-2682,2821-2822,3440-3461
+docs/models/errors/outbounderror.md
+  s_a2a2b753bda23a::t_eb0a41f5d8a32b 1-15
+docs/models/operations/finalizeinformationrequestauditorfileuploadrequest.md
+  s_a2a2b753bda23a::t_59cf62bc6c1615 1-23
+docs/models/operations/initiateinformationrequestauditorfileuploadrequest.md
+  s_a2a2b753bda23a::t_db06192d90a968 1-25
+docs/sdks/audits/README.md
+  s_a2a2b753bda23a::t_87b9f654106f39 63-64,5201-5430
+package-lock.json
+  s_a2a2b753bda23a::t_178b0472896fbc 3,9
+src/funcs/auditsFinalizeInformationRequestAuditorFileUpload.ts
+  s_a2a2b753bda23a::t_1ed9ef97655fcd 1-221
+src/funcs/auditsInitiateInformationRequestAuditorFileUpload.ts
+  s_a2a2b753bda23a::t_70c4946b3eae7b 1-218
+src/models/components/finalizeauditorfileuploadinput.ts
+  s_a2a2b753bda23a::t_adbd89d41a6021 1-33
+src/models/components/index.ts
+  s_a2a2b753bda23a::t_aa815c762db99d 32,74,91,162
+src/models/components/uploadedauditorfile.ts
+  s_a2a2b753bda23a::t_f400ed81804900 1-31
+src/models/errors/index.ts
+  s_a2a2b753bda23a::t_3ea54b27172b7d 7
+src/models/errors/outbounderror.ts
+  s_a2a2b753bda23a::t_4225063107f222 1-45
+src/models/operations/finalizeinformationrequestauditorfileupload.ts
+  s_a2a2b753bda23a::t_33e2eadce4613f 1-49
+src/models/operations/index.ts
+  s_a2a2b753bda23a::t_59a7067a6f6b54 15,28
+src/models/operations/initiateinformationrequestauditorfileupload.ts
+  s_a2a2b753bda23a::t_c54f9fd3896dc7 1-49
+src/sdk/audits.ts
+  s_a2a2b753bda23a::t_c037149bf8a68a 16,30,1848-1940
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c07ca71c3dfb2829e57ed7ab101661aecd2551cc",
+  "prompts": {},
+  "sessions": {
+    "s_a2a2b753bda23a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e659-73c1-7013-9a9b-56ccf2de7fef",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
