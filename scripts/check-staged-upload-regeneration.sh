@@ -87,7 +87,7 @@ check_generation() {
   while IFS= read -r file; do
     case "$file" in
       src/auditor-files.ts|docs/auditor-files.md|examples/README.md) exit 1 ;;
-      src/*|docs/models/*|docs/sdks/*|README.md|USAGE.md|FUNCTIONS.md|package.json|package-lock.json|jsr.json|.speakeasy/gen.*|.speakeasy/workflow.yaml|examples/audits*.example.ts) ;;
+      src/*|docs/models/*|docs/sdks/*|README.md|USAGE.md|FUNCTIONS.md|package.json|package-lock.json|jsr.json|.speakeasy/gen.*|.speakeasy/workflow.yaml|.speakeasy/workflow.lock|examples/audits*.example.ts) ;;
       *) echo "Unexpected regeneration change: $file" >&2; exit 1 ;;
     esac
   done < <(git diff --name-only)

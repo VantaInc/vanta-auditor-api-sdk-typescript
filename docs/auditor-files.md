@@ -60,7 +60,7 @@ npm --prefix smoke-test run test:auditor-files
 npm --prefix smoke-test run test:module-format
 ```
 
-The independent `sdk-tests` PR job runs these checks without secrets or the production smoke bypass. Captured transports cover sequencing, signed fields and serialized multipart, credential isolation, policy boundaries, clock skew, active cancellation, deadlines, retry exhaustion, same-ID recovery and redacted errors. The executable example uses a real temporary file. Unit boundary tests substitute `Blob.size`; they do not prove real storage limits or memory use.
+The independent `sdk-tests` PR job runs these checks without secrets or the production smoke bypass. Its dedicated Vitest config selects only the helper and example suites. Default production-read discovery excludes these suites and writable live tests. Captured transports cover sequencing, signed fields and serialized multipart, credential isolation, policy boundaries, clock skew, active cancellation, deadlines, retry exhaustion, same-ID recovery and redacted errors. The executable example uses a real temporary file. Unit boundary tests substitute `Blob.size`; they do not prove real storage limits or memory use.
 
 With the authenticated, checksum-verified pinned Speakeasy CLI available:
 
