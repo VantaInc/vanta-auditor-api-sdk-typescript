@@ -22,6 +22,8 @@ it("runs the documented upload example", async () => {
   vi.stubGlobal("fetch", storage);
   let initiations = 0;
   let completions = 0;
+  let expired = false;
+  let rejectFinalization = false;
   const client = new Vanta({
     bearerAuth: "example-oauth",
     httpClient: new HTTPClient({
@@ -29,6 +31,7 @@ it("runs the documented upload example", async () => {
         const url = value instanceof Request ? value.url : String(value);
         if (url.endsWith("/finalize")) {
           completions++;
+          if (rejectFinalization) return Response.json({ message: "unsupported" }, { status: 422 });
           return Response.json({ id: "attached-file" }, { status: 201 });
         }
         initiations++;
@@ -37,7 +40,7 @@ it("runs the documented upload example", async () => {
           url: "https://storage.example.test/",
           fields: { key: "example-key" },
           maxSizeBytes: 1_024,
-          transferExpiresAt: new Date(Date.now() + 60_000).toISOString(),
+          transferExpiresAt: new Date(Date.now() + (expired ? -60_000 : 60_000)).toISOString(),
           finalizationExpiresAt: new Date(Date.now() + 600_000).toISOString(),
         }, { headers: { date: new Date().toUTCString() } });
       },
@@ -51,6 +54,14 @@ it("runs the documented upload example", async () => {
     const log = vi.spyOn(console, "error").mockImplementation(() => {});
     await expect(uploadGuidance(client, metadata, AbortSignal.abort())).rejects.toBeInstanceOf(AuditorFileUploadError);
     expect(log).toHaveBeenCalledWith("Auditor file upload:", "initiate", "aborted", undefined);
+    expired = true;
+    await expect(uploadGuidance(client, metadata)).rejects.toMatchObject({ code: "expired" });
+    expect(log).toHaveBeenCalledWith("The upload window expired; check the current attachment before restarting.");
+    expired = false;
+    rejectFinalization = true;
+    await expect(uploadGuidance(client, metadata)).rejects.toMatchObject({ phase: "finalize", statusCode: 422 });
+    expect(log).toHaveBeenCalledWith("Retain this uploadId and follow the recovery guide before restarting.");
+    expect(storage).toHaveBeenCalledTimes(2);
     log.mockRestore();
   } finally {
     await rm(directory, { recursive: true, force: true });

@@ -18,10 +18,10 @@ export async function uploadGuidance(
   } catch (error) {
     if (error instanceof AuditorFileUploadError) {
       console.error("Auditor file upload:", error.phase, error.code, error.uploadId);
-      if (error.phase === "finalize" && error.uploadId) {
-        console.error("Recover completion with this uploadId; do not upload the file again.");
-      } else if (error.code === "expired") {
+      if (error.code === "expired") {
         console.error("The upload window expired; check the current attachment before restarting.");
+      } else if (error.phase === "finalize" && error.uploadId) {
+        console.error("Retain this uploadId and follow the recovery guide before restarting.");
       }
     }
     throw error;
