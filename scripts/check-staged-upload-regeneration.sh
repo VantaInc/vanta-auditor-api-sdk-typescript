@@ -64,7 +64,11 @@ const grant = source.components.schemas.AuditorFileUploadGrant;
 for (const name of ['uploadId', 'url', 'fields', 'maxSizeBytes', 'transferExpiresAt', 'finalizationExpiresAt']) {
   if (!grant.required.includes(name)) throw new Error(`Missing required grant field: ${name}`);
 }
-if (grant.properties.fields.additionalProperties?.type !== 'string') throw new Error('Signed fields must remain a string dictionary.');
+const fieldSchema = grant.properties.fields;
+const fields = fieldSchema.$ref?.startsWith('#/components/schemas/')
+  ? source.components.schemas[fieldSchema.$ref.slice('#/components/schemas/'.length)]
+  : fieldSchema;
+if (fields?.additionalProperties?.type !== 'string') throw new Error('Signed fields must remain a string dictionary.');
 writeFileSync('.speakeasy/workflow.yaml', JSON.stringify({
   workflowVersion: '1.0.0', speakeasyVersion: 'pinned',
   sources: { local: { inputs: [{ location: schemaPath }], overlays: [{ location: '.speakeasy/speakeasy-modifications-overlay.yaml' }] } },
