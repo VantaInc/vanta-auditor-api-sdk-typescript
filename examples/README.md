@@ -2,6 +2,8 @@
 
 This directory contains example scripts demonstrating how to use the vanta-auditor-api-sdk SDK.
 
+For auditor guidance files, see [the complete upload example](uploadInformationRequestAuditorFile.example.mts) and [upload behavior and recovery](../docs/auditor-files.md). The example uses Node 20 or later and a file-backed Blob.
+
 ## Prerequisites
 
 - Node.js (v18 or higher)

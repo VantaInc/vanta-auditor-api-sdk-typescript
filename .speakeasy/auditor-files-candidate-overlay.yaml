@@ -1,0 +1,241 @@
+overlay: 1.0.0
+info:
+  title: Auditor file upload candidate
+  version: 1.0.0
+actions:
+- target: $.paths
+  update:
+    /audits/{auditId}/information-requests/{requestId}/auditor-files/uploads:
+      post:
+        operationId: InitiateInformationRequestAuditorFileUpload
+        responses:
+          '200':
+            description: Ok
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/AuditorFileUploadGrant'
+                examples:
+                  Example 1:
+                    value:
+                      uploadId: 7630c3ba-51c3-4410-84d1-3b79d6a8eb1d
+                      url: https://uploads.example.com/
+                      fields:
+                        key: example-upload-key
+                        Content-Type: text/csv
+                        Policy: example-base64-policy
+                        X-Amz-Signature: example-signature
+                      maxSizeBytes: 52428800
+                      transferExpiresAt: 2026-11-03 12:01:00+00:00
+                      finalizationExpiresAt: 2026-11-03 12:10:00+00:00
+          '400':
+            description: Invalid request body or path parameters; correct the input
+          '401':
+            description: Missing or expired Vanta access token
+          '403':
+            description: The application or named auditor lacks access
+          '404':
+            description: The audit or information request was not found
+          '409':
+            description: The audit is completed; reopen it before uploading
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OutboundError'
+          '422':
+            description: Unsupported contentType, audit not yet available, or upload could not start before
+              its transfer deadline
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OutboundError'
+          '429':
+            description: Request rate or unfinished-upload limit reached; back off before starting another
+              upload
+          '500':
+            description: Unexpected server error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OutboundError'
+        description: "Starts an upload of a file an auditor provides for the customer, such as\ninstructions\
+          \ or a template, on an information request. This does not upload\ncustomer evidence. Use this\
+          \ three-step flow:\n\n1. Call this endpoint with `email`, `filename` and `contentType` to receive\n\
+          \   an `uploadId`, a temporary `url` and form `fields`.\n2. POST the file to `url` as `multipart/form-data`\
+          \ before `transferExpiresAt`.\n   Copy every returned field name and value unchanged, then append\
+          \ the file\n   under `file` as the final part. Do not hard-code the field names or send\n  \
+          \ your Vanta bearer token to this URL. Let your HTTP client set the\n   multipart Content-Type\
+          \ header and boundary. Wait for a 2xx response;\n   the response body may be empty.\n3. POST\
+          \ `{ \"uploadId\": \"<returned uploadId>\" }` to\n   `/v1/audits/{auditId}/information-requests/{requestId}/auditor-files/uploads/finalize`\n\
+          \   and complete finalization before `finalizationExpiresAt`.\n\nThe file is attached only after\
+          \ finalization succeeds. Each upload accepts\none file up to 50MB, inclusive. The auditor identified\n\
+          by `email` is credited as the uploader and must be an active user in your\nfirm with access\
+          \ to the audit. A completed audit returns 409.\n\nEach application is limited to 10 unfinished\
+          \ auditor file uploads per\ncustomer, across all audits and requests. Uploads count toward this\
+          \ limit\nuntil they are finalized, fail, or expire. Starting another upload at this\nlimit returns\
+          \ 429, even if the earlier file transfers have succeeded.\nRepeating this start operation creates\
+          \ a new upload; it does not recover\nan earlier upload whose response was lost.\n\nRate limit:\
+          \ 10 requests / minute."
+        summary: Start an auditor file upload
+        tags:
+        - Audits
+        security:
+        - bearerAuth: []
+        parameters:
+        - in: path
+          name: auditId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: requestId
+          required: true
+          schema:
+            type: string
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiateAuditorFileUploadInput'
+    /audits/{auditId}/information-requests/{requestId}/auditor-files/uploads/finalize:
+      post:
+        operationId: FinalizeInformationRequestAuditorFileUpload
+        responses:
+          '201':
+            description: Auditor file attached
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/UploadedAuditorFile'
+                examples:
+                  Example 1:
+                    value:
+                      id: 65fc81a3359c8508c9af880f
+          '400':
+            description: Invalid request body or path parameters; correct the input
+          '401':
+            description: Missing or expired Vanta access token
+          '403':
+            description: The application or original auditor no longer has access
+          '404':
+            description: The audit, information request or upload was not found for this application and
+              destination
+          '409':
+            description: The audit is completed; stop this upload attempt
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OutboundError'
+          '413':
+            description: The file exceeds 50MB
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OutboundError'
+          '422':
+            description: Upload expired, file missing or unsupported, or audit not yet available; correct
+              the problem before starting a new upload
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OutboundError'
+          '429':
+            description: Request rate or finalization limit reached; retry the same uploadId with backoff
+              before finalizationExpiresAt
+          '500':
+            description: Unexpected server error; retry the same uploadId with backoff before finalizationExpiresAt
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OutboundError'
+        description: 'Completes an auditor file upload by validating the file and attaching it
+
+          to the information request. First start an upload with
+
+          `POST /v1/audits/{auditId}/information-requests/{requestId}/auditor-files/uploads`,
+
+          then transfer the file to the returned `url` and wait for its 2xx response.
+
+          Calling finalize before the file arrives ends that upload; start a new one.
+
+
+          Send `{ "uploadId": "<returned uploadId>" }` using the same application,
+
+          audit and information request that started the upload. Vanta uses the
+
+          auditor identified by `email` at the start; that auditor must still be an
+
+          active user in your firm with audit access. Unsupported file types return
+
+          `422` during finalization.
+
+
+          A 201 response contains the attached file''s `id`, which differs from
+
+          `uploadId`. Use `GET /v1/audits/{auditId}/information-requests/{requestId}/auditor-files`
+
+          to find that ID and obtain a temporary download URL.
+
+
+          Retry the same upload ID with backoff after a lost response, a 5xx or a 429.
+
+          Stop retrying at `finalizationExpiresAt`. A 409 means the audit is
+
+          completed; stop this attempt. For 404, 413 or 422, stop this attempt and
+
+          correct the input or start a new upload.
+
+
+          A 429 can mean too many requests, another finalization of this upload is
+
+          still running, or too many files are being finalized for this application
+
+          and customer.
+
+          After a failed attempt, you may need to wait up to 60 seconds before
+
+          retrying. Expired uploads, missing files and unsupported files return 422;
+
+          files over 50MB return 413. Retrying a finalization
+
+          that already succeeded returns the original auditor file ID, even if the
+
+          file was later deleted; it does not attach the file again. Current access
+
+          is still required.
+
+
+          Rate limit: 10 requests / minute.'
+        summary: Complete an auditor file upload and attach the file
+        tags:
+        - Audits
+        security:
+        - bearerAuth: []
+        parameters:
+        - in: path
+          name: auditId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: requestId
+          required: true
+          schema:
+            type: string
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinalizeAuditorFileUploadInput'
+- target: $.components.schemas
+  update:
+    OutboundError:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+      additionalProperties: false
