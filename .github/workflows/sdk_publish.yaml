@@ -1,9 +1,6 @@
 name: Publish
 permissions:
-  checks: write
   contents: write
-  pull-requests: write
-  statuses: write
   id-token: write
 "on":
   push:
@@ -14,10 +11,11 @@ permissions:
   workflow_dispatch: {}
 jobs:
   publish:
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/speakeasy_publish.yaml
     with:
       target: vanta
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      npm_token: ${{ secrets.NPM_TOKEN }}
-      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      SPEAKEASY_API_KEY: ${{ secrets.SPEAKEASY_API_KEY }}

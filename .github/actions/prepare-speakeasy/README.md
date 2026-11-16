@@ -2,18 +2,18 @@
 
 Generate and Publish use a small patch against the exact reviewed upstream action. The upstream action otherwise downloads an unchecked bootstrap CLI even when SDK configuration names a generator version. This repository owns the patch; it is maintained separately from generated SDK code.
 
-The entry workflows keep their triggers, inputs and secret mappings, and call local reusable implementations from the same SDK commit:
+The entry workflows keep their triggers and inputs, require `main`, and call local reusable implementations from the same SDK commit. Jobs obtain credentials through protected environments:
 
 | Entry workflow | Implementation |
 | --- | --- |
 | `.github/workflows/sdk_generation.yaml` | `.github/workflows/speakeasy_generate.yaml` |
 | `.github/workflows/sdk_publish.yaml` | `.github/workflows/speakeasy_publish.yaml` |
 
-The implementations contain the TypeScript jobs extracted from the pinned upstream wrappers. Each job prepares its own action checkout; the npm token is passed only by Publish and used only in its publishing step.
+The implementations contain the TypeScript jobs extracted from the pinned upstream wrappers. Each job prepares its own action checkout; the npm token is passed only by Publish and used only in its protected publishing job.
 
 `action.yml` selects the upstream source SHA; `prepare.sh` checks the same SHA and a clean tree. `runtime.patch` contains the Go/Docker changes and Go tests. `pinned-cli.json` is the single production CLI record: version, platform, artifact URL, archive SHA-256 and executable SHA-256. Preparation copies that record and `install_pinned_cli.py` into the action; installation and embedded Go verification consume the same record.
 
-Keep `.speakeasy/workflow.yaml` in `speakeasyVersion: pinned` mode. Startup must reject an invalid CLI before authentication or release dispatch, and every CLI launch must verify the executable. Preparation failure removes the generated checkout; Publish callbacks must also require successful preparation. npm credentials belong only in the Publish step. Callback telemetry reports the SDK commit that owns the applied patch.
+Keep `.speakeasy/workflow.yaml` in `speakeasyVersion: pinned` mode. Startup must reject an invalid CLI before authentication or release dispatch, and every CLI launch must verify the executable. Preparation failure removes the generated checkout; Publish callbacks must also require successful preparation. npm credentials belong only in the protected publishing job. Callback telemetry reports the SDK commit that owns the applied patch.
 
 ## Update the CLI
 
