@@ -1,0 +1,21 @@
+smoke-test/src/auditor-files-example.test.ts
+  s_a2a2b753bda23a::t_49b6b7235ce29f 25-26,34,43,57-64
+examples/uploadInformationRequestAuditorFile.example.mts
+  s_a2a2b753bda23a::t_49b6b7235ce29f 21,23-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2bad2731bba7bf9c2e2012bfb196343f306e241f",
+  "prompts": {},
+  "sessions": {
+    "s_a2a2b753bda23a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e659-73c1-7013-9a9b-56ccf2de7fef",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
