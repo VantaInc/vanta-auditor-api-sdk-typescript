@@ -13,12 +13,26 @@ on:
     secrets:
       github_access_token:
         required: true
-      speakeasy_api_key:
+      SPEAKEASY_API_KEY:
         required: true
 jobs:
   generate:
+    if: github.ref == 'refs/heads/main'
+    environment: sdk-automation
     runs-on: ubuntu-22.04
     steps:
+      - name: Verify environment credentials
+        shell: bash
+        working-directory: ${{ github.workspace }}
+        env:
+          SPEAKEASY_API_KEY: ${{ secrets.SPEAKEASY_API_KEY }}
+        run: |
+          for name in SPEAKEASY_API_KEY; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Required environment secret ${name} is missing. See SDK_CREDENTIALS.md."
+              exit 1
+            fi
+          done
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
@@ -30,7 +44,7 @@ jobs:
         uses: ./.speakeasy/temp/action
         with:
           github_access_token: ${{ secrets.github_access_token }}
-          speakeasy_api_key: ${{ secrets.speakeasy_api_key }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
           mode: ${{ inputs.mode }}
           force: ${{ inputs.force }}
           set_version: ${{ inputs.set_version }}
@@ -41,7 +55,7 @@ jobs:
         with:
           action: log-result
           github_access_token: ${{ secrets.github_access_token }}
-          speakeasy_api_key: ${{ secrets.speakeasy_api_key }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
         env:
           GH_ACTION_RESULT: ${{ job.status }}
           RESOLVED_SPEAKEASY_VERSION: ${{ steps.run-workflow.outputs.resolved_speakeasy_version }}
