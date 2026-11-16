@@ -2,7 +2,7 @@
 
 Generate and Publish use a small patch against the exact reviewed upstream action. The upstream action otherwise downloads an unchecked bootstrap CLI even when SDK configuration names a generator version. This repository owns the patch; it is maintained separately from generated SDK code.
 
-The entry workflows keep their triggers and inputs, require `main`, and call local reusable implementations from the same SDK commit. Jobs obtain credentials through protected environments; see [SDK credential setup](../../../SDK_CREDENTIALS.md) before enabling these workflows:
+The entry workflows keep their triggers and inputs, require `main`, and call local reusable implementations from the same SDK commit. Jobs obtain credentials through protected environments:
 
 | Entry workflow | Implementation |
 | --- | --- |
