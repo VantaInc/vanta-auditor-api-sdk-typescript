@@ -14,6 +14,8 @@ The migration is TypeScript-only. It does not publish a package, delete source s
 
 The source values are supplied to the migration job by GitHub Actions. The script sends each value through standard input to `gh secret set`, which encrypts it for GitHub's destination environment. No values, hashes, CLI response bodies, secret files, artifacts, or workflow outputs are logged or created.
 
+GitHub CLI removes trailing carriage-return/newline characters (CR/LF) from standard input. Both validation and copy mode reject either source if it ends with CR/LF, before any API calls or writes. The CLI adapter also rejects these values before starting `gh`. Internal line breaks and surrounding spaces/tabs are preserved. If this check fails, stop and review an exact-value migration method or provider rotation; do not trim or print the existing secret to make the check pass.
+
 ## Prepare the temporary token
 
 1. Open your GitHub **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**.

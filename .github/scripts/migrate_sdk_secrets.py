@@ -21,6 +21,13 @@ class MigrationError(Exception):
     """Only messages constructed here, without secret values, may be logged."""
 
 
+def check_value_preservation(value):
+    # gh secret set trims trailing CR/LF from stdin. Reject instead of silently
+    # changing a credential; do not include the value in the error.
+    if value.endswith(("\r", "\n")):
+        raise MigrationError("A source secret ends with CR/LF, which GitHub CLI would remove. Stop and review; no value was logged.")
+
+
 class GitHub:
     def __init__(self, token):
         # Do not pass source values, debug switches, or other credentials to gh.
@@ -57,6 +64,7 @@ class GitHub:
             raise MigrationError("GitHub returned an unreadable response.") from None
 
     def set_secret(self, environment, name, value):
+        check_value_preservation(value)
         # gh encrypts locally using the destination's public key. Values use stdin,
         # never command arguments, shell interpolation, files, or workflow outputs.
         self.run([
@@ -123,6 +131,7 @@ def migrate(environment, client, emit=print):
         value = environment.get("SOURCE_" + name, "")
         if not value.strip():
             raise MigrationError(f"Required source {name} is empty; nothing was copied.")
+        check_value_preservation(value)
         sources[name] = value
 
     # Complete every preflight before writing any secret.

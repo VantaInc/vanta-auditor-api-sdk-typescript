@@ -91,7 +91,7 @@ class MigrationTests(unittest.TestCase):
 
     def test_copy_preserves_values_and_sources(self):
         self.environment["MIGRATION_MODE"] = "copy"
-        self.environment["SOURCE_SPEAKEASY_API_KEY"] = "synthetic\nmultiline\nvalue\n"
+        self.environment["SOURCE_SPEAKEASY_API_KEY"] = " \tsynthetic\r\nmultiline\nvalue \t"
         original = dict(self.environment)
         self.run_migration()
         self.assertEqual(self.client.writes, [
@@ -119,6 +119,23 @@ class MigrationTests(unittest.TestCase):
                 with self.subTest(key=key, empty=empty), patch.dict(self.environment, {key: empty}):
                     self.assert_rejected_without_writes()
         self.assertEqual(self.client.reads, [])
+
+    def test_trailing_cr_lf_in_either_source_stops_both_modes_before_api_access(self):
+        for mode in ("validate", "copy"):
+            for name in ("SOURCE_NPM_TOKEN", "SOURCE_SPEAKEASY_API_KEY"):
+                for suffix in ("\r", "\n", "\r\n", "\n\r\n", " \t\n"):
+                    value = "synthetic-sensitive-value" + suffix
+                    with self.subTest(mode=mode, name=name, suffix=suffix), patch.dict(
+                        self.environment, {"MIGRATION_MODE": mode, name: value}
+                    ):
+                        original = dict(self.environment)
+                        with self.assertRaises(migration.MigrationError) as result:
+                            self.run_migration()
+                        self.assertNotIn(value, str(result.exception))
+                        self.assertEqual(self.environment, original)
+                        self.assertEqual(self.client.reads, [])
+                        self.assertEqual(self.client.writes, [])
+                        self.assertEqual(self.messages, [])
 
     def test_rejects_unsafe_branch_rules(self):
         for name in self.client.settings:
@@ -196,7 +213,7 @@ class GitHubClientTests(unittest.TestCase):
     @patch("migrate_sdk_secrets.subprocess.run")
     def test_secret_uses_stdin_and_child_environment_excludes_sources_and_debug(self, run):
         run.return_value = subprocess.CompletedProcess([], 0, "", "")
-        value = "synthetic\nmultiline\n"
+        value = " \tsynthetic\r\nmultiline \t"
         with patch.dict("os.environ", {"SOURCE_NPM_TOKEN": value, "GH_DEBUG": "api"}):
             client = migration.GitHub("synthetic-migration-token")
         client.set_secret("sdk-publish", "NPM_TOKEN", value)
@@ -207,6 +224,17 @@ class GitHubClientTests(unittest.TestCase):
         self.assertNotIn("SOURCE_NPM_TOKEN", kwargs["env"])
         self.assertNotIn("GH_DEBUG", kwargs["env"])
         self.assertTrue(kwargs["capture_output"])
+
+    @patch("migrate_sdk_secrets.subprocess.run")
+    def test_cli_boundary_rejects_trailing_cr_lf_without_starting_gh(self, run):
+        client = migration.GitHub("synthetic-token")
+        for suffix in ("\r", "\n", "\r\n", "\n\r\n", " \t\n"):
+            value = "synthetic-sensitive-value" + suffix
+            with self.subTest(suffix=suffix):
+                with self.assertRaises(migration.MigrationError) as result:
+                    client.set_secret("sdk-publish", "NPM_TOKEN", value)
+                self.assertNotIn(value, str(result.exception))
+                run.assert_not_called()
 
     @patch("migrate_sdk_secrets.subprocess.run")
     def test_command_failure_does_not_surface_command_output(self, run):
