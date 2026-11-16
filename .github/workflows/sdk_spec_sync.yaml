@@ -1,0 +1,104 @@
+name: Sync auditor spec
+on:
+  schedule:
+    - cron: '23 23 * * *'
+  workflow_dispatch: {}
+permissions:
+  contents: read
+concurrency:
+  group: sdk-spec-sync
+  cancel-in-progress: false
+jobs:
+  fetch:
+    if: github.ref == 'refs/heads/main'
+    environment: sdk-spec-sync
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - run: npm ci --prefix .github/scripts/sdk-spec --ignore-scripts --no-audit --no-fund
+      - name: Verify Obsidian app configuration
+        env:
+          OBSIDIAN_APP_CLIENT_ID: ${{ vars.OBSIDIAN_APP_CLIENT_ID }}
+          OBSIDIAN_APP_PRIVATE_KEY: ${{ secrets.OBSIDIAN_APP_PRIVATE_KEY }}
+        run: |
+          for name in OBSIDIAN_APP_CLIENT_ID OBSIDIAN_APP_PRIVATE_KEY; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Configure ${name} in the main-only sdk-spec-sync environment."
+              exit 1
+            fi
+          done
+      - name: Create read-only Obsidian token
+        id: obsidian
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.OBSIDIAN_APP_CLIENT_ID }}
+          private-key: ${{ secrets.OBSIDIAN_APP_PRIVATE_KEY }}
+          owner: VantaInc
+          repositories: obsidian
+          permission-contents: read
+      - name: Fetch and validate the committed YAML
+        env:
+          OBSIDIAN_TOKEN: ${{ steps.obsidian.outputs.token }}
+        run: node .github/scripts/sdk-spec/spec.mjs fetch "$RUNNER_TEMP/auditor-api-spec"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: auditor-api-spec
+          path: ${{ runner.temp }}/auditor-api-spec/
+          if-no-files-found: error
+          retention-days: 1
+  propose:
+    if: github.ref == 'refs/heads/main'
+    needs: fetch
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - run: npm ci --prefix .github/scripts/sdk-spec --ignore-scripts --no-audit --no-fund
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: auditor-api-spec
+          path: ${{ runner.temp }}/auditor-api-spec/
+      - name: Stage validated snapshot
+        id: spec
+        run: |
+          node .github/scripts/sdk-spec/spec.mjs stage "$RUNNER_TEMP/auditor-api-spec" openapi
+          node --input-type=module -e 'import { readFileSync, appendFileSync } from "node:fs"; const source = JSON.parse(readFileSync("openapi/source.json")); appendFileSync(process.env.GITHUB_OUTPUT, `commit=${source.commit}\n`);'
+      - name: Propose spec update
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
+        with:
+          token: ${{ github.token }}
+          branch: automation/obsidian-auditor-spec
+          base: main
+          sign-commits: true
+          add-paths: |
+            openapi/auditor-api.yaml
+            openapi/source.json
+          commit-message: 'chore: sync auditor API spec from Obsidian'
+          title: 'chore: update auditor API spec from Obsidian'
+          body: |
+            ## Changes
+            Updates the local auditor API YAML from [Obsidian commit ${{ steps.spec.outputs.commit }}](https://github.com/VantaInc/obsidian/commit/${{ steps.spec.outputs.commit }}).
+            The exact source path and automatically calculated checksum are recorded in `openapi/source.json`.
+
+            ## Motivation
+            SDK generation consumes this reviewed snapshot instead of the live Mintlify URL (VM-19444).
+
+            Review the spec diff and confirm it represents the released public API before merging.
+            Merging triggers SDK generation, which opens a separate SDK update PR. Publishing still requires approval.
+            If GitHub asks for approval to run this bot-created PR's checks, select **Approve workflows to run**.
+            This branch is managed by the daily sync; make source corrections in Obsidian.

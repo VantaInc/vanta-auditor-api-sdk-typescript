@@ -4,6 +4,11 @@ permissions:
   pull-requests: write
   id-token: write
 "on":
+  push:
+    branches: [main]
+    paths:
+      - openapi/auditor-api.yaml
+      - openapi/source.json
   workflow_dispatch:
     inputs:
       force:
@@ -15,6 +20,9 @@ permissions:
         type: string
   schedule:
     - cron: 0 0 * * *
+concurrency:
+  group: sdk-generation
+  cancel-in-progress: false
 jobs:
   generate:
     if: github.ref == 'refs/heads/main'

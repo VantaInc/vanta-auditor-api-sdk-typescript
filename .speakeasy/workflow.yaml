@@ -3,7 +3,7 @@ speakeasyVersion: pinned
 sources:
     Conduct an audit:
         inputs:
-            - location: https://vanta.mintlify.app/reference/auditor-api.json
+            - location: ./openapi/auditor-api.yaml
         overlays:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
         registry:
