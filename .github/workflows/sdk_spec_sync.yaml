@@ -37,6 +37,7 @@ jobs:
           repositories: obsidian
           permission-contents: read
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        id: source
         with:
           repository: VantaInc/obsidian
           ref: main
@@ -46,12 +47,10 @@ jobs:
           sparse-checkout-cone-mode: false
           persist-credentials: false
       - name: Copy the self-contained spec
-        id: spec
         run: |
           source_spec=obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
           node sdk/.github/scripts/validate-spec.mjs "$source_spec"
           cp "$source_spec" sdk/openapi/auditor-api.yaml
-          echo "commit=$(git -C obsidian rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
         with:
           token: ${{ github.token }}
@@ -63,7 +62,7 @@ jobs:
           commit-message: 'chore: sync auditor API spec from Obsidian'
           title: 'chore: update auditor API spec from Obsidian'
           body: |
-            Updates the auditor spec from [Obsidian commit ${{ steps.spec.outputs.commit }}](https://github.com/VantaInc/obsidian/commit/${{ steps.spec.outputs.commit }}).
+            Updates the auditor spec from [Obsidian commit ${{ steps.source.outputs.commit }}](https://github.com/VantaInc/obsidian/commit/${{ steps.source.outputs.commit }}).
 
             Review the YAML diff and confirm it describes the released public API before merging.
             Merging triggers a separate SDK generation PR; publishing retains its approval gate.

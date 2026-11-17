@@ -25,7 +25,8 @@ inputs, as required by [VM-19444](https://vanta.atlassian.net/browse/VM-19444).
 `main`. One job checks out the SDK and sparsely checks out the source YAML from
 Obsidian `main` into sibling directories. It validates and copies that file, then
 opens or updates `automation/obsidian-auditor-spec`. Only the YAML is committed;
-the source commit appears in the PR body. Unchanged YAML creates no update.
+the source commit appears in the PR body. With no YAML diff against SDK `main`,
+no PR is created.
 
 The sync job combines an Obsidian read token and SDK write permission. No Obsidian
 code is built or executed. Neither the source checkout nor its credentials enter
@@ -43,7 +44,7 @@ The dependency is also declared in `.speakeasy/gen.yaml` so regeneration retains
 
 ## Setup and verification
 
-Before enabling sync:
+Before merging this workflow:
 
 1. Install a dedicated GitHub App only on Obsidian, with **Contents: read-only**.
    This grants repository-wide read access, not access limited to the YAML path.
@@ -66,8 +67,11 @@ corrections in Obsidian; automation manages the sync branch.
 After merge, verify an unchanged sync creates no PR, a changed spec creates a
 YAML-only PR with the correct source commit, and a dispatch from a non-`main`
 branch cannot access the environment. Then verify merging a spec PR opens an SDK
-generation PR and publishing still requires approval. These live checks need the
-App/environment setup; local checks cannot establish them.
+generation PR and publishing still requires approval. Confirm the first bot PR
+offers the spec check for approval. In the first generation PR, verify `js-yaml`
+remains pinned, `npm ci` succeeds, and `.speakeasy/workflow.lock` records the local
+input instead of Mintlify. These live checks need the App/environment setup;
+local checks cannot establish them.
 
 Local checks from the SDK root:
 
