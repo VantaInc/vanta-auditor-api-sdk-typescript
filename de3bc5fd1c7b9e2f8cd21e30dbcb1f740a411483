@@ -1,0 +1,21 @@
+.github/workflows/sdk_spec_sync.yaml
+  s_0c59641a5c45c9::t_e580d5ce5b9c7c 40,65
+openapi/README.md
+  s_0c59641a5c45c9::t_e580d5ce5b9c7c 28-29,47,70-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "de3bc5fd1c7b9e2f8cd21e30dbcb1f740a411483",
+  "prompts": {},
+  "sessions": {
+    "s_0c59641a5c45c9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ea14-588f-7aa0-8d13-d35c4f97f16c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
