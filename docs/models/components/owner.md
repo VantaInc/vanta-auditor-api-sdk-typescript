@@ -1,6 +1,6 @@
 # Owner
 
-The control's owner.
+The name, unique identifier, and email address of the computer's owner.
 
 ## Example Usage
 

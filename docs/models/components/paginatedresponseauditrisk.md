@@ -35,7 +35,7 @@ let value: PaginatedResponseAuditRisk = {
           "control-1",
           "control-2",
         ],
-        identified: "2023-01-15T10:00:00.000Z",
+        identified: "2023-01-15T10:00:00Z",
       },
     ],
     pageInfo: {

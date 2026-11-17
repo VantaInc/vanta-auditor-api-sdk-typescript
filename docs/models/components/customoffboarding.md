@@ -10,8 +10,8 @@ import { CustomOffboarding } from "vanta-auditor-api-sdk/models/components";
 
 let value: CustomOffboarding = {
   status: "NO_SECURITY_TASKS",
-  dueDate: "2024-03-15",
-  completionDate: "2024-01-20",
+  dueDate: "2024-03-15T00:00:00Z",
+  completionDate: "2024-01-20T00:00:00Z",
 };
 ```
 
@@ -20,5 +20,5 @@ let value: CustomOffboarding = {
 | Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | `status`                                                                                   | [components.PeopleSecurityTaskStatus](../../models/components/peoplesecuritytaskstatus.md) | :heavy_check_mark:                                                                         | Security task status for individual task categories.                                       |                                                                                            |
-| `dueDate`                                                                                  | *string*                                                                                   | :heavy_check_mark:                                                                         | Due date for incomplete task in ISO 8601 format, or null if none.                          | 2024-03-15                                                                                 |
-| `completionDate`                                                                           | *string*                                                                                   | :heavy_check_mark:                                                                         | Completion date for completed task in ISO 8601 format, or null if incomplete.              | 2024-01-20                                                                                 |
+| `dueDate`                                                                                  | *string*                                                                                   | :heavy_check_mark:                                                                         | Due date for incomplete task in ISO 8601 format, or null if none.                          | 2024-03-15 00:00:00 +0000 UTC                                                              |
+| `completionDate`                                                                           | *string*                                                                                   | :heavy_check_mark:                                                                         | Completion date for completed task in ISO 8601 format, or null if incomplete.              | 2024-01-20 00:00:00 +0000 UTC                                                              |
