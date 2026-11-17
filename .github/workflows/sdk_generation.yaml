@@ -16,8 +16,41 @@ permissions:
   schedule:
     - cron: 0 0 * * *
 jobs:
+  spec:
+    if: github.ref == 'refs/heads/main'
+    environment: sdk-spec-fetch
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        id: source
+        with:
+          repository: VantaInc/obsidian
+          ref: main
+          token: ${{ secrets.OBSIDIAN_READ_PAT }}
+          path: obsidian
+          sparse-checkout: apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - name: Record the Obsidian source commit
+        env:
+          OBSIDIAN_COMMIT: ${{ steps.source.outputs.commit }}
+        run: |
+          source_spec=obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
+          [[ -f "$source_spec" && -s "$source_spec" && ! -L "$source_spec" ]]
+          echo "Auditor spec source: VantaInc/obsidian@$OBSIDIAN_COMMIT" | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: auditor-spec
+          path: obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
+          if-no-files-found: error
+          retention-days: 1
+          overwrite: true
   generate:
     if: github.ref == 'refs/heads/main'
+    needs: spec
     uses: ./.github/workflows/speakeasy_generate.yaml
     with:
       force: ${{ github.event.inputs.force }}
