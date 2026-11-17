@@ -1,83 +1,74 @@
 # Auditor API spec
 
-## Purpose
+## Foundation
 
-Auditor SDK generation uses the reviewed `openapi/auditor-api.yaml` snapshot in
-this repository. The source is
-`apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml` in
-`VantaInc/obsidian`. This removes the mutable Mintlify document from generation
-inputs, as required by [VM-19444](https://vanta.atlassian.net/browse/VM-19444).
+Obsidian owns the auditor API definition. Each SDK generation run reads
+`apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml` from the
+latest Obsidian `main` commit, records that SHA in CI, and opens an SDK PR for
+review before merge. There is no duplicated input snapshot or separate spec PR.
+This is the source and review model chosen for
+[VM-19444](https://vanta.atlassian.net/browse/VM-19444).
 
 ## Requirements
 
-- Review and merge spec changes before SDK generation consumes them. Review the
-  YAML itself; reviewing generated SDK code alone is insufficient.
-- Keep the spec self-contained: references, operation links and discriminator
-  mappings must stay within the document. External example values are rejected.
-- Confirm the spec describes the released public API. Obsidian `main` can contain
-  undeployed changes; a successful sync does not establish release readiness.
-- Obsidian credentials belong only to the sync job. Generation has no publishing
-  credentials; publication retains the protected `sdk-publish` environment.
+- Resolve Obsidian `main` once per fetch, and generate only from that checkout's
+  bytes. Record its commit SHA in both job logs and the generation summary.
+- Reject missing, malformed or externally referenced inputs without a Mintlify
+  fallback. No Obsidian code is built or executed.
+- Review the generated SDK changes before merging. Confirm the API is ready to
+  expose: Obsidian `main` may contain undeployed changes.
+- Keep Obsidian credentials in the fetch job, publishing credentials in the
+  protected publishing job, and neither in SDK generation.
 
 ## Architecture
 
-`.github/workflows/sdk_spec_sync.yaml` runs daily at 23:23 UTC or manually from
-`main`. One job checks out the SDK and sparsely checks out the source YAML from
-Obsidian `main` into sibling directories. It validates and copies that file, then
-opens or updates `automation/obsidian-auditor-spec`. Only the YAML is committed;
-the source commit appears in the PR body. With no YAML diff against SDK `main`,
-no PR is created.
+`.github/workflows/sdk_generation.yaml` retains its daily/manual triggers. Its
+`spec` job sparsely checks out the YAML with a read-only GitHub App token, logs the
+resolved SHA, and uploads only that file in an artifact named for the commit.
+The artifact and commit output belong to the same workflow run. Re-running the
+fetch can select a newer `main`; re-running only generation reuses the successful
+fetch's commit and artifact while it is retained.
 
-The sync job combines an Obsidian read token and SDK write permission. No Obsidian
-code is built or executed. Neither the source checkout nor its credentials enter
-the separate generation and publishing jobs.
-
-Merging a spec change triggers `.github/workflows/sdk_generation.yaml` in PR mode.
-Its daily and manual triggers also use the merged snapshot. Speakeasy clones this
-SDK repository independently, so the input must be committed rather than merely
-copied into the generation job's initial checkout. There is no Mintlify fallback.
+`.github/workflows/speakeasy_generate.yaml` downloads the corresponding artifact
+into `auditor-spec/api-spec.yaml` and validates it before preparing Speakeasy. The
+pinned action clones the SDK into `$GITHUB_WORKSPACE/repo`; the workflow input
+`../auditor-spec/api-spec.yaml` reaches the sibling artifact in the mounted
+workspace. Keep this layout aligned when changing the action or input path.
 
 `.github/scripts/validate-spec.mjs` checks the OpenAPI 3.0 document and local
-references with the SDK's lockfile-pinned `js-yaml` dependency. It is an input
-boundary check, not a full OpenAPI validator or an assessment of generated code.
-The dependency is also declared in `.speakeasy/gen.yaml` so regeneration retains it.
+references using the SDK's lockfile-pinned `js-yaml`. It is not a full OpenAPI
+validator or an assessment of generated code. `.speakeasy/gen.yaml` preserves the
+dependency during regeneration. Release tagging uses the existing workflow lock
+and registry revisions; publication does not re-fetch Obsidian or regenerate from
+its current `main`.
 
-## Setup and verification
+## Verification and setup
 
-Before merging this workflow:
+Before merging, install a dedicated GitHub App only on Obsidian with **Contents:
+read-only**. This grants repository-wide read access, not access limited to the
+YAML path. In the SDK repository, create `sdk-spec-fetch`, restricted to the exact
+branch `main`, with no tags or administrator bypass. Store environment variable
+`OBSIDIAN_APP_CLIENT_ID` and secret `OBSIDIAN_APP_PRIVATE_KEY` there, not in
+repository secrets or generation/publishing environments. Allow the SHA-pinned
+actions used by the workflows. Keep required SDK PR review and the existing
+`sdk-publish` approval gate.
 
-1. Install a dedicated GitHub App only on Obsidian, with **Contents: read-only**.
-   This grants repository-wide read access, not access limited to the YAML path.
-2. Create the SDK repository environment `sdk-spec-sync`, restricted to the exact
-   branch `main`, with no tags or administrator bypass. Store variable
-   `OBSIDIAN_APP_CLIENT_ID` and secret `OBSIDIAN_APP_PRIVATE_KEY` there, not in
-   repository secrets or generation/publishing environments.
-3. Allow Actions to create PRs and allow the SHA-pinned actions in the workflow.
-   Require PR review, stale-review dismissal and **SDK spec checks / validate**
-   before merging. Keep the publishing approval gate enabled.
-4. Review the initial snapshot, copied unchanged from
-   [Obsidian commit 94d36495dcabdccb869045493853d63b556d0609](https://github.com/VantaInc/obsidian/commit/94d36495dcabdccb869045493853d63b556d0609).
+After setup, verify a generation run logs the Obsidian SHA, transfers only the
+YAML, validates it, and opens an SDK PR. Confirm the first generated PR preserves
+`js-yaml` and updates `.speakeasy/workflow.lock` to the local input path. Verify a
+non-`main` dispatch cannot access the fetch environment, missing/invalid inputs
+stop generation, and publication uses the reviewed SDK without fetching a new
+spec. If the one-day artifact has expired, start a new generation run.
 
-Approve workflow runs on bot-created spec PRs when GitHub requests it. GitHub's
-[`GITHUB_TOKEN` rules](https://docs.github.com/en/actions/concepts/security/github_token)
-require approval for PR workflows created by this token. Run the checks again
-after automated updates and review each updated diff before merging. Make source
-corrections in Obsidian; automation manages the sync branch.
-
-After merge, verify an unchanged sync creates no PR, a changed spec creates a
-YAML-only PR with the correct source commit, and a dispatch from a non-`main`
-branch cannot access the environment. Then verify merging a spec PR opens an SDK
-generation PR and publishing still requires approval. Confirm the first bot PR
-offers the spec check for approval. In the first generation PR, verify `js-yaml`
-remains pinned, `npm ci` succeeds, and `.speakeasy/workflow.lock` records the local
-input instead of Mintlify. These live checks need the App/environment setup;
-local checks cannot establish them.
-
-Local checks from the SDK root:
+Local checks from the SDK root, after `npm ci --ignore-scripts`:
 
 ```sh
-npm ci --ignore-scripts --no-audit --no-fund
-node --test .github/scripts/validate-spec.test.mjs
-node .github/scripts/validate-spec.mjs
-actionlint .github/workflows/sdk_spec_sync.yaml .github/workflows/sdk_spec_check.yaml .github/workflows/sdk_generation.yaml
+node --test .github/scripts/*.test.mjs
+node .github/scripts/validate-spec.mjs /path/to/api-spec.yaml
+npm run lint
+npm run build
+actionlint .github/workflows/sdk_generation.yaml .github/workflows/speakeasy_generate.yaml .github/workflows/sdk_spec_check.yaml
 ```
+
+Local checks do not establish App authentication, environment enforcement, or
+licensed end-to-end generation and publication.

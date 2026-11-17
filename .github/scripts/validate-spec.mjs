@@ -43,7 +43,7 @@ export function validateSpec(text) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   try {
-    const file = process.argv[2] ?? "openapi/auditor-api.yaml";
+    const file = process.argv[2];
     const stat = lstatSync(file);
     if (!stat.isFile() || stat.size > 5 * 1024 * 1024) throw new Error();
     validateSpec(new TextDecoder("utf-8", { fatal: true }).decode(readFileSync(file)));

@@ -17,5 +17,4 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: node --test .github/scripts/validate-spec.test.mjs
-      - run: node .github/scripts/validate-spec.mjs
+      - run: node --test .github/scripts/*.test.mjs
