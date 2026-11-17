@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-candidate=false
-if [[ "${1:-}" == --candidate && $# == 1 ]]; then
-  candidate=true
-elif [[ $# != 0 ]]; then
-  echo 'Usage: check-staged-upload-regeneration.sh [--candidate]' >&2
-  exit 2
-fi
 repo="$(git rev-parse --show-toplevel)"
 cli_path="$(command -v "${SPEAKEASY_CLI:-speakeasy}")"
 node --input-type=module - "$repo" "$cli_path" <<'JS'
@@ -24,9 +17,9 @@ scratch="$(mktemp -d)"
 trap 'if [[ "${KEEP_REGEN_CHECK:-0}" == 1 ]]; then echo "Retained check: $scratch"; else rm -rf -- "$scratch"; fi' EXIT
 git clone --quiet --no-hardlinks "$repo" "$scratch/sdk"
 cd "$scratch/sdk"
-echo "Checking committed SDK $(git rev-parse HEAD); candidate overlay: $candidate"
+echo "Checking committed SDK $(git rev-parse HEAD)"
 schema="$scratch/input.json"
-node --input-type=module - "$schema" "$candidate" <<'JS'
+node --input-type=module - "$schema" <<'JS'
 import { writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 const response = await fetch('https://vanta.mintlify.app/reference/auditor-api.json');
@@ -34,34 +27,18 @@ if (!response.ok) throw new Error(`Public schema fetch failed: ${response.status
 const source = await response.text();
 JSON.parse(source);
 const hash = createHash('sha256').update(source).digest('hex');
-if (process.argv[3] === 'true' && hash !== '1411f0e0421bb75d777e7d4979d54da9f4bf4eb118ca3f321a4e13e637aef8b6') {
-  throw new Error('The reviewed candidate baseline changed. Review the public source before updating this pin.');
-}
 writeFileSync(process.argv[2], source);
-writeFileSync(`${process.argv[2]}.baseline`, source);
 console.log(`Public schema SHA-256: ${hash}`);
 JS
-if $candidate; then
-  "$cli_path" overlay apply --schema "$schema.baseline" \
-    --overlay .speakeasy/auditor-files-candidate-overlay.yaml --out "$schema"
-fi
 node --input-type=module - "$schema" <<'JS'
 import { readFileSync, writeFileSync } from 'node:fs';
-import { isDeepStrictEqual } from 'node:util';
 const schemaPath = process.argv[2];
 const source = JSON.parse(readFileSync(schemaPath));
-const baseline = JSON.parse(readFileSync(`${schemaPath}.baseline`));
 const root = '/audits/{auditId}/information-requests/{requestId}/auditor-files/uploads';
 for (const [path, id] of [[root, 'InitiateInformationRequestAuditorFileUpload'], [`${root}/finalize`, 'FinalizeInformationRequestAuditorFileUpload']]) {
   if (source.paths[path]?.post?.operationId !== id) {
-    throw new Error('Upload operations are absent. Publish the API source before ordinary regeneration; --candidate is draft-only.');
+    throw new Error('Upload operations are absent. Publish the API source before regeneration.');
   }
-}
-for (const [path, value] of Object.entries(baseline.paths)) {
-  if (!isDeepStrictEqual(source.paths[path], value)) throw new Error(`Existing path changed: ${path}`);
-}
-for (const [name, value] of Object.entries(baseline.components.schemas)) {
-  if (!isDeepStrictEqual(source.components.schemas[name], value)) throw new Error(`Existing schema changed: ${name}`);
 }
 const grant = source.components.schemas.AuditorFileUploadGrant;
 for (const name of ['uploadId', 'url', 'fields', 'maxSizeBytes', 'transferExpiresAt', 'finalizationExpiresAt']) {

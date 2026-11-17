@@ -107,8 +107,6 @@ run();
 
 Use `uploadInformationRequestAuditorFile` from `vanta-auditor-api-sdk/auditor-files` to initiate, transfer and attach a guidance file in one call. See the [upload guide](docs/auditor-files.md) for the API, cancellation and recovery, and the [Node example](examples/uploadInformationRequestAuditorFile.example.mts).
 
-This draft uses candidate API operations. Public-source generation and writable staging verification remain prerequisites for release.
-
 <!-- Start Authentication [security] -->
 ## Authentication
 

@@ -42,11 +42,9 @@ Initiation and each finalization request have a 30-second limit. Finalization ma
 
 After a finalization error, attachment can be uncertain, including after cancellation or a lost response. Retain `uploadId`. Recover through `client.audits.finalizeInformationRequestAuditorFileUpload` with the same audit, request and `finalizeAuditorFileUploadInput: { uploadId }`, before the grant expires. Apply backoff and stop on terminal errors. Do not rerun the entire upload to recover a lost finalization response. An upload ID differs from the resulting auditor-file ID; successful repeated finalization returns the original file ID.
 
-### Draft source and merge prerequisites
+### API source dependency
 
-The normal public schema at `https://vanta.mintlify.app/reference/auditor-api.json` does not yet contain the upload operations. The initial generation used its 48-path baseline (SHA-256 `1411f0e0421bb75d777e7d4979d54da9f4bf4eb118ca3f321a4e13e637aef8b6`) plus the two operations and `OutboundError` from Obsidian commit `f21be711d41b7600c91b7e6b2b70dbde99ad568d`, `apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml`. The existing public schema already contains the upload component models.
-
-`.speakeasy/auditor-files-candidate-overlay.yaml` preserves that candidate for reproducible draft checks. It is deliberately absent from the normal generation workflow. Before merge/release, API owners must confirm endpoint availability, completion semantics, retry budgets and clock behavior. Publish the operations through the normal source and pass ordinary regeneration without the candidate overlay. Otherwise the next generated PR can remove the endpoints.
+The upload operations must land in the normal public schema at `https://vanta.mintlify.app/reference/auditor-api.json` before this SDK change merges. Use the existing generation workflow once they are available; this SDK keeps no separate copy of the API schema. API owners must confirm endpoint availability, completion semantics, retry budgets and clock behavior.
 
 ## Verification
 
@@ -65,11 +63,9 @@ The independent `sdk-tests` PR job runs these checks without secrets or the prod
 With the authenticated, checksum-verified pinned Speakeasy CLI available:
 
 ```sh
-SPEAKEASY_CLI=/path/to/speakeasy bash scripts/check-staged-upload-regeneration.sh --candidate
-# Required again once the public source contains the operations:
 SPEAKEASY_CLI=/path/to/speakeasy bash scripts/check-staged-upload-regeneration.sh
 ```
 
-The script uses a disposable clone of committed HEAD. Candidate mode requires the reviewed public-source hash and verifies that the overlay preserves its existing paths and schemas. Both modes reject generated changes outside the reviewed upload inventory, regenerate normally and after adding a model property, check helper preservation, rerun build/lint/tests, and execute packed ESM/CommonJS consumers. It does not publish a package or upload a registry spec.
+The script uses a disposable clone of committed HEAD and the normal public schema. It rejects generated changes outside the reviewed upload inventory, regenerates normally and after adding a model property, checks helper preservation, reruns build/lint/tests, and executes packed ESM/CommonJS consumers. It does not publish a package or upload a registry spec.
 
 The writable staging harness and real Vanta/S3 acceptance remain follow-up work and release prerequisites. A dedicated fixture must pass a small upload/list/download/checksum/delete journey, the actual 52,428,800-byte boundary and one-byte-over storage rejection, lost-finalization recovery, real expiry/interruption and memory profiling. Reserve unfinished-session headroom, serialize and pace requests to the owner-confirmed quotas, and delete attached fixtures. Unfinished sessions need real expiry or an owner-approved termination mechanism. The existing production read-only smoke and mocked tests do not supply this evidence. Writable tests must use explicit dedicated configuration and stay outside default test discovery.
