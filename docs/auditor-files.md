@@ -50,4 +50,4 @@ npm --prefix smoke-test run test:module-format
 
 The credential-free `sdk-tests` job checks the helper and public ESM/CommonJS imports independently of the production smoke bypass. Tests cover protocol ordering, storage isolation, returned limits, failures, cancellation, bounded waits, same-ID recovery and safe errors. Boundary unit tests substitute `Blob.size`; they do not prove real storage policy.
 
-The operations must land in the normal public API schema before this SDK change merges. Use normal generation and inspect its diff. Before release, verify a real upload/list/download/checksum/delete journey and boundary/recovery behavior with a dedicated writable staging fixture. Mocked tests and the production read-only smoke do not provide that evidence.
+The normal generation workflow reads the Auditor API spec from Obsidian. Before release, verify a real upload/list/download/checksum/delete journey and boundary/recovery behavior with a dedicated writable staging fixture. Mocked tests and the production read-only smoke do not provide that evidence.
