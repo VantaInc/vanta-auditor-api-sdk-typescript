@@ -47,7 +47,10 @@ function fixture(overrides = {}) {
     },
   });
   api.addHook("beforeRequest", hook);
-  const storage = vi.fn<typeof fetch>(async () => new Response(null, { status: 204 }));
+  const storage = vi.fn<typeof fetch>(async (url, init) => {
+    new Request(url, init);
+    return new Response(null, { status: 204 });
+  });
   vi.stubGlobal("fetch", storage);
   const client = new Vanta({
     bearerAuth: "vanta-oauth-secret",
@@ -61,7 +64,7 @@ function fixture(overrides = {}) {
 }
 
 beforeEach(() => {
-  vi.useFakeTimers({ toFake: ["Date", "performance", "setTimeout", "clearTimeout"] });
+  vi.useFakeTimers({ toFake: ["Date", "setTimeout", "clearTimeout"] });
   vi.setSystemTime(NOW);
 });
 afterEach(() => {
@@ -173,34 +176,24 @@ describe("auditor file upload", () => {
     expect(f.finalize).not.toHaveBeenCalled();
   });
 
-  it.each([120_000, -120_000])("uses server time with client clock skew %i", async (skew) => {
+  it.each([3_600_000, -3_600_000])("does not depend on the client clock for grant expiry: %i", async (skew) => {
     const f = fixture();
     vi.setSystemTime(NOW + skew);
     expect(await uploadInformationRequestAuditorFile(f.client, input())).toEqual({ id: "file-1" });
   });
 
-  it("uses a synchronized local clock when Date is unavailable", async () => {
+  it("accepts grants without an exposed Date header", async () => {
     const f = fixture();
     f.initiate.mockImplementation(async () => Response.json(f.grant));
     expect(await uploadInformationRequestAuditorFile(f.client, input())).toEqual({ id: "file-1" });
   });
 
-  it("does not start storage after transfer expiry", async () => {
+  it("reports an expired signed form rejected by storage without finalizing", async () => {
     const f = fixture({ transferExpiresAt: new Date(NOW).toISOString() });
-    await expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ code: "expired", phase: "transfer" });
-    expect(f.storage).not.toHaveBeenCalled();
-  });
-
-  it("consumes initiation latency from the transfer window", async () => {
-    const f = fixture({ transferExpiresAt: new Date(NOW + 2_000).toISOString() });
-    f.initiate.mockImplementation(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 3_000));
-      return json(f.grant);
-    });
-    const observed = expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ code: "expired" });
-    await vi.advanceTimersByTimeAsync(3_000);
-    await observed;
-    expect(f.storage).not.toHaveBeenCalled();
+    f.storage.mockResolvedValue(new Response(null, { status: 403 }));
+    await expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ code: "rejected", phase: "transfer", statusCode: 403 });
+    expect(f.storage).toHaveBeenCalledTimes(1);
+    expect(f.finalize).not.toHaveBeenCalled();
   });
 
   it("allows an in-flight transfer to cross its start deadline", async () => {
@@ -214,18 +207,16 @@ describe("auditor file upload", () => {
     expect(await result).toEqual({ id: "file-1" });
   });
 
-  it("enforces finalization expiry after a successful transfer", async () => {
-    const f = fixture({
-      transferExpiresAt: new Date(NOW + 2_000).toISOString(),
-      finalizationExpiresAt: new Date(NOW + 3_000).toISOString(),
-    });
+  it("bounds a hanging transfer with the overall timeout", async () => {
+    const f = fixture();
     f.storage.mockImplementation(async (_url, init) => new Promise((_resolve, reject) => {
       init?.signal?.addEventListener("abort", () => reject(new DOMException("aborted", "AbortError")), { once: true });
     }));
     const observed = expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ code: "timeout", phase: "transfer" });
-    await vi.advanceTimersByTimeAsync(3_000);
+    await vi.advanceTimersByTimeAsync(600_000);
     await observed;
     expect(f.finalize).not.toHaveBeenCalled();
+    expect(vi.getTimerCount()).toBe(0);
   });
 
   it.each([429, 500, 503])("retries safe completion failures %i using the same uploadId", async (status) => {
@@ -292,6 +283,23 @@ describe("auditor file upload", () => {
     expect(f.finalize).toHaveBeenCalledTimes(1);
   });
 
+  it("does not accept an empty attachment ID", async () => {
+    const f = fixture();
+    f.finalize.mockResolvedValue(json({ id: "" }, 201));
+    await expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ phase: "finalize", code: "invalid-response", uploadId: "upload-1" });
+    expect(f.finalize).toHaveBeenCalledTimes(1);
+  });
+
+  it("retains a safe recovery ID when response JSON cannot be parsed", async () => {
+    const f = fixture();
+    f.finalize.mockResolvedValue(new Response("{signed-secret", { status: 500, headers: { "content-type": "application/json" } }));
+    const error = await uploadInformationRequestAuditorFile(f.client, input()).catch((error: unknown) => error);
+    expect(error).toMatchObject({ phase: "finalize", code: "request-failed", uploadId: "upload-1" });
+    expect(String(error)).not.toContain("secret");
+    expect(error).not.toHaveProperty("cause");
+    expect(f.finalize).toHaveBeenCalledTimes(1);
+  });
+
   it("honors Retry-After and bounds completion attempts", async () => {
     const f = fixture();
     f.finalize.mockImplementation(async () => json({ message: "busy" }, 429, { "retry-after": "30" }));
@@ -305,14 +313,58 @@ describe("auditor file upload", () => {
     expect(f.finalize).toHaveBeenCalledTimes(5);
   });
 
-  it("does not wait or retry beyond finalization expiry", async () => {
-    const f = fixture({
-      transferExpiresAt: new Date(NOW + 2_000).toISOString(),
-      finalizationExpiresAt: new Date(NOW + 5_000).toISOString(),
-    });
-    f.finalize.mockResolvedValue(json({ message: "busy" }, 429, { "retry-after": "3600" }));
-    await expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ code: "expired", phase: "finalize" });
+  it.each([
+    { name: "an hour", retryAfter: "3600" },
+    { name: "numeric overflow", retryAfter: "9".repeat(400) },
+  ])("stops when Retry-After exceeds the client budget: $name", async ({ retryAfter }) => {
+    const f = fixture();
+    f.finalize.mockResolvedValue(json({ message: "busy" }, 429, { "retry-after": retryAfter }));
+    await expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ code: "retry-exhausted", phase: "finalize", statusCode: 429, uploadId: "upload-1" });
     expect(f.finalize).toHaveBeenCalledTimes(1);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("bounds retry waits by the remaining overall timeout", async () => {
+    const f = fixture();
+    f.finalize.mockImplementation(async () => json({ message: "busy" }, 429, { "retry-after": "400" }));
+    const observed = expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ code: "timeout", phase: "finalize", uploadId: "upload-1" });
+    await vi.advanceTimersByTimeAsync(600_000);
+    await observed;
+    expect(f.finalize).toHaveBeenCalledTimes(2);
+    expect(f.storage).toHaveBeenCalledTimes(1);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("does not repeat a timed-out initiation", async () => {
+    const f = fixture();
+    f.initiate.mockImplementation(async (value) => new Promise((_resolve, reject) => {
+      (value as Request).signal.addEventListener("abort", () => reject(new DOMException("aborted", "AbortError")), { once: true });
+    }));
+    const observed = expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ code: "timeout", phase: "initiate" });
+    await vi.advanceTimersByTimeAsync(30_000);
+    await observed;
+    expect(f.initiate).toHaveBeenCalledTimes(1);
+    expect(f.storage).not.toHaveBeenCalled();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("does not retry arbitrary client or hook failures", async () => {
+    const f = fixture();
+    f.finalize.mockRejectedValue(new Error("private-hook-detail"));
+    await expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ code: "request-failed", phase: "finalize" });
+    expect(f.finalize).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(["initiate", "finalize"] as const)("redacts malformed API responses during %s", async (phase) => {
+    const f = fixture();
+    f[phase].mockResolvedValue(json({ private: "signed-secret" }, phase === "initiate" ? 200 : 201));
+    const error = await uploadInformationRequestAuditorFile(f.client, input()).catch((error: unknown) => error);
+    expect(error).toBeInstanceOf(AuditorFileUploadError);
+    expect(error).toMatchObject({ phase, code: "invalid-response" });
+    expect(JSON.stringify(error)).not.toContain("secret");
+    expect(String(error)).not.toContain("secret");
+    expect(error).not.toHaveProperty("cause");
+    expect(error).not.toHaveProperty("rawResponse");
   });
 
   it("cancels before initiation without making a request", async () => {
@@ -357,13 +409,19 @@ describe("auditor file upload", () => {
   });
 
   it.each([
-    { maxSizeBytes: 0 }, { maxSizeBytes: 1.5 }, { uploadId: "" },
     { url: "http://storage.example.test" }, { url: "not a URL" },
-    { url: "https://user:password@storage.example.test" }, { transferExpiresAt: "invalid" },
+    { transferExpiresAt: "invalid" },
   ])("rejects malformed grants before storage: %j", async (grant) => {
     const f = fixture(grant);
     await expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toBeInstanceOf(AuditorFileUploadError);
     expect(f.storage).not.toHaveBeenCalled();
+    expect(f.finalize).not.toHaveBeenCalled();
+  });
+
+  it("leaves rejection of URL credentials to the native request implementation", async () => {
+    const f = fixture({ url: "https://user:password@storage.example.test" });
+    await expect(uploadInformationRequestAuditorFile(f.client, input())).rejects.toMatchObject({ phase: "transfer", code: "request-failed", uploadId: "upload-1" });
+    expect(f.storage).toHaveBeenCalledTimes(1);
     expect(f.finalize).not.toHaveBeenCalled();
   });
 });

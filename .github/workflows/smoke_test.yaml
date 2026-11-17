@@ -24,14 +24,11 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             smoke-test/package-lock.json
-            examples/package-lock.json
       - run: npm ci
       - run: npm run build && npm run lint
       - run: npm ci
         working-directory: smoke-test
-      - run: npm ci
-        working-directory: examples
-      - run: npm run check:auditor-files-example && npm run test:auditor-files && npm run test:module-format
+      - run: npm run typecheck && npm run test:auditor-files && npm run test:module-format
         working-directory: smoke-test
 
   smoke:

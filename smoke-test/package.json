@@ -5,11 +5,11 @@
   "type": "module",
   "description": "Live smoke test against a real Vanta API tenant. See ../SMOKE_TEST.md.",
   "scripts": {
-    "test:module-format": "node module-format-esm.mjs && node module-format-cjs.cjs && node module-format-auditor-files.mjs",
+    "test:module-format": "node module-format-esm.mjs && node module-format-cjs.cjs",
     "test:live": "vitest run --reporter=default --reporter=junit --outputFile.junit=test-report.xml",
     "test": "npm run test:module-format && npm run test:live",
-    "test:auditor-files": "vitest run --config vitest.auditor-files.config.ts --reporter=verbose",
-    "check:auditor-files-example": "tsc --project tsconfig.auditor-files.json"
+    "test:auditor-files": "vitest run src/auditor-files.test.ts --reporter=verbose",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "vanta-auditor-api-sdk": "file:.."

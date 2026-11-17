@@ -2,13 +2,16 @@
 
 ## Foundation
 
-Auditors attach guidance files to an information request. These are auditor files; uploading one does not submit customer evidence or complete an evidence request. [PEX-12141](https://vanta.atlassian.net/browse/PEX-12141) tracks this SDK work.
+Auditors attach guidance files to an information request. Uploading one does not submit customer evidence or complete an evidence request. [PEX-12141](https://vanta.atlassian.net/browse/PEX-12141) tracks this feature.
 
 ## Requirements
 
-Callers supply the audit, information request, auditor email, filename, content type and a `Blob` or `File`. One helper initiates the upload, transfers the file and confirms attachment. It resolves only when finalization returns the attached file ID. The server controls access, accepted file types and byte limits.
+One helper accepts metadata and a `Blob` or `File`, initiates the upload, transfers it and returns the confirmed attached file ID. Vanta owns authorization, accepted file types, byte limits and upload expiry.
+
+For a file on disk in Node 20 or later:
 
 ```ts
+import { openAsBlob } from "node:fs";
 import { Vanta } from "vanta-auditor-api-sdk";
 import { uploadInformationRequestAuditorFile } from "vanta-auditor-api-sdk/auditor-files";
 
@@ -19,53 +22,32 @@ const attached = await uploadInformationRequestAuditorFile(client, {
   email: "auditor@example.com",
   filename: "guidance.csv",
   contentType: "text/csv",
-  file, // Blob or File
+  file: await openAsBlob("guidance.csv", { type: "text/csv" }),
 }, { signal });
 console.log(attached.id);
 ```
 
-The [Node example](../examples/uploadInformationRequestAuditorFile.example.mts) uses `node:fs` `openAsBlob` to avoid reading the entire file into a JavaScript buffer. It requires Node 20 or later. Browser callers can pass a `File`; browser CORS and exposed `Date` headers still need staging verification.
+Browser callers can pass a `File`. Browser CORS still needs staging verification.
 
 ## Architecture
 
-The `auditor-files` subpath owns orchestration. It uses generated initiation and finalization functions and types. The existing wildcard package export supports ESM and CommonJS without changing the generated root index. A scoped patch under `.speakeasy/patches/examples/` preserves the upload guide link in the generated examples README.
+`src/auditor-files.ts` calls the generated SDK methods. Storage uses native `fetch` with credentials omitted and redirects rejected, copying all signed fields unchanged and appending the file last. SDK authentication, hooks, headers and proxy configuration are not inherited. The helper checks the returned byte limit and requires HTTPS. Failed transfers never finalize; initiation and transfer are never retried automatically.
 
-The helper copies every signed form field unchanged and appends the file last. Native `fetch` sets the multipart boundary. Storage requests omit credentials and reject redirects. They use a separate transport, so SDK authentication, hooks, custom headers and proxy configuration are not inherited. No automatic initiation or transfer retry occurs. A failed transfer never triggers finalization.
+Vanta and storage enforce expiry. The helper does not predict server time or reject grants based on the client clock. It bounds the entire call to ten minutes and each API request to thirty seconds, with caller cancellation throughout. Finalization has at most five attempts, with delays of 10, 20, 40 and 60 seconds increased by `Retry-After` when supplied. Only 429, 5xx, recognized connection failures and timeouts retry, always with the same upload ID. A delay exceeding the client budget stops retries instead of retrying early.
 
-`maxSizeBytes` comes from the grant. Oversized input fails before storage. This can leave an unfinished upload reservation until server expiry; there is no finalize-as-abort operation.
-
-`transferExpiresAt` is a deadline for starting a transfer. An active transfer can cross it, but remains bounded by `finalizationExpiresAt`. The helper anchors the API's HTTP `Date` to request-start monotonic time and conservatively accounts for its one-second precision. If `Date` is absent or inaccessible, the caller's system clock must be synchronized with the server. Clock skew in that mode can reject a valid grant early or leave rejection to the server. Keep system time synchronized; inspect the attachment and upload ID before restarting an expired attempt.
-
-Initiation and each finalization request have a 30-second limit. Finalization makes at most five attempts with delays of 10, 20, 40 and 60 seconds, increased by `Retry-After` when supplied. Requests and waits stop at the finalization deadline or caller cancellation. Only 429, 5xx, recognized connection failures and request timeouts can retry, always with the same upload ID. Nested SDK retries are disabled. The API owners must confirm these finite budgets before merge.
-
-`AuditorFileUploadError` exposes `phase`, `code`, optional `uploadId` and optional `statusCode`. Its message does not include signed URLs, fields, raw response bodies or raw error causes. Disable SDK debug logging (`VANTA_DEBUG` / `debugLogger`) and avoid logging response bodies in custom hooks: those user-configured loggers can expose the initiation grant independently of helper error handling.
-
-After a finalization error, attachment can be uncertain, including after cancellation or a lost response. Retain `uploadId`. Recover through `client.audits.finalizeInformationRequestAuditorFileUpload` with the same audit, request and `finalizeAuditorFileUploadInput: { uploadId }`, before the grant expires. Apply backoff and stop on terminal errors. Do not rerun the entire upload to recover a lost finalization response. An upload ID differs from the resulting auditor-file ID; successful repeated finalization returns the original file ID.
-
-### API source dependency
-
-The upload operations must land in the normal public schema at `https://vanta.mintlify.app/reference/auditor-api.json` before this SDK change merges. Use the existing generation workflow once they are available; this SDK keeps no separate copy of the API schema. API owners must confirm endpoint availability, completion semantics, retry budgets and clock behavior.
+`AuditorFileUploadError` exposes a safe message, phase, code, optional upload ID and HTTP status. After an uncertain finalization failure, retain the upload ID and recover through `client.audits.finalizeInformationRequestAuditorFileUpload` with `finalizeAuditorFileUploadInput: { uploadId }`. Stop on terminal errors and respect expiry. Do not rerun the entire upload to recover a lost completion response. SDK debug logging and custom response hooks can expose signed grants; disable that logging for uploads.
 
 ## Verification
 
-Run these credential-free checks after building the SDK and installing dependencies in the root, `smoke-test` and `examples` directories:
+After installing dependencies in the root and `smoke-test`, run:
 
 ```sh
-npm run build
-npm run lint
-npm --prefix smoke-test run check:auditor-files-example
+npm run build && npm run lint
+npm --prefix smoke-test run typecheck
 npm --prefix smoke-test run test:auditor-files
 npm --prefix smoke-test run test:module-format
 ```
 
-The independent `sdk-tests` PR job runs these checks without secrets or the production smoke bypass. Its dedicated Vitest config selects only the helper and example suites. Default production-read discovery excludes these suites and writable live tests. Captured transports cover sequencing, signed fields and serialized multipart, credential isolation, policy boundaries, clock skew, active cancellation, deadlines, retry exhaustion, same-ID recovery and redacted errors. The executable example uses a real temporary file. Unit boundary tests substitute `Blob.size`; they do not prove real storage limits or memory use.
+The credential-free `sdk-tests` job checks the helper and public ESM/CommonJS imports independently of the production smoke bypass. Tests cover protocol ordering, storage isolation, returned limits, failures, cancellation, bounded waits, same-ID recovery and safe errors. Boundary unit tests substitute `Blob.size`; they do not prove real storage policy.
 
-With the authenticated, checksum-verified pinned Speakeasy CLI available:
-
-```sh
-SPEAKEASY_CLI=/path/to/speakeasy bash scripts/check-staged-upload-regeneration.sh
-```
-
-The script uses a disposable clone of committed HEAD and the normal public schema. It rejects generated changes outside the reviewed upload inventory, regenerates normally and after adding a model property, checks helper preservation, reruns build/lint/tests, and executes packed ESM/CommonJS consumers. It does not publish a package or upload a registry spec.
-
-The writable staging harness and real Vanta/S3 acceptance remain follow-up work and release prerequisites. A dedicated fixture must pass a small upload/list/download/checksum/delete journey, the actual 52,428,800-byte boundary and one-byte-over storage rejection, lost-finalization recovery, real expiry/interruption and memory profiling. Reserve unfinished-session headroom, serialize and pace requests to the owner-confirmed quotas, and delete attached fixtures. Unfinished sessions need real expiry or an owner-approved termination mechanism. The existing production read-only smoke and mocked tests do not supply this evidence. Writable tests must use explicit dedicated configuration and stay outside default test discovery.
+The operations must land in the normal public API schema before this SDK change merges. Use normal generation and inspect its diff. Before release, verify a real upload/list/download/checksum/delete journey and boundary/recovery behavior with a dedicated writable staging fixture. Mocked tests and the production read-only smoke do not provide that evidence.
