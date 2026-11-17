@@ -1,0 +1,26 @@
+docs/auditor-files.md
+  s_a2a2b753bda23a::t_83c1231545cb8a 31,73,75
+scripts/check-staged-upload-regeneration.sh
+  s_a2a2b753bda23a::t_83c1231545cb8a 97-98
+.speakeasy/patches/examples/README.md.patch
+  s_a2a2b753bda23a::t_c22e9483ea5adf 4,6-7
+  s_a2a2b753bda23a::t_83c1231545cb8a 1-3,5,8-10
+README.md
+  s_a2a2b753bda23a::t_83c1231545cb8a 27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "165c158c52e7d464407cfc66d40bc30b950c8d66",
+  "prompts": {},
+  "sessions": {
+    "s_a2a2b753bda23a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e659-73c1-7013-9a9b-56ccf2de7fef",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}

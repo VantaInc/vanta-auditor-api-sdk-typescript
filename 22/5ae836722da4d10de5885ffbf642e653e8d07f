@@ -1,0 +1,112 @@
+README.md
+  s_a2a2b753bda23a::t_a722d107e76e2d 105-110
+  s_a2a2b753bda23a::t_fc054e3a630317 199-200,245,258,365-372,385-394,398,404-408,421,438-439
+jsr.json
+  s_a2a2b753bda23a::t_866f45c33eda1c 5
+src/auditor-files.ts
+  s_a2a2b753bda23a::t_db0fb8e7ea81a6 101,139
+  s_a2a2b753bda23a::t_e5d33046131443 1-100,102-104,111-138,140-211
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 105-110
+examples/uploadInformationRequestAuditorFile.example.mts
+  s_a2a2b753bda23a::t_7245c77e99970b 1-29
+smoke-test/tsconfig.auditor-files.json
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 1-8,10-11
+  s_a2a2b753bda23a::t_7245c77e99970b 9
+src/lib/config.ts
+  s_a2a2b753bda23a::t_866f45c33eda1c 68,71
+smoke-test/module-format-auditor-files.mjs
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 1-43
+.speakeasy/auditor-files-candidate-overlay.yaml
+  s_a2a2b753bda23a::t_dc9b46bab64eb6 1-241
+smoke-test/package.json
+  s_a2a2b753bda23a::t_dc9b46bab64eb6 8,10-12
+docs/models/components/finalizeauditorfileuploadinput.md
+  s_a2a2b753bda23a::t_daeb9c496b1aa1 1-14
+smoke-test/vitest.config.ts
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 6
+.github/workflows/smoke_test.yaml
+  s_a2a2b753bda23a::t_a9d02190f5512e 16-36
+AGENTS.md
+  s_a2a2b753bda23a::t_a9179ce8011cfc 1-7
+docs/auditor-files.md
+  s_a2a2b753bda23a::t_a9179ce8011cfc 1-26,28-75
+  s_a2a2b753bda23a::t_7245c77e99970b 27
+smoke-test/src/auditor-files-example.test.ts
+  s_a2a2b753bda23a::t_7245c77e99970b 7
+  s_a2a2b753bda23a::t_0d4b4f0044e66b 1-6,8-58
+docs/models/components/auditorfileuploadgrant.md
+  s_a2a2b753bda23a::t_af88654b67de64 1-19
+smoke-test/src/auditor-files.test.ts
+  s_a2a2b753bda23a::t_89b4e4d7dc2581 1-108,112-113,131-178,185-247,261,263-264,279-296,298-321,345-360,363-369
+  s_a2a2b753bda23a::t_a9d02190f5512e 297
+  s_a2a2b753bda23a::t_db0fb8e7ea81a6 109-111,114-130,179-184,248-260,262,265-278,322-344,361-362
+examples/README.md
+  s_a2a2b753bda23a::t_7245c77e99970b 5
+  s_a2a2b753bda23a::t_a9179ce8011cfc 6
+src/models/components/initiateauditorfileuploadinput.ts
+  s_a2a2b753bda23a::t_866f45c33eda1c 13-14,18-36
+  s_a2a2b753bda23a::t_0462e575b3a0d2 1-8,39-69
+docs/models/components/uploadedauditorfile.md
+  s_a2a2b753bda23a::t_68fff941b8b0d2 1-14
+scripts/check-staged-upload-regeneration.sh
+  s_a2a2b753bda23a::t_67ba33f59ba4ea 1-117
+src/models/components/auditorfileuploadgrant.ts
+  s_a2a2b753bda23a::t_866f45c33eda1c 21-23,25-26,30-32,34-36,38-40
+  s_a2a2b753bda23a::t_e7be15b5ef327e 1-10,14-15,42-72
+docs/models/components/initiateauditorfileuploadinput.md
+  s_a2a2b753bda23a::t_829f0824640d4c 1-16
+package.json
+  s_a2a2b753bda23a::t_866f45c33eda1c 3
+.speakeasy/gen.yaml
+  s_a2a2b753bda23a::t_866f45c33eda1c 36
+.speakeasy/gen.lock
+  s_a2a2b753bda23a::t_cc04cccaa8418b 8-9,207-208,467-468,547-548,1095-1096,1239-1242,1287-1290,1339-1342,1509-1510,1571-1574,1627-1628,1785-1786,1943-1944,2115-2116,2191-2192,2479-2480,2613-2618,2675-2678,2731-2734,3516-3525,3527-3537
+docs/models/errors/outbounderror.md
+  s_a2a2b753bda23a::t_eb0a41f5d8a32b 1-15
+docs/models/operations/finalizeinformationrequestauditorfileuploadrequest.md
+  s_a2a2b753bda23a::t_59cf62bc6c1615 1-23
+docs/models/operations/initiateinformationrequestauditorfileuploadrequest.md
+  s_a2a2b753bda23a::t_db06192d90a968 1-25
+docs/sdks/audits/README.md
+  s_a2a2b753bda23a::t_87b9f654106f39 53-54,5409-5410,5412,5417,5424,5430-5434,5436-5443,5445,5451-5465,5467-5474,5476,5482-5487,5489-5498,5500-5505,5507-5509,5513,5515,5517,5520,5525,5530,5542-5546,5548-5555,5557,5558-5571,5573-5580,5582,5583-5587,5589-5598,5600-5605,5607-5609
+package-lock.json
+  s_a2a2b753bda23a::t_178b0472896fbc 3,9
+src/funcs/auditsFinalizeInformationRequestAuditorFileUpload.ts
+  s_a2a2b753bda23a::t_1ed9ef97655fcd 1-221
+src/funcs/auditsInitiateInformationRequestAuditorFileUpload.ts
+  s_a2a2b753bda23a::t_70c4946b3eae7b 1-38,40-41,43-48,50-221
+src/models/components/finalizeauditorfileuploadinput.ts
+  s_a2a2b753bda23a::t_adbd89d41a6021 1-7,11-36
+src/models/components/index.ts
+  s_a2a2b753bda23a::t_aa815c762db99d 32,75,93,165
+src/models/components/uploadedauditorfile.ts
+  s_a2a2b753bda23a::t_f400ed81804900 1-10,14-34
+src/models/errors/index.ts
+  s_a2a2b753bda23a::t_3ea54b27172b7d 7
+src/models/errors/outbounderror.ts
+  s_a2a2b753bda23a::t_4225063107f222 1-45
+src/models/operations/finalizeinformationrequestauditorfileupload.ts
+  s_a2a2b753bda23a::t_33e2eadce4613f 1-49
+src/models/operations/index.ts
+  s_a2a2b753bda23a::t_59a7067a6f6b54 16,29
+src/models/operations/initiateinformationrequestauditorfileupload.ts
+  s_a2a2b753bda23a::t_c54f9fd3896dc7 1-49
+src/sdk/audits.ts
+  s_a2a2b753bda23a::t_c037149bf8a68a 17,31,1920-1921,1923-1924,1929,1936,1942-1944,1947,1950-1956,1958-1959,1961,1964,1969,1974,1986-1988,1991,1994-1998
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "225ae836722da4d10de5885ffbf642e653e8d07f",
+  "prompts": {},
+  "sessions": {
+    "s_a2a2b753bda23a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e659-73c1-7013-9a9b-56ccf2de7fef",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}

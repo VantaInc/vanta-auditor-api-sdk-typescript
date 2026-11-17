@@ -1,0 +1,40 @@
+smoke-test/module-format-esm.mjs
+  s_a2a2b753bda23a::t_42d460a38b1c7c 2,15
+smoke-test/vitest.config.ts
+  s_a2a2b753bda23a::t_42d460a38b1c7c 6
+.github/workflows/smoke_test.yaml
+  s_a2a2b753bda23a::t_42d460a38b1c7c 31
+smoke-test/module-format-cjs.cjs
+  s_a2a2b753bda23a::t_42d460a38b1c7c 2,15
+README.md
+  s_a2a2b753bda23a::t_42d460a38b1c7c 108
+smoke-test/src/auditor-files.test.ts
+  s_a2a2b753bda23a::t_424befa14da8f0 50-53,67,179,185,191,193-196,210-211,216,219,320-354,358-368,425-426
+  s_a2a2b753bda23a::t_185f024429d821 286-302,316-319,413,420-424
+  s_a2a2b753bda23a::t_24afc56a131309 369
+docs/auditor-files.md
+  s_a2a2b753bda23a::t_32141671406220 5,9-11,14,25,30,34,36,38,42,45-46,51,53
+src/auditor-files.ts
+  s_a2a2b753bda23a::t_6968b6cc4a9fe4 1,5,7,35,40,53,57-58,60-62,65,73-75,83-100,102-126,129-133,135-136,141-142,145-146,149-151
+  s_a2a2b753bda23a::t_42d460a38b1c7c 76-82,127,134,137-140
+smoke-test/package.json
+  s_a2a2b753bda23a::t_42d460a38b1c7c 8,11-12
+smoke-test/tsconfig.json
+  s_a2a2b753bda23a::t_42d460a38b1c7c 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8cd396285193e754761e141c82e6af3881a63534",
+  "prompts": {},
+  "sessions": {
+    "s_a2a2b753bda23a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e659-73c1-7013-9a9b-56ccf2de7fef",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
