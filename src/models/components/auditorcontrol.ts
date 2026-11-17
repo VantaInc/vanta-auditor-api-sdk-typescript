@@ -17,7 +17,7 @@ import { Section, Section$inboundSchema } from "./section.js";
 /**
  * The control's owner.
  */
-export type Owner = {
+export type AuditorControlOwner = {
   /**
    * Unique identifier for the person.
    */
@@ -57,7 +57,7 @@ export type AuditorControl = {
   /**
    * The control's owner.
    */
-  owner: Owner | null;
+  owner: AuditorControlOwner | null;
   /**
    * The control's GDPR role, if the control is a GDPR control.
    */
@@ -110,20 +110,23 @@ export type AuditorControl = {
 };
 
 /** @internal */
-export const Owner$inboundSchema: z.ZodType<Owner, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    displayName: z.string(),
-    emailAddress: z.string(),
-  });
+export const AuditorControlOwner$inboundSchema: z.ZodType<
+  AuditorControlOwner,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  displayName: z.string(),
+  emailAddress: z.string(),
+});
 
-export function ownerFromJSON(
+export function auditorControlOwnerFromJSON(
   jsonString: string,
-): SafeParseResult<Owner, SDKValidationError> {
+): SafeParseResult<AuditorControlOwner, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Owner$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Owner' from JSON`,
+    (x) => AuditorControlOwner$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AuditorControlOwner' from JSON`,
   );
 }
 
@@ -139,7 +142,7 @@ export const AuditorControl$inboundSchema: z.ZodType<
   description: z.string(),
   source: ControlSource$inboundSchema,
   domains: z.array(z.string()),
-  owner: z.nullable(z.lazy(() => Owner$inboundSchema)),
+  owner: z.nullable(z.lazy(() => AuditorControlOwner$inboundSchema)),
   role: z.nullable(z.string()).optional(),
   customFields: z.array(CustomField$inboundSchema),
   creationDate: z.nullable(

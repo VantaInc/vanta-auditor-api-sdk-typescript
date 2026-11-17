@@ -32,7 +32,7 @@ export type OperatingSystem = {
 /**
  * The name, unique identifier, and email address of the computer's owner.
  */
-export type MonitoredComputerOwner = {
+export type Owner = {
   /**
    * Unique identifier for the person.
    */
@@ -83,7 +83,7 @@ export type MonitoredComputer = {
   /**
    * The name, unique identifier, and email address of the computer's owner.
    */
-  owner: MonitoredComputerOwner | null;
+  owner: Owner | null;
   /**
    * The serial number of the computer. This value may be null if it is not reported by the device.
    */
@@ -115,23 +115,20 @@ export function operatingSystemFromJSON(
 }
 
 /** @internal */
-export const MonitoredComputerOwner$inboundSchema: z.ZodType<
-  MonitoredComputerOwner,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  displayName: z.string(),
-  emailAddress: z.string(),
-});
+export const Owner$inboundSchema: z.ZodType<Owner, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.string(),
+    displayName: z.string(),
+    emailAddress: z.string(),
+  });
 
-export function monitoredComputerOwnerFromJSON(
+export function ownerFromJSON(
   jsonString: string,
-): SafeParseResult<MonitoredComputerOwner, SDKValidationError> {
+): SafeParseResult<Owner, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => MonitoredComputerOwner$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'MonitoredComputerOwner' from JSON`,
+    (x) => Owner$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Owner' from JSON`,
   );
 }
 
@@ -151,7 +148,7 @@ export const MonitoredComputer$inboundSchema: z.ZodType<
   passwordManager: ComputerStatus$inboundSchema,
   antivirusInstallation: ComputerStatus$inboundSchema,
   operatingSystem: z.nullable(z.lazy(() => OperatingSystem$inboundSchema)),
-  owner: z.nullable(z.lazy(() => MonitoredComputerOwner$inboundSchema)),
+  owner: z.nullable(z.lazy(() => Owner$inboundSchema)),
   serialNumber: z.nullable(z.string()),
   udid: z.nullable(z.string()),
 });

@@ -1,16 +1,16 @@
-# MonitoredComputerOwner
+# AuditorControlOwner
 
-The name, unique identifier, and email address of the computer's owner.
+The control's owner.
 
 ## Example Usage
 
 ```typescript
-import { MonitoredComputerOwner } from "vanta-auditor-api-sdk/models/components";
+import { AuditorControlOwner } from "vanta-auditor-api-sdk/models/components";
 
-let value: MonitoredComputerOwner = {
+let value: AuditorControlOwner = {
   id: "<id>",
-  displayName: "Brandi.Johnson",
-  emailAddress: "Ernesto.Streich14@hotmail.com",
+  displayName: "Chase.Gleichner",
+  emailAddress: "Caleigh17@hotmail.com",
 };
 ```
 

@@ -15,8 +15,8 @@ let value: PaginatedResponseAccountAccessResults = {
         "Admin",
       ],
       mfa: true,
-      createdDate: new Date("2024-01-15T10:30:00.000Z"),
-      deactivatedDate: new Date("2024-06-20T08:00:00.000Z"),
+      createdDate: new Date("2024-01-15T10:30:00Z"),
+      deactivatedDate: new Date("2024-06-20T08:00:00Z"),
     },
   ],
   pageInfo: {

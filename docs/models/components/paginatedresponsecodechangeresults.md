@@ -13,8 +13,8 @@ let value: PaginatedResponseCodeChangeResults = {
       identifier: "101",
       service: "github",
       repository: "vanta/obsidian",
-      openedAt: new Date("2025-01-25T14:30:00.000Z"),
-      closedAt: new Date("2025-03-25T14:30:00.000Z"),
+      openedAt: new Date("2025-01-25T14:30:00Z"),
+      closedAt: new Date("2025-03-25T14:30:00Z"),
     },
   ],
   pageInfo: {
