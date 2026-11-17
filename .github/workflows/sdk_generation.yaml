@@ -29,7 +29,7 @@ jobs:
         with:
           repository: VantaInc/obsidian
           ref: main
-          token: ${{ secrets.OBSIDIAN_READ_TOKEN }}
+          token: ${{ secrets.OBSIDIAN_READ_PAT }}
           path: obsidian
           sparse-checkout: apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
           sparse-checkout-cone-mode: false
