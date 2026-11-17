@@ -37,7 +37,8 @@ typescript:
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
-    devDependencies: {}
+    devDependencies:
+      js-yaml: 4.1.1
     peerDependencies: {}
   additionalPackageJSON: {}
   additionalScripts: {}

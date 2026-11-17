@@ -4,6 +4,10 @@ permissions:
   pull-requests: write
   id-token: write
 "on":
+  push:
+    branches: [main]
+    paths:
+      - openapi/auditor-api.yaml
   workflow_dispatch:
     inputs:
       force:
