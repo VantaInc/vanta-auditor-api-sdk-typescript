@@ -24,20 +24,12 @@ jobs:
     permissions:
       contents: read
     steps:
-      - id: obsidian
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        with:
-          client-id: ${{ vars.OBSIDIAN_APP_CLIENT_ID }}
-          private-key: ${{ secrets.OBSIDIAN_APP_PRIVATE_KEY }}
-          owner: VantaInc
-          repositories: obsidian
-          permission-contents: read
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         id: source
         with:
           repository: VantaInc/obsidian
           ref: main
-          token: ${{ steps.obsidian.outputs.token }}
+          token: ${{ secrets.OBSIDIAN_READ_TOKEN }}
           path: obsidian
           sparse-checkout: apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
           sparse-checkout-cone-mode: false
