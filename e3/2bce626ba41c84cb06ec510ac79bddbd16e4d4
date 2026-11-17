@@ -1,0 +1,21 @@
+scripts/check-staged-upload-regeneration.sh
+  s_a2a2b753bda23a::t_52b4275cd2991a 20,22,40
+docs/auditor-files.md
+  s_a2a2b753bda23a::t_52b4275cd2991a 45,47,69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e32bce626ba41c84cb06ec510ac79bddbd16e4d4",
+  "prompts": {},
+  "sessions": {
+    "s_a2a2b753bda23a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e659-73c1-7013-9a9b-56ccf2de7fef",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
