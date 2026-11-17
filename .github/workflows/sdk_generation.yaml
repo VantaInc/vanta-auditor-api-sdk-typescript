@@ -23,8 +23,6 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
-    outputs:
-      commit: ${{ steps.source.outputs.commit }}
     steps:
       - id: obsidian
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
@@ -49,11 +47,11 @@ jobs:
           OBSIDIAN_COMMIT: ${{ steps.source.outputs.commit }}
         run: |
           source_spec=obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
-          test -s "$source_spec" && test ! -L "$source_spec"
-          echo "Auditor spec source: VantaInc/obsidian@$OBSIDIAN_COMMIT"
+          [[ -f "$source_spec" && -s "$source_spec" && ! -L "$source_spec" ]]
+          echo "Auditor spec source: VantaInc/obsidian@$OBSIDIAN_COMMIT" | tee -a "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: auditor-spec-${{ steps.source.outputs.commit }}
+          name: auditor-spec
           path: obsidian/apps/api-external/assets/__generated__/auditor-api/v1/api-spec.yaml
           if-no-files-found: error
           retention-days: 1
@@ -63,7 +61,6 @@ jobs:
     needs: spec
     uses: ./.github/workflows/speakeasy_generate.yaml
     with:
-      obsidian_commit: ${{ needs.spec.outputs.commit }}
       force: ${{ github.event.inputs.force }}
       mode: pr
       set_version: ${{ github.event.inputs.set_version }}

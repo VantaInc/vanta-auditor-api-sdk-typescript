@@ -2,9 +2,6 @@ name: Speakeasy Generate
 on:
   workflow_call:
     inputs:
-      obsidian_commit:
-        type: string
-        required: true
       mode:
         type: string
         required: true
@@ -42,19 +39,28 @@ jobs:
           token: ${{ secrets.github_access_token }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: auditor-spec-${{ inputs.obsidian_commit }}
+          name: auditor-spec
           path: auditor-spec
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version: '22'
-      - name: Validate the Obsidian spec
-        env:
-          OBSIDIAN_COMMIT: ${{ inputs.obsidian_commit }}
+      - name: Check the fetched spec
+        shell: bash
         run: |
-          echo "Generating from Obsidian commit $OBSIDIAN_COMMIT"
-          printf 'Auditor spec: [Obsidian %s](https://github.com/VantaInc/obsidian/commit/%s)\n' "$OBSIDIAN_COMMIT" "$OBSIDIAN_COMMIT" >> "$GITHUB_STEP_SUMMARY"
-          npm ci --ignore-scripts --no-audit --no-fund
-          node .github/scripts/validate-spec.mjs auditor-spec/api-spec.yaml
+          spec=auditor-spec/api-spec.yaml
+          [[ -f "$spec" && -s "$spec" && ! -L "$spec" ]]
+          yq -e '
+            ([.. | select(anchor != "")] | length == 0) and
+            ([.. | select(tag == "!!map") | ((has("<<") | not) and (keys | length == (unique | length)))] | all)
+          ' "$spec" > /dev/null
+          yq -o=json '.' "$spec" | jq -s -e '
+            def internal: type == "string" and startswith("#");
+            length == 1 and (.[0] | . as $spec |
+              type == "object" and
+              all(.. | objects;
+                all(to_entries[] | select(.key == "$ref" or .key == "operationRef" or .key == "$dynamicRef" or .key == "$recursiveRef"); .value | internal) and
+                (has("externalValue") | not) and
+                all(.discriminator.mapping[]?; . as $target |
+                  type == "string" and
+                  (internal or (($spec.components.schemas // {}) | has($target))))))
+          ' > /dev/null
       - id: prepare
         uses: ./.github/actions/prepare-speakeasy
       - id: run-workflow
