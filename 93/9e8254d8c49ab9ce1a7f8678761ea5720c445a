@@ -1,0 +1,34 @@
+.github/workflows/speakeasy_generate.yaml
+  s_0c59641a5c45c9::t_30cbc3eeef6e21 5-7,43-57
+AGENTS.md
+  s_0c59641a5c45c9::t_30cbc3eeef6e21 3
+.speakeasy/workflow.yaml
+  s_0c59641a5c45c9::t_30cbc3eeef6e21 6
+.github/workflows/sdk_spec_check.yaml
+  s_0c59641a5c45c9::t_a1a302573fa0b0 20
+openapi/README.md
+  s_0c59641a5c45c9::t_22c7f3b0ef9be8 3,5-10,14-21,25-30,32-36,39-63,67-70,72-74
+  s_0c59641a5c45c9::t_a1a302573fa0b0 66
+.github/scripts/spec-workflow.test.mjs
+  s_0c59641a5c45c9::t_a1a302573fa0b0 1-31
+.github/workflows/sdk_generation.yaml
+  s_0c59641a5c45c9::t_30cbc3eeef6e21 19-60,63,66
+.github/scripts/validate-spec.mjs
+  s_0c59641a5c45c9::t_30cbc3eeef6e21 46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "939e8254d8c49ab9ce1a7f8678761ea5720c445a",
+  "prompts": {},
+  "sessions": {
+    "s_0c59641a5c45c9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ea14-588f-7aa0-8d13-d35c4f97f16c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
