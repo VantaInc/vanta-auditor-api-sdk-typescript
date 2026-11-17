@@ -1,0 +1,52 @@
+.github/workflows/sdk_spec_sync.yaml
+  s_0c59641a5c45c9::t_83a02a7e58fcca 1-70
+.speakeasy/gen.yaml
+  s_0c59641a5c45c9::t_83a02a7e58fcca 40-41
+package.json
+  s_0c59641a5c45c9::t_83a02a7e58fcca 36
+AGENTS.md
+  s_0c59641a5c45c9::t_83a02a7e58fcca 1-4
+.github/workflows/sdk_spec_check.yaml
+  s_0c59641a5c45c9::t_83a02a7e58fcca 1-21
+.github/scripts/validate-spec.mjs
+  s_0c59641a5c45c9::t_83a02a7e58fcca 1-55
+.github/scripts/validate-spec.test.mjs
+  s_0c59641a5c45c9::t_ac16c5c5238019 6,70,72,76,78
+  s_0c59641a5c45c9::t_83a02a7e58fcca 1-5,7-69,71,73-75,77,79-80
+.github/workflows/sdk_generation.yaml
+  s_0c59641a5c45c9::t_83a02a7e58fcca 7-10
+openapi/auditor-api.yaml
+  s_0c59641a5c45c9::t_1b5114c6f415a6 1-13405
+openapi/README.md
+  s_0c59641a5c45c9::t_b4bb2fa718341c 1-79
+.speakeasy/workflow.yaml
+  s_0c59641a5c45c9::t_83a02a7e58fcca 6
+.github/.npmignore
+  s_0c59641a5c45c9::t_3706aa9254c887 1
+package-lock.json
+  s_a2a2b753bda23a::t_f06c05e23d9503 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2748fb0ae72066784a3510ac04346470690120de",
+  "prompts": {},
+  "sessions": {
+    "s_0c59641a5c45c9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1ea14-588f-7aa0-8d13-d35c4f97f16c",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    },
+    "s_a2a2b753bda23a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1e659-73c1-7013-9a9b-56ccf2de7fef",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
