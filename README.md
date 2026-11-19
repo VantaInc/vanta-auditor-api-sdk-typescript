@@ -24,6 +24,7 @@ Conduct an audit: The Auditor API lets audit firms conduct audits from a tool ou
   * [SDK Installation](#sdk-installation)
   * [Requirements](#requirements)
   * [SDK Example Usage](#sdk-example-usage)
+  * [Upload auditor files](#upload-auditor-files)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
@@ -101,6 +102,10 @@ run();
 
 ```
 <!-- End SDK Example Usage [usage] -->
+
+## Upload auditor files
+
+Use `uploadInformationRequestAuditorFile` from `vanta-auditor-api-sdk/auditor-files` to initiate, transfer and attach a guidance file in one call. See the [upload guide](docs/auditor-files.md) for an example, cancellation and recovery.
 
 <!-- Start Authentication [security] -->
 ## Authentication

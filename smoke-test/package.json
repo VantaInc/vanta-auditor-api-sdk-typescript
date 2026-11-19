@@ -7,7 +7,9 @@
   "scripts": {
     "test:module-format": "node module-format-esm.mjs && node module-format-cjs.cjs",
     "test:live": "vitest run --reporter=default --reporter=junit --outputFile.junit=test-report.xml",
-    "test": "npm run test:module-format && npm run test:live"
+    "test": "npm run test:module-format && npm run test:live",
+    "test:auditor-files": "vitest run src/auditor-files.test.ts --reporter=verbose",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "vanta-auditor-api-sdk": "file:.."

@@ -1,4 +1,5 @@
 const { Vanta } = require("vanta-auditor-api-sdk");
+const { uploadInformationRequestAuditorFile } = require("vanta-auditor-api-sdk/auditor-files");
 const components = require("vanta-auditor-api-sdk/models/components");
 const errors = require("vanta-auditor-api-sdk/models/errors");
 const operations = require("vanta-auditor-api-sdk/models/operations");
@@ -11,6 +12,7 @@ function assert(condition, message) {
 }
 
 assert(typeof Vanta === "function", "CJS: Vanta export missing");
+assert(typeof uploadInformationRequestAuditorFile === "function", "CJS: auditor-files export missing");
 assert(typeof HTTPClient === "function", "CJS: HTTPClient export missing");
 assert(Object.keys(components).length > 0, "CJS: models/components empty");
 assert(Object.keys(errors).length > 0, "CJS: models/errors empty");
