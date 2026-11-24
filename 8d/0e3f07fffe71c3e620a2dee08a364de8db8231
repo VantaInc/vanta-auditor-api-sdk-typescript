@@ -1,0 +1,19 @@
+.github/actions/prepare-speakeasy/pinned-cli.json
+  s_8b2a13a09f409f::t_18d55708761383 2,4-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8d0e3f07fffe71c3e620a2dee08a364de8db8231",
+  "prompts": {},
+  "sessions": {
+    "s_8b2a13a09f409f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a20f18-ed8b-7220-9e73-3b736ca4aeb6",
+        "model": "gpt-6.2-sol"
+      },
+      "human_author": "Victor Noventa <victor@bitcomplete.io>"
+    }
+  }
+}
