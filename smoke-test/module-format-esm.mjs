@@ -1,4 +1,5 @@
 import { Vanta } from "vanta-auditor-api-sdk";
+import { uploadInformationRequestAuditorFile } from "vanta-auditor-api-sdk/auditor-files";
 import * as components from "vanta-auditor-api-sdk/models/components";
 import * as errors from "vanta-auditor-api-sdk/models/errors";
 import * as operations from "vanta-auditor-api-sdk/models/operations";
@@ -11,6 +12,7 @@ function assert(condition, message) {
 }
 
 assert(typeof Vanta === "function", "ESM: Vanta export missing");
+assert(typeof uploadInformationRequestAuditorFile === "function", "ESM: auditor-files export missing");
 assert(typeof HTTPClient === "function", "ESM: HTTPClient export missing");
 assert(Object.keys(components).length > 0, "ESM: models/components empty");
 assert(Object.keys(errors).length > 0, "ESM: models/errors empty");
