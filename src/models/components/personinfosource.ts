@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,11 +32,13 @@ export const PersonInfoSource$inboundSchema: z.ZodType<
   PersonInfoSource,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  VantaBasedPersonInfoSource$inboundSchema,
-  ScimBasedPersonInfoSource$inboundSchema,
-  IntegrationBasedPersonInfoSource$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    VantaBasedPersonInfoSource$inboundSchema,
+    ScimBasedPersonInfoSource$inboundSchema,
+    IntegrationBasedPersonInfoSource$inboundSchema,
+  ])
+);
 
 export function personInfoSourceFromJSON(
   jsonString: string,

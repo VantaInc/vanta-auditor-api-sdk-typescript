@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Updates an existing comment on an information request.
@@ -40,10 +41,12 @@ export const UpdateInformationRequestCommentInput$outboundSchema: z.ZodType<
   UpdateInformationRequestCommentInput$Outbound,
   z.ZodTypeDef,
   UpdateInformationRequestCommentInput
-> = z.object({
-  text: z.string(),
-  email: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    email: z.string(),
+  })
+);
 
 export function updateInformationRequestCommentInputToJSON(
   updateInformationRequestCommentInput: UpdateInformationRequestCommentInput,

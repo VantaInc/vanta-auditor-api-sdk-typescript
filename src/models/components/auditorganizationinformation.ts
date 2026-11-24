@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -69,9 +69,11 @@ export const CompanyLogo$inboundSchema: z.ZodType<
   CompanyLogo,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+  })
+);
 
 export function companyLogoFromJSON(
   jsonString: string,
@@ -88,16 +90,18 @@ export const AuditOrganizationInformation$inboundSchema: z.ZodType<
   AuditOrganizationInformation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  displayName: z.string(),
-  legalName: z.nullable(z.string()).optional(),
-  incorporation: z.nullable(z.string()).optional(),
-  url: z.nullable(z.string()).optional(),
-  mailingAddress: z.nullable(z.string()).optional(),
-  telephone: z.nullable(z.string()).optional(),
-  companyLogo: z.nullable(z.lazy(() => CompanyLogo$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string(),
+    legalName: z.nullable(z.string()).optional(),
+    incorporation: z.nullable(z.string()).optional(),
+    url: z.nullable(z.string()).optional(),
+    mailingAddress: z.nullable(z.string()).optional(),
+    telephone: z.nullable(z.string()).optional(),
+    companyLogo: z.nullable(z.lazy(() => CompanyLogo$inboundSchema)).optional(),
+  })
+);
 
 export function auditOrganizationInformationFromJSON(
   jsonString: string,

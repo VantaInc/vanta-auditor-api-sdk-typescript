@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -83,10 +83,12 @@ export type VantaDocumentEvidence = {
 
 /** @internal */
 export const AddedBy$inboundSchema: z.ZodType<AddedBy, z.ZodTypeDef, unknown> =
-  z.object({
-    email: z.string(),
-    name: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      email: z.string(),
+      name: z.string(),
+    })
+  );
 
 export function addedByFromJSON(
   jsonString: string,
@@ -99,11 +101,13 @@ export function addedByFromJSON(
 }
 
 /** @internal */
-export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
-  .union([
-    VantaDocumentUploadedEvidence$inboundSchema,
-    VantaDocumentLinkEvidence$inboundSchema,
-  ]);
+export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      VantaDocumentUploadedEvidence$inboundSchema,
+      VantaDocumentLinkEvidence$inboundSchema,
+    ])
+  );
 
 export function fileFromJSON(
   jsonString: string,
@@ -120,19 +124,21 @@ export const VantaDocumentEvidence$inboundSchema: z.ZodType<
   VantaDocumentEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  title: z.string(),
-  description: z.string().optional(),
-  expirationDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  addedBy: z.lazy(() => AddedBy$inboundSchema).optional(),
-  documentVersionId: z.string(),
-  file: z.union([
-    VantaDocumentUploadedEvidence$inboundSchema,
-    VantaDocumentLinkEvidence$inboundSchema,
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    expirationDate: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    addedBy: z.lazy(() => AddedBy$inboundSchema).optional(),
+    documentVersionId: z.string(),
+    file: z.union([
+      VantaDocumentUploadedEvidence$inboundSchema,
+      VantaDocumentLinkEvidence$inboundSchema,
+    ]),
+  })
+);
 
 export function vantaDocumentEvidenceFromJSON(
   jsonString: string,

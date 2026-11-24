@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const InformationRequestActivityType = {
@@ -22,4 +23,6 @@ export type InformationRequestActivityType = ClosedEnum<
 /** @internal */
 export const InformationRequestActivityType$inboundSchema: z.ZodNativeEnum<
   typeof InformationRequestActivityType
-> = z.nativeEnum(InformationRequestActivityType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(InformationRequestActivityType)
+);

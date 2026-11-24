@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   AuditorEnabledStateTransition,
   AuditorEnabledStateTransition$outboundSchema,
@@ -31,10 +32,12 @@ export const StatusUpdate$outboundSchema: z.ZodType<
   StatusUpdate$Outbound,
   z.ZodTypeDef,
   StatusUpdate
-> = z.object({
-  auditorEmail: z.string(),
-  stateTransition: AuditorEnabledStateTransition$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditorEmail: z.string(),
+    stateTransition: AuditorEnabledStateTransition$outboundSchema,
+  })
+);
 
 export function statusUpdateToJSON(statusUpdate: StatusUpdate): string {
   return JSON.stringify(StatusUpdate$outboundSchema.parse(statusUpdate));
@@ -50,9 +53,11 @@ export const AuditEvidenceUpdateInput$outboundSchema: z.ZodType<
   AuditEvidenceUpdateInput$Outbound,
   z.ZodTypeDef,
   AuditEvidenceUpdateInput
-> = z.object({
-  statusUpdate: z.lazy(() => StatusUpdate$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    statusUpdate: z.lazy(() => StatusUpdate$outboundSchema).optional(),
+  })
+);
 
 export function auditEvidenceUpdateInputToJSON(
   auditEvidenceUpdateInput: AuditEvidenceUpdateInput,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -21,10 +21,12 @@ export const VantaTestSnapshotExcludedItemGroup$inboundSchema: z.ZodType<
   VantaTestSnapshotExcludedItemGroup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reason: z.string(),
-  entities: z.array(VantaTestSnapshotExcludedItem$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string(),
+    entities: z.array(VantaTestSnapshotExcludedItem$inboundSchema),
+  })
+);
 
 export function vantaTestSnapshotExcludedItemGroupFromJSON(
   jsonString: string,

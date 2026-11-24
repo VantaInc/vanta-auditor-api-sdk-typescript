@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type FlagInformationRequestEvidenceRequest = {
@@ -26,16 +27,19 @@ export const FlagInformationRequestEvidenceRequest$outboundSchema: z.ZodType<
   FlagInformationRequestEvidenceRequest$Outbound,
   z.ZodTypeDef,
   FlagInformationRequestEvidenceRequest
-> = z.object({
-  auditId: z.string(),
-  requestId: z.string(),
-  flagInformationRequestEvidenceInput:
-    components.FlagInformationRequestEvidenceInput$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    flagInformationRequestEvidenceInput: "FlagInformationRequestEvidenceInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    requestId: z.string(),
+    flagInformationRequestEvidenceInput:
+      components.FlagInformationRequestEvidenceInput$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      flagInformationRequestEvidenceInput:
+        "FlagInformationRequestEvidenceInput",
+    });
+  })
+);
 
 export function flagInformationRequestEvidenceRequestToJSON(
   flagInformationRequestEvidenceRequest: FlagInformationRequestEvidenceRequest,

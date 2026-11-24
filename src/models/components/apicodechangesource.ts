@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -22,4 +23,4 @@ export type ApiCodeChangeSource = ClosedEnum<typeof ApiCodeChangeSource>;
 /** @internal */
 export const ApiCodeChangeSource$outboundSchema: z.ZodNativeEnum<
   typeof ApiCodeChangeSource
-> = z.nativeEnum(ApiCodeChangeSource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ApiCodeChangeSource));

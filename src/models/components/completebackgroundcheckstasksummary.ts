@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TaskStatus, TaskStatus$inboundSchema } from "./taskstatus.js";
@@ -55,10 +55,12 @@ export const CompleteBackgroundChecksTaskSummaryDisabled$inboundSchema:
     CompleteBackgroundChecksTaskSummaryDisabled,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    date: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    reason: z.nullable(z.string()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      date: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      reason: z.nullable(z.string()),
+    })
+  );
 
 export function completeBackgroundChecksTaskSummaryDisabledFromJSON(
   jsonString: string,
@@ -81,19 +83,21 @@ export const CompleteBackgroundChecksTaskSummary$inboundSchema: z.ZodType<
   CompleteBackgroundChecksTaskSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  taskType: TaskTypeCOMPLETEBACKGROUNDCHECKS$inboundSchema,
-  status: TaskStatus$inboundSchema,
-  dueDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  completionDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  disabled: z.nullable(
-    z.lazy(() => CompleteBackgroundChecksTaskSummaryDisabled$inboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskType: TaskTypeCOMPLETEBACKGROUNDCHECKS$inboundSchema,
+    status: TaskStatus$inboundSchema,
+    dueDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    completionDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    disabled: z.nullable(
+      z.lazy(() => CompleteBackgroundChecksTaskSummaryDisabled$inboundSchema),
+    ),
+  })
+);
 
 export function completeBackgroundChecksTaskSummaryFromJSON(
   jsonString: string,

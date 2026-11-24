@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -99,10 +99,12 @@ export const OperatingSystem$inboundSchema: z.ZodType<
   OperatingSystem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: OperatingSystemType$inboundSchema,
-  version: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: OperatingSystemType$inboundSchema,
+    version: z.nullable(z.string()),
+  })
+);
 
 export function operatingSystemFromJSON(
   jsonString: string,
@@ -115,12 +117,14 @@ export function operatingSystemFromJSON(
 }
 
 /** @internal */
-export const Owner$inboundSchema: z.ZodType<Owner, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    displayName: z.string(),
-    emailAddress: z.string(),
-  });
+export const Owner$inboundSchema: z.ZodType<Owner, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      displayName: z.string(),
+      emailAddress: z.string(),
+    })
+  );
 
 export function ownerFromJSON(
   jsonString: string,
@@ -137,21 +141,23 @@ export const MonitoredComputer$inboundSchema: z.ZodType<
   MonitoredComputer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  integrationId: z.string(),
-  lastCheckDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  screenlock: ComputerStatus$inboundSchema,
-  diskEncryption: ComputerStatus$inboundSchema,
-  passwordManager: ComputerStatus$inboundSchema,
-  antivirusInstallation: ComputerStatus$inboundSchema,
-  operatingSystem: z.nullable(z.lazy(() => OperatingSystem$inboundSchema)),
-  owner: z.nullable(z.lazy(() => Owner$inboundSchema)),
-  serialNumber: z.nullable(z.string()),
-  udid: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    integrationId: z.string(),
+    lastCheckDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    screenlock: ComputerStatus$inboundSchema,
+    diskEncryption: ComputerStatus$inboundSchema,
+    passwordManager: ComputerStatus$inboundSchema,
+    antivirusInstallation: ComputerStatus$inboundSchema,
+    operatingSystem: z.nullable(z.lazy(() => OperatingSystem$inboundSchema)),
+    owner: z.nullable(z.lazy(() => Owner$inboundSchema)),
+    serialNumber: z.nullable(z.string()),
+    udid: z.nullable(z.string()),
+  })
+);
 
 export function monitoredComputerFromJSON(
   jsonString: string,

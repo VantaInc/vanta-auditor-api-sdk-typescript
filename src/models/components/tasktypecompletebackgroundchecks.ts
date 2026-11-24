@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const TaskTypeCOMPLETEBACKGROUNDCHECKS = {
@@ -15,4 +16,6 @@ export type TaskTypeCOMPLETEBACKGROUNDCHECKS = ClosedEnum<
 /** @internal */
 export const TaskTypeCOMPLETEBACKGROUNDCHECKS$inboundSchema: z.ZodNativeEnum<
   typeof TaskTypeCOMPLETEBACKGROUNDCHECKS
-> = z.nativeEnum(TaskTypeCOMPLETEBACKGROUNDCHECKS);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(TaskTypeCOMPLETEBACKGROUNDCHECKS)
+);

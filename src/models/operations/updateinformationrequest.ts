@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type UpdateInformationRequestRequest = {
@@ -25,16 +26,18 @@ export const UpdateInformationRequestRequest$outboundSchema: z.ZodType<
   UpdateInformationRequestRequest$Outbound,
   z.ZodTypeDef,
   UpdateInformationRequestRequest
-> = z.object({
-  auditId: z.string(),
-  requestId: z.string(),
-  partialUpdateInformationRequest:
-    components.PartialUpdateInformationRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    partialUpdateInformationRequest: "PartialUpdateInformationRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    requestId: z.string(),
+    partialUpdateInformationRequest:
+      components.PartialUpdateInformationRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      partialUpdateInformationRequest: "PartialUpdateInformationRequest",
+    });
+  })
+);
 
 export function updateInformationRequestRequestToJSON(
   updateInformationRequestRequest: UpdateInformationRequestRequest,

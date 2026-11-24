@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListMonitoredComputersInAuditScopeRequest = {
@@ -31,14 +32,16 @@ export const ListMonitoredComputersInAuditScopeRequest$outboundSchema:
     ListMonitoredComputersInAuditScopeRequest$Outbound,
     z.ZodTypeDef,
     ListMonitoredComputersInAuditScopeRequest
-  > = z.object({
-    auditId: z.string(),
-    pageSize: z.number().int().default(10),
-    pageCursor: z.string().optional(),
-    complianceStatusFilterMatchesAny: z.array(
-      components.ComputerStatusFilter$outboundSchema,
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      auditId: z.string(),
+      pageSize: z.number().int().default(10),
+      pageCursor: z.string().optional(),
+      complianceStatusFilterMatchesAny: z.array(
+        components.ComputerStatusFilter$outboundSchema,
+      ).optional(),
+    })
+  );
 
 export function listMonitoredComputersInAuditScopeRequestToJSON(
   listMonitoredComputersInAuditScopeRequest:

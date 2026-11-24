@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -52,12 +52,14 @@ export const AuditorControlAssessment$inboundSchema: z.ZodType<
   AuditorControlAssessment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  controlId: z.string(),
-  segmentId: z.string(),
-  assessmentState: AuditControlAssessmentState$inboundSchema,
-  justification: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    controlId: z.string(),
+    segmentId: z.string(),
+    assessmentState: AuditControlAssessmentState$inboundSchema,
+    justification: z.string(),
+  })
+);
 
 export function auditorControlAssessmentFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -116,10 +116,12 @@ export const BusinessUnit$inboundSchema: z.ZodType<
   BusinessUnit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  displayName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string(),
+  })
+);
 
 export function businessUnitFromJSON(
   jsonString: string,
@@ -132,11 +134,13 @@ export function businessUnitFromJSON(
 }
 
 /** @internal */
-export const System$inboundSchema: z.ZodType<System, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    displayName: z.string(),
-  });
+export const System$inboundSchema: z.ZodType<System, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      displayName: z.string(),
+    })
+  );
 
 export function systemFromJSON(
   jsonString: string,
@@ -153,10 +157,12 @@ export const Soc2Deliverable$inboundSchema: z.ZodType<
   Soc2Deliverable,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reportType: AuditSoc2ReportType$inboundSchema,
-  tscs: z.array(AuditSoc2Tsc$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reportType: AuditSoc2ReportType$inboundSchema,
+    tscs: z.array(AuditSoc2Tsc$inboundSchema),
+  })
+);
 
 export function soc2DeliverableFromJSON(
   jsonString: string,
@@ -173,15 +179,17 @@ export const AuditSegment$inboundSchema: z.ZodType<
   AuditSegment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  kind: AuditSegmentKind$inboundSchema,
-  displayName: z.string(),
-  framework: AuditSegmentFramework$inboundSchema,
-  businessUnit: z.nullable(z.lazy(() => BusinessUnit$inboundSchema)),
-  system: z.nullable(z.lazy(() => System$inboundSchema)),
-  soc2Deliverable: z.nullable(z.lazy(() => Soc2Deliverable$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    kind: AuditSegmentKind$inboundSchema,
+    displayName: z.string(),
+    framework: AuditSegmentFramework$inboundSchema,
+    businessUnit: z.nullable(z.lazy(() => BusinessUnit$inboundSchema)),
+    system: z.nullable(z.lazy(() => System$inboundSchema)),
+    soc2Deliverable: z.nullable(z.lazy(() => Soc2Deliverable$inboundSchema)),
+  })
+);
 
 export function auditSegmentFromJSON(
   jsonString: string,

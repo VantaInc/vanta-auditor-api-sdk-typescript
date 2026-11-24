@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { PageInfo, PageInfo$inboundSchema } from "./pageinfo.js";
@@ -26,10 +26,12 @@ export const PaginatedResponseRiskSnapshotResults$inboundSchema: z.ZodType<
   PaginatedResponseRiskSnapshotResults,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(RiskSnapshot$inboundSchema),
-  pageInfo: PageInfo$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(RiskSnapshot$inboundSchema),
+    pageInfo: PageInfo$inboundSchema,
+  })
+);
 
 export function paginatedResponseRiskSnapshotResultsFromJSON(
   jsonString: string,
@@ -47,9 +49,11 @@ export const PaginatedResponseRiskSnapshot$inboundSchema: z.ZodType<
   PaginatedResponseRiskSnapshot,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  results: z.lazy(() => PaginatedResponseRiskSnapshotResults$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.lazy(() => PaginatedResponseRiskSnapshotResults$inboundSchema),
+  })
+);
 
 export function paginatedResponseRiskSnapshotFromJSON(
   jsonString: string,

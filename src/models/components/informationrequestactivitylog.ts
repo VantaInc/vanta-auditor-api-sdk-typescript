@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -166,34 +166,38 @@ export type InformationRequestActivityLog = {
 };
 
 /** @internal */
-export const OldStatus$inboundSchema: z.ZodNativeEnum<typeof OldStatus> = z
-  .nativeEnum(OldStatus);
+export const OldStatus$inboundSchema: z.ZodNativeEnum<typeof OldStatus> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OldStatus));
 
 /** @internal */
-export const NewStatus$inboundSchema: z.ZodNativeEnum<typeof NewStatus> = z
-  .nativeEnum(NewStatus);
+export const NewStatus$inboundSchema: z.ZodNativeEnum<typeof NewStatus> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(NewStatus));
 
 /** @internal */
-export const FillOutcome$inboundSchema: z.ZodNativeEnum<typeof FillOutcome> = z
-  .nativeEnum(FillOutcome);
+export const FillOutcome$inboundSchema: z.ZodNativeEnum<typeof FillOutcome> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FillOutcome));
 
 /** @internal */
 export const InformationRequestActivityLog$inboundSchema: z.ZodType<
   InformationRequestActivityLog,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  activityType: InformationRequestActivityType$inboundSchema,
-  timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  userEmail: z.nullable(z.string()),
-  oldStatus: z.nullable(OldStatus$inboundSchema),
-  newStatus: z.nullable(NewStatus$inboundSchema),
-  reason: z.nullable(z.string()),
-  fillOutcome: z.nullable(FillOutcome$inboundSchema),
-  sourceInformationRequestId: z.nullable(z.string()),
-  sourceAuditId: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    activityType: InformationRequestActivityType$inboundSchema,
+    timestamp: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    userEmail: z.nullable(z.string()),
+    oldStatus: z.nullable(OldStatus$inboundSchema),
+    newStatus: z.nullable(NewStatus$inboundSchema),
+    reason: z.nullable(z.string()),
+    fillOutcome: z.nullable(FillOutcome$inboundSchema),
+    sourceInformationRequestId: z.nullable(z.string()),
+    sourceAuditId: z.nullable(z.string()),
+  })
+);
 
 export function informationRequestActivityLogFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -27,7 +28,7 @@ export type VulnerableAssetType = ClosedEnum<typeof VulnerableAssetType>;
 /** @internal */
 export const VulnerableAssetType$inboundSchema: z.ZodNativeEnum<
   typeof VulnerableAssetType
-> = z.nativeEnum(VulnerableAssetType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VulnerableAssetType));
 /** @internal */
 export const VulnerableAssetType$outboundSchema: z.ZodNativeEnum<
   typeof VulnerableAssetType

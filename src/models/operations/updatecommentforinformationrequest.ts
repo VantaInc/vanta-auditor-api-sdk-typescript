@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type UpdateCommentForInformationRequestRequest = {
@@ -29,18 +30,20 @@ export const UpdateCommentForInformationRequestRequest$outboundSchema:
     UpdateCommentForInformationRequestRequest$Outbound,
     z.ZodTypeDef,
     UpdateCommentForInformationRequestRequest
-  > = z.object({
-    auditId: z.string(),
-    requestId: z.string(),
-    commentId: z.string(),
-    updateInformationRequestCommentInput:
-      components.UpdateInformationRequestCommentInput$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      auditId: z.string(),
+      requestId: z.string(),
+      commentId: z.string(),
       updateInformationRequestCommentInput:
-        "UpdateInformationRequestCommentInput",
-    });
-  });
+        components.UpdateInformationRequestCommentInput$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        updateInformationRequestCommentInput:
+          "UpdateInformationRequestCommentInput",
+      });
+    })
+  );
 
 export function updateCommentForInformationRequestRequestToJSON(
   updateCommentForInformationRequestRequest:

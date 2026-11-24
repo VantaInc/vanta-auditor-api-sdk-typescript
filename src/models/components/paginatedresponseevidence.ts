@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Evidence, Evidence$inboundSchema } from "./evidence.js";
@@ -26,10 +26,12 @@ export const PaginatedResponseEvidenceResults$inboundSchema: z.ZodType<
   PaginatedResponseEvidenceResults,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(Evidence$inboundSchema),
-  pageInfo: PageInfo$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(Evidence$inboundSchema),
+    pageInfo: PageInfo$inboundSchema,
+  })
+);
 
 export function paginatedResponseEvidenceResultsFromJSON(
   jsonString: string,
@@ -46,9 +48,11 @@ export const PaginatedResponseEvidence$inboundSchema: z.ZodType<
   PaginatedResponseEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  results: z.lazy(() => PaginatedResponseEvidenceResults$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.lazy(() => PaginatedResponseEvidenceResults$inboundSchema),
+  })
+);
 
 export function paginatedResponseEvidenceFromJSON(
   jsonString: string,

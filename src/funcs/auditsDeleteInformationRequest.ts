@@ -9,9 +9,8 @@ import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { RequestOptions } from "../lib/sdks.js";
+import { encodePath, RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
-import { pathToFunc } from "../lib/url.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -34,14 +33,13 @@ import { Result } from "../types/fp.js";
  * the request as deleted (setting `deletionDate`) while preserving it in the system
  * for audit history and compliance tracking.
  *
- * Soft deletion allows:
- * - Maintaining complete audit trail of all requests ever created
- * - Retrieving deleted requests via `changedSinceDate` for synchronization
+ * When information request webhooks are enabled, Vanta can deliver
+ * `v1.information-request.deleted` after the deletion succeeds to the
+ * subscribed audit firm that had access to the audit before deletion.
+ * The payload identifies the deleted request and its audit.
  *
- * After deletion:
- * - The request remains in list responses with `deletionDate` set, even when
- *
- *   `changedSinceDate` is omitted
+ * Use the information request list to reconcile deletions. The list returns
+ * the request with `deletionDate` set, even when `changedSinceDate` is omitted.
  *
  * Rate limit: 50 requests / minute.
  */
@@ -111,9 +109,14 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/audits/{auditId}/information-requests/{requestId}")(
+  const pathResult = encodePath(
+    "/audits/{auditId}/information-requests/{requestId}",
     pathParams,
   );
+  if (!pathResult.ok) {
+    return [pathResult, { status: "invalid" }];
+  }
+  const path = pathResult.value;
 
   const headers = new Headers(compactMap({
     Accept: "*/*",

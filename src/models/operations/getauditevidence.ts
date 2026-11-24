@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetAuditEvidenceRequest = {
   auditId: string;
@@ -20,10 +21,12 @@ export const GetAuditEvidenceRequest$outboundSchema: z.ZodType<
   GetAuditEvidenceRequest$Outbound,
   z.ZodTypeDef,
   GetAuditEvidenceRequest
-> = z.object({
-  auditId: z.string(),
-  auditEvidenceId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    auditEvidenceId: z.string(),
+  })
+);
 
 export function getAuditEvidenceRequestToJSON(
   getAuditEvidenceRequest: GetAuditEvidenceRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Comments enable auditors and customers to collaborate on a control within an
@@ -49,11 +50,13 @@ export const AddAuditControlCommentInput$outboundSchema: z.ZodType<
   AddAuditControlCommentInput$Outbound,
   z.ZodTypeDef,
   AddAuditControlCommentInput
-> = z.object({
-  text: z.string(),
-  email: z.string(),
-  creationDate: z.date().transform(v => v.toISOString()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    email: z.string(),
+    creationDate: z.date().transform(v => v.toISOString()),
+  })
+);
 
 export function addAuditControlCommentInputToJSON(
   addAuditControlCommentInput: AddAuditControlCommentInput,

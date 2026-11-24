@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -150,27 +150,29 @@ export type AuditRisk = {
 };
 
 /** @internal */
-export const Treatment$inboundSchema: z.ZodNativeEnum<typeof Treatment> = z
-  .nativeEnum(Treatment);
+export const Treatment$inboundSchema: z.ZodNativeEnum<typeof Treatment> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Treatment));
 
 /** @internal */
 export const TreatmentStatus$inboundSchema: z.ZodNativeEnum<
   typeof TreatmentStatus
-> = z.nativeEnum(TreatmentStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TreatmentStatus));
 
 /** @internal */
 export const ReviewStatus$inboundSchema: z.ZodNativeEnum<typeof ReviewStatus> =
-  z.nativeEnum(ReviewStatus);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReviewStatus));
 
 /** @internal */
 export const AuditRiskOwner$inboundSchema: z.ZodType<
   AuditRiskOwner,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayName: z.string(),
-  imageUrl: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    imageUrl: z.nullable(z.string()),
+  })
+);
 
 export function auditRiskOwnerFromJSON(
   jsonString: string,
@@ -187,23 +189,25 @@ export const AuditRisk$inboundSchema: z.ZodType<
   AuditRisk,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  riskId: z.nullable(z.string()),
-  riskScenario: z.nullable(z.string()).optional(),
-  likelihood: z.nullable(z.number()).optional(),
-  impact: z.nullable(z.number()).optional(),
-  inherentRisk: z.nullable(z.number()).optional(),
-  treatment: z.nullable(Treatment$inboundSchema).optional(),
-  treatmentStatus: z.nullable(TreatmentStatus$inboundSchema).optional(),
-  residualRisk: z.nullable(z.number()).optional(),
-  reviewStatus: z.nullable(ReviewStatus$inboundSchema).optional(),
-  owner: z.nullable(z.lazy(() => AuditRiskOwner$inboundSchema)).optional(),
-  categories: z.array(z.string()).optional(),
-  ciaCategories: z.array(AuditRiskCia$inboundSchema).optional(),
-  linkedControlIds: z.array(z.string()).optional(),
-  identified: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    riskId: z.nullable(z.string()),
+    riskScenario: z.nullable(z.string()).optional(),
+    likelihood: z.nullable(z.number()).optional(),
+    impact: z.nullable(z.number()).optional(),
+    inherentRisk: z.nullable(z.number()).optional(),
+    treatment: z.nullable(Treatment$inboundSchema).optional(),
+    treatmentStatus: z.nullable(TreatmentStatus$inboundSchema).optional(),
+    residualRisk: z.nullable(z.number()).optional(),
+    reviewStatus: z.nullable(ReviewStatus$inboundSchema).optional(),
+    owner: z.nullable(z.lazy(() => AuditRiskOwner$inboundSchema)).optional(),
+    categories: z.array(z.string()).optional(),
+    ciaCategories: z.array(AuditRiskCia$inboundSchema).optional(),
+    linkedControlIds: z.array(z.string()).optional(),
+    identified: z.nullable(z.string()).optional(),
+  })
+);
 
 export function auditRiskFromJSON(
   jsonString: string,

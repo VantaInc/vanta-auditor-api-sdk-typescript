@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Updates an existing comment on a control.
@@ -40,10 +41,12 @@ export const UpdateAuditControlCommentInput$outboundSchema: z.ZodType<
   UpdateAuditControlCommentInput$Outbound,
   z.ZodTypeDef,
   UpdateAuditControlCommentInput
-> = z.object({
-  text: z.string(),
-  email: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    email: z.string(),
+  })
+);
 
 export function updateAuditControlCommentInputToJSON(
   updateAuditControlCommentInput: UpdateAuditControlCommentInput,

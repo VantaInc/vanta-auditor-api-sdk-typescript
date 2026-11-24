@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AccountAccess, AccountAccess$inboundSchema } from "./accountaccess.js";
@@ -26,10 +26,12 @@ export const PaginatedResponseAccountAccessResults$inboundSchema: z.ZodType<
   PaginatedResponseAccountAccessResults,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(AccountAccess$inboundSchema),
-  pageInfo: PageInfo$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(AccountAccess$inboundSchema),
+    pageInfo: PageInfo$inboundSchema,
+  })
+);
 
 export function paginatedResponseAccountAccessResultsFromJSON(
   jsonString: string,
@@ -47,9 +49,11 @@ export const PaginatedResponseAccountAccess$inboundSchema: z.ZodType<
   PaginatedResponseAccountAccess,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  results: z.lazy(() => PaginatedResponseAccountAccessResults$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.lazy(() => PaginatedResponseAccountAccessResults$inboundSchema),
+  })
+);
 
 export function paginatedResponseAccountAccessFromJSON(
   jsonString: string,

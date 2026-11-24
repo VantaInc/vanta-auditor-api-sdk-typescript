@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListVulnerabilitiesRequest = {
@@ -81,22 +82,24 @@ export const ListVulnerabilitiesRequest$outboundSchema: z.ZodType<
   ListVulnerabilitiesRequest$Outbound,
   z.ZodTypeDef,
   ListVulnerabilitiesRequest
-> = z.object({
-  auditId: z.string(),
-  query: z.string().optional(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  isDeactivated: z.boolean().optional(),
-  externalVulnerabilityId: z.string().optional(),
-  isFixAvailable: z.boolean().optional(),
-  packageIdentifier: z.string().optional(),
-  slaDeadlineAfterDate: z.date().transform(v => v.toISOString()).optional(),
-  slaDeadlineBeforeDate: z.date().transform(v => v.toISOString()).optional(),
-  severity: components.ExternalFindingSeverity$outboundSchema.optional(),
-  integrationId: z.string().optional(),
-  includeVulnerabilitiesWithoutSlas: z.boolean().optional(),
-  vulnerableAssetId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    query: z.string().optional(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    isDeactivated: z.boolean().optional(),
+    externalVulnerabilityId: z.string().optional(),
+    isFixAvailable: z.boolean().optional(),
+    packageIdentifier: z.string().optional(),
+    slaDeadlineAfterDate: z.date().transform(v => v.toISOString()).optional(),
+    slaDeadlineBeforeDate: z.date().transform(v => v.toISOString()).optional(),
+    severity: components.ExternalFindingSeverity$outboundSchema.optional(),
+    integrationId: z.string().optional(),
+    includeVulnerabilitiesWithoutSlas: z.boolean().optional(),
+    vulnerableAssetId: z.string().optional(),
+  })
+);
 
 export function listVulnerabilitiesRequestToJSON(
   listVulnerabilitiesRequest: ListVulnerabilitiesRequest,

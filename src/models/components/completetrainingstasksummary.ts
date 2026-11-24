@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TaskStatus, TaskStatus$inboundSchema } from "./taskstatus.js";
@@ -63,10 +63,12 @@ export const Disabled$inboundSchema: z.ZodType<
   Disabled,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  date: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  reason: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    date: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    reason: z.nullable(z.string()),
+  })
+);
 
 export function disabledFromJSON(
   jsonString: string,
@@ -83,19 +85,21 @@ export const CompleteTrainingsTaskSummary$inboundSchema: z.ZodType<
   CompleteTrainingsTaskSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  taskType: TaskTypeCOMPLETETRAININGS$inboundSchema,
-  status: TaskStatus$inboundSchema,
-  dueDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  completionDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  disabled: z.nullable(z.lazy(() => Disabled$inboundSchema)),
-  incompleteTrainings: z.array(Training$inboundSchema),
-  completedTrainings: z.array(Training$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskType: TaskTypeCOMPLETETRAININGS$inboundSchema,
+    status: TaskStatus$inboundSchema,
+    dueDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    completionDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    disabled: z.nullable(z.lazy(() => Disabled$inboundSchema)),
+    incompleteTrainings: z.array(Training$inboundSchema),
+    completedTrainings: z.array(Training$inboundSchema),
+  })
+);
 
 export function completeTrainingsTaskSummaryFromJSON(
   jsonString: string,

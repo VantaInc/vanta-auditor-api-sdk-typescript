@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const InformationRequestSupportedEvidenceType = {
@@ -20,8 +21,10 @@ export type InformationRequestSupportedEvidenceType = ClosedEnum<
 
 /** @internal */
 export const InformationRequestSupportedEvidenceType$inboundSchema:
-  z.ZodNativeEnum<typeof InformationRequestSupportedEvidenceType> = z
-    .nativeEnum(InformationRequestSupportedEvidenceType);
+  z.ZodNativeEnum<typeof InformationRequestSupportedEvidenceType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(InformationRequestSupportedEvidenceType)
+    );
 /** @internal */
 export const InformationRequestSupportedEvidenceType$outboundSchema:
   z.ZodNativeEnum<typeof InformationRequestSupportedEvidenceType> =

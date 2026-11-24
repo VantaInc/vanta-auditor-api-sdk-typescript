@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,11 +22,13 @@ export const VantaTestSnapshotFrameworkExclusion$inboundSchema: z.ZodType<
   VantaTestSnapshotFrameworkExclusion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  frameworkId: z.string(),
-  frameworkName: z.string(),
-  groupedByReason: z.array(VantaTestSnapshotExcludedItemGroup$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    frameworkId: z.string(),
+    frameworkName: z.string(),
+    groupedByReason: z.array(VantaTestSnapshotExcludedItemGroup$inboundSchema),
+  })
+);
 
 export function vantaTestSnapshotFrameworkExclusionFromJSON(
   jsonString: string,

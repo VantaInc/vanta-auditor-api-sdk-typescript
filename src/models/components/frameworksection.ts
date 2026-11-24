@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { FrameworkId, FrameworkId$outboundSchema } from "./frameworkid.js";
 
 /**
@@ -26,7 +27,9 @@ export const FrameworkSectionFrameworkId$outboundSchema: z.ZodType<
   FrameworkSectionFrameworkId$Outbound,
   z.ZodTypeDef,
   FrameworkSectionFrameworkId
-> = z.union([FrameworkId$outboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([FrameworkId$outboundSchema, z.string()])
+);
 
 export function frameworkSectionFrameworkIdToJSON(
   frameworkSectionFrameworkId: FrameworkSectionFrameworkId,
@@ -49,10 +52,12 @@ export const FrameworkSection$outboundSchema: z.ZodType<
   FrameworkSection$Outbound,
   z.ZodTypeDef,
   FrameworkSection
-> = z.object({
-  frameworkId: z.union([FrameworkId$outboundSchema, z.string()]),
-  sectionId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    frameworkId: z.union([FrameworkId$outboundSchema, z.string()]),
+    sectionId: z.string(),
+  })
+);
 
 export function frameworkSectionToJSON(
   frameworkSection: FrameworkSection,

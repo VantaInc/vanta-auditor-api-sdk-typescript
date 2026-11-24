@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -338,13 +338,17 @@ export type PersonnelPerson = {
 /** @internal */
 export const PersonnelPersonEmploymentStatus$inboundSchema: z.ZodNativeEnum<
   typeof PersonnelPersonEmploymentStatus
-> = z.nativeEnum(PersonnelPersonEmploymentStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(PersonnelPersonEmploymentStatus)
+);
 
 /** @internal */
-export const Groups$inboundSchema: z.ZodType<Groups, z.ZodTypeDef, unknown> = z
-  .object({
-    name: z.string(),
-  });
+export const Groups$inboundSchema: z.ZodType<Groups, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+    })
+  );
 
 export function groupsFromJSON(
   jsonString: string,
@@ -357,11 +361,13 @@ export function groupsFromJSON(
 }
 
 /** @internal */
-export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> = z
-  .object({
-    mainSource: z.string(),
-    supplementarySource: z.nullable(z.string()),
-  });
+export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      mainSource: z.string(),
+      supplementarySource: z.nullable(z.string()),
+    })
+  );
 
 export function sourceFromJSON(
   jsonString: string,
@@ -378,14 +384,16 @@ export const PersonnelPersonTaskStatus$inboundSchema: z.ZodType<
   PersonnelPersonTaskStatus,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: PeopleTaskStatus$inboundSchema,
-  dueDate: z.nullable(z.string()),
-  completionDate: z.nullable(z.string()),
-  numTasksCompleted: z.nullable(z.number()),
-  numTasksOverdue: z.nullable(z.number()),
-  numTasksDueSoon: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: PeopleTaskStatus$inboundSchema,
+    dueDate: z.nullable(z.string()),
+    completionDate: z.nullable(z.string()),
+    numTasksCompleted: z.nullable(z.number()),
+    numTasksOverdue: z.nullable(z.number()),
+    numTasksDueSoon: z.nullable(z.number()),
+  })
+);
 
 export function personnelPersonTaskStatusFromJSON(
   jsonString: string,
@@ -402,11 +410,13 @@ export const Policies$inboundSchema: z.ZodType<
   Policies,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: PeopleSecurityTaskStatus$inboundSchema,
-  dueDate: z.nullable(z.string()),
-  completionDate: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: PeopleSecurityTaskStatus$inboundSchema,
+    dueDate: z.nullable(z.string()),
+    completionDate: z.nullable(z.string()),
+  })
+);
 
 export function policiesFromJSON(
   jsonString: string,
@@ -423,11 +433,13 @@ export const Trainings$inboundSchema: z.ZodType<
   Trainings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: PeopleSecurityTaskStatus$inboundSchema,
-  dueDate: z.nullable(z.string()),
-  completionDate: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: PeopleSecurityTaskStatus$inboundSchema,
+    dueDate: z.nullable(z.string()),
+    completionDate: z.nullable(z.string()),
+  })
+);
 
 export function trainingsFromJSON(
   jsonString: string,
@@ -444,11 +456,13 @@ export const BackgroundChecks$inboundSchema: z.ZodType<
   BackgroundChecks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: PeopleSecurityTaskStatus$inboundSchema,
-  dueDate: z.nullable(z.string()),
-  completionDate: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: PeopleSecurityTaskStatus$inboundSchema,
+    dueDate: z.nullable(z.string()),
+    completionDate: z.nullable(z.string()),
+  })
+);
 
 export function backgroundChecksFromJSON(
   jsonString: string,
@@ -465,11 +479,13 @@ export const DeviceMonitoring$inboundSchema: z.ZodType<
   DeviceMonitoring,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: PeopleSecurityTaskStatus$inboundSchema,
-  dueDate: z.nullable(z.string()),
-  completionDate: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: PeopleSecurityTaskStatus$inboundSchema,
+    dueDate: z.nullable(z.string()),
+    completionDate: z.nullable(z.string()),
+  })
+);
 
 export function deviceMonitoringFromJSON(
   jsonString: string,
@@ -486,11 +502,13 @@ export const CustomOnboarding$inboundSchema: z.ZodType<
   CustomOnboarding,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: PeopleSecurityTaskStatus$inboundSchema,
-  dueDate: z.nullable(z.string()),
-  completionDate: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: PeopleSecurityTaskStatus$inboundSchema,
+    dueDate: z.nullable(z.string()),
+    completionDate: z.nullable(z.string()),
+  })
+);
 
 export function customOnboardingFromJSON(
   jsonString: string,
@@ -507,11 +525,13 @@ export const CustomOffboarding$inboundSchema: z.ZodType<
   CustomOffboarding,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: PeopleSecurityTaskStatus$inboundSchema,
-  dueDate: z.nullable(z.string()),
-  completionDate: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: PeopleSecurityTaskStatus$inboundSchema,
+    dueDate: z.nullable(z.string()),
+    completionDate: z.nullable(z.string()),
+  })
+);
 
 export function customOffboardingFromJSON(
   jsonString: string,
@@ -528,32 +548,35 @@ export const PersonnelPerson$inboundSchema: z.ZodType<
   PersonnelPerson,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.string(),
-  segmentIds: z.array(z.string()).optional(),
-  jobTitle: z.nullable(z.string()).optional(),
-  employmentStatus: z.nullable(PersonnelPersonEmploymentStatus$inboundSchema)
-    .optional(),
-  startDate: z.nullable(z.string()).optional(),
-  endDate: z.nullable(z.string()).optional(),
-  groups: z.array(z.lazy(() => Groups$inboundSchema)).optional(),
-  source: z.nullable(z.lazy(() => Source$inboundSchema)).optional(),
-  taskStatus: z.nullable(z.lazy(() => PersonnelPersonTaskStatus$inboundSchema))
-    .optional(),
-  lastReminded: z.nullable(z.string()).optional(),
-  policies: z.nullable(z.lazy(() => Policies$inboundSchema)).optional(),
-  trainings: z.nullable(z.lazy(() => Trainings$inboundSchema)).optional(),
-  backgroundChecks: z.nullable(z.lazy(() => BackgroundChecks$inboundSchema))
-    .optional(),
-  deviceMonitoring: z.nullable(z.lazy(() => DeviceMonitoring$inboundSchema))
-    .optional(),
-  customOnboarding: z.nullable(z.lazy(() => CustomOnboarding$inboundSchema))
-    .optional(),
-  customOffboarding: z.nullable(z.lazy(() => CustomOffboarding$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    email: z.string(),
+    segmentIds: z.array(z.string()).optional(),
+    jobTitle: z.nullable(z.string()).optional(),
+    employmentStatus: z.nullable(PersonnelPersonEmploymentStatus$inboundSchema)
+      .optional(),
+    startDate: z.nullable(z.string()).optional(),
+    endDate: z.nullable(z.string()).optional(),
+    groups: z.array(z.lazy(() => Groups$inboundSchema)).optional(),
+    source: z.nullable(z.lazy(() => Source$inboundSchema)).optional(),
+    taskStatus: z.nullable(
+      z.lazy(() => PersonnelPersonTaskStatus$inboundSchema),
+    ).optional(),
+    lastReminded: z.nullable(z.string()).optional(),
+    policies: z.nullable(z.lazy(() => Policies$inboundSchema)).optional(),
+    trainings: z.nullable(z.lazy(() => Trainings$inboundSchema)).optional(),
+    backgroundChecks: z.nullable(z.lazy(() => BackgroundChecks$inboundSchema))
+      .optional(),
+    deviceMonitoring: z.nullable(z.lazy(() => DeviceMonitoring$inboundSchema))
+      .optional(),
+    customOnboarding: z.nullable(z.lazy(() => CustomOnboarding$inboundSchema))
+      .optional(),
+    customOffboarding: z.nullable(z.lazy(() => CustomOffboarding$inboundSchema))
+      .optional(),
+  })
+);
 
 export function personnelPersonFromJSON(
   jsonString: string,

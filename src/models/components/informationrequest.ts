@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -217,16 +217,18 @@ export type InformationRequest = {
 };
 
 /** @internal */
-export const Cadence$inboundSchema: z.ZodNativeEnum<typeof Cadence> = z
-  .nativeEnum(Cadence);
+export const Cadence$inboundSchema: z.ZodNativeEnum<typeof Cadence> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Cadence));
 
 /** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z
-  .object({
-    displayName: z.string(),
-    id: z.string(),
-    type: z.literal("team"),
-  });
+export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      displayName: z.string(),
+      id: z.string(),
+      type: z.literal("team"),
+    })
+  );
 
 export function twoFromJSON(
   jsonString: string,
@@ -239,12 +241,14 @@ export function twoFromJSON(
 }
 
 /** @internal */
-export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z
-  .object({
-    displayName: z.string(),
-    id: z.string(),
-    type: z.literal("user"),
-  });
+export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      displayName: z.string(),
+      id: z.string(),
+      type: z.literal("user"),
+    })
+  );
 
 export function oneFromJSON(
   jsonString: string,
@@ -261,7 +265,9 @@ export const OwnerAssignment$inboundSchema: z.ZodType<
   OwnerAssignment,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => One$inboundSchema), z.lazy(() => Two$inboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => One$inboundSchema), z.lazy(() => Two$inboundSchema)])
+);
 
 export function ownerAssignmentFromJSON(
   jsonString: string,
@@ -278,38 +284,43 @@ export const InformationRequest$inboundSchema: z.ZodType<
   InformationRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  uniqueId: z.string(),
-  additionalControlIds: z.array(z.string()),
-  linkedControlIds: z.array(z.string()),
-  approvalStatus: InformationRequestApprovalStatus$inboundSchema,
-  cadence: z.nullable(Cadence$inboundSchema),
-  frameworkCodes: z.array(z.string()),
-  segmentIds: z.array(z.string()),
-  description: z.nullable(z.string()),
-  dueDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  evidenceCaptureDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  requestId: z.nullable(z.string()),
-  requestType: InformationRequestType$inboundSchema,
-  title: z.string(),
-  creationDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  modificationDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  deletionDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  ownerAssignment: z.nullable(
-    z.union([z.lazy(() => One$inboundSchema), z.lazy(() => Two$inboundSchema)]),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    uniqueId: z.string(),
+    additionalControlIds: z.array(z.string()),
+    linkedControlIds: z.array(z.string()),
+    approvalStatus: InformationRequestApprovalStatus$inboundSchema,
+    cadence: z.nullable(Cadence$inboundSchema),
+    frameworkCodes: z.array(z.string()),
+    segmentIds: z.array(z.string()),
+    description: z.nullable(z.string()),
+    dueDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    evidenceCaptureDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    requestId: z.nullable(z.string()),
+    requestType: InformationRequestType$inboundSchema,
+    title: z.string(),
+    creationDate: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    modificationDate: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    deletionDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    ownerAssignment: z.nullable(
+      z.union([
+        z.lazy(() => One$inboundSchema),
+        z.lazy(() => Two$inboundSchema),
+      ]),
+    ),
+  })
+);
 
 export function informationRequestFromJSON(
   jsonString: string,

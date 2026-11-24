@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -553,9 +553,11 @@ export const Category$inboundSchema: z.ZodType<
   Category,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+  })
+);
 
 export function categoryFromJSON(
   jsonString: string,
@@ -568,21 +570,23 @@ export function categoryFromJSON(
 }
 
 /** @internal */
-export const Method$inboundSchema: z.ZodNativeEnum<typeof Method> = z
-  .nativeEnum(Method);
+export const Method$inboundSchema: z.ZodNativeEnum<typeof Method> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Method));
 
 /** @internal */
 export const AuthDetails$inboundSchema: z.ZodType<
   AuthDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  passwordMinimumLength: z.nullable(z.number()),
-  passwordRequiresSymbol: z.nullable(z.boolean()),
-  passwordRequiresNumber: z.nullable(z.boolean()),
-  passwordMFA: z.nullable(z.boolean()),
-  method: z.nullable(Method$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    passwordMinimumLength: z.nullable(z.number()),
+    passwordRequiresSymbol: z.nullable(z.boolean()),
+    passwordRequiresNumber: z.nullable(z.boolean()),
+    passwordMFA: z.nullable(z.boolean()),
+    method: z.nullable(Method$inboundSchema),
+  })
+);
 
 export function authDetailsFromJSON(
   jsonString: string,
@@ -597,17 +601,19 @@ export function authDetailsFromJSON(
 /** @internal */
 export const VendorHeadquarters$inboundSchema: z.ZodNativeEnum<
   typeof VendorHeadquarters
-> = z.nativeEnum(VendorHeadquarters);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VendorHeadquarters));
 
 /** @internal */
 export const ContractAmount$inboundSchema: z.ZodType<
   ContractAmount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  amount: z.number(),
-  currency: CurrencyCode$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number(),
+    currency: CurrencyCode$inboundSchema,
+  })
+);
 
 export function contractAmountFromJSON(
   jsonString: string,
@@ -624,12 +630,14 @@ export const LatestDecision$inboundSchema: z.ZodType<
   LatestDecision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: VendorDecisionStatus$inboundSchema,
-  lastUpdatedAt: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: VendorDecisionStatus$inboundSchema,
+    lastUpdatedAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  })
+);
 
 export function latestDecisionFromJSON(
   jsonString: string,
@@ -646,10 +654,12 @@ export const LinkedTaskTrackerTaskProcurementRequest$inboundSchema: z.ZodType<
   LinkedTaskTrackerTaskProcurementRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-  service: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    service: z.string(),
+  })
+);
 
 export function linkedTaskTrackerTaskProcurementRequestFromJSON(
   jsonString: string,
@@ -672,12 +682,14 @@ export const ParentVendor$inboundSchema: z.ZodType<
   ParentVendor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  status: VendorStatus$inboundSchema,
-  websiteUrl: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    status: VendorStatus$inboundSchema,
+    websiteUrl: z.nullable(z.string()),
+  })
+);
 
 export function parentVendorFromJSON(
   jsonString: string,
@@ -690,52 +702,54 @@ export function parentVendorFromJSON(
 }
 
 /** @internal */
-export const Vendor$inboundSchema: z.ZodType<Vendor, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    websiteUrl: z.nullable(z.string()),
-    accountManagerName: z.nullable(z.string()),
-    accountManagerEmail: z.nullable(z.string()),
-    servicesProvided: z.nullable(z.string()),
-    additionalNotes: z.nullable(z.string()),
-    securityOwnerUserId: z.nullable(z.string()),
-    businessOwnerUserId: z.nullable(z.string()),
-    contractStartDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    contractRenewalDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    contractTerminationDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    nextSecurityReviewDueDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    lastSecurityReviewCompletionDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    isVisibleToAuditors: z.nullable(z.boolean()),
-    isRiskAutoScored: z.nullable(z.boolean()),
-    riskAttributeIds: z.array(z.string()),
-    categoryId: z.nullable(z.string()),
-    category: z.nullable(z.lazy(() => Category$inboundSchema)),
-    authDetails: z.lazy(() => AuthDetails$inboundSchema),
-    status: VendorStatus$inboundSchema,
-    inherentRiskLevel: VendorRiskLevel$inboundSchema,
-    residualRiskLevel: VendorRiskLevel$inboundSchema,
-    vendorHeadquarters: z.nullable(VendorHeadquarters$inboundSchema),
-    contractAmount: z.nullable(z.lazy(() => ContractAmount$inboundSchema)),
-    customFields: z.nullable(z.array(CustomField$inboundSchema)),
-    latestDecision: z.nullable(z.lazy(() => LatestDecision$inboundSchema)),
-    linkedTaskTrackerTaskProcurementRequest: z.nullable(
-      z.lazy(() => LinkedTaskTrackerTaskProcurementRequest$inboundSchema),
-    ),
-    engagements: z.array(VendorRelationshipSummary$inboundSchema).optional(),
-    parentVendor: z.nullable(z.lazy(() => ParentVendor$inboundSchema))
-      .optional(),
-  });
+export const Vendor$inboundSchema: z.ZodType<Vendor, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      websiteUrl: z.nullable(z.string()),
+      accountManagerName: z.nullable(z.string()),
+      accountManagerEmail: z.nullable(z.string()),
+      servicesProvided: z.nullable(z.string()),
+      additionalNotes: z.nullable(z.string()),
+      securityOwnerUserId: z.nullable(z.string()),
+      businessOwnerUserId: z.nullable(z.string()),
+      contractStartDate: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      contractRenewalDate: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      contractTerminationDate: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      nextSecurityReviewDueDate: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      lastSecurityReviewCompletionDate: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      isVisibleToAuditors: z.nullable(z.boolean()),
+      isRiskAutoScored: z.nullable(z.boolean()),
+      riskAttributeIds: z.array(z.string()),
+      categoryId: z.nullable(z.string()),
+      category: z.nullable(z.lazy(() => Category$inboundSchema)),
+      authDetails: z.lazy(() => AuthDetails$inboundSchema),
+      status: VendorStatus$inboundSchema,
+      inherentRiskLevel: VendorRiskLevel$inboundSchema,
+      residualRiskLevel: VendorRiskLevel$inboundSchema,
+      vendorHeadquarters: z.nullable(VendorHeadquarters$inboundSchema),
+      contractAmount: z.nullable(z.lazy(() => ContractAmount$inboundSchema)),
+      customFields: z.nullable(z.array(CustomField$inboundSchema)),
+      latestDecision: z.nullable(z.lazy(() => LatestDecision$inboundSchema)),
+      linkedTaskTrackerTaskProcurementRequest: z.nullable(
+        z.lazy(() => LinkedTaskTrackerTaskProcurementRequest$inboundSchema),
+      ),
+      engagements: z.array(VendorRelationshipSummary$inboundSchema).optional(),
+      parentVendor: z.nullable(z.lazy(() => ParentVendor$inboundSchema))
+        .optional(),
+    })
+  );
 
 export function vendorFromJSON(
   jsonString: string,

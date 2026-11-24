@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListVendorsRequest = {
@@ -57,19 +58,22 @@ export const ListVendorsRequest$outboundSchema: z.ZodType<
   ListVendorsRequest$Outbound,
   z.ZodTypeDef,
   ListVendorsRequest
-> = z.object({
-  auditId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  search: z.string().optional(),
-  vendorStatusesMatchesAny: z.array(components.AuditVendorStatus$outboundSchema)
-    .optional(),
-  inherentRiskMatchesAny: z.array(
-    components.AuditVendorRiskLevel$outboundSchema,
-  ).optional(),
-  orderBy: components.VendorOrderBy$outboundSchema.optional(),
-  orderDirection: components.OrderDirection$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    search: z.string().optional(),
+    vendorStatusesMatchesAny: z.array(
+      components.AuditVendorStatus$outboundSchema,
+    ).optional(),
+    inherentRiskMatchesAny: z.array(
+      components.AuditVendorRiskLevel$outboundSchema,
+    ).optional(),
+    orderBy: components.VendorOrderBy$outboundSchema.optional(),
+    orderDirection: components.OrderDirection$outboundSchema.optional(),
+  })
+);
 
 export function listVendorsRequestToJSON(
   listVendorsRequest: ListVendorsRequest,

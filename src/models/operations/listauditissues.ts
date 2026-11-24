@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListAuditIssuesRequest = {
@@ -72,19 +73,21 @@ export const ListAuditIssuesRequest$outboundSchema: z.ZodType<
   ListAuditIssuesRequest$Outbound,
   z.ZodTypeDef,
   ListAuditIssuesRequest
-> = z.object({
-  auditId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  search: z.string().optional(),
-  snapshotIdMatchesAny: z.array(z.string()).optional(),
-  createdAfterDate: z.date().transform(v => v.toISOString()).optional(),
-  createdBeforeDate: z.date().transform(v => v.toISOString()).optional(),
-  detectedAfterDate: z.date().transform(v => v.toISOString()).optional(),
-  detectedBeforeDate: z.date().transform(v => v.toISOString()).optional(),
-  orderBy: components.IssueSnapshotItemOrderBy$outboundSchema.optional(),
-  orderDirection: components.OrderDirection$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    search: z.string().optional(),
+    snapshotIdMatchesAny: z.array(z.string()).optional(),
+    createdAfterDate: z.date().transform(v => v.toISOString()).optional(),
+    createdBeforeDate: z.date().transform(v => v.toISOString()).optional(),
+    detectedAfterDate: z.date().transform(v => v.toISOString()).optional(),
+    detectedBeforeDate: z.date().transform(v => v.toISOString()).optional(),
+    orderBy: components.IssueSnapshotItemOrderBy$outboundSchema.optional(),
+    orderDirection: components.OrderDirection$outboundSchema.optional(),
+  })
+);
 
 export function listAuditIssuesRequestToJSON(
   listAuditIssuesRequest: ListAuditIssuesRequest,

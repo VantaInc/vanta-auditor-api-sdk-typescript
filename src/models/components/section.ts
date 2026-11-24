@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,10 +41,12 @@ export const Principle$inboundSchema: z.ZodType<
   Principle,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+  })
+);
 
 export function principleFromJSON(
   jsonString: string,
@@ -58,11 +60,13 @@ export function principleFromJSON(
 
 /** @internal */
 export const Section$inboundSchema: z.ZodType<Section, z.ZodTypeDef, unknown> =
-  z.object({
-    name: z.string(),
-    framework: z.string(),
-    principle: z.nullable(z.lazy(() => Principle$inboundSchema)),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      framework: z.string(),
+      principle: z.nullable(z.lazy(() => Principle$inboundSchema)),
+    })
+  );
 
 export function sectionFromJSON(
   jsonString: string,

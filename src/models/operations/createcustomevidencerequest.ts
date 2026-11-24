@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type CreateCustomEvidenceRequestRequest = {
@@ -23,15 +24,17 @@ export const CreateCustomEvidenceRequestRequest$outboundSchema: z.ZodType<
   CreateCustomEvidenceRequestRequest$Outbound,
   z.ZodTypeDef,
   CreateCustomEvidenceRequestRequest
-> = z.object({
-  auditId: z.string(),
-  createCustomEvidenceRequestInput:
-    components.CreateCustomEvidenceRequestInput$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    createCustomEvidenceRequestInput: "CreateCustomEvidenceRequestInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    createCustomEvidenceRequestInput:
+      components.CreateCustomEvidenceRequestInput$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      createCustomEvidenceRequestInput: "CreateCustomEvidenceRequestInput",
+    });
+  })
+);
 
 export function createCustomEvidenceRequestRequestToJSON(
   createCustomEvidenceRequestRequest: CreateCustomEvidenceRequestRequest,

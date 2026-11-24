@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const PeopleOrderBy = {
@@ -14,4 +15,4 @@ export type PeopleOrderBy = ClosedEnum<typeof PeopleOrderBy>;
 /** @internal */
 export const PeopleOrderBy$outboundSchema: z.ZodNativeEnum<
   typeof PeopleOrderBy
-> = z.nativeEnum(PeopleOrderBy);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PeopleOrderBy));

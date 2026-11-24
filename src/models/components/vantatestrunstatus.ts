@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const VantaTestRunStatus = {
@@ -18,4 +19,4 @@ export type VantaTestRunStatus = ClosedEnum<typeof VantaTestRunStatus>;
 /** @internal */
 export const VantaTestRunStatus$inboundSchema: z.ZodNativeEnum<
   typeof VantaTestRunStatus
-> = z.nativeEnum(VantaTestRunStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VantaTestRunStatus));

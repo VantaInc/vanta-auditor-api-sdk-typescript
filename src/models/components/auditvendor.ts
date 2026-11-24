@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -115,17 +115,19 @@ export type AuditVendor = {
 
 /** @internal */
 export const ResidualRisk$inboundSchema: z.ZodNativeEnum<typeof ResidualRisk> =
-  z.nativeEnum(ResidualRisk);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResidualRisk));
 
 /** @internal */
 export const DataAgreements$inboundSchema: z.ZodType<
   DataAgreements,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.number(),
-  complete: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number(),
+    complete: z.number(),
+  })
+);
 
 export function dataAgreementsFromJSON(
   jsonString: string,
@@ -142,25 +144,27 @@ export const AuditVendor$inboundSchema: z.ZodType<
   AuditVendor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  segmentIds: z.array(z.string()).optional(),
-  inherentRisk: AuditVendorRiskLevel$inboundSchema.optional(),
-  status: AuditVendorStatus$inboundSchema.optional(),
-  findings: z.number().optional(),
-  lastReviewedCompleted: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  nextSecurityReviewDueDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  vendorCategory: z.nullable(z.string()).optional(),
-  vendorCategoryId: z.nullable(z.string()).optional(),
-  residualRisk: z.nullable(ResidualRisk$inboundSchema).optional(),
-  dataAgreements: z.nullable(z.lazy(() => DataAgreements$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    segmentIds: z.array(z.string()).optional(),
+    inherentRisk: AuditVendorRiskLevel$inboundSchema.optional(),
+    status: AuditVendorStatus$inboundSchema.optional(),
+    findings: z.number().optional(),
+    lastReviewedCompleted: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    nextSecurityReviewDueDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    vendorCategory: z.nullable(z.string()).optional(),
+    vendorCategoryId: z.nullable(z.string()).optional(),
+    residualRisk: z.nullable(ResidualRisk$inboundSchema).optional(),
+    dataAgreements: z.nullable(z.lazy(() => DataAgreements$inboundSchema))
+      .optional(),
+  })
+);
 
 export function auditVendorFromJSON(
   jsonString: string,

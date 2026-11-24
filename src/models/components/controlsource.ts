@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ControlSource = {
@@ -14,4 +15,4 @@ export type ControlSource = ClosedEnum<typeof ControlSource>;
 /** @internal */
 export const ControlSource$inboundSchema: z.ZodNativeEnum<
   typeof ControlSource
-> = z.nativeEnum(ControlSource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ControlSource));

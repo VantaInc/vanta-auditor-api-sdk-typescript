@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -66,15 +66,17 @@ export const TaskSummaryDetails$inboundSchema: z.ZodType<
   TaskSummaryDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completeTrainings: CompleteTrainingsTaskSummary$inboundSchema,
-  acceptPolicies: AcceptPoliciesTaskSummary$inboundSchema,
-  completeCustomTasks: CompleteCustomTasksTaskSummary$inboundSchema,
-  completeOffboardingCustomTasks:
-    CompleteOffboardingCustomTasksTaskSummary$inboundSchema,
-  installDeviceMonitoring: InstallDeviceMonitoringTaskSummary$inboundSchema,
-  completeBackgroundChecks: CompleteBackgroundChecksTaskSummary$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completeTrainings: CompleteTrainingsTaskSummary$inboundSchema,
+    acceptPolicies: AcceptPoliciesTaskSummary$inboundSchema,
+    completeCustomTasks: CompleteCustomTasksTaskSummary$inboundSchema,
+    completeOffboardingCustomTasks:
+      CompleteOffboardingCustomTasksTaskSummary$inboundSchema,
+    installDeviceMonitoring: InstallDeviceMonitoringTaskSummary$inboundSchema,
+    completeBackgroundChecks: CompleteBackgroundChecksTaskSummary$inboundSchema,
+  })
+);
 
 export function taskSummaryDetailsFromJSON(
   jsonString: string,

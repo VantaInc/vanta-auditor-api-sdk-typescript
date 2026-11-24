@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Comment, Comment$inboundSchema } from "./comment.js";
@@ -26,10 +26,12 @@ export const PaginatedResponseCommentResults$inboundSchema: z.ZodType<
   PaginatedResponseCommentResults,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(Comment$inboundSchema),
-  pageInfo: PageInfo$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(Comment$inboundSchema),
+    pageInfo: PageInfo$inboundSchema,
+  })
+);
 
 export function paginatedResponseCommentResultsFromJSON(
   jsonString: string,
@@ -46,9 +48,11 @@ export const PaginatedResponseComment$inboundSchema: z.ZodType<
   PaginatedResponseComment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  results: z.lazy(() => PaginatedResponseCommentResults$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.lazy(() => PaginatedResponseCommentResults$inboundSchema),
+  })
+);
 
 export function paginatedResponseCommentFromJSON(
   jsonString: string,

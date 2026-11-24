@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Deletes an existing comment on a control.
@@ -31,9 +32,11 @@ export const DeleteAuditControlCommentInput$outboundSchema: z.ZodType<
   DeleteAuditControlCommentInput$Outbound,
   z.ZodTypeDef,
   DeleteAuditControlCommentInput
-> = z.object({
-  email: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+  })
+);
 
 export function deleteAuditControlCommentInputToJSON(
   deleteAuditControlCommentInput: DeleteAuditControlCommentInput,

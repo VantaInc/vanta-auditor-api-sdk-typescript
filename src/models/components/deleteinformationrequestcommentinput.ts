@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Deletes an existing comment on an information request.
@@ -31,9 +32,11 @@ export const DeleteInformationRequestCommentInput$outboundSchema: z.ZodType<
   DeleteInformationRequestCommentInput$Outbound,
   z.ZodTypeDef,
   DeleteInformationRequestCommentInput
-> = z.object({
-  email: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+  })
+);
 
 export function deleteInformationRequestCommentInputToJSON(
   deleteInformationRequestCommentInput: DeleteInformationRequestCommentInput,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { LinkEvidence, LinkEvidence$inboundSchema } from "./linkevidence.js";
@@ -52,15 +52,17 @@ export const InformationRequestEvidenceUnion$inboundSchema: z.ZodType<
   InformationRequestEvidenceUnion,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  VantaTestEvidence$inboundSchema,
-  VantaTestSnapshotEvidence$inboundSchema,
-  VantaPolicyEvidence$inboundSchema,
-  UploadedDocumentEvidence$inboundSchema,
-  VantaDocumentEvidence$inboundSchema,
-  LinkEvidence$inboundSchema,
-  ObservationEvidence$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    VantaTestEvidence$inboundSchema,
+    VantaTestSnapshotEvidence$inboundSchema,
+    VantaPolicyEvidence$inboundSchema,
+    UploadedDocumentEvidence$inboundSchema,
+    VantaDocumentEvidence$inboundSchema,
+    LinkEvidence$inboundSchema,
+    ObservationEvidence$inboundSchema,
+  ])
+);
 
 export function informationRequestEvidenceUnionFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,13 +29,15 @@ export type Auditor = {
 
 /** @internal */
 export const Auditor$inboundSchema: z.ZodType<Auditor, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    organizationId: z.string(),
-    email: z.string(),
-    givenName: z.string(),
-    familyName: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      organizationId: z.string(),
+      email: z.string(),
+      givenName: z.string(),
+      familyName: z.string(),
+    })
+  );
 
 export function auditorFromJSON(
   jsonString: string,

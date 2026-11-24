@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type DeleteInformationRequestAuditorFileRequest = {
@@ -29,18 +30,20 @@ export const DeleteInformationRequestAuditorFileRequest$outboundSchema:
     DeleteInformationRequestAuditorFileRequest$Outbound,
     z.ZodTypeDef,
     DeleteInformationRequestAuditorFileRequest
-  > = z.object({
-    auditId: z.string(),
-    requestId: z.string(),
-    auditorFileId: z.string(),
-    deleteInformationRequestAuditorFileInput:
-      components.DeleteInformationRequestAuditorFileInput$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      auditId: z.string(),
+      requestId: z.string(),
+      auditorFileId: z.string(),
       deleteInformationRequestAuditorFileInput:
-        "DeleteInformationRequestAuditorFileInput",
-    });
-  });
+        components.DeleteInformationRequestAuditorFileInput$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        deleteInformationRequestAuditorFileInput:
+          "DeleteInformationRequestAuditorFileInput",
+      });
+    })
+  );
 
 export function deleteInformationRequestAuditorFileRequestToJSON(
   deleteInformationRequestAuditorFileRequest:

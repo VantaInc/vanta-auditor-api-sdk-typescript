@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Input for accepting evidence on an information request, indicating that
@@ -31,9 +32,11 @@ export const AcceptInformationRequestEvidenceInput$outboundSchema: z.ZodType<
   AcceptInformationRequestEvidenceInput$Outbound,
   z.ZodTypeDef,
   AcceptInformationRequestEvidenceInput
-> = z.object({
-  auditorEmail: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditorEmail: z.string(),
+  })
+);
 
 export function acceptInformationRequestEvidenceInputToJSON(
   acceptInformationRequestEvidenceInput: AcceptInformationRequestEvidenceInput,

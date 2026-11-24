@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,10 +48,12 @@ export const UploadedBy$inboundSchema: z.ZodType<
   UploadedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    name: z.string(),
+  })
+);
 
 export function uploadedByFromJSON(
   jsonString: string,
@@ -68,16 +70,18 @@ export const InformationRequestAuditorFile$inboundSchema: z.ZodType<
   InformationRequestAuditorFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  filename: z.string(),
-  mimeType: z.string(),
-  url: z.string(),
-  uploadedBy: z.nullable(z.lazy(() => UploadedBy$inboundSchema)),
-  uploadedDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    filename: z.string(),
+    mimeType: z.string(),
+    url: z.string(),
+    uploadedBy: z.nullable(z.lazy(() => UploadedBy$inboundSchema)),
+    uploadedDate: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  })
+);
 
 export function informationRequestAuditorFileFromJSON(
   jsonString: string,

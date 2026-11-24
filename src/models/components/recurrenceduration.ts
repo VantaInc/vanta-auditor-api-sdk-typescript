@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const RecurrenceDuration = {
@@ -20,7 +21,7 @@ export type RecurrenceDuration = ClosedEnum<typeof RecurrenceDuration>;
 /** @internal */
 export const RecurrenceDuration$inboundSchema: z.ZodNativeEnum<
   typeof RecurrenceDuration
-> = z.nativeEnum(RecurrenceDuration);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RecurrenceDuration));
 /** @internal */
 export const RecurrenceDuration$outboundSchema: z.ZodNativeEnum<
   typeof RecurrenceDuration

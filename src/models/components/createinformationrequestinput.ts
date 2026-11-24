@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   InformationRequestType,
@@ -103,9 +104,10 @@ export type CreateInformationRequestInput = {
 
 /** @internal */
 export const CreateInformationRequestInputCadence$outboundSchema:
-  z.ZodNativeEnum<typeof CreateInformationRequestInputCadence> = z.nativeEnum(
-    CreateInformationRequestInputCadence,
-  );
+  z.ZodNativeEnum<typeof CreateInformationRequestInputCadence> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateInformationRequestInputCadence)
+    );
 
 /** @internal */
 export type CreateInformationRequestInput$Outbound = {
@@ -125,19 +127,21 @@ export const CreateInformationRequestInput$outboundSchema: z.ZodType<
   CreateInformationRequestInput$Outbound,
   z.ZodTypeDef,
   CreateInformationRequestInput
-> = z.object({
-  uniqueId: z.string(),
-  title: z.string(),
-  requestType: InformationRequestType$outboundSchema,
-  description: z.nullable(z.string()).optional(),
-  frameworkCodes: z.array(z.string()),
-  cadence: z.nullable(CreateInformationRequestInputCadence$outboundSchema)
-    .optional(),
-  dueDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  evidenceCaptureDate: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  additionalControlIds: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    uniqueId: z.string(),
+    title: z.string(),
+    requestType: InformationRequestType$outboundSchema,
+    description: z.nullable(z.string()).optional(),
+    frameworkCodes: z.array(z.string()),
+    cadence: z.nullable(CreateInformationRequestInputCadence$outboundSchema)
+      .optional(),
+    dueDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    evidenceCaptureDate: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    additionalControlIds: z.array(z.string()).optional(),
+  })
+);
 
 export function createInformationRequestInputToJSON(
   createInformationRequestInput: CreateInformationRequestInput,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type UpsertAssessmentForControlRequest = {
@@ -26,16 +27,18 @@ export const UpsertAssessmentForControlRequest$outboundSchema: z.ZodType<
   UpsertAssessmentForControlRequest$Outbound,
   z.ZodTypeDef,
   UpsertAssessmentForControlRequest
-> = z.object({
-  auditId: z.string(),
-  controlId: z.string(),
-  upsertAuditControlAssessmentInput:
-    components.UpsertAuditControlAssessmentInput$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    upsertAuditControlAssessmentInput: "UpsertAuditControlAssessmentInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    controlId: z.string(),
+    upsertAuditControlAssessmentInput:
+      components.UpsertAuditControlAssessmentInput$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      upsertAuditControlAssessmentInput: "UpsertAuditControlAssessmentInput",
+    });
+  })
+);
 
 export function upsertAssessmentForControlRequestToJSON(
   upsertAssessmentForControlRequest: UpsertAssessmentForControlRequest,

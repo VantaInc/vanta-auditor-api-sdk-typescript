@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type CreateCommentForInformationRequestRequest = {
@@ -27,16 +28,18 @@ export const CreateCommentForInformationRequestRequest$outboundSchema:
     CreateCommentForInformationRequestRequest$Outbound,
     z.ZodTypeDef,
     CreateCommentForInformationRequestRequest
-  > = z.object({
-    auditId: z.string(),
-    requestId: z.string(),
-    addInformationRequestCommentInput:
-      components.AddInformationRequestCommentInput$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      addInformationRequestCommentInput: "AddInformationRequestCommentInput",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      auditId: z.string(),
+      requestId: z.string(),
+      addInformationRequestCommentInput:
+        components.AddInformationRequestCommentInput$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        addInformationRequestCommentInput: "AddInformationRequestCommentInput",
+      });
+    })
+  );
 
 export function createCommentForInformationRequestRequestToJSON(
   createCommentForInformationRequestRequest:

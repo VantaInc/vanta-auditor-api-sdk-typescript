@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { VendorStatus, VendorStatus$inboundSchema } from "./vendorstatus.js";
@@ -37,12 +37,14 @@ export const VendorRelationshipSummary$inboundSchema: z.ZodType<
   VendorRelationshipSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  status: VendorStatus$inboundSchema,
-  websiteUrl: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    status: VendorStatus$inboundSchema,
+    websiteUrl: z.nullable(z.string()),
+  })
+);
 
 export function vendorRelationshipSummaryFromJSON(
   jsonString: string,

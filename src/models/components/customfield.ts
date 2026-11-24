@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,8 +15,8 @@ export type CustomField = {
 };
 
 /** @internal */
-export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.array(z.string())]);
+export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.array(z.string())]));
 
 export function valueFromJSON(
   jsonString: string,
@@ -33,10 +33,12 @@ export const CustomField$inboundSchema: z.ZodType<
   CustomField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  label: z.string(),
-  value: z.union([z.string(), z.array(z.string())]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    label: z.string(),
+    value: z.union([z.string(), z.array(z.string())]),
+  })
+);
 
 export function customFieldFromJSON(
   jsonString: string,

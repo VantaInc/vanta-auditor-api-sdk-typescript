@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ListCommentsForInformationRequestRequest = {
   auditId: string;
@@ -38,13 +39,15 @@ export const ListCommentsForInformationRequestRequest$outboundSchema: z.ZodType<
   ListCommentsForInformationRequestRequest$Outbound,
   z.ZodTypeDef,
   ListCommentsForInformationRequestRequest
-> = z.object({
-  auditId: z.string(),
-  requestId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  changedSinceDate: z.date().transform(v => v.toISOString()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    requestId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    changedSinceDate: z.date().transform(v => v.toISOString()).optional(),
+  })
+);
 
 export function listCommentsForInformationRequestRequestToJSON(
   listCommentsForInformationRequestRequest:
