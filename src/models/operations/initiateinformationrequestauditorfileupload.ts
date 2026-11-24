@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type InitiateInformationRequestAuditorFileUploadRequest = {
@@ -26,16 +27,18 @@ export const InitiateInformationRequestAuditorFileUploadRequest$outboundSchema:
     InitiateInformationRequestAuditorFileUploadRequest$Outbound,
     z.ZodTypeDef,
     InitiateInformationRequestAuditorFileUploadRequest
-  > = z.object({
-    auditId: z.string(),
-    requestId: z.string(),
-    initiateAuditorFileUploadInput:
-      components.InitiateAuditorFileUploadInput$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      initiateAuditorFileUploadInput: "InitiateAuditorFileUploadInput",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      auditId: z.string(),
+      requestId: z.string(),
+      initiateAuditorFileUploadInput:
+        components.InitiateAuditorFileUploadInput$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        initiateAuditorFileUploadInput: "InitiateAuditorFileUploadInput",
+      });
+    })
+  );
 
 export function initiateInformationRequestAuditorFileUploadRequestToJSON(
   initiateInformationRequestAuditorFileUploadRequest:

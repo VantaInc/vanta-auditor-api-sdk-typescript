@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Comments enable communication between auditors and customers about
@@ -50,11 +51,13 @@ export const AddInformationRequestCommentInput$outboundSchema: z.ZodType<
   AddInformationRequestCommentInput$Outbound,
   z.ZodTypeDef,
   AddInformationRequestCommentInput
-> = z.object({
-  text: z.string(),
-  email: z.string(),
-  creationDate: z.date().transform(v => v.toISOString()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    email: z.string(),
+    creationDate: z.date().transform(v => v.toISOString()),
+  })
+);
 
 export function addInformationRequestCommentInputToJSON(
   addInformationRequestCommentInput: AddInformationRequestCommentInput,

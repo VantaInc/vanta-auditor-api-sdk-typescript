@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const AuditIntegrationCategory = {
@@ -36,4 +37,4 @@ export type AuditIntegrationCategory = ClosedEnum<
 /** @internal */
 export const AuditIntegrationCategory$outboundSchema: z.ZodNativeEnum<
   typeof AuditIntegrationCategory
-> = z.nativeEnum(AuditIntegrationCategory);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AuditIntegrationCategory));

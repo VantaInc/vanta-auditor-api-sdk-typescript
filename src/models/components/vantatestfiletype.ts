@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const VantaTestFileType = {
@@ -16,4 +17,4 @@ export type VantaTestFileType = ClosedEnum<typeof VantaTestFileType>;
 /** @internal */
 export const VantaTestFileType$inboundSchema: z.ZodNativeEnum<
   typeof VantaTestFileType
-> = z.nativeEnum(VantaTestFileType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VantaTestFileType));

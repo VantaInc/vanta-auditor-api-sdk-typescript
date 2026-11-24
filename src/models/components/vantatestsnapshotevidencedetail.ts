@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -99,10 +99,12 @@ export const Settings$inboundSchema: z.ZodType<
   Settings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  numericValue: z.number(),
-  unit: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    numericValue: z.number(),
+    unit: z.nullable(z.string()),
+  })
+);
 
 export function settingsFromJSON(
   jsonString: string,
@@ -119,10 +121,12 @@ export const SlaRemediation$inboundSchema: z.ZodType<
   SlaRemediation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  settings: z.nullable(z.lazy(() => Settings$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    settings: z.nullable(z.lazy(() => Settings$inboundSchema)),
+  })
+);
 
 export function slaRemediationFromJSON(
   jsonString: string,
@@ -139,18 +143,20 @@ export const VantaTestSnapshotEvidenceDetail$inboundSchema: z.ZodType<
   VantaTestSnapshotEvidenceDetail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  testId: z.string(),
-  testName: z.string(),
-  description: z.string(),
-  evaluationCriteria: z.nullable(z.string()),
-  integrations: z.array(VantaTestSnapshotIntegration$inboundSchema),
-  slaRemediation: z.nullable(z.lazy(() => SlaRemediation$inboundSchema)),
-  rawTestData: z.array(VantaTestSnapshotRawTestDataRow$inboundSchema),
-  outOfScopeResources: VantaTestSnapshotOutOfScopeResources$inboundSchema
-    .optional(),
-  apiRequests: z.array(VantaTestSnapshotApiRequest$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    testId: z.string(),
+    testName: z.string(),
+    description: z.string(),
+    evaluationCriteria: z.nullable(z.string()),
+    integrations: z.array(VantaTestSnapshotIntegration$inboundSchema),
+    slaRemediation: z.nullable(z.lazy(() => SlaRemediation$inboundSchema)),
+    rawTestData: z.array(VantaTestSnapshotRawTestDataRow$inboundSchema),
+    outOfScopeResources: VantaTestSnapshotOutOfScopeResources$inboundSchema
+      .optional(),
+    apiRequests: z.array(VantaTestSnapshotApiRequest$inboundSchema).optional(),
+  })
+);
 
 export function vantaTestSnapshotEvidenceDetailFromJSON(
   jsonString: string,

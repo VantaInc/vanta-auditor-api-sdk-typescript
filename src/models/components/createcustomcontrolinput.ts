@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   ControlDomain,
@@ -65,9 +66,8 @@ export type CreateCustomControlInput = {
 };
 
 /** @internal */
-export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
+export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Role));
 
 /** @internal */
 export type CreateCustomControlInput$Outbound = {
@@ -85,15 +85,17 @@ export const CreateCustomControlInput$outboundSchema: z.ZodType<
   CreateCustomControlInput$Outbound,
   z.ZodTypeDef,
   CreateCustomControlInput
-> = z.object({
-  externalId: z.string(),
-  name: z.nullable(z.string()),
-  description: z.string(),
-  effectiveDate: z.date().transform(v => v.toISOString()),
-  category: ControlDomain$outboundSchema,
-  sections: z.nullable(z.array(FrameworkSection$outboundSchema)).optional(),
-  role: z.nullable(Role$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    externalId: z.string(),
+    name: z.nullable(z.string()),
+    description: z.string(),
+    effectiveDate: z.date().transform(v => v.toISOString()),
+    category: ControlDomain$outboundSchema,
+    sections: z.nullable(z.array(FrameworkSection$outboundSchema)).optional(),
+    role: z.nullable(Role$outboundSchema).optional(),
+  })
+);
 
 export function createCustomControlInputToJSON(
   createCustomControlInput: CreateCustomControlInput,

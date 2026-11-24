@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type FinalizeAuditorFileUploadInput = {
   /**
@@ -21,9 +22,11 @@ export const FinalizeAuditorFileUploadInput$outboundSchema: z.ZodType<
   FinalizeAuditorFileUploadInput$Outbound,
   z.ZodTypeDef,
   FinalizeAuditorFileUploadInput
-> = z.object({
-  uploadId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    uploadId: z.string(),
+  })
+);
 
 export function finalizeAuditorFileUploadInputToJSON(
   finalizeAuditorFileUploadInput: FinalizeAuditorFileUploadInput,

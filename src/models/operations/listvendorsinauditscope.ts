@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ListVendorsInAuditScopeRequest = {
   auditId: string;
@@ -22,11 +23,13 @@ export const ListVendorsInAuditScopeRequest$outboundSchema: z.ZodType<
   ListVendorsInAuditScopeRequest$Outbound,
   z.ZodTypeDef,
   ListVendorsInAuditScopeRequest
-> = z.object({
-  auditId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+  })
+);
 
 export function listVendorsInAuditScopeRequestToJSON(
   listVendorsInAuditScopeRequest: ListVendorsInAuditScopeRequest,

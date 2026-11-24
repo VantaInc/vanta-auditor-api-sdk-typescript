@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListIntegrationsRequest = {
@@ -47,17 +48,19 @@ export const ListIntegrationsRequest$outboundSchema: z.ZodType<
   ListIntegrationsRequest$Outbound,
   z.ZodTypeDef,
   ListIntegrationsRequest
-> = z.object({
-  auditId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  search: z.string().optional(),
-  tagsMatchesAny: z.array(components.AuditIntegrationTag$outboundSchema)
-    .optional(),
-  categoriesMatchesAny: z.array(
-    components.AuditIntegrationCategory$outboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    search: z.string().optional(),
+    tagsMatchesAny: z.array(components.AuditIntegrationTag$outboundSchema)
+      .optional(),
+    categoriesMatchesAny: z.array(
+      components.AuditIntegrationCategory$outboundSchema,
+    ).optional(),
+  })
+);
 
 export function listIntegrationsRequestToJSON(
   listIntegrationsRequest: ListIntegrationsRequest,

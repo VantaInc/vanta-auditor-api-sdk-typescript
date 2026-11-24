@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   InformationRequestCadence,
   InformationRequestCadence$outboundSchema,
@@ -105,18 +106,20 @@ export const PartialUpdateInformationRequest$outboundSchema: z.ZodType<
   PartialUpdateInformationRequest$Outbound,
   z.ZodTypeDef,
   PartialUpdateInformationRequest
-> = z.object({
-  frameworkCodes: z.array(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  dueDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  evidenceCaptureDate: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  requestType: InformationRequestType$outboundSchema.optional(),
-  title: z.string().optional(),
-  cadence: InformationRequestCadence$outboundSchema.optional(),
-  additionalControlIds: z.array(z.string()).optional(),
-  linkedControlIds: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    frameworkCodes: z.array(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    dueDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    evidenceCaptureDate: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    requestType: InformationRequestType$outboundSchema.optional(),
+    title: z.string().optional(),
+    cadence: InformationRequestCadence$outboundSchema.optional(),
+    additionalControlIds: z.array(z.string()).optional(),
+    linkedControlIds: z.array(z.string()).optional(),
+  })
+);
 
 export function partialUpdateInformationRequestToJSON(
   partialUpdateInformationRequest: PartialUpdateInformationRequest,

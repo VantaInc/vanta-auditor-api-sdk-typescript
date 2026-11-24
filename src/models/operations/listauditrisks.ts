@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListAuditRisksRequest = {
@@ -52,15 +53,17 @@ export const ListAuditRisksRequest$outboundSchema: z.ZodType<
   ListAuditRisksRequest$Outbound,
   z.ZodTypeDef,
   ListAuditRisksRequest
-> = z.object({
-  auditId: z.string(),
-  snapshotId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  search: z.string().optional(),
-  orderBy: components.RiskOrderBy$outboundSchema.optional(),
-  orderDirection: components.OrderDirection$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    snapshotId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    search: z.string().optional(),
+    orderBy: components.RiskOrderBy$outboundSchema.optional(),
+    orderDirection: components.OrderDirection$outboundSchema.optional(),
+  })
+);
 
 export function listAuditRisksRequestToJSON(
   listAuditRisksRequest: ListAuditRisksRequest,

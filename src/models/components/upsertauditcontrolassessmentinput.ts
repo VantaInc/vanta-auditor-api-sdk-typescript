@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   AuditControlAssessmentState,
   AuditControlAssessmentState$outboundSchema,
@@ -67,12 +68,14 @@ export const UpsertAuditControlAssessmentInput$outboundSchema: z.ZodType<
   UpsertAuditControlAssessmentInput$Outbound,
   z.ZodTypeDef,
   UpsertAuditControlAssessmentInput
-> = z.object({
-  segmentId: z.string().optional(),
-  assessmentState: AuditControlAssessmentState$outboundSchema,
-  justification: z.string(),
-  auditorEmail: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    segmentId: z.string().optional(),
+    assessmentState: AuditControlAssessmentState$outboundSchema,
+    justification: z.string(),
+    auditorEmail: z.string(),
+  })
+);
 
 export function upsertAuditControlAssessmentInputToJSON(
   upsertAuditControlAssessmentInput: UpsertAuditControlAssessmentInput,

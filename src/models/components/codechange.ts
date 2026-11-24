@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -63,18 +63,20 @@ export const CodeChange$inboundSchema: z.ZodType<
   CodeChange,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  codeChange: z.string(),
-  segmentIds: z.array(z.string()).optional(),
-  identifier: z.string().optional(),
-  service: z.string().optional(),
-  repository: z.string().optional(),
-  openedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  closedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    codeChange: z.string(),
+    segmentIds: z.array(z.string()).optional(),
+    identifier: z.string().optional(),
+    service: z.string().optional(),
+    repository: z.string().optional(),
+    openedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    closedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+  })
+);
 
 export function codeChangeFromJSON(
   jsonString: string,

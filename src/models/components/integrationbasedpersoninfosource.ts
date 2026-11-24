@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,11 +21,13 @@ export const IntegrationBasedPersonInfoSource$inboundSchema: z.ZodType<
   IntegrationBasedPersonInfoSource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  integrationId: z.string(),
-  resourceId: z.nullable(z.string()),
-  type: z.literal("INTEGRATION"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    integrationId: z.string(),
+    resourceId: z.nullable(z.string()),
+    type: z.literal("INTEGRATION"),
+  })
+);
 
 export function integrationBasedPersonInfoSourceFromJSON(
   jsonString: string,

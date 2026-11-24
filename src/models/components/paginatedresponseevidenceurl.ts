@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { EvidenceUrl, EvidenceUrl$inboundSchema } from "./evidenceurl.js";
@@ -26,10 +26,12 @@ export const PaginatedResponseEvidenceUrlResults$inboundSchema: z.ZodType<
   PaginatedResponseEvidenceUrlResults,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(EvidenceUrl$inboundSchema),
-  pageInfo: PageInfo$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(EvidenceUrl$inboundSchema),
+    pageInfo: PageInfo$inboundSchema,
+  })
+);
 
 export function paginatedResponseEvidenceUrlResultsFromJSON(
   jsonString: string,
@@ -47,9 +49,11 @@ export const PaginatedResponseEvidenceUrl$inboundSchema: z.ZodType<
   PaginatedResponseEvidenceUrl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  results: z.lazy(() => PaginatedResponseEvidenceUrlResults$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.lazy(() => PaginatedResponseEvidenceUrlResults$inboundSchema),
+  })
+);
 
 export function paginatedResponseEvidenceUrlFromJSON(
   jsonString: string,

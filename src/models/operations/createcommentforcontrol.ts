@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type CreateCommentForControlRequest = {
@@ -24,16 +25,18 @@ export const CreateCommentForControlRequest$outboundSchema: z.ZodType<
   CreateCommentForControlRequest$Outbound,
   z.ZodTypeDef,
   CreateCommentForControlRequest
-> = z.object({
-  auditId: z.string(),
-  controlId: z.string(),
-  addAuditControlCommentInput:
-    components.AddAuditControlCommentInput$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    addAuditControlCommentInput: "AddAuditControlCommentInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    controlId: z.string(),
+    addAuditControlCommentInput:
+      components.AddAuditControlCommentInput$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      addAuditControlCommentInput: "AddAuditControlCommentInput",
+    });
+  })
+);
 
 export function createCommentForControlRequestToJSON(
   createCommentForControlRequest: CreateCommentForControlRequest,

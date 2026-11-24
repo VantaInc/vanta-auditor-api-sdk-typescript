@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -66,15 +66,17 @@ export const AuditOrganizationNotifications$inboundSchema: z.ZodType<
   AuditOrganizationNotifications,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  preferredTimeZone: z.nullable(z.string()).optional(),
-  employeeDigestFrequency: z.nullable(z.string()).optional(),
-  subscribedChannelTypes: z.array(z.string()).optional(),
-  externalNotifications: z.array(
-    AuditOrganizationNotificationSubscription$inboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    preferredTimeZone: z.nullable(z.string()).optional(),
+    employeeDigestFrequency: z.nullable(z.string()).optional(),
+    subscribedChannelTypes: z.array(z.string()).optional(),
+    externalNotifications: z.array(
+      AuditOrganizationNotificationSubscription$inboundSchema,
+    ).optional(),
+  })
+);
 
 export function auditOrganizationNotificationsFromJSON(
   jsonString: string,

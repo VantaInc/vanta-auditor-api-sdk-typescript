@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const FrameworkId = {
@@ -46,5 +47,5 @@ export const FrameworkId = {
 export type FrameworkId = ClosedEnum<typeof FrameworkId>;
 
 /** @internal */
-export const FrameworkId$outboundSchema: z.ZodNativeEnum<typeof FrameworkId> = z
-  .nativeEnum(FrameworkId);
+export const FrameworkId$outboundSchema: z.ZodNativeEnum<typeof FrameworkId> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FrameworkId));

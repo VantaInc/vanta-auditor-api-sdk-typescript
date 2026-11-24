@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteInformationRequestAuditorFileInput = {
   /**
@@ -24,9 +25,11 @@ export const DeleteInformationRequestAuditorFileInput$outboundSchema: z.ZodType<
   DeleteInformationRequestAuditorFileInput$Outbound,
   z.ZodTypeDef,
   DeleteInformationRequestAuditorFileInput
-> = z.object({
-  email: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+  })
+);
 
 export function deleteInformationRequestAuditorFileInputToJSON(
   deleteInformationRequestAuditorFileInput:

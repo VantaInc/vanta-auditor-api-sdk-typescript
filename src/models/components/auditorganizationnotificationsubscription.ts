@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -52,13 +52,15 @@ export const AuditOrganizationNotificationSubscription$inboundSchema: z.ZodType<
   AuditOrganizationNotificationSubscription,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  address: z.string(),
-  cadence: z.nullable(z.string()),
-  unsubSettingsKey: z.string(),
-  toggleIsSubscribed: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    address: z.string(),
+    cadence: z.nullable(z.string()),
+    unsubSettingsKey: z.string(),
+    toggleIsSubscribed: z.boolean(),
+  })
+);
 
 export function auditOrganizationNotificationSubscriptionFromJSON(
   jsonString: string,

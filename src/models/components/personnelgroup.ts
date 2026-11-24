@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -70,16 +70,18 @@ export const PersonnelGroup$inboundSchema: z.ZodType<
   PersonnelGroup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  segmentIds: z.array(z.string()).optional(),
-  members: z.number().optional(),
-  source: z.string().optional(),
-  tasks: z.array(PersonnelGroupTask$inboundSchema).optional(),
-  tasksLastUpdated: z.nullable(z.string()).optional(),
-  pointOfContact: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    segmentIds: z.array(z.string()).optional(),
+    members: z.number().optional(),
+    source: z.string().optional(),
+    tasks: z.array(PersonnelGroupTask$inboundSchema).optional(),
+    tasksLastUpdated: z.nullable(z.string()).optional(),
+    pointOfContact: z.nullable(z.string()).optional(),
+  })
+);
 
 export function personnelGroupFromJSON(
   jsonString: string,

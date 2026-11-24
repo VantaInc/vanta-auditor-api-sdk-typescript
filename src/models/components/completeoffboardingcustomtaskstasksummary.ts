@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { CustomTask, CustomTask$inboundSchema } from "./customtask.js";
@@ -64,10 +64,12 @@ export const CompleteOffboardingCustomTasksTaskSummaryDisabled$inboundSchema:
     CompleteOffboardingCustomTasksTaskSummaryDisabled,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    date: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    reason: z.nullable(z.string()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      date: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      reason: z.nullable(z.string()),
+    })
+  );
 
 export function completeOffboardingCustomTasksTaskSummaryDisabledFromJSON(
   jsonString: string,
@@ -90,23 +92,23 @@ export const CompleteOffboardingCustomTasksTaskSummary$inboundSchema: z.ZodType<
   CompleteOffboardingCustomTasksTaskSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  taskType: TaskTypeCOMPLETECUSTOMOFFBOARDINGTASKS$inboundSchema,
-  status: TaskStatus$inboundSchema,
-  dueDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  completionDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  disabled: z.nullable(
-    z.lazy(() =>
-      CompleteOffboardingCustomTasksTaskSummaryDisabled$inboundSchema
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskType: TaskTypeCOMPLETECUSTOMOFFBOARDINGTASKS$inboundSchema,
+    status: TaskStatus$inboundSchema,
+    dueDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ),
-  ),
-  incompleteCustomOffboardingTasks: z.array(CustomTask$inboundSchema),
-  completedCustomOffboardingTasks: z.array(CustomTask$inboundSchema),
-});
+    completionDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    disabled: z.nullable(z.lazy(() =>
+      CompleteOffboardingCustomTasksTaskSummaryDisabled$inboundSchema
+    )),
+    incompleteCustomOffboardingTasks: z.array(CustomTask$inboundSchema),
+    completedCustomOffboardingTasks: z.array(CustomTask$inboundSchema),
+  })
+);
 
 export function completeOffboardingCustomTasksTaskSummaryFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Request body for duplicating an IRL audit into a new audit engagement.
@@ -52,14 +53,16 @@ export const DuplicateAuditRequest$outboundSchema: z.ZodType<
   DuplicateAuditRequest$Outbound,
   z.ZodTypeDef,
   DuplicateAuditRequest
-> = z.object({
-  sourceAuditId: z.string(),
-  displayName: z.string(),
-  auditStartDate: z.date().transform(v => v.toISOString()),
-  auditEndDate: z.date().transform(v => v.toISOString()),
-  earlyAccessStartsAt: z.date().transform(v => v.toISOString()),
-  allowAuditorEmails: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sourceAuditId: z.string(),
+    displayName: z.string(),
+    auditStartDate: z.date().transform(v => v.toISOString()),
+    auditEndDate: z.date().transform(v => v.toISOString()),
+    earlyAccessStartsAt: z.date().transform(v => v.toISOString()),
+    allowAuditorEmails: z.array(z.string()),
+  })
+);
 
 export function duplicateAuditRequestToJSON(
   duplicateAuditRequest: DuplicateAuditRequest,

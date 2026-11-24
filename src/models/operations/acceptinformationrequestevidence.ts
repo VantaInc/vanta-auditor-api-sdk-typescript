@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type AcceptInformationRequestEvidenceRequest = {
@@ -26,17 +27,19 @@ export const AcceptInformationRequestEvidenceRequest$outboundSchema: z.ZodType<
   AcceptInformationRequestEvidenceRequest$Outbound,
   z.ZodTypeDef,
   AcceptInformationRequestEvidenceRequest
-> = z.object({
-  auditId: z.string(),
-  requestId: z.string(),
-  acceptInformationRequestEvidenceInput:
-    components.AcceptInformationRequestEvidenceInput$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    requestId: z.string(),
     acceptInformationRequestEvidenceInput:
-      "AcceptInformationRequestEvidenceInput",
-  });
-});
+      components.AcceptInformationRequestEvidenceInput$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      acceptInformationRequestEvidenceInput:
+        "AcceptInformationRequestEvidenceInput",
+    });
+  })
+);
 
 export function acceptInformationRequestEvidenceRequestToJSON(
   acceptInformationRequestEvidenceRequest:

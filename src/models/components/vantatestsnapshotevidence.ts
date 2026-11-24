@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -71,23 +71,25 @@ export type VantaTestSnapshotEvidence = {
 /** @internal */
 export const TestRunStatus$inboundSchema: z.ZodNativeEnum<
   typeof TestRunStatus
-> = z.nativeEnum(TestRunStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TestRunStatus));
 
 /** @internal */
 export const VantaTestSnapshotEvidence$inboundSchema: z.ZodType<
   VantaTestSnapshotEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  snapshotId: z.string(),
-  testId: z.string(),
-  testRunId: z.string(),
-  testRunTitle: z.string(),
-  testRunStatus: TestRunStatus$inboundSchema,
-  testRunExecutedAt: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    snapshotId: z.string(),
+    testId: z.string(),
+    testRunId: z.string(),
+    testRunTitle: z.string(),
+    testRunStatus: TestRunStatus$inboundSchema,
+    testRunExecutedAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  })
+);
 
 export function vantaTestSnapshotEvidenceFromJSON(
   jsonString: string,

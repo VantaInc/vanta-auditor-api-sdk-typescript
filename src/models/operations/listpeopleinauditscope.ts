@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListPeopleInAuditScopeRequest = {
@@ -46,17 +47,19 @@ export const ListPeopleInAuditScopeRequest$outboundSchema: z.ZodType<
   ListPeopleInAuditScopeRequest$Outbound,
   z.ZodTypeDef,
   ListPeopleInAuditScopeRequest
-> = z.object({
-  auditId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  tasksSummaryStatusMatchesAny: z.array(
-    components.TasksSummaryStatus$outboundSchema,
-  ).optional(),
-  taskTypeMatchesAny: z.array(components.TaskType$outboundSchema).optional(),
-  taskStatusMatchesAny: z.array(components.TaskStatus$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    tasksSummaryStatusMatchesAny: z.array(
+      components.TasksSummaryStatus$outboundSchema,
+    ).optional(),
+    taskTypeMatchesAny: z.array(components.TaskType$outboundSchema).optional(),
+    taskStatusMatchesAny: z.array(components.TaskStatus$outboundSchema)
+      .optional(),
+  })
+);
 
 export function listPeopleInAuditScopeRequestToJSON(
   listPeopleInAuditScopeRequest: ListPeopleInAuditScopeRequest,

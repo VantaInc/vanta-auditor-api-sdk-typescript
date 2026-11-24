@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TaskStatus, TaskStatus$inboundSchema } from "./taskstatus.js";
@@ -70,10 +70,12 @@ export const AcceptPoliciesTaskSummaryDisabled$inboundSchema: z.ZodType<
   AcceptPoliciesTaskSummaryDisabled,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  date: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  reason: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    date: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    reason: z.nullable(z.string()),
+  })
+);
 
 export function acceptPoliciesTaskSummaryDisabledFromJSON(
   jsonString: string,
@@ -90,9 +92,11 @@ export const UnacceptedPolicies$inboundSchema: z.ZodType<
   UnacceptedPolicies,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function unacceptedPoliciesFromJSON(
   jsonString: string,
@@ -109,9 +113,11 @@ export const AcceptedPolicies$inboundSchema: z.ZodType<
   AcceptedPolicies,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function acceptedPoliciesFromJSON(
   jsonString: string,
@@ -128,21 +134,23 @@ export const AcceptPoliciesTaskSummary$inboundSchema: z.ZodType<
   AcceptPoliciesTaskSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  taskType: TaskTypeACCEPTPOLICIES$inboundSchema,
-  status: TaskStatus$inboundSchema,
-  dueDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  completionDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  disabled: z.nullable(
-    z.lazy(() => AcceptPoliciesTaskSummaryDisabled$inboundSchema),
-  ),
-  unacceptedPolicies: z.array(z.lazy(() => UnacceptedPolicies$inboundSchema)),
-  acceptedPolicies: z.array(z.lazy(() => AcceptedPolicies$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskType: TaskTypeACCEPTPOLICIES$inboundSchema,
+    status: TaskStatus$inboundSchema,
+    dueDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    completionDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    disabled: z.nullable(
+      z.lazy(() => AcceptPoliciesTaskSummaryDisabled$inboundSchema),
+    ),
+    unacceptedPolicies: z.array(z.lazy(() => UnacceptedPolicies$inboundSchema)),
+    acceptedPolicies: z.array(z.lazy(() => AcceptedPolicies$inboundSchema)),
+  })
+);
 
 export function acceptPoliciesTaskSummaryFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   RecurrenceDuration,
   RecurrenceDuration$outboundSchema,
@@ -49,15 +50,17 @@ export const CreateCustomEvidenceRequestInput$outboundSchema: z.ZodType<
   CreateCustomEvidenceRequestInput$Outbound,
   z.ZodTypeDef,
   CreateCustomEvidenceRequestInput
-> = z.object({
-  controlIds: z.array(z.string()),
-  title: z.string(),
-  description: z.string(),
-  cadence: RecurrenceDuration$outboundSchema,
-  reminderWindow: RecurrenceDuration$outboundSchema,
-  isRestricted: z.boolean(),
-  auditorEmail: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    controlIds: z.array(z.string()),
+    title: z.string(),
+    description: z.string(),
+    cadence: RecurrenceDuration$outboundSchema,
+    reminderWindow: RecurrenceDuration$outboundSchema,
+    isRestricted: z.boolean(),
+    auditorEmail: z.string(),
+  })
+);
 
 export function createCustomEvidenceRequestInputToJSON(
   createCustomEvidenceRequestInput: CreateCustomEvidenceRequestInput,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -98,10 +98,12 @@ export const ApprovalProgress$inboundSchema: z.ZodType<
   ApprovalProgress,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approvedCount: z.number(),
-  totalApprovers: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approvedCount: z.number(),
+    totalApprovers: z.number(),
+  })
+);
 
 export function approvalProgressFromJSON(
   jsonString: string,
@@ -118,27 +120,30 @@ export const IssueSnapshotItem$inboundSchema: z.ZodType<
   IssueSnapshotItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  title: z.string().optional(),
-  description: z.string().optional(),
-  readableIssueId: z.string(),
-  issueId: z.string(),
-  snapshotId: z.string(),
-  dueDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  status: IssueStatusTypeForSnapshot$inboundSchema.optional(),
-  approvalProgress: z.nullable(z.lazy(() => ApprovalProgress$inboundSchema))
-    .optional(),
-  lastModifiedAt: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  detectedAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    title: z.string().optional(),
+    description: z.string().optional(),
+    readableIssueId: z.string(),
+    issueId: z.string(),
+    snapshotId: z.string(),
+    dueDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    status: IssueStatusTypeForSnapshot$inboundSchema.optional(),
+    approvalProgress: z.nullable(z.lazy(() => ApprovalProgress$inboundSchema))
+      .optional(),
+    lastModifiedAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    detectedAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  })
+);
 
 export function issueSnapshotItemFromJSON(
   jsonString: string,

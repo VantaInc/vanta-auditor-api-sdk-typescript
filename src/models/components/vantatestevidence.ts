@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -83,10 +83,12 @@ export const VantaTestEvidenceFile$inboundSchema: z.ZodType<
   VantaTestEvidenceFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mimeType: z.string(),
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mimeType: z.string(),
+    url: z.string(),
+  })
+);
 
 export function vantaTestEvidenceFileFromJSON(
   jsonString: string,
@@ -103,15 +105,19 @@ export const VantaTestEvidence$inboundSchema: z.ZodType<
   VantaTestEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  title: z.string(),
-  testId: z.string(),
-  snapshotId: z.string(),
-  testRunStatus: VantaTestRunStatus$inboundSchema,
-  executedAt: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  fileType: VantaTestFileType$inboundSchema,
-  file: z.lazy(() => VantaTestEvidenceFile$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    title: z.string(),
+    testId: z.string(),
+    snapshotId: z.string(),
+    testRunStatus: VantaTestRunStatus$inboundSchema,
+    executedAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    fileType: VantaTestFileType$inboundSchema,
+    file: z.lazy(() => VantaTestEvidenceFile$inboundSchema),
+  })
+);
 
 export function vantaTestEvidenceFromJSON(
   jsonString: string,

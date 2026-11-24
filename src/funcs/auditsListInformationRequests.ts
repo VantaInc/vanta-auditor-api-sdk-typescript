@@ -8,9 +8,8 @@ import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { RequestOptions } from "../lib/sdks.js";
+import { encodePath, RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
-import { pathToFunc } from "../lib/url.js";
 import * as components from "../models/components/index.js";
 import {
   ConnectionError,
@@ -33,17 +32,22 @@ import { Result } from "../types/fp.js";
  * Retrieves a paginated list of all information requests for an audit, enabling
  * external audit management systems to display and track evidence requests.
  *
- * This endpoint always includes soft-deleted records (where `deletionDate !== null`).
- * Clients should check the `deletionDate` field to identify and handle deleted records
- * appropriately in their systems.
+ * This list includes soft-deleted requests (`deletionDate !== null`) even when
+ * `changedSinceDate` is omitted. When supplied, `changedSinceDate` filters both
+ * live and deleted requests.
  *
- * This is the only endpoint that returns a deleted information request. No
- * webhook fires when a request is deleted. Endpoints under
- * `/audits/{auditId}/information-requests/{requestId}` return a 4xx HTTP error
- * for a deleted request. To confirm deletion, check the request's `deletionDate`
- * in this list. Deleting a request does not set `deletionDate` on its comments
- * or evidence or send delete events for them. Once this list confirms the
- * request was deleted, treat its comments and evidence as deleted too.
+ * This is the only endpoint that returns a deleted information request.
+ * Deletion makes the request and its child endpoints inaccessible by ID.
+ * A `403` or `404` can also mean access was lost. Use `deletionDate` or the
+ * `v1.information-request.deleted` webhook to confirm deletion. Remove the
+ * deleted request and its comments and evidence from your local mirror.
+ * Deleting a request produces no separate deletion events or tombstones for
+ * its children.
+ *
+ * To recover from missed request deletion events, paginate this list without
+ * `changedSinceDate` or other optional filters.
+ * Reconcile missing records only after a successful, complete traversal with
+ * access to the audit.
  *
  * This endpoint supports delta synchronization via the `changedSinceDate` parameter,
  * allowing efficient polling for changes without retrieving the entire dataset.
@@ -55,11 +59,11 @@ import { Result } from "../types/fp.js";
  * 4. Repeat until `hasNextPage` is false
  *
  * Delta sync usage:
- * 1. Store the timestamp of your last sync
- * 2. Pass that timestamp as `changedSinceDate`
- * 3. Only requests created, modified, or deleted since that timestamp are returned
- * 4. Process updates and soft-deletes by checking the `deletionDate` field
- * 5. Update your last sync timestamp to the current time
+ * 1. Capture the timestamp before requesting the first page
+ * 2. Pass the previous successful sync's start timestamp as `changedSinceDate`
+ * 3. Keep the same filters across pages and use `deletionDate` to process deletes
+ * 4. Save the captured start timestamp only after every page succeeds
+ * 5. Handle records returned by more than one sync idempotently
  *
  * `segmentIds` on each returned request is resolved against the audit's
  * current scope. A scope-only change (a segment leaving or joining the audit
@@ -130,7 +134,14 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/audits/{auditId}/information-requests")(pathParams);
+  const pathResult = encodePath(
+    "/audits/{auditId}/information-requests",
+    pathParams,
+  );
+  if (!pathResult.ok) {
+    return [pathResult, { status: "invalid" }];
+  }
+  const path = pathResult.value;
 
   const query = encodeFormQuery({
     "changedSinceDate": payload.changedSinceDate,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,15 +41,17 @@ export const CustomEvidenceRequest$inboundSchema: z.ZodType<
   CustomEvidenceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  controlIds: z.array(z.string()),
-  title: z.string(),
-  description: z.string(),
-  cadence: RecurrenceDuration$inboundSchema,
-  reminderWindow: RecurrenceDuration$inboundSchema,
-  isRestricted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    controlIds: z.array(z.string()),
+    title: z.string(),
+    description: z.string(),
+    cadence: RecurrenceDuration$inboundSchema,
+    reminderWindow: RecurrenceDuration$inboundSchema,
+    isRestricted: z.boolean(),
+  })
+);
 
 export function customEvidenceRequestFromJSON(
   jsonString: string,

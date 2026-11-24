@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListPersonnelGroupsRequest = {
@@ -52,15 +53,17 @@ export const ListPersonnelGroupsRequest$outboundSchema: z.ZodType<
   ListPersonnelGroupsRequest$Outbound,
   z.ZodTypeDef,
   ListPersonnelGroupsRequest
-> = z.object({
-  auditId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  search: z.string().optional(),
-  sourcesMatchesAny: z.array(z.string()).optional(),
-  orderBy: components.GroupOrderBy$outboundSchema.optional(),
-  orderDirection: components.OrderDirection$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    search: z.string().optional(),
+    sourcesMatchesAny: z.array(z.string()).optional(),
+    orderBy: components.GroupOrderBy$outboundSchema.optional(),
+    orderDirection: components.OrderDirection$outboundSchema.optional(),
+  })
+);
 
 export function listPersonnelGroupsRequestToJSON(
   listPersonnelGroupsRequest: ListPersonnelGroupsRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -149,18 +149,20 @@ export type Audit = {
 /** @internal */
 export const IrlGenerationStatus$inboundSchema: z.ZodNativeEnum<
   typeof IrlGenerationStatus
-> = z.nativeEnum(IrlGenerationStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(IrlGenerationStatus));
 
 /** @internal */
 export const AuditorRequestListMetadata$inboundSchema: z.ZodType<
   AuditorRequestListMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  requestsSharedWithCustomer: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestsSharedWithCustomer: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  })
+);
 
 export function auditorRequestListMetadataFromJSON(
   jsonString: string,
@@ -173,45 +175,47 @@ export function auditorRequestListMetadataFromJSON(
 }
 
 /** @internal */
-export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    customerOrganizationName: z.string(),
-    customerDisplayName: z.nullable(z.string()),
-    customerOrganizationId: z.string(),
-    auditStartDate: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    auditEndDate: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    earlyAccessStartsAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    framework: z.string(),
-    displayName: z.string(),
-    allowAuditorEmails: z.array(z.string()),
-    allowAllAuditors: z.boolean(),
-    deletionDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    creationDate: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    modificationDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    completionDate: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    auditFocus: AuditFocus$inboundSchema,
-    auditView: AuditView$inboundSchema,
-    irlGenerationStatus: z.nullable(IrlGenerationStatus$inboundSchema),
-    auditorRequestListMetadata: z.lazy(() =>
-      AuditorRequestListMetadata$inboundSchema
-    ).optional(),
-    segments: z.array(AuditSegment$inboundSchema),
-  });
+export const Audit$inboundSchema: z.ZodType<Audit, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      customerOrganizationName: z.string(),
+      customerDisplayName: z.nullable(z.string()),
+      customerOrganizationId: z.string(),
+      auditStartDate: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      auditEndDate: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      earlyAccessStartsAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      framework: z.string(),
+      displayName: z.string(),
+      allowAuditorEmails: z.array(z.string()),
+      allowAllAuditors: z.boolean(),
+      deletionDate: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      creationDate: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      modificationDate: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      completionDate: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      auditFocus: AuditFocus$inboundSchema,
+      auditView: AuditView$inboundSchema,
+      irlGenerationStatus: z.nullable(IrlGenerationStatus$inboundSchema),
+      auditorRequestListMetadata: z.lazy(() =>
+        AuditorRequestListMetadata$inboundSchema
+      ).optional(),
+      segments: z.array(AuditSegment$inboundSchema),
+    })
+  );
 
 export function auditFromJSON(
   jsonString: string,

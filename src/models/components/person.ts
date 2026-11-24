@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -175,14 +175,18 @@ export const Employment$inboundSchema: z.ZodType<
   Employment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: EmploymentStatus$inboundSchema,
-  startDate: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  jobTitle: z.nullable(z.string()),
-  endDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: EmploymentStatus$inboundSchema,
+    startDate: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    jobTitle: z.nullable(z.string()),
+    endDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  })
+);
 
 export function employmentFromJSON(
   jsonString: string,
@@ -199,13 +203,17 @@ export const LeaveInfo$inboundSchema: z.ZodType<
   LeaveInfo,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  startDate: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  endDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  status: LeaveStatus$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    startDate: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    endDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    status: LeaveStatus$inboundSchema,
+  })
+);
 
 export function leaveInfoFromJSON(
   jsonString: string,
@@ -218,12 +226,14 @@ export function leaveInfoFromJSON(
 }
 
 /** @internal */
-export const Name$inboundSchema: z.ZodType<Name, z.ZodTypeDef, unknown> = z
-  .object({
-    first: z.nullable(z.string()),
-    last: z.nullable(z.string()),
-    display: z.string(),
-  });
+export const Name$inboundSchema: z.ZodType<Name, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      first: z.nullable(z.string()),
+      last: z.nullable(z.string()),
+      display: z.string(),
+    })
+  );
 
 export function nameFromJSON(
   jsonString: string,
@@ -240,10 +250,12 @@ export const PersonEmployment$inboundSchema: z.ZodType<
   PersonEmployment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  endDate: PersonInfoSource$inboundSchema,
-  startDate: PersonInfoSource$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endDate: PersonInfoSource$inboundSchema,
+    startDate: PersonInfoSource$inboundSchema,
+  })
+);
 
 export function personEmploymentFromJSON(
   jsonString: string,
@@ -257,10 +269,12 @@ export function personEmploymentFromJSON(
 
 /** @internal */
 export const Sources$inboundSchema: z.ZodType<Sources, z.ZodTypeDef, unknown> =
-  z.object({
-    employment: z.lazy(() => PersonEmployment$inboundSchema),
-    emailAddress: PersonInfoSource$inboundSchema,
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      employment: z.lazy(() => PersonEmployment$inboundSchema),
+      emailAddress: PersonInfoSource$inboundSchema,
+    })
+  );
 
 export function sourcesFromJSON(
   jsonString: string,
@@ -277,16 +291,18 @@ export const TasksSummary$inboundSchema: z.ZodType<
   TasksSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  details: TaskSummaryDetails$inboundSchema,
-  status: TasksSummaryStatus$inboundSchema,
-  dueDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  completionDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    details: TaskSummaryDetails$inboundSchema,
+    status: TasksSummaryStatus$inboundSchema,
+    dueDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    completionDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  })
+);
 
 export function tasksSummaryFromJSON(
   jsonString: string,
@@ -299,18 +315,20 @@ export function tasksSummaryFromJSON(
 }
 
 /** @internal */
-export const Person$inboundSchema: z.ZodType<Person, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    userId: z.nullable(z.string()),
-    emailAddress: z.string(),
-    employment: z.lazy(() => Employment$inboundSchema),
-    leaveInfo: z.nullable(z.lazy(() => LeaveInfo$inboundSchema)),
-    groupIds: z.array(z.string()),
-    name: z.lazy(() => Name$inboundSchema),
-    sources: z.lazy(() => Sources$inboundSchema),
-    tasksSummary: z.lazy(() => TasksSummary$inboundSchema),
-  });
+export const Person$inboundSchema: z.ZodType<Person, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      userId: z.nullable(z.string()),
+      emailAddress: z.string(),
+      employment: z.lazy(() => Employment$inboundSchema),
+      leaveInfo: z.nullable(z.lazy(() => LeaveInfo$inboundSchema)),
+      groupIds: z.array(z.string()),
+      name: z.lazy(() => Name$inboundSchema),
+      sources: z.lazy(() => Sources$inboundSchema),
+      tasksSummary: z.lazy(() => TasksSummary$inboundSchema),
+    })
+  );
 
 export function personFromJSON(
   jsonString: string,

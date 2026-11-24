@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,18 +48,20 @@ export const AuditorFileUploadGrant$inboundSchema: z.ZodType<
   AuditorFileUploadGrant,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  uploadId: z.string(),
-  url: z.string(),
-  fields: z.record(z.string()),
-  maxSizeBytes: z.number(),
-  transferExpiresAt: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  finalizationExpiresAt: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    uploadId: z.string(),
+    url: z.string(),
+    fields: z.record(z.string()),
+    maxSizeBytes: z.number(),
+    transferExpiresAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    finalizationExpiresAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  })
+);
 
 export function auditorFileUploadGrantFromJSON(
   jsonString: string,

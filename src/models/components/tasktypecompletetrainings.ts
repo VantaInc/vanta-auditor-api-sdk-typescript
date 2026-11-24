@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const TaskTypeCOMPLETETRAININGS = {
@@ -15,4 +16,4 @@ export type TaskTypeCOMPLETETRAININGS = ClosedEnum<
 /** @internal */
 export const TaskTypeCOMPLETETRAININGS$inboundSchema: z.ZodNativeEnum<
   typeof TaskTypeCOMPLETETRAININGS
-> = z.nativeEnum(TaskTypeCOMPLETETRAININGS);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TaskTypeCOMPLETETRAININGS));

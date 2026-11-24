@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -37,4 +38,4 @@ export type VendorRiskLevel = ClosedEnum<typeof VendorRiskLevel>;
 /** @internal */
 export const VendorRiskLevel$inboundSchema: z.ZodNativeEnum<
   typeof VendorRiskLevel
-> = z.nativeEnum(VendorRiskLevel);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VendorRiskLevel));

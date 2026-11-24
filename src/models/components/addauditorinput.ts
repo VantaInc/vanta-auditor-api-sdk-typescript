@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type AddAuditorInput = {
   /**
@@ -31,11 +32,13 @@ export const AddAuditorInput$outboundSchema: z.ZodType<
   AddAuditorInput$Outbound,
   z.ZodTypeDef,
   AddAuditorInput
-> = z.object({
-  email: z.string(),
-  givenName: z.string(),
-  familyName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    givenName: z.string(),
+    familyName: z.string(),
+  })
+);
 
 export function addAuditorInputToJSON(
   addAuditorInput: AddAuditorInput,

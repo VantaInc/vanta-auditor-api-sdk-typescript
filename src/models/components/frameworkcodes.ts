@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,10 +36,12 @@ export const FrameworkCodes$inboundSchema: z.ZodType<
   FrameworkCodes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  frameworkCodes: z.array(z.string()),
-  codesByFramework: z.array(FrameworkCodesByFramework$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    frameworkCodes: z.array(z.string()),
+    codesByFramework: z.array(FrameworkCodesByFramework$inboundSchema),
+  })
+);
 
 export function frameworkCodesFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,14 +47,16 @@ export const VulnerableAsset$inboundSchema: z.ZodType<
   VulnerableAsset,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  assetType: VulnerableAssetType$inboundSchema,
-  hasBeenScanned: z.boolean(),
-  imageScanTag: z.nullable(z.string()),
-  scanners: z.array(VulnerableAssetScanner$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    assetType: VulnerableAssetType$inboundSchema,
+    hasBeenScanned: z.boolean(),
+    imageScanTag: z.nullable(z.string()),
+    scanners: z.array(VulnerableAssetScanner$inboundSchema),
+  })
+);
 
 export function vulnerableAssetFromJSON(
   jsonString: string,

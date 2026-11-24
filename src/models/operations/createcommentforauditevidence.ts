@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type CreateCommentForAuditEvidenceRequest = {
@@ -24,15 +25,17 @@ export const CreateCommentForAuditEvidenceRequest$outboundSchema: z.ZodType<
   CreateCommentForAuditEvidenceRequest$Outbound,
   z.ZodTypeDef,
   CreateCommentForAuditEvidenceRequest
-> = z.object({
-  auditId: z.string(),
-  auditEvidenceId: z.string(),
-  addCommentInput: components.AddCommentInput$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    addCommentInput: "AddCommentInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    auditEvidenceId: z.string(),
+    addCommentInput: components.AddCommentInput$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      addCommentInput: "AddCommentInput",
+    });
+  })
+);
 
 export function createCommentForAuditEvidenceRequestToJSON(
   createCommentForAuditEvidenceRequest: CreateCommentForAuditEvidenceRequest,

@@ -941,17 +941,22 @@ export class Audits extends ClientSDK {
    * Retrieves a paginated list of all information requests for an audit, enabling
    * external audit management systems to display and track evidence requests.
    *
-   * This endpoint always includes soft-deleted records (where `deletionDate !== null`).
-   * Clients should check the `deletionDate` field to identify and handle deleted records
-   * appropriately in their systems.
+   * This list includes soft-deleted requests (`deletionDate !== null`) even when
+   * `changedSinceDate` is omitted. When supplied, `changedSinceDate` filters both
+   * live and deleted requests.
    *
-   * This is the only endpoint that returns a deleted information request. No
-   * webhook fires when a request is deleted. Endpoints under
-   * `/audits/{auditId}/information-requests/{requestId}` return a 4xx HTTP error
-   * for a deleted request. To confirm deletion, check the request's `deletionDate`
-   * in this list. Deleting a request does not set `deletionDate` on its comments
-   * or evidence or send delete events for them. Once this list confirms the
-   * request was deleted, treat its comments and evidence as deleted too.
+   * This is the only endpoint that returns a deleted information request.
+   * Deletion makes the request and its child endpoints inaccessible by ID.
+   * A `403` or `404` can also mean access was lost. Use `deletionDate` or the
+   * `v1.information-request.deleted` webhook to confirm deletion. Remove the
+   * deleted request and its comments and evidence from your local mirror.
+   * Deleting a request produces no separate deletion events or tombstones for
+   * its children.
+   *
+   * To recover from missed request deletion events, paginate this list without
+   * `changedSinceDate` or other optional filters.
+   * Reconcile missing records only after a successful, complete traversal with
+   * access to the audit.
    *
    * This endpoint supports delta synchronization via the `changedSinceDate` parameter,
    * allowing efficient polling for changes without retrieving the entire dataset.
@@ -963,11 +968,11 @@ export class Audits extends ClientSDK {
    * 4. Repeat until `hasNextPage` is false
    *
    * Delta sync usage:
-   * 1. Store the timestamp of your last sync
-   * 2. Pass that timestamp as `changedSinceDate`
-   * 3. Only requests created, modified, or deleted since that timestamp are returned
-   * 4. Process updates and soft-deletes by checking the `deletionDate` field
-   * 5. Update your last sync timestamp to the current time
+   * 1. Capture the timestamp before requesting the first page
+   * 2. Pass the previous successful sync's start timestamp as `changedSinceDate`
+   * 3. Keep the same filters across pages and use `deletionDate` to process deletes
+   * 4. Save the captured start timestamp only after every page succeeds
+   * 5. Handle records returned by more than one sync idempotently
    *
    * `segmentIds` on each returned request is resolved against the audit's
    * current scope. A scope-only change (a segment leaving or joining the audit
@@ -1077,14 +1082,13 @@ export class Audits extends ClientSDK {
    * the request as deleted (setting `deletionDate`) while preserving it in the system
    * for audit history and compliance tracking.
    *
-   * Soft deletion allows:
-   * - Maintaining complete audit trail of all requests ever created
-   * - Retrieving deleted requests via `changedSinceDate` for synchronization
+   * When information request webhooks are enabled, Vanta can deliver
+   * `v1.information-request.deleted` after the deletion succeeds to the
+   * subscribed audit firm that had access to the audit before deletion.
+   * The payload identifies the deleted request and its audit.
    *
-   * After deletion:
-   * - The request remains in list responses with `deletionDate` set, even when
-   *
-   *   `changedSinceDate` is omitted
+   * Use the information request list to reconcile deletions. The list returns
+   * the request with `deletionDate` set, even when `changedSinceDate` is omitted.
    *
    * Rate limit: 50 requests / minute.
    */

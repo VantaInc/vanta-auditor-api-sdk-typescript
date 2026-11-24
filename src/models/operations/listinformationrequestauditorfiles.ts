@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ListInformationRequestAuditorFilesRequest = {
   auditId: string;
@@ -31,12 +32,14 @@ export const ListInformationRequestAuditorFilesRequest$outboundSchema:
     ListInformationRequestAuditorFilesRequest$Outbound,
     z.ZodTypeDef,
     ListInformationRequestAuditorFilesRequest
-  > = z.object({
-    auditId: z.string(),
-    requestId: z.string(),
-    pageSize: z.number().int().default(10),
-    pageCursor: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      auditId: z.string(),
+      requestId: z.string(),
+      pageSize: z.number().int().default(10),
+      pageCursor: z.string().optional(),
+    })
+  );
 
 export function listInformationRequestAuditorFilesRequestToJSON(
   listInformationRequestAuditorFilesRequest:

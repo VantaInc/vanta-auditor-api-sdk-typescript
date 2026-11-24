@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListPersonnelAccountAccessRequest = {
@@ -47,14 +48,16 @@ export const ListPersonnelAccountAccessRequest$outboundSchema: z.ZodType<
   ListPersonnelAccountAccessRequest$Outbound,
   z.ZodTypeDef,
   ListPersonnelAccountAccessRequest
-> = z.object({
-  auditId: z.string(),
-  serviceId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  search: z.string().optional(),
-  status: components.AccountAccessStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    serviceId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    search: z.string().optional(),
+    status: components.AccountAccessStatus$outboundSchema.optional(),
+  })
+);
 
 export function listPersonnelAccountAccessRequestToJSON(
   listPersonnelAccountAccessRequest: ListPersonnelAccountAccessRequest,

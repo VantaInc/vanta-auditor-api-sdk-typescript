@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetFrameworkCodesRequest = {
   auditId: string;
@@ -18,9 +19,11 @@ export const GetFrameworkCodesRequest$outboundSchema: z.ZodType<
   GetFrameworkCodesRequest$Outbound,
   z.ZodTypeDef,
   GetFrameworkCodesRequest
-> = z.object({
-  auditId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+  })
+);
 
 export function getFrameworkCodesRequestToJSON(
   getFrameworkCodesRequest: GetFrameworkCodesRequest,

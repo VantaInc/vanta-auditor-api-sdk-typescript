@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AuditVendor, AuditVendor$inboundSchema } from "./auditvendor.js";
@@ -26,10 +26,12 @@ export const PaginatedResponseAuditVendorResults$inboundSchema: z.ZodType<
   PaginatedResponseAuditVendorResults,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(AuditVendor$inboundSchema),
-  pageInfo: PageInfo$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(AuditVendor$inboundSchema),
+    pageInfo: PageInfo$inboundSchema,
+  })
+);
 
 export function paginatedResponseAuditVendorResultsFromJSON(
   jsonString: string,
@@ -47,9 +49,11 @@ export const PaginatedResponseAuditVendor$inboundSchema: z.ZodType<
   PaginatedResponseAuditVendor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  results: z.lazy(() => PaginatedResponseAuditVendorResults$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.lazy(() => PaginatedResponseAuditVendorResults$inboundSchema),
+  })
+);
 
 export function paginatedResponseAuditVendorFromJSON(
   jsonString: string,

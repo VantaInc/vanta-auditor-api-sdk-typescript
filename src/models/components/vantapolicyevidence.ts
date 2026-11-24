@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -128,10 +128,12 @@ export const LastEditedBy$inboundSchema: z.ZodType<
   LastEditedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    name: z.string(),
+  })
+);
 
 export function lastEditedByFromJSON(
   jsonString: string,
@@ -148,16 +150,18 @@ export const VantaPolicyEvidenceFile$inboundSchema: z.ZodType<
   VantaPolicyEvidenceFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  effectiveOrCreationDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  locale: z.string(),
-  url: z.string(),
-  mimeType: z.string(),
-  filename: z.string().optional(),
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effectiveOrCreationDate: z.string().datetime({ offset: true }).transform(
+      v => new Date(v)
+    ),
+    locale: z.string(),
+    url: z.string(),
+    mimeType: z.string(),
+    filename: z.string().optional(),
+    id: z.string(),
+  })
+);
 
 export function vantaPolicyEvidenceFileFromJSON(
   jsonString: string,
@@ -174,18 +178,20 @@ export const VantaPolicyEvidence$inboundSchema: z.ZodType<
   VantaPolicyEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  title: z.string(),
-  description: z.string().optional(),
-  expirationDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  lastEditedBy: z.lazy(() => LastEditedBy$inboundSchema).optional(),
-  policyId: z.string(),
-  policyVersionId: z.string(),
-  policyVersionFileId: z.string(),
-  file: z.lazy(() => VantaPolicyEvidenceFile$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    expirationDate: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    lastEditedBy: z.lazy(() => LastEditedBy$inboundSchema).optional(),
+    policyId: z.string(),
+    policyVersionId: z.string(),
+    policyVersionFileId: z.string(),
+    file: z.lazy(() => VantaPolicyEvidenceFile$inboundSchema),
+  })
+);
 
 export function vantaPolicyEvidenceFromJSON(
   jsonString: string,

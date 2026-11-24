@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ShareInformationRequestListRequest = {
   auditId: string;
@@ -18,9 +19,11 @@ export const ShareInformationRequestListRequest$outboundSchema: z.ZodType<
   ShareInformationRequestListRequest$Outbound,
   z.ZodTypeDef,
   ShareInformationRequestListRequest
-> = z.object({
-  auditId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+  })
+);
 
 export function shareInformationRequestListRequestToJSON(
   shareInformationRequestListRequest: ShareInformationRequestListRequest,

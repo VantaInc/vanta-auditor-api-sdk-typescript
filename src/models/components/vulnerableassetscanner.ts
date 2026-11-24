@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { KeyValuePair, KeyValuePair$inboundSchema } from "./keyvaluepair.js";
@@ -76,25 +76,27 @@ export const VulnerableAssetScanner$inboundSchema: z.ZodType<
   VulnerableAssetScanner,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  resourceId: z.string(),
-  integrationId: z.string(),
-  imageDigest: z.nullable(z.string()),
-  imagePushedAtDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  imageTags: z.nullable(z.array(z.string())),
-  assetTags: z.nullable(z.array(KeyValuePair$inboundSchema)),
-  parentAccountOrOrganization: z.nullable(z.string()),
-  biosUuid: z.nullable(z.string()),
-  ipv4s: z.nullable(z.array(z.string())),
-  ipv6s: z.nullable(z.array(z.string())),
-  macAddresses: z.nullable(z.array(z.string())),
-  hostnames: z.nullable(z.array(z.string())),
-  fqdns: z.nullable(z.array(z.string())),
-  operatingSystems: z.nullable(z.array(z.string())),
-  targetId: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resourceId: z.string(),
+    integrationId: z.string(),
+    imageDigest: z.nullable(z.string()),
+    imagePushedAtDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    imageTags: z.nullable(z.array(z.string())),
+    assetTags: z.nullable(z.array(KeyValuePair$inboundSchema)),
+    parentAccountOrOrganization: z.nullable(z.string()),
+    biosUuid: z.nullable(z.string()),
+    ipv4s: z.nullable(z.array(z.string())),
+    ipv6s: z.nullable(z.array(z.string())),
+    macAddresses: z.nullable(z.array(z.string())),
+    hostnames: z.nullable(z.array(z.string())),
+    fqdns: z.nullable(z.array(z.string())),
+    operatingSystems: z.nullable(z.array(z.string())),
+    targetId: z.nullable(z.string()),
+  })
+);
 
 export function vulnerableAssetScannerFromJSON(
   jsonString: string,

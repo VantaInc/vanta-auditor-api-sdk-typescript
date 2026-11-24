@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type FinalizeInformationRequestAuditorFileUploadRequest = {
@@ -26,16 +27,18 @@ export const FinalizeInformationRequestAuditorFileUploadRequest$outboundSchema:
     FinalizeInformationRequestAuditorFileUploadRequest$Outbound,
     z.ZodTypeDef,
     FinalizeInformationRequestAuditorFileUploadRequest
-  > = z.object({
-    auditId: z.string(),
-    requestId: z.string(),
-    finalizeAuditorFileUploadInput:
-      components.FinalizeAuditorFileUploadInput$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      finalizeAuditorFileUploadInput: "FinalizeAuditorFileUploadInput",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      auditId: z.string(),
+      requestId: z.string(),
+      finalizeAuditorFileUploadInput:
+        components.FinalizeAuditorFileUploadInput$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        finalizeAuditorFileUploadInput: "FinalizeAuditorFileUploadInput",
+      });
+    })
+  );
 
 export function finalizeInformationRequestAuditorFileUploadRequestToJSON(
   finalizeInformationRequestAuditorFileUploadRequest:

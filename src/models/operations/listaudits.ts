@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ListAuditsRequest = {
   pageSize?: number | undefined;
@@ -33,12 +34,14 @@ export const ListAuditsRequest$outboundSchema: z.ZodType<
   ListAuditsRequest$Outbound,
   z.ZodTypeDef,
   ListAuditsRequest
-> = z.object({
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-  changedSinceDate: z.date().transform(v => v.toISOString()).optional(),
-  isActiveAudit: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+    changedSinceDate: z.date().transform(v => v.toISOString()).optional(),
+    isActiveAudit: z.boolean().optional(),
+  })
+);
 
 export function listAuditsRequestToJSON(
   listAuditsRequest: ListAuditsRequest,

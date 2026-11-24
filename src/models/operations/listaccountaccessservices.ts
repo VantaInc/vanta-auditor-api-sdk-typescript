@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ListAccountAccessServicesRequest = {
   /**
@@ -31,11 +32,13 @@ export const ListAccountAccessServicesRequest$outboundSchema: z.ZodType<
   ListAccountAccessServicesRequest$Outbound,
   z.ZodTypeDef,
   ListAccountAccessServicesRequest
-> = z.object({
-  auditId: z.string(),
-  pageSize: z.number().int().default(10),
-  pageCursor: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    pageSize: z.number().int().default(10),
+    pageCursor: z.string().optional(),
+  })
+);
 
 export function listAccountAccessServicesRequestToJSON(
   listAccountAccessServicesRequest: ListAccountAccessServicesRequest,

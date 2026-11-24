@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ExternalFindingSeverityType = {
@@ -18,4 +19,6 @@ export type ExternalFindingSeverityType = ClosedEnum<
 /** @internal */
 export const ExternalFindingSeverityType$inboundSchema: z.ZodNativeEnum<
   typeof ExternalFindingSeverityType
-> = z.nativeEnum(ExternalFindingSeverityType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ExternalFindingSeverityType)
+);

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const AuditSegmentFramework$inboundSchema: z.ZodType<
   AuditSegmentFramework,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+  })
+);
 
 export function auditSegmentFrameworkFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -82,24 +82,26 @@ export const InformationRequestEvidence$inboundSchema: z.ZodType<
   InformationRequestEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  evidenceType: InformationRequestSupportedEvidenceType$inboundSchema,
-  visibleToAuditorDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  creationDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  modificationDate: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  deletionDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  capturedSegmentIds: z.array(z.string()),
-  evidence: InformationRequestEvidenceUnion$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    evidenceType: InformationRequestSupportedEvidenceType$inboundSchema,
+    visibleToAuditorDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    creationDate: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    modificationDate: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    deletionDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    capturedSegmentIds: z.array(z.string()),
+    evidence: InformationRequestEvidenceUnion$inboundSchema,
+  })
+);
 
 export function informationRequestEvidenceFromJSON(
   jsonString: string,

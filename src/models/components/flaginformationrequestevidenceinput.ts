@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Input for flagging evidence on an information request, indicating issues
@@ -42,10 +43,12 @@ export const FlagInformationRequestEvidenceInput$outboundSchema: z.ZodType<
   FlagInformationRequestEvidenceInput$Outbound,
   z.ZodTypeDef,
   FlagInformationRequestEvidenceInput
-> = z.object({
-  auditorEmail: z.string(),
-  reason: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditorEmail: z.string(),
+    reason: z.string(),
+  })
+);
 
 export function flagInformationRequestEvidenceInputToJSON(
   flagInformationRequestEvidenceInput: FlagInformationRequestEvidenceInput,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -114,11 +114,13 @@ export const AuditorControlOwner$inboundSchema: z.ZodType<
   AuditorControlOwner,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  displayName: z.string(),
-  emailAddress: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string(),
+    emailAddress: z.string(),
+  })
+);
 
 export function auditorControlOwnerFromJSON(
   jsonString: string,
@@ -135,27 +137,29 @@ export const AuditorControl$inboundSchema: z.ZodType<
   AuditorControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  externalId: z.nullable(z.string()),
-  name: z.string(),
-  description: z.string(),
-  source: ControlSource$inboundSchema,
-  domains: z.array(z.string()),
-  owner: z.nullable(z.lazy(() => AuditorControlOwner$inboundSchema)),
-  role: z.nullable(z.string()).optional(),
-  customFields: z.array(CustomField$inboundSchema),
-  creationDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  modificationDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  framework: z.string(),
-  sections: z.array(Section$inboundSchema),
-  inScopeSegmentIds: z.array(z.string()),
-  assessments: z.array(AuditControlAssessment$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    externalId: z.nullable(z.string()),
+    name: z.string(),
+    description: z.string(),
+    source: ControlSource$inboundSchema,
+    domains: z.array(z.string()),
+    owner: z.nullable(z.lazy(() => AuditorControlOwner$inboundSchema)),
+    role: z.nullable(z.string()).optional(),
+    customFields: z.array(CustomField$inboundSchema),
+    creationDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    modificationDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    framework: z.string(),
+    sections: z.array(Section$inboundSchema),
+    inScopeSegmentIds: z.array(z.string()),
+    assessments: z.array(AuditControlAssessment$inboundSchema),
+  })
+);
 
 export function auditorControlFromJSON(
   jsonString: string,

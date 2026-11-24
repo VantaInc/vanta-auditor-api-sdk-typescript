@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type DeleteCommentForControlRequest = {
@@ -27,17 +28,19 @@ export const DeleteCommentForControlRequest$outboundSchema: z.ZodType<
   DeleteCommentForControlRequest$Outbound,
   z.ZodTypeDef,
   DeleteCommentForControlRequest
-> = z.object({
-  auditId: z.string(),
-  controlId: z.string(),
-  commentId: z.string(),
-  deleteAuditControlCommentInput:
-    components.DeleteAuditControlCommentInput$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    deleteAuditControlCommentInput: "DeleteAuditControlCommentInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auditId: z.string(),
+    controlId: z.string(),
+    commentId: z.string(),
+    deleteAuditControlCommentInput:
+      components.DeleteAuditControlCommentInput$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      deleteAuditControlCommentInput: "DeleteAuditControlCommentInput",
+    });
+  })
+);
 
 export function deleteCommentForControlRequestToJSON(
   deleteCommentForControlRequest: DeleteCommentForControlRequest,
