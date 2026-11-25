@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:2b91024c77472a058231f43cc2d69f630b0b0b2734d4ecc05c6f329c1569ac03
         sourceBlobDigest: sha256:b6bf14d4b979a9b277df7949e423ad5e801969741fc75d8449140f352a04df46
         codeSamplesNamespace: conduct-an-audit-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:b6460d374625b683eb75ef5b8a7c6377e9f91a45428feae37b4cbc065e6fc5bf
+        codeSamplesRevisionDigest: sha256:18697fc9b89d5bbbae74ef75845af53d7193fc8978796de91f14f55de3349a67
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: pinned
