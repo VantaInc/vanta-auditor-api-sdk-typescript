@@ -203,6 +203,7 @@ run();
 * [listInformationRequestEvidence](docs/sdks/audits/README.md#listinformationrequestevidence) - List evidence for an information request
 * [getInformationRequestEvidence](docs/sdks/audits/README.md#getinformationrequestevidence) - Get information request evidence by ID
 * [getInformationRequestTestSnapshotEvidenceDetail](docs/sdks/audits/README.md#getinformationrequesttestsnapshotevidencedetail) - Get test snapshot detail for an evidence row
+* [listInformationRequestTestSnapshotRawData](docs/sdks/audits/README.md#listinformationrequesttestsnapshotrawdata) - List raw test data for a test snapshot
 * [listCommentsForInformationRequest](docs/sdks/audits/README.md#listcommentsforinformationrequest) - List comments for an information request
 * [createCommentForInformationRequest](docs/sdks/audits/README.md#createcommentforinformationrequest) - Create a comment for an information request
 * [getCommentForInformationRequest](docs/sdks/audits/README.md#getcommentforinformationrequest) - Get an information request comment by ID
@@ -286,6 +287,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`auditsListInformationRequestEvidence`](docs/sdks/audits/README.md#listinformationrequestevidence) - List evidence for an information request
 - [`auditsListInformationRequests`](docs/sdks/audits/README.md#listinformationrequests) - List information requests for an audit
 - [`auditsListInformationRequestsForControl`](docs/sdks/audits/README.md#listinformationrequestsforcontrol) - List information requests linked to a control within an audit
+- [`auditsListInformationRequestTestSnapshotRawData`](docs/sdks/audits/README.md#listinformationrequesttestsnapshotrawdata) - List raw test data for a test snapshot
 - [`auditsListIntegrations`](docs/sdks/audits/README.md#listintegrations) - List integrations for an audit
 - [`auditsListPersonnelAccountAccess`](docs/sdks/audits/README.md#listpersonnelaccountaccess) - List account access records for an audit
 - [`auditsListPersonnelGroups`](docs/sdks/audits/README.md#listpersonnelgroups) - List groups for an audit
@@ -445,7 +447,7 @@ run();
 
 
 **Inherit from [`VantaError`](./src/models/errors/vantaerror.ts)**:
-* [`OutboundError`](./src/models/errors/outbounderror.ts): Applicable to 2 of 61 methods.*
+* [`OutboundError`](./src/models/errors/outbounderror.ts): Applicable to 2 of 62 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

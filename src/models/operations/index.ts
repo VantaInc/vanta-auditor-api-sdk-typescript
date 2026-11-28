@@ -44,6 +44,7 @@ export * from "./listinformationrequestauditorfiles.js";
 export * from "./listinformationrequestevidence.js";
 export * from "./listinformationrequests.js";
 export * from "./listinformationrequestsforcontrol.js";
+export * from "./listinformationrequesttestsnapshotrawdata.js";
 export * from "./listintegrations.js";
 export * from "./listmonitoredcomputersinauditscope.js";
 export * from "./listpeopleinauditscope.js";
