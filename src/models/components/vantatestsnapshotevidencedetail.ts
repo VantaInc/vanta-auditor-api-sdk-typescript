@@ -72,7 +72,9 @@ export type VantaTestSnapshotEvidenceDetail = {
    */
   slaRemediation: SlaRemediation | null;
   /**
-   * Raw test data captured at snapshot time.
+   * Always empty. Read captured records from `GET /v1/audits/{auditId}/information-requests/{requestId}/evidence/{evidenceId}/test-snapshot/raw-data`. This field will be removed on 2027-01-25.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   rawTestData: Array<VantaTestSnapshotRawTestDataRow>;
   /**

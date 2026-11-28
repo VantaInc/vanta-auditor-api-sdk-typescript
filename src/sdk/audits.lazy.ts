@@ -762,6 +762,29 @@ const auditsGetInformationRequestTestSnapshotEvidenceDetail =
       ),
     )) as typeof import("../funcs/auditsGetInformationRequestTestSnapshotEvidenceDetail.js").auditsGetInformationRequestTestSnapshotEvidenceDetail;
 
+let auditsListInformationRequestTestSnapshotRawData$module:
+  | Promise<
+    typeof import("../funcs/auditsListInformationRequestTestSnapshotRawData.js")
+  >
+  | undefined;
+const auditsListInformationRequestTestSnapshotRawData =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/auditsListInformationRequestTestSnapshotRawData.js").auditsListInformationRequestTestSnapshotRawData
+    >
+  ) =>
+    new APIPromise(
+      (auditsListInformationRequestTestSnapshotRawData$module ??= import(
+        "../funcs/auditsListInformationRequestTestSnapshotRawData.js"
+      ).catch((error: unknown) => {
+        auditsListInformationRequestTestSnapshotRawData$module = undefined;
+        throw error;
+      })).then((module) =>
+        module.auditsListInformationRequestTestSnapshotRawData(...args)
+          .$inspect()
+      ),
+    )) as typeof import("../funcs/auditsListInformationRequestTestSnapshotRawData.js").auditsListInformationRequestTestSnapshotRawData;
+
 let auditsListCommentsForInformationRequest$module:
   | Promise<
     typeof import("../funcs/auditsListCommentsForInformationRequest.js")
@@ -2435,17 +2458,10 @@ export class Audits extends ClientSDK {
    * @remarks
    * Retrieves the rich detail for a single VANTA_TEST_SNAPSHOT evidence row
    * attached to an information request. The response includes test-level
-   * metadata (description, integrations, SLA), the raw test data captured
-   * at snapshot time, and the resources that were excluded from the test
-   * (out-of-scope resources).
+   * metadata (description, integrations, SLA) and out-of-scope resources.
    *
-   * For structured snapshots, the `rawTestData` array contains one row per
-   * resource the test ran against; each row carries `resourceId`,
-   * `resourceType`, and the raw JSON for that resource.
-   *
-   * For unstructured snapshots, the `rawTestData` array contains a single
-   * row with `resourceId` and `resourceType` set to `null` and `rawJson`
-   * containing the entire test-run JSON blob.
+   * To retrieve captured raw test data, call
+   * `GET /v1/audits/{auditId}/information-requests/{requestId}/evidence/{evidenceId}/test-snapshot/raw-data`.
    *
    * The `outOfScopeResources` field lists resources excluded at the test
    * level (customer-disabled) and the framework level (segment
@@ -2455,13 +2471,40 @@ export class Audits extends ClientSDK {
    * introspection tests. Empty when the test does not perform API
    * introspection.
    *
-   * Rate limit: 10 requests / minute.
+   * Rate limit: 50 requests / minute.
    */
   async getInformationRequestTestSnapshotEvidenceDetail(
     request: operations.GetInformationRequestTestSnapshotEvidenceDetailRequest,
     options?: RequestOptions,
   ): Promise<components.VantaTestSnapshotEvidenceDetail> {
     return unwrapAsync(auditsGetInformationRequestTestSnapshotEvidenceDetail(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List raw test data for a test snapshot
+   *
+   * @remarks
+   * Lists raw test data captured in a test snapshot, in capture order.
+   * Structured entries contain the primary resource ID, type, and captured
+   * JSON. Unstructured entries contain one captured JSON record, with null
+   * resource ID and type.
+   *
+   * Pass `results.pageInfo.endCursor` as `pageCursor` to continue until
+   * `results.pageInfo.hasNextPage` is false.
+   *
+   * Deleted evidence returns 404.
+   *
+   * Rate limit: 50 requests / minute.
+   */
+  async listInformationRequestTestSnapshotRawData(
+    request: operations.ListInformationRequestTestSnapshotRawDataRequest,
+    options?: RequestOptions,
+  ): Promise<components.PaginatedResponseVantaTestSnapshotRawTestDataPageRow> {
+    return unwrapAsync(auditsListInformationRequestTestSnapshotRawData(
       this,
       request,
       options,

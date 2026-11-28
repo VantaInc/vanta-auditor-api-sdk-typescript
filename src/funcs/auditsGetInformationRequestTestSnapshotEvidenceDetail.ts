@@ -31,17 +31,10 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Retrieves the rich detail for a single VANTA_TEST_SNAPSHOT evidence row
  * attached to an information request. The response includes test-level
- * metadata (description, integrations, SLA), the raw test data captured
- * at snapshot time, and the resources that were excluded from the test
- * (out-of-scope resources).
+ * metadata (description, integrations, SLA) and out-of-scope resources.
  *
- * For structured snapshots, the `rawTestData` array contains one row per
- * resource the test ran against; each row carries `resourceId`,
- * `resourceType`, and the raw JSON for that resource.
- *
- * For unstructured snapshots, the `rawTestData` array contains a single
- * row with `resourceId` and `resourceType` set to `null` and `rawJson`
- * containing the entire test-run JSON blob.
+ * To retrieve captured raw test data, call
+ * `GET /v1/audits/{auditId}/information-requests/{requestId}/evidence/{evidenceId}/test-snapshot/raw-data`.
  *
  * The `outOfScopeResources` field lists resources excluded at the test
  * level (customer-disabled) and the framework level (segment
@@ -51,7 +44,7 @@ import { Result } from "../types/fp.js";
  * introspection tests. Empty when the test does not perform API
  * introspection.
  *
- * Rate limit: 10 requests / minute.
+ * Rate limit: 50 requests / minute.
  */
 export function auditsGetInformationRequestTestSnapshotEvidenceDetail(
   client: VantaCore,
